@@ -20,6 +20,16 @@ public class Team {
 	public int fameSum;
 	public int deterrenceSum;
 	public int barterSkillSum;
+	
+	/**
+	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
+	*/
+	public static ArrayList<Consumable> workingInventory = new ArrayList<Consumable>();
+		
+	/**
+	* A TreeSet which gets updated every time the workingInventory changes  
+	*/
+	public static TreeSet<String> displayInventory;
 
 	
 	
@@ -146,42 +156,36 @@ public class Team {
 			// Merchant Hero is chosen.
 			case 1:                  
 				MerchantMan merchant = new MerchantMan();
-				merchant.setHeroClass("Merchant");
 				heroArray.add(merchant);
 				break;
 			
 			// Tank Hero is chosen.
 			case 2:                  
 				Tank tank = new Tank();
-				tank.setHeroClass("Tank");
 				heroArray.add(tank);
 				break;
 			
 			// Cartographer Hero is chosen.
 			case 3:                  
 				Cartographer cartographer = new Cartographer();
-				cartographer.setHeroClass("Cartographer");
 				heroArray.add(cartographer);
 				break;
 				
 			// Support Hero is chosen.	
 			case 4:                  
 				Support support = new Support();
-				support.setHeroClass("Support");
 				heroArray.add(support);
 				break;
 				
 			// LuckyBoii Hero is chosen.
 			case 5:                  
 				LuckyBoii lucky = new LuckyBoii();
-				lucky.setHeroClass("LuckyBoii");
 				heroArray.add(lucky);
 				break;
 			
 			// EdgyScaryFiendLord Hero is chosen.
 			case 6:                  
 				EdgyScaryFiendLord esfl = new EdgyScaryFiendLord(); 
-				esfl.setHeroClass("Edgy Anti-Hero");
 				heroArray.add(esfl);
 				break;
 				
@@ -193,69 +197,54 @@ public class Team {
 	
 	
 	
-		//------------------------------------------------
-		//                   [INVENTORY]
-		//------------------------------------------------
-		
-		
-		/**
-		 * An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
-		 */
-		public static ArrayList<Consumable> workingInventory = new ArrayList<Consumable>();
-		
-		/**
-		 * A TreeSet which gets updated every time the workingInventory changes  
-		 */
-		public static TreeSet<String> displayInventory;
-		
-		
+	//------------------------------------------------
+	//                   [INVENTORY]
+	//------------------------------------------------
+	/**
+	* Refreshes the displayInventory when the workingInventory changes
+	*/
+	public void refreshDisplayInventory() {
+		displayInventory = new TreeSet<String>();    
+		for(Consumable item : workingInventory) {
+			int itemFrequency = Collections.frequency(workingInventory, item);
+			displayInventory.add(item.getName() + " (" + itemFrequency + ")");
+		} 
+	}
 		
 		
 		
-		/**
-		 * Refreshes the displayInventory when the workingInventory changes
-		 */
-		public void refreshDisplayInventory() {
-			displayInventory = new TreeSet<String>();    
-			for(Consumable item : workingInventory) {
-				int itemFrequency = Collections.frequency(workingInventory, item);
-				String itemType = item.getName() + "(" + itemFrequency + ")";
-				displayInventory.add(itemType);
-			} 
-		}
+	/**
+	* Adds a consumable item to the workingInventory
+	* Reshreshes displayInventory
+	* @param item
+	*/
+	public void addItem(Consumable item) {    
+		workingInventory.add(item);
+		refreshDisplayInventory();
+	}
 		
 		
+	/**
+	* Removes a consumable item from the workingInventory
+	* Refreshes displayInventory
+	* @param item
+	*/
+	public void removeItem(Consumable item) {
+		workingInventory.remove(item);
+		refreshDisplayInventory();
+	}
 		
-		/**
-		 * Adds a consumable item to the workingInventory
-		 * Reshreshes displayInventory
-		 * @param item
-		 */
-		public void addItem(Consumable item) {    
-			workingInventory.add(item);
-			refreshDisplayInventory();
-		}
-		
-		
-		/**
-		 * Removes a consumable item from the workingInventory
-		 * Refreshes displayInventory
-		 * @param item
-		 */
-		public void removeItem(Consumable item) {
-			workingInventory.remove(item);
-			refreshDisplayInventory();
-		}
-		
-		public void displayInventory() {
-			if (workingInventory.size() > 0) {
+	
+	public void displayInventory() {
+		if (workingInventory.size() > 0) {
 			for(String item : displayInventory) {
 				System.out.println(item);
-			}}
-			else {
-				System.out.println("You Have No Items Currently.");
 			}
 		}
+		else {
+			System.out.println("You Have No Items Currently.");
+		}
+	}
 	
 	
 	//------------------------------------------------

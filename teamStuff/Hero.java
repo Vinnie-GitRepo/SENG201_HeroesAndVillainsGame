@@ -7,7 +7,8 @@ public class Hero {
 	private String heroName;
 	private String heroClass;
 	private static int maxHealth;
-	private int currentHealth;
+	private static int currentHealth;
+	private static int recoveryBoost;
 	private static int heroArmor;
 	private static int barterSkill;
 	private boolean luck;
@@ -16,10 +17,12 @@ public class Hero {
 	
 	
 	
-	public Hero(int health, int armor, int barter, boolean luck, int fame, int deterrence) {
+	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
 		
 		maxHealth = health;
 		currentHealth = maxHealth;
+		heroClass = theClass;
+		recoveryBoost = recovery;
 		heroArmor = armor;
 		barterSkill = barter;
 		this.luck = luck;
@@ -44,7 +47,7 @@ public class Hero {
 				done = false;
 				while (done == false) {
 					if(name.equals(hero.getName())) {
-						System.out.println("That name is already taken by a team member, so you must enter another.");
+						System.out.println("That name is already taken by a team member");
 						System.out.println("Enter another name: ");
 						inputName = new Scanner(System.in);
 						name = inputName.nextLine();}
@@ -61,19 +64,24 @@ public class Hero {
 	
 	
 	
-	/**
-	 *      [GETTERS]
-	 */
+	//------------------------------------------------
+	//                    [GETTERS]
+	//------------------------------------------------
+	
 	public String getName() {
 		return heroName;
 	}
 	
-	public int getMaxHealth() {
+	public static int getMaxHealth() {
 		return maxHealth;
 	}
 	
-	public int getCurrentHealth() {
+	public static int getCurrentHealth() {
 		return currentHealth;
+	}
+	
+	public static int getRecoveryBoost() {
+		return recoveryBoost;
 	}
 	
 	public int getArmor() {
@@ -100,7 +108,9 @@ public class Hero {
 	
 	
 	
-	public void restoreHealth(int amount) {
+	
+	
+	public static void restoreHealth(int amount) {
 		if(currentHealth + amount >= maxHealth) {
 			currentHealth = maxHealth;}
 		else {
@@ -111,21 +121,11 @@ public class Hero {
 	
 	
 	
-	/**
-	 *              [SETTERS]
-	 */
 	
-	public void setHeroClass(String className) {
-		heroClass = className;
-	}
+	//------------------------------------------------
+	//                    [BOOSTERS]
+	//------------------------------------------------
 	
-	
-	
-	
-	
-	/**
-	 *             [BOOSTERS]
-	 */
 	public static void boostMaxHealth(int healthBoost) {
 		maxHealth += healthBoost;
 	}
@@ -145,6 +145,8 @@ public class Hero {
 	public static void boostDeterrence(int deterrenceBoost) {
 		deterrence += deterrenceBoost;
 	}
+	
+	
 	
 	//------------------------------------------------
 	//              [DAMAGE & DEATH]
