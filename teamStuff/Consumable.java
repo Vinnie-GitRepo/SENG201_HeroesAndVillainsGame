@@ -5,7 +5,7 @@ public class Consumable implements Consume{
 	
 	
 	private String consumableName;
-	private int consumablePotency;
+	private static int consumablePotency;
 	private int consumablePrice;
 	private boolean forHeroUse; // Distinguishes Potions and Power Ups from Map consumables
 	
@@ -40,6 +40,9 @@ public class Consumable implements Consume{
 	
 	
 	public void apply() {
+		Hero.boostMaxHealth(consumablePotency);
+		Hero.boostArmor(consumablePotency);
+		Hero.boostBarterSkill(consumablePotency);
 		
 	}
 	

@@ -18,22 +18,66 @@ public class Team {
 	public int fameSum;
 	public int deterrenceSum;
 	public int barterSkillSum;
-	public boolean good = false;
+
 	
 	
 	/**
 	 * Constructor for the Team Class
 	 */
 	public Team() {
+
+		chooseTeamSize();		// Determines the size of the heroArray of the team
+		fillHeroArray();		// Lets you select and name heroes for your team
+		nameTeam();				// Lets you name your team of heroes
 		
+		// Setters based on the heroes selected
+		setBarterSkillSum();
+		setDeterrenceSum();
+		setFameSum();
+	}
+	
+	
+	
+	
+	/**
+	 * Has the player select a valid number of heroes to be in the team.
+	 * 
+	 * @return teamSize
+	 */
+	public int chooseTeamSize() {
 		
-		// Determines the size of the heroArray of the team
-		chooseTeamSize();
-				
-				
-		// Lets you select and name heroes for your team
-		for (int i = 0; i < teamSize; i++) {
+		boolean done = false;
+		while(done == false) {
+			System.out.println("\nChoose how many heroes are on your team\n \nChoices:");
+			System.out.println("(1) One Hero.");
+			System.out.println("(2) Two Heroes.");
+			System.out.println("(3) Three Heroes.");
 			
+			try {
+				Scanner sizeChoice = new Scanner(System.in);
+				int toAdd = sizeChoice.nextInt(); 
+
+				if ((toAdd > 3) || (toAdd < 1)) {
+					System.out.println("Your team may only contain 1, 2, or 3 heroes.");}
+				else {
+					teamSize += toAdd;
+					done = true;}}
+			
+			catch(InputMismatchException e) {
+				e.getCause();
+				System.out.println("\nYour input is invalid. Please enter a valid number");}
+		}
+		return teamSize;
+	}
+	
+	
+	
+	
+	/**
+	 *  Has the player select valid hero types for heroes they create, according to the size of the team.
+	 */
+	public void fillHeroArray() {
+		for (int i = 0; i < teamSize; i++) {
 			boolean correct = false;
 			while (!correct) {
 				System.out.println("\nWhat type of hero would you like to add to your team? \nEnter one of the following numbers:");
@@ -43,55 +87,42 @@ public class Team {
 				System.out.println("(4) Support Class Hero.");
 				System.out.println("(5) LuckyBoii Class Hero.");
 				System.out.println("(6) Intimidating AntiHero Class Hero.");
-					
-				Scanner heroChoice = new Scanner(System.in);
-				int choice = heroChoice.nextInt();
 				
-				if ((choice > 6) || (choice < 1)) {
-					System.out.println("Your input is invalid. Please enter a valid number");} 
-				else {
-					correct = true ;
-					this.selectHeroType(choice);}
+				try {
+					Scanner heroChoice = new Scanner(System.in);
+					int choice = heroChoice.nextInt();
+					
+					if ((choice > 6) || (choice < 1)) {
+						System.out.println("Your input is invalid. Please enter a valid number");} 
+					else {
+						correct = true ;
+						this.selectHeroType(choice);}}
+			    
+				catch (InputMismatchException e) {
+			    	e.getCause();
+			    	System.out.println("Your input is invalid. Please enter a valid number");}
+				
 			}
 			correct = false;
 		}
-				
-		// Lets you name your team of heroes
-		nameTeam();
 	}
 	
 	
+	
+	/**
+	 *  Has the player name the team in accordance with the length restrictions.
+	 */
 	public void nameTeam() {
+		
 		System.out.println("Name your team of heroes.");
 		Scanner teamNameChoice = new Scanner(System.in);
 		String name = teamNameChoice.nextLine();
+		
 		if(name.length() < 2 || name.length() > 10) {
+			System.out.println("The team name must be between 2 and 10 characters in length.");
 			nameTeam();}
 		else {
 			Team.teamName = name;}
-	}
-
-	
-	
-	public int chooseTeamSize() {
-		System.out.println("\nChoose how many heroes are on your team\n \nChoices:");
-		System.out.println("(1) One Hero.");
-		System.out.println("(2) Two Heroes.");
-		System.out.println("(3) Three Heroes.");
-		
-		
-		Scanner sizeChoice = new Scanner(System.in);
-		int toAdd = sizeChoice.nextInt(); 
-
-		if ((toAdd > 3) || (toAdd < 1)) {
-			System.out.println("Your team may only contain 1, 2, or 3 heroes.");
-			chooseTeamSize();
-		}
-		else {
-			teamSize += toAdd;
-		}
-		good = true;
-		return teamSize;
 	}
 	
 	
@@ -99,7 +130,6 @@ public class Team {
 	/**
 	 * Checks if choice is valid;
 	 * Creates a new hero of the selected type;
-	 * Sets the name of the Hero;
 	 * Adds the hero to the heroArray of the team.
 	 *  
 	 * @param choice
@@ -110,49 +140,43 @@ public class Team {
 			// Merchant Hero is chosen.
 			case 1:                  
 				MerchantMan merchant = new MerchantMan();
-				//merchant.nameHero();
 				merchant.setHeroClass("Merchant");
-				addHero(merchant);
+				heroArray.add(merchant);
 				break;
 			
 			// Tank Hero is chosen.
 			case 2:                  
 				Tank tank = new Tank();
-				//tank.nameHero();
 				tank.setHeroClass("Tank");
-				addHero(tank);
+				heroArray.add(tank);
 				break;
 			
 			// Cartographer Hero is chosen.
 			case 3:                  
 				Cartographer cartographer = new Cartographer();
-				//cartographer.nameHero();
 				cartographer.setHeroClass("Cartographer");
-				this.addHero(cartographer);
+				heroArray.add(cartographer);
 				break;
 				
 			// Support Hero is chosen.	
 			case 4:                  
 				Support support = new Support();
-				//support.nameHero();
 				support.setHeroClass("Support");
-				addHero(support);
+				heroArray.add(support);
 				break;
 				
 			// LuckyBoii Hero is chosen.
 			case 5:                  
 				LuckyBoii lucky = new LuckyBoii();
-				//lucky.nameHero();
 				lucky.setHeroClass("LuckyBoii");
-				addHero(lucky);
+				heroArray.add(lucky);
 				break;
 			
 			// EdgyScaryFiendLord Hero is chosen.
 			case 6:                  
 				EdgyScaryFiendLord esfl = new EdgyScaryFiendLord(); 
-				//esfl.nameHero();
 				esfl.setHeroClass("Edgy Anti-Hero");
-				addHero(esfl);
+				heroArray.add(esfl);
 				break;
 				
 			// Handles invalid input
@@ -164,31 +188,12 @@ public class Team {
 	
 	
 	
-				
+
 	
 	
-		
-	
-	
-	public void addHero(Hero hero) {
-		heroArray.add(hero);
-	}
-	
-	public void addMoney(int amount) {
-		money += amount;
-	}
-	
-	
-	
-	
-	
-	public static void removeHero(Hero hero) {
-		heroArray.remove(hero);
-	}
-	
-	
-	
-	
+	//------------------------------------------------
+	//                   [GETTERS]
+	//------------------------------------------------
 	
 	public int getMoney() {
 		return money;
@@ -213,6 +218,9 @@ public class Team {
 	
 	
 	
+	//------------------------------------------------
+	//                   [SETTERS]
+	//------------------------------------------------
 	
 	public void setFameSum() {
 		for(Hero hero : heroArray) {
@@ -226,10 +234,6 @@ public class Team {
 		}
 	}
 	
-	
-	
-	
-	
 	public void setBarterSkillSum() {
 		for(Hero hero : heroArray) {
 			barterSkillSum += hero.getBarterSkill();
@@ -239,7 +243,9 @@ public class Team {
 	
 	
 	
-	
+	//------------------------------------------------
+	//                [BATTLE METHODS]
+	//------------------------------------------------
 	public void selectHero () {
 		System.out.println("\nSelect a hero for battle!");
 		for (int i = 0; i < heroArray.size(); i++) {
@@ -247,8 +253,22 @@ public class Team {
 		}
 	}
 	
+	public static void removeHero(Hero hero) {
+		heroArray.remove(hero);
+	}
+	
+	public void addMoney(int amount) {
+		money += amount;
+	}
+	
+	
+	
+	
+	
 	public String toString() {
-		String resultString = "\nHERO TEAM NAME: " + teamName + "\nMoney: " + money + "\n-------------------------------------------\n\n";
+		String resultString = "\n\nHERO TEAM NAME: " + teamName 
+				            + "\nMONEY: " + money 
+				            + "\n-------------------------------------------\n\n";
 		
 		for(Hero hero: heroArray) {
 			resultString += hero.toString() + "\n";
@@ -263,9 +283,9 @@ public class Team {
 		Team team = new Team();
 		System.out.println(team);
 		//team.selectHero();
-		Hero dead = heroArray.get(0);
-		dead.damageHealth(10000000);
-		System.out.println(team);
+		//Hero dead = heroArray.get(0);
+		//dead.damageHealth(10000000);
+		//System.out.println(team);
 		
 		
 	}

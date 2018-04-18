@@ -6,13 +6,13 @@ public class Hero {
 	
 	private String heroName;
 	private String heroClass;
-	private int maxHealth;
+	private static int maxHealth;
 	private int currentHealth;
-	private int heroArmor;
-	private int barterSkill;
+	private static int heroArmor;
+	private static int barterSkill;
 	private boolean luck;
-	private int fame;
-	private int deterrence;
+	private static int fame;
+	private static int deterrence;
 	
 	
 	
@@ -26,34 +26,14 @@ public class Hero {
 		this.fame = fame;
 		this.deterrence = deterrence;
 		nameHero();
-		
-		
 	}
 	
-	
-	
-	/*public void nameHero() {
-		System.out.println("What is this hero's name? ");
-		Scanner inputName = new Scanner(System.in);
-		String name = inputName.nextLine();
-		
-		
-		for(Hero hero : Team.getHeroArray()) {
-			if(name.equals(hero.getName())) {
-				System.out.println("That name is already taken by a team member.");
-				System.out.println("Enter another name.");
-				nameHero();
-			}
-		}
-		setName(name);
-		inputName.close();
-	}*/
 	
 	
 	public void nameHero() {
 		ArrayList<Hero> checkArray = Team.getHeroArray();
 		
-		System.out.println("What is this hero's name? ");
+		System.out.println("\nWhat is this hero's name? ");
 		Scanner inputName = new Scanner(System.in);
 		String name = inputName.nextLine();
 		
@@ -69,12 +49,12 @@ public class Hero {
 						inputName = new Scanner(System.in);
 						name = inputName.nextLine();}
 					else {
-						setName(name);
+						heroName = name;
 						done = true;}
 				}
 			}
 		}
-		setName(name);
+		heroName = name;
 	}
 	
 	
@@ -120,12 +100,20 @@ public class Hero {
 	
 	
 	
+	public void restoreHealth(int amount) {
+		if(currentHealth + amount >= maxHealth) {
+			currentHealth = maxHealth;}
+		else {
+			currentHealth += amount;}
+	}
+	
+	
+	
+	
+	
 	/**
 	 *              [SETTERS]
 	 */
-	public void setName(String inputName) {
-		heroName = inputName;
-	}
 	
 	public void setHeroClass(String className) {
 		heroClass = className;
@@ -133,33 +121,39 @@ public class Hero {
 	
 	
 	
-	public void boostMaxHealth(int healthBoost) {
-		maxHealth += healthBoost;
-	}
-	
-	
 	
 	
 	/**
 	 *             [BOOSTERS]
 	 */
-	public void boostArmor(int armorBoost) {
+	public static void boostMaxHealth(int healthBoost) {
+		maxHealth += healthBoost;
+	}
+	
+	public static void boostArmor(int armorBoost) {
 		heroArmor += armorBoost;
 	}
 	
-	public void boostBarterSkill(int barterBoost) {
+	public static void boostBarterSkill(int barterBoost) {
 		barterSkill += barterBoost;
 	}
 	
-	public void boostFame(int fameBoost) {
+	public static void boostFame(int fameBoost) {
 		fame += fameBoost;
 	}
 	
+	public static void boostDeterrence(int deterrenceBoost) {
+		deterrence += deterrenceBoost;
+	}
 	
-	
+	//------------------------------------------------
+	//              [DAMAGE & DEATH]
+	//------------------------------------------------
 	
 	/**
-	 *          [DAMAGE & DEATH]
+	 * Calculates how much damage is dealt, if any.
+	 * Reduces the damaged hero's armor, if any.
+	 * Determines whether the damaged hero is dead.
 	 */
 	public void damageHealth(int damage) {
 		if(heroArmor < damage) {
@@ -170,6 +164,11 @@ public class Hero {
 		}
 	}
 	
+	
+	/**
+	 * Informs the player about a hero's death.
+	 * Removes dead hero from the team.
+	 */
 	public void deathHandling() {
 		System.out.println(this.getName() + " has died");
 		Team.removeHero(this);
@@ -178,12 +177,16 @@ public class Hero {
 	
 	
 	
-	
 
 	
-	
 	public String toString() {
-		String resultString = "Name: " + heroName + "\nClass: " + heroClass + "\nHealth: " + currentHealth + "/" + maxHealth + "\nArmor: " + heroArmor + "\nBarter Skill: " + barterSkill + "\nFame: " + fame + "\nDeterrence: " + deterrence + "\n";
+		String resultString = "Name: " + heroName 
+				            + "\nClass: " + heroClass 
+				            + "\nHealth: " + currentHealth + "/" + maxHealth 
+				            + "\nArmor: " + heroArmor 
+				            + "\nBarter Skill: " + barterSkill 
+				            + "\nFame: " + fame 
+				            + "\nDeterrence: " + deterrence + "\n";
 		return resultString;
 	}
 	
