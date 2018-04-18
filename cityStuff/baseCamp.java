@@ -5,7 +5,13 @@ import teamStuff.*;
 
 public class baseCamp extends gameEnvironment implements menu {
 	
-	public ArrayList<String> areas = new ArrayList<String>();
+	public static shop shopMap = new shop();
+	
+	public static lair lairMap = new lair();
+	
+	public static hospital hospitalMap = new hospital();
+	
+	public static powerUpDen PowerUpDenMap = new powerUpDen();
 	
 	public static ArrayList<Boolean> foundPlace = new ArrayList<Boolean>() 
 	{{
@@ -15,6 +21,8 @@ public class baseCamp extends gameEnvironment implements menu {
 	add(false);
 	}};
 	
+	public ArrayList<String> areas = new ArrayList<String>();
+	
 	public ArrayList<String> options = new ArrayList<String>()
 	{{add("Shop");
 	add("PowerUpDen");
@@ -23,7 +31,7 @@ public class baseCamp extends gameEnvironment implements menu {
 	}};
 	
 	public String[] directions 	= 	{"North","East ","South","West "};
-	public String[] menu 		= 	{"View Stats", "View Map", "Exit Game"};
+	public String[] menu 		= 	{"View Stats", "View Map", "View Inventory", "Exit Game"};
 	public Team thisTeam;
 	public Random rand;
 	
@@ -38,12 +46,21 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//Another initializer which is no longer used
+	//this is now used again in the latest update
 	public baseCamp() {
 		rand = new Random();
+		//System.out.println("ples"); got to here
 		this.generateLayout();
 	}
 	
 	
+	//final intializer
+	public baseCamp(ArrayList map) {
+		areas = map;
+	}
+	
+	
+
 	//A method we though we'd need but definitely done
 	public void enter() {
 	}
@@ -69,16 +86,20 @@ public class baseCamp extends gameEnvironment implements menu {
 			this.viewMap();
 			break;
 		case 2 :
+			thisTeam.displayInventory();
+			this.viewMenu();
+			break;
+		case 3 :
 			this.exitGame();
 			break;
-		case 3 ://this is needed to be taken out
+		case 4 ://this is needed to be taken out
 			this.finishCity();
 			break;
-		case 4 ://another developer ,method
+		case 5 ://another developer ,method
 			team.addMoney(400);
 			break;
 		default:
-			System.out.println("Input is invalid");
+			System.out.println("This Is Not An Availablie Option\nPlease Select An Option");
 			this.viewMenu();
 			break;
 		}
@@ -98,6 +119,17 @@ public class baseCamp extends gameEnvironment implements menu {
 	}
 	
 	
+	//Sends the team out
+	public Team getTeam() {
+		return thisTeam;
+	}
+	
+	
+	//sets the team
+	public void setTeam(Team team) {
+		thisTeam = team;
+	}
+	
 	//This is the menu generator in other sections has been hard coded
 	public void viewMenu() {
 		
@@ -106,8 +138,18 @@ public class baseCamp extends gameEnvironment implements menu {
 		for (int i = 0; i < menu.length; i++) {
 			System.out.println("(" + i + ") " + menu[i] );
 		}
-		int choice = this.getPlayerChoice();
-		this.operateMenuChoice(choice);
+		boolean accepted = false;
+		while (accepted == false) {
+			System.out.println("Please Select An Option");
+			try {
+				int choice = this.getPlayerChoice();
+				this.operateMenuChoice(choice);
+				accepted = true;
+			}
+			catch(InputMismatchException e) {
+				System.out.println("This Is Not An Available Option");
+			}
+			}
 	}
 	
 	
@@ -157,7 +199,7 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//This is the layout generator which randomizes each city
-	public void generateLayout() {
+	/*public void generateLayout() {
 		
 		int size = options.size();
 		int num;
@@ -167,7 +209,7 @@ public class baseCamp extends gameEnvironment implements menu {
 			areas.add(options.get(num));
 			options.remove(num);
 		}
-	}
+	}*/
 	
 	
 	
@@ -185,19 +227,17 @@ public class baseCamp extends gameEnvironment implements menu {
 		System.out.println("You have chosen to move " + direction + " into the " + area);
 		switch(area) {
 		case "Shop" :
-			shop shopMap = new shop();
+			shopMap.setTeam(thisTeam);
 			shopMap.viewMenu();
+			this.viewMenu();
 			break;
 		case "PowerUpDen" :
-			powerUpDen PowerUpDenMap = new powerUpDen();
 			PowerUpDenMap.viewMenu();
 			break;
 		case "Hospital" :
-			hospital hospitalMap = new hospital();
 			hospitalMap.viewMenu();
 			break;
 		case "Lair" :
-			lair lairMap = new lair();
 			lairMap.viewMenu();
 			System.out.println("HE finishes");
 			//if the teamarray still has people and the cities villian is dead then super.setCityBeat();

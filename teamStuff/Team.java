@@ -1,8 +1,10 @@
 package teamStuff;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 
 
@@ -20,6 +22,10 @@ public class Team {
 	public int barterSkillSum;
 
 	
+	
+	
+	
+	/*GFDSHG^%$R&^%&URDH^%*&^R*H&^%R*^DR&H%$^G#W^BES%R^BES%^B%R&E%E^%$#^%$#&^%$#&^%#%$^#$^#@%VERS%F^G$W^%$W&%$WG^$*/
 	
 	/**
 	 * Constructor for the Team Class
@@ -187,8 +193,69 @@ public class Team {
 	
 	
 	
-	
-
+		//------------------------------------------------
+		//                   [INVENTORY]
+		//------------------------------------------------
+		
+		
+		/**
+		 * An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
+		 */
+		public static ArrayList<Consumable> workingInventory = new ArrayList<Consumable>();
+		
+		/**
+		 * A TreeSet which gets updated every time the workingInventory changes  
+		 */
+		public static TreeSet<String> displayInventory;
+		
+		
+		
+		
+		
+		/**
+		 * Refreshes the displayInventory when the workingInventory changes
+		 */
+		public void refreshDisplayInventory() {
+			displayInventory = new TreeSet<String>();    
+			for(Consumable item : workingInventory) {
+				int itemFrequency = Collections.frequency(workingInventory, item);
+				String itemType = item.getName() + "(" + itemFrequency + ")";
+				displayInventory.add(itemType);
+			} 
+		}
+		
+		
+		
+		/**
+		 * Adds a consumable item to the workingInventory
+		 * Reshreshes displayInventory
+		 * @param item
+		 */
+		public void addItem(Consumable item) {    
+			workingInventory.add(item);
+			refreshDisplayInventory();
+		}
+		
+		
+		/**
+		 * Removes a consumable item from the workingInventory
+		 * Refreshes displayInventory
+		 * @param item
+		 */
+		public void removeItem(Consumable item) {
+			workingInventory.remove(item);
+			refreshDisplayInventory();
+		}
+		
+		public void displayInventory() {
+			if (workingInventory.size() > 0) {
+			for(String item : displayInventory) {
+				System.out.println(item);
+			}}
+			else {
+				System.out.println("You Have No Items Currently.");
+			}
+		}
 	
 	
 	//------------------------------------------------
