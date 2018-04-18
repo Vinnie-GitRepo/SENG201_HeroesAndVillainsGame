@@ -57,6 +57,7 @@ public class numberGuess {
 					attempts += 1;
 					System.out.println("You guessed it in " + attempts + " attempts");
 					finish = true;
+					System.out.println("You Deal Damage To The Villian");
 					}
 				else 
 				{

@@ -187,9 +187,11 @@ public class gameEnvironment {
 			//System.out.println("You have completed this city!");
 			
 		}
-		for (baseCamp camp : baseCamps) {
-			camp.setTeam(team);
-			camp.viewMenu();
+		for (int i = 0; i < baseCamps.size(); i++) {//(baseCamp camp : baseCamps) {
+			baseCamps.get(i).setTeam(team);//camp.setTeam(team);
+			//System.out.println(villians.get(i).getTaunt());
+			baseCamps.get(i).setVillian(villians.get(i));
+			baseCamps.get(i).viewMenu();//camp.viewMenu();
 			System.out.println("FInihed the city");
 		}
 		System.out.println("WHAT THE FUCK CUNT HOW HAVE U GINISHED IT ALREADY WWUT>?");			//At this point they must have gone though each city, will make super villian happen now

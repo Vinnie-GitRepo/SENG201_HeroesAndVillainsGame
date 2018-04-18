@@ -2,6 +2,7 @@ package cityStuff;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import teamStuff.*;
+import villianStuff.*;
 
 public class baseCamp extends gameEnvironment implements menu {
 	
@@ -32,12 +33,19 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	public String[] directions 	= 	{"North","East ","South","West "};
 	public String[] menu 		= 	{"View Stats", "View Map", "View Inventory", "Exit Game"};
+	
 	public Team thisTeam;
+	public Villian thisVillian;
 	public Random rand;
 	
 	
 	//The initializer to a basecamp. This creates a layout for the
 	//city and saves it in the gameEnvironment
+	
+	public Villian getVillian() {
+		return thisVillian;
+	}
+	
 	public baseCamp(Team team) {
 		thisTeam = team;
 		rand = new Random();
@@ -60,6 +68,17 @@ public class baseCamp extends gameEnvironment implements menu {
 	}
 	
 	
+	
+	public void setVillian(Villian vill) {
+		thisVillian = vill;
+		lairMap.setVillian(vill);
+		//System.out.println(thisVillian.getTaunt());
+	}
+	//final intializer2.0
+	/*public baseCamp(ArrayList map, Villian vill) {
+			areas = map;
+			thisVillian = vill;
+	}*/
 
 	//A method we though we'd need but definitely done
 	public void enter() {

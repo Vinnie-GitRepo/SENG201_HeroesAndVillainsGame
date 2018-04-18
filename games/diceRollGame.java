@@ -2,10 +2,12 @@ package games;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;//randomizer import
 import teamStuff.*;
+import villianStuff.*;
 
 public class diceRollGame {
 	public static Team thisTeam;
 	public static int luckynum = 1;
+	public static Villian thisVillian;
 	
 	public static boolean finish = false;
 	
@@ -55,6 +57,7 @@ public class diceRollGame {
 			Integer villian = this.getVillianRoll();
 			System.out.println("The Villian has rolled a " + villian);
 			lost = this.calculateWinner(hero, villian);
+			System.out.println(lost);
 			int choice = 0;
 			if (lost == true) {
 				System.out.println("You have lost!");
@@ -84,13 +87,18 @@ public class diceRollGame {
 					finish = true;
 					break;
 				}
+				lost = false;
+			} else {
+				System.out.println("You Deal Damage Towards The Villians");
 			}
 		}
 		}//need to at this point go to baseCamp menu
 	}
-	public static void playGame(Team team) {
+	public static void playGame(Team team, Villian vill) {
 		diceRollGame game = new diceRollGame();
 		thisTeam = team;
+		thisVillian = vill;
+		System.out.println("Villian Taunts: " + thisVillian.getTaunt());
 		game.gameSequence();
 		System.out.println("The game ended");
 	}

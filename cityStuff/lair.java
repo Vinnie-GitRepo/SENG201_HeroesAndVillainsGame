@@ -2,9 +2,11 @@ package cityStuff;
 import java.util.*;
 import games.*;
 import teamStuff.*;
+import villianStuff.*;
 
 public class lair extends baseCamp {
 	public Team thisTeam;
+	public Villian thisVillian;
 	
 	public void viewMenu() {
 		
@@ -31,6 +33,9 @@ public class lair extends baseCamp {
 		}
 	}
 	
+	public void setVillian(Villian vill) {
+		thisVillian = vill;
+	}
 	
 	public void setTeam(Team team) {
 		thisTeam = team;
@@ -49,7 +54,7 @@ public class lair extends baseCamp {
 			games.numberGuess.playGame(thisTeam);
 			break;
 		case 1 :
-			games.diceRollGame.playGame(thisTeam);
+			games.diceRollGame.playGame(thisTeam, thisVillian);
 			break;
 		case 2 :
 			games.paperScissorsRock.playGame();
