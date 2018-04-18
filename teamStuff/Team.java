@@ -38,7 +38,6 @@ public class Team {
 	
 	
 	
-	
 	/**
 	 * Has the player select a valid number of heroes to be in the team.
 	 * 
@@ -48,7 +47,8 @@ public class Team {
 		
 		boolean done = false;
 		while(done == false) {
-			System.out.println("\nChoose how many heroes are on your team\n \nChoices:");
+			System.out.println("\nChoose how many heroes are on your team\n");
+			System.out.println("Choices:");
 			System.out.println("(1) One Hero.");
 			System.out.println("(2) Two Heroes.");
 			System.out.println("(3) Three Heroes.");
@@ -80,7 +80,8 @@ public class Team {
 		for (int i = 0; i < teamSize; i++) {
 			boolean correct = false;
 			while (!correct) {
-				System.out.println("\nWhat type of hero would you like to add to your team? \nEnter one of the following numbers:");
+				System.out.println("\nWhat type of hero would you like to add to your team?");
+				System.out.println("Enter one of the following numbers:");
 				System.out.println("(1) Merchant Class Hero.");
 				System.out.println("(2) Tank Class Hero.");
 				System.out.println("(3) Cartographer Class Hero.");
@@ -264,7 +265,9 @@ public class Team {
 	
 	
 	
-	
+	/**
+	 * Prints team information 
+	 */
 	public String toString() {
 		String resultString = "\n\nHERO TEAM NAME: " + teamName 
 				            + "\nMONEY: " + money 

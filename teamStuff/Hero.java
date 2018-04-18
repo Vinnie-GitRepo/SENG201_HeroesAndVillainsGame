@@ -7,7 +7,8 @@ public class Hero {
 	private String heroName;
 	private String heroClass;
 	private static int maxHealth;
-	private int currentHealth;
+	private static int currentHealth;
+	private static int recoveryBoost;
 	private static int heroArmor;
 	private static int barterSkill;
 	private boolean luck;
@@ -16,10 +17,11 @@ public class Hero {
 	
 	
 	
-	public Hero(int health, int armor, int barter, boolean luck, int fame, int deterrence) {
+	public Hero(int health, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
 		
 		maxHealth = health;
 		currentHealth = maxHealth;
+		recoveryBoost = recovery;
 		heroArmor = armor;
 		barterSkill = barter;
 		this.luck = luck;
@@ -68,12 +70,16 @@ public class Hero {
 		return heroName;
 	}
 	
-	public int getMaxHealth() {
+	public static int getMaxHealth() {
 		return maxHealth;
 	}
 	
-	public int getCurrentHealth() {
+	public static int getCurrentHealth() {
 		return currentHealth;
+	}
+	
+	public static int getRecoveryBoost() {
+		return recoveryBoost;
 	}
 	
 	public int getArmor() {
@@ -100,7 +106,9 @@ public class Hero {
 	
 	
 	
-	public void restoreHealth(int amount) {
+	
+	
+	public static void restoreHealth(int amount) {
 		if(currentHealth + amount >= maxHealth) {
 			currentHealth = maxHealth;}
 		else {
@@ -111,10 +119,11 @@ public class Hero {
 	
 	
 	
-	/**
-	 *              [SETTERS]
-	 */
 	
+	
+	//------------------------------------------------
+	//                     [SETTERS]
+	//------------------------------------------------
 	public void setHeroClass(String className) {
 		heroClass = className;
 	}
@@ -122,10 +131,11 @@ public class Hero {
 	
 	
 	
+
+	//------------------------------------------------
+	//                    [BOOSTERS]
+	//------------------------------------------------
 	
-	/**
-	 *             [BOOSTERS]
-	 */
 	public static void boostMaxHealth(int healthBoost) {
 		maxHealth += healthBoost;
 	}
