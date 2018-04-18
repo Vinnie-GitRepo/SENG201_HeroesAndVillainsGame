@@ -238,6 +238,7 @@ public class baseCamp extends gameEnvironment implements menu {
 			hospitalMap.viewMenu();
 			break;
 		case "Lair" :
+			lairMap.setTeam(thisTeam);
 			lairMap.viewMenu();
 			System.out.println("HE finishes");
 			//if the teamarray still has people and the cities villian is dead then super.setCityBeat();
@@ -250,7 +251,9 @@ public class baseCamp extends gameEnvironment implements menu {
 			}
 			if (super.cityBeat == false) {//this here will be like well obviously you have left the lair like a pussy
 				this.viewMenu();
-			} 
+			} else {
+				this.viewMenu();
+			}
 			break;
 		default:
 			System.out.println("Please Input A Valid Selection");

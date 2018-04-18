@@ -1,9 +1,10 @@
 package cityStuff;
 import java.util.*;
 import games.*;
+import teamStuff.*;
 
 public class lair extends baseCamp {
-
+	public Team thisTeam;
 	
 	public void viewMenu() {
 		
@@ -31,6 +32,10 @@ public class lair extends baseCamp {
 	}
 	
 	
+	public void setTeam(Team team) {
+		thisTeam = team;
+	}
+	
 	//The beggining of the whole battle section
 	public void displayBattleScreen() {
 
@@ -41,10 +46,10 @@ public class lair extends baseCamp {
 		
 		switch(choice) {
 		case 0 :
-			games.numberGuess.playGame(super.getTeam());
+			games.numberGuess.playGame(thisTeam);
 			break;
 		case 1 :
-			games.diceRollGame.playGame(super.getTeam());
+			games.diceRollGame.playGame(thisTeam);
 			break;
 		case 2 :
 			games.paperScissorsRock.playGame();
@@ -56,7 +61,6 @@ public class lair extends baseCamp {
 	
 	public void exit() {
 		System.out.println("Heading Back To The Base Camp");
-		super.viewMenu();
 	}
 	
 	

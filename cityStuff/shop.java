@@ -8,12 +8,14 @@ public class shop extends baseCamp {
 	
 	public String[] 	healingItems 	= 	{"1 Minute Full Health","2 Minute Full Health", "Immediate 25 Health"};//{"Immediate 25 Health","2 Minute Full Health", "1 Minute Full Health"};
 	
-	public static ArrayList<Integer> healingStockLevel = new ArrayList<Integer>() 
+	public static Integer[] healingStockLevel = {5,3,1};
+	
+	/*public static ArrayList<Integer> healingStockLevel = new ArrayList<Integer>() 
 	{{
 	add(5);
 	add(3);
 	add(1);
-	}};
+	}};*/
 	
 	public Integer[] 	powerUpPrice 	= 	{5,15,30};
 	
@@ -67,7 +69,7 @@ public class shop extends baseCamp {
 	//Shows the list of items that are available to purchase
 	public void showHealingItems() {
 		for (int i = 0; i < healingItems.length; i++) {
-			System.out.println("(" + i + ") " + "Price - " + healingPrice[i] + " " + healingItems[i] + " Stock Level - " + healingStockLevel.get(i));
+			System.out.println("(" + i + ") " + "Price - " + healingPrice[i] + " " + healingItems[i] + " Stock Level - " + healingStockLevel[i]);//healingStockLevel.get(i));
 		}
 		System.out.println("(" + healingItems.length + ") Exit");
 		int choice = this.getPlayerChoice();
@@ -77,21 +79,31 @@ public class shop extends baseCamp {
 				//System.out.println(currentTeam);
 				//System.out.println(currentTeam.getMoney());
 				//System.out.println(healingPrice[0]);
-				if (healingStockLevel.get(0) >= 1 && currentTeam.getMoney() >= healingPrice[0]) {
+				if (healingStockLevel[0]/*healingStockLevel.get(0)*/ >= 1 && currentTeam.getMoney() >= healingPrice[0]) {
 					System.out.println("1 Minute Full Health Has Been Added To Your Inventory");
 					RestoreHealthI healthI = new RestoreHealthI();
 					currentTeam.addItem(healthI);
-					healingStockLevel.add(0,-1);
+					healingStockLevel[0] -= 1;//healingStockLevel.add(0,healingStockLevel.get(0) - 1);
 					currentTeam.addMoney(-healingPrice[0]);}
 				else if (currentTeam.getMoney() < healingPrice[0]){
 					System.out.println("Your Team Does Not Have Enough Money");
 				} else {
 						System.out.println("There Are Not Enough In Stock");
-				}
+				} 
 				this.viewMenu();
 				break;
 			case 1 :
-				System.out.println("2 Minute Full Health Has Been Added To Your Inventory");
+				if (healingStockLevel[1]/*healingStockLevel.get(1)*/ >= 1 && currentTeam.getMoney() >= healingPrice[1]) {
+					System.out.println("2 Minute Full Health Has Been Added To Your Inventory");
+					RestoreHealthII healthII = new RestoreHealthII();
+					currentTeam.addItem(healthII);
+					healingStockLevel[1] -= 1;//healingStockLevel.add(1,healingStockLevel.get(1) - 1);
+					currentTeam.addMoney(-healingPrice[1]);
+				} else if (currentTeam.getMoney() < healingPrice[1]){
+					System.out.println("Your Team Does Not Have Enough Money");
+				} else {
+						System.out.println("There Are Not Enough In Stock");
+				}
 				this.viewMenu();
 				break;
 			case 2 :
