@@ -1,8 +1,10 @@
 package teamStuff;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 
 
@@ -18,8 +20,22 @@ public class Team {
 	public int fameSum;
 	public int deterrenceSum;
 	public int barterSkillSum;
+	
+	/**
+	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
+	*/
+	public static ArrayList<Consumable> workingInventory = new ArrayList<Consumable>();
+		
+	/**
+	* A TreeSet which gets updated every time the workingInventory changes  
+	*/
+	public static TreeSet<String> displayInventory;
 
 	
+	
+	
+	
+	/*GFDSHG^%$R&^%&URDH^%*&^R*H&^%R*^DR&H%$^G#W^BES%R^BES%^B%R&E%E^%$#^%$#&^%$#&^%#%$^#$^#@%VERS%F^G$W^%$W&%$WG^$*/
 	
 	/**
 	 * Constructor for the Team Class
@@ -38,6 +54,7 @@ public class Team {
 	
 	
 	
+	
 	/**
 	 * Has the player select a valid number of heroes to be in the team.
 	 * 
@@ -47,8 +64,7 @@ public class Team {
 		
 		boolean done = false;
 		while(done == false) {
-			System.out.println("\nChoose how many heroes are on your team\n");
-			System.out.println("Choices:");
+			System.out.println("\nChoose how many heroes are on your team\n \nChoices:");
 			System.out.println("(1) One Hero.");
 			System.out.println("(2) Two Heroes.");
 			System.out.println("(3) Three Heroes.");
@@ -80,8 +96,7 @@ public class Team {
 		for (int i = 0; i < teamSize; i++) {
 			boolean correct = false;
 			while (!correct) {
-				System.out.println("\nWhat type of hero would you like to add to your team?");
-				System.out.println("Enter one of the following numbers:");
+				System.out.println("\nWhat type of hero would you like to add to your team? \nEnter one of the following numbers:");
 				System.out.println("(1) Merchant Class Hero.");
 				System.out.println("(2) Tank Class Hero.");
 				System.out.println("(3) Cartographer Class Hero.");
@@ -141,42 +156,36 @@ public class Team {
 			// Merchant Hero is chosen.
 			case 1:                  
 				MerchantMan merchant = new MerchantMan();
-				merchant.setHeroClass("Merchant");
 				heroArray.add(merchant);
 				break;
 			
 			// Tank Hero is chosen.
 			case 2:                  
 				Tank tank = new Tank();
-				tank.setHeroClass("Tank");
 				heroArray.add(tank);
 				break;
 			
 			// Cartographer Hero is chosen.
 			case 3:                  
 				Cartographer cartographer = new Cartographer();
-				cartographer.setHeroClass("Cartographer");
 				heroArray.add(cartographer);
 				break;
 				
 			// Support Hero is chosen.	
 			case 4:                  
 				Support support = new Support();
-				support.setHeroClass("Support");
 				heroArray.add(support);
 				break;
 				
 			// LuckyBoii Hero is chosen.
 			case 5:                  
 				LuckyBoii lucky = new LuckyBoii();
-				lucky.setHeroClass("LuckyBoii");
 				heroArray.add(lucky);
 				break;
 			
 			// EdgyScaryFiendLord Hero is chosen.
 			case 6:                  
 				EdgyScaryFiendLord esfl = new EdgyScaryFiendLord(); 
-				esfl.setHeroClass("Edgy Anti-Hero");
 				heroArray.add(esfl);
 				break;
 				
@@ -188,8 +197,63 @@ public class Team {
 	
 	
 	
+	//------------------------------------------------
+	//                   [INVENTORY]
+	//------------------------------------------------
+		
+		
 	
-
+		
+		
+		
+		
+		
+	/**
+	* Refreshes the displayInventory when the workingInventory changes
+	*/
+	public void refreshDisplayInventory() {
+		displayInventory = new TreeSet<String>();    
+		for(Consumable item : workingInventory) {
+			int itemFrequency = Collections.frequency(workingInventory, item);
+			String itemType = item.getName() + "(" + itemFrequency + ")";
+			displayInventory.add(itemType);
+		} 
+	}
+		
+		
+		
+	/**
+	* Adds a consumable item to the workingInventory
+	* Reshreshes displayInventory
+	* @param item
+	*/
+	public void addItem(Consumable item) {    
+		workingInventory.add(item);
+		refreshDisplayInventory();
+	}
+		
+		
+	/**
+	* Removes a consumable item from the workingInventory
+	* Refreshes displayInventory
+	* @param item
+	*/
+	public void removeItem(Consumable item) {
+		workingInventory.remove(item);
+		refreshDisplayInventory();
+	}
+		
+	
+	public void displayInventory() {
+		if (workingInventory.size() > 0) {
+			for(String item : displayInventory) {
+				System.out.println(item);
+			}
+		}
+		else {
+			System.out.println("You Have No Items Currently.");
+		}
+	}
 	
 	
 	//------------------------------------------------
@@ -265,9 +329,7 @@ public class Team {
 	
 	
 	
-	/**
-	 * Prints team information 
-	 */
+	
 	public String toString() {
 		String resultString = "\n\nHERO TEAM NAME: " + teamName 
 				            + "\nMONEY: " + money 

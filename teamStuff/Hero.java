@@ -17,10 +17,11 @@ public class Hero {
 	
 	
 	
-	public Hero(int health, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
+	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
 		
 		maxHealth = health;
 		currentHealth = maxHealth;
+		heroClass = theClass;
 		recoveryBoost = recovery;
 		heroArmor = armor;
 		barterSkill = barter;
