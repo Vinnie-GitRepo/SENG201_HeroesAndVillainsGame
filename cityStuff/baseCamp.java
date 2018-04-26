@@ -268,10 +268,13 @@ public class baseCamp extends gameEnvironment implements menu {
 			if (thisTeam.heroArray.size() == 0) {
 				super.endGame();// if there are no people in the team then you have lost the game
 			}
+			if (thisVillian.getLossCount() == 3) {
+				super.setCityBeat();
+			}
 			if (super.cityBeat == false) {//this here will be like well obviously you have left the lair like a pussy
 				this.viewMenu();
 			} else {
-				this.viewMenu();
+				this.finishCity();
 			}
 			break;
 		default:

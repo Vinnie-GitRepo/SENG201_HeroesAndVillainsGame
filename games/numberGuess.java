@@ -3,10 +3,12 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import teamStuff.*;
 import cityStuff.*;
+import villianStuff.*;
 
 public class numberGuess {
 	public static Team thisTeam;
 	public static int attempts = 0;
+	public static Villian thisVillian;
 	
 	public static boolean finish = false;
 	
@@ -58,6 +60,26 @@ public class numberGuess {
 					System.out.println("You guessed it in " + attempts + " attempts");
 					finish = true;
 					System.out.println("You Deal Damage To The Villian");
+					thisVillian.oneDefeat();
+					System.out.println("You have defeated the Villian " + thisVillian.getLossCount() + "/3 Times");
+					System.out.println("Options:\n(0) Switch Character\n(1) Continue Playing\n(2) Flee From Lair");
+					if (thisVillian.getLossCount() == 3) {
+						continuePlaying = false;
+						finish = true;
+					} else {
+					choice = this.getPlayerChoice();
+					if (choice == 0) {
+					continuePlaying = true;
+					selectChar = true;
+					break;
+					} else if (choice == 1){
+						continuePlaying = true;
+					} else if (choice == 2) {
+						continuePlaying = false;
+						finish = true;
+						break;
+					}
+					lost = false;}
 					}
 				else 
 				{
@@ -115,11 +137,14 @@ public class numberGuess {
 			}
 		}
 	}
-	public static void playGame(Team team) {
+	public static void playGame(Team team, Villian vill) {
+		thisVillian = vill;
 		thisTeam = team;
 		numberGuess game = new numberGuess();
 		game.gameSequence();
 	}
+	
+	
 	public static void main(String[] args) {
 		numberGuess game = new numberGuess();
 		int villianNumber = ThreadLocalRandom.current().nextInt(1, 11);

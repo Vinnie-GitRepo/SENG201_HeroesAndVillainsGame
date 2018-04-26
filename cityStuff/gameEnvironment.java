@@ -193,6 +193,7 @@ public class gameEnvironment {
 			baseCamps.get(i).setVillian(villians.get(i));
 			baseCamps.get(i).viewMenu();//camp.viewMenu();
 			System.out.println("FInihed the city");
+			cityBeat = false;
 		}
 		System.out.println("WHAT THE FUCK CUNT HOW HAVE U GINISHED IT ALREADY WWUT>?");			//At this point they must have gone though each city, will make super villian happen now
 

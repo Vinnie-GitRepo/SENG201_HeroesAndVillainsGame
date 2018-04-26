@@ -51,13 +51,13 @@ public class lair extends baseCamp {
 		
 		switch(choice) {
 		case 0 :
-			games.numberGuess.playGame(thisTeam);
+			games.numberGuess.playGame(thisTeam, thisVillian);
 			break;
 		case 1 :
 			games.diceRollGame.playGame(thisTeam, thisVillian);
 			break;
 		case 2 :
-			games.paperScissorsRock.playGame();
+			games.paperScissorsRock.playGame(thisTeam, thisVillian);
 		}
 		//this.exit();
 	}
