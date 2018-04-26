@@ -1,9 +1,12 @@
 package cityStuff;
 import java.util.*;
 import games.*;
+import teamStuff.*;
+import villianStuff.*;
 
 public class lair extends baseCamp {
-
+	public Team thisTeam;
+	public Villian thisVillian;
 	
 	public void viewMenu() {
 		
@@ -30,6 +33,13 @@ public class lair extends baseCamp {
 		}
 	}
 	
+	public void setVillian(Villian vill) {
+		thisVillian = vill;
+	}
+	
+	public void setTeam(Team team) {
+		thisTeam = team;
+	}
 	
 	//The beggining of the whole battle section
 	public void displayBattleScreen() {
@@ -41,13 +51,13 @@ public class lair extends baseCamp {
 		
 		switch(choice) {
 		case 0 :
-			games.numberGuess.playGame(super.getTeam());
+			games.numberGuess.playGame(thisTeam, thisVillian);
 			break;
 		case 1 :
-			games.diceRollGame.playGame(super.getTeam());
+			games.diceRollGame.playGame(thisTeam, thisVillian);
 			break;
 		case 2 :
-			games.paperScissorsRock.playGame();
+			games.paperScissorsRock.playGame(thisTeam, thisVillian);
 		}
 		//this.exit();
 	}
@@ -56,7 +66,6 @@ public class lair extends baseCamp {
 	
 	public void exit() {
 		System.out.println("Heading Back To The Base Camp");
-		super.viewMenu();
 	}
 	
 	

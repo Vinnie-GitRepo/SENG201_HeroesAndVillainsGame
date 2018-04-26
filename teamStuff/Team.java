@@ -34,9 +34,6 @@ public class Team {
 	
 	
 	
-	
-	/*GFDSHG^%$R&^%&URDH^%*&^R*H&^%R*^DR&H%$^G#W^BES%R^BES%^B%R&E%E^%$#^%$#&^%$#&^%#%$^#$^#@%VERS%F^G$W^%$W&%$WG^$*/
-	
 	/**
 	 * Constructor for the Team Class
 	 */
@@ -189,7 +186,7 @@ public class Team {
 				heroArray.add(esfl);
 				break;
 				
-			// Handles invalid input
+			// Else
 			default:                 
 				break;
 		}
@@ -200,23 +197,14 @@ public class Team {
 	//------------------------------------------------
 	//                   [INVENTORY]
 	//------------------------------------------------
-		
-		
-	
-		
-		
-		
-		
-		
 	/**
 	* Refreshes the displayInventory when the workingInventory changes
 	*/
-	public void refreshDisplayInventory() {
+	public static void refreshDisplayInventory() {
 		displayInventory = new TreeSet<String>();    
 		for(Consumable item : workingInventory) {
 			int itemFrequency = Collections.frequency(workingInventory, item);
-			String itemType = item.getName() + "(" + itemFrequency + ")";
-			displayInventory.add(itemType);
+			displayInventory.add(item.getName() + " (" + itemFrequency + ")");
 		} 
 	}
 		
@@ -238,7 +226,7 @@ public class Team {
 	* Refreshes displayInventory
 	* @param item
 	*/
-	public void removeItem(Consumable item) {
+	public static void removeItem(Consumable item) {
 		workingInventory.remove(item);
 		refreshDisplayInventory();
 	}

@@ -6,8 +6,5 @@ public class SilverTongueIII extends Consumable{
 		super("Silver Tongue III", 50, 100, true);
 	}
 	
-	public void apply() {
-		Hero.boostBarterSkill(getPotency());
-	}
 
 }

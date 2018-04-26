@@ -1,6 +1,6 @@
 package teamStuff;
 
-public class RestoreHealthIII extends Consumable{
+public class RestoreHealthIII extends ConsumableItem {
 	
 	
 	

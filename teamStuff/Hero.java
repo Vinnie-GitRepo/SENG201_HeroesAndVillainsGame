@@ -1,19 +1,22 @@
 package teamStuff;
 
 import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Hero {
 	
+	public static int secondsPassed = 0;
 	private String heroName;
 	private String heroClass;
-	private static int maxHealth;
-	private static int currentHealth;
-	private static int recoveryBoost;
-	private static int heroArmor;
-	private static int barterSkill;
+	private int maxHealth;
+	private int currentHealth;
+	private int recoveryBoost;
+	private int heroArmor;
+	private int barterSkill;
 	private boolean luck;
-	private static int fame;
-	private static int deterrence;
+	private int fame;
+	private int deterrence;
 	
 	
 	
@@ -47,7 +50,7 @@ public class Hero {
 				done = false;
 				while (done == false) {
 					if(name.equals(hero.getName())) {
-						System.out.println("That name is already taken by a team member, so you must enter another.");
+						System.out.println("That name is already taken by a team member");
 						System.out.println("Enter another name: ");
 						inputName = new Scanner(System.in);
 						name = inputName.nextLine();}
@@ -64,22 +67,23 @@ public class Hero {
 	
 	
 	
-	/**
-	 *      [GETTERS]
-	 */
+	//------------------------------------------------
+	//                    [GETTERS]
+	//------------------------------------------------
+	
 	public String getName() {
 		return heroName;
 	}
 	
-	public static int getMaxHealth() {
+	public int getMaxHealth() {
 		return maxHealth;
 	}
 	
-	public static int getCurrentHealth() {
+	public int getCurrentHealth() {
 		return currentHealth;
 	}
 	
-	public static int getRecoveryBoost() {
+	public int getRecoveryBoost() {
 		return recoveryBoost;
 	}
 	
@@ -90,7 +94,6 @@ public class Hero {
 	public int getBarterSkill() {
 		return barterSkill;
 	}
-	
 	
 	public int getDeterrence() {
 		return deterrence;
@@ -106,10 +109,17 @@ public class Hero {
 	
 	
 	
+	//------------------------------------------------
+	//              [CONSUMABLE METHODS]
+	//------------------------------------------------
+	public void useConsumable(Consumable item) { 
+		item.apply(this);
+		Team.removeItem(item);
+		
+	}
 	
 	
-	
-	public static void restoreHealth(int amount) {
+	public void restoreHealth(int amount) {
 		if(currentHealth + amount >= maxHealth) {
 			currentHealth = maxHealth;}
 		else {
@@ -121,41 +131,31 @@ public class Hero {
 	
 	
 	
-	
-	//------------------------------------------------
-	//                     [SETTERS]
-	//------------------------------------------------
-	public void setHeroClass(String className) {
-		heroClass = className;
-	}
-	
-	
-	
-	
-
 	//------------------------------------------------
 	//                    [BOOSTERS]
 	//------------------------------------------------
 	
-	public static void boostMaxHealth(int healthBoost) {
+	public void boostMaxHealth(int healthBoost) {
 		maxHealth += healthBoost;
 	}
 	
-	public static void boostArmor(int armorBoost) {
+	public void boostArmor(int armorBoost) {
 		heroArmor += armorBoost;
 	}
 	
-	public static void boostBarterSkill(int barterBoost) {
+	public void boostBarterSkill(int barterBoost) {
 		barterSkill += barterBoost;
 	}
 	
-	public static void boostFame(int fameBoost) {
+	public void boostFame(int fameBoost) {
 		fame += fameBoost;
 	}
 	
-	public static void boostDeterrence(int deterrenceBoost) {
+	public void boostDeterrence(int deterrenceBoost) {
 		deterrence += deterrenceBoost;
 	}
+	
+	
 	
 	//------------------------------------------------
 	//              [DAMAGE & DEATH]
@@ -168,11 +168,21 @@ public class Hero {
 	 */
 	public void damageHealth(int damage) {
 		if(heroArmor < damage) {
-			currentHealth -= (damage - heroArmor);}
+			currentHealth -= (damage - heroArmor);
+			damageArmor(damage);}
+		
 		if(currentHealth <= 0) {
 			currentHealth = 0;
-			deathHandling();
-		}
+			deathHandling();}
+	}
+	
+	
+	public void damageArmor(int damage) {
+		if(heroArmor > damage) {
+			heroArmor -= damage;}
+		
+		if(heroArmor <= damage) {
+			heroArmor = 0;}
 	}
 	
 	
@@ -191,13 +201,13 @@ public class Hero {
 
 	
 	public String toString() {
-		String resultString = "Name: " + heroName 
-				            + "\nClass: " + heroClass 
-				            + "\nHealth: " + currentHealth + "/" + maxHealth 
-				            + "\nArmor: " + heroArmor 
-				            + "\nBarter Skill: " + barterSkill 
-				            + "\nFame: " + fame 
-				            + "\nDeterrence: " + deterrence + "\n";
+		String resultString = "Name: " + getName() 										// Name: (heroName)
+				            + "\nClass: " + heroClass 									// Class: (heroClass)
+				            + "\nHealth: " + getCurrentHealth() + "/" + getMaxHealth()  // Health: (currentHealth/maxHealth)
+				            + "\nArmor: " + getArmor() 									// Armor: (heroArmor)
+				            + "\nBarter Skill: " + getBarterSkill() 					// Barter Skill: (barterSkill)
+				            + "\nFame: " + getFame() 									// Fame: (fame)
+				            + "\nDeterrence: " + getDeterrence() + "\n";				// Deterrence (deterrence)
 		return resultString;
 	}
 	

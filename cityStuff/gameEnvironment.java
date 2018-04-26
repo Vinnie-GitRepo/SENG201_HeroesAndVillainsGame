@@ -45,9 +45,10 @@ public class gameEnvironment {
 	}
 	
 	
-	//A likely uneeded function
+	//A likely unneeded function
 	public void addBaseCamp() {
-		baseCamp Camp = new baseCamp();
+		baseCamp Camp = new baseCamp(this.generateLayout());
+		//System.out.println("made new one");
 		baseCamps.add(Camp);
 	}
 	
@@ -128,6 +129,33 @@ public class gameEnvironment {
 	}
 	
 	
+	//DATA FOR GENERATING CITIES
+	//public ArrayList<String> areas = new ArrayList<String>();
+	
+	
+	
+	//THE ACTUAL CITY GENERATOR
+	public ArrayList<String> generateLayout() {
+		ArrayList<String> options = new ArrayList<String>()
+		{{add("Shop");
+		add("PowerUpDen");
+		add("Hospital");
+		add("Lair");
+		}};
+		
+		String[] directions 	= 	{"North","East ","South","West "};
+		ArrayList<String> areas = new ArrayList<String>();
+		int size = options.size();
+		int num;
+		
+		for (int i = size - 1; i != -1; i--) {
+			num = rand.nextInt(i + 1);
+			areas.add(options.get(num));
+			options.remove(num);
+		}
+		return areas;
+	}
+	
 	
 	public static void main(String[] args) {
 		int num = 0;
@@ -148,15 +176,24 @@ public class gameEnvironment {
 		System.out.println(team);																//Prints out the initial team showing stats
 		
 		for (int i = 0; i != num; i++) {														//THIS IS GENERATING HOW MANY CITIES THERE ARE
+			game.addBaseCamp();
+			//System.out.println("added camp");
+			//while (cityBeat == false) {
+				//game.addBaseCamp(team);															//i need to get the villian into that city
+				//baseCamps.get(i).viewMenu();
+			//}																					//something like if city is won baseCamps.get(i).finishCity();
 			
-			while (cityBeat == false) {
-				game.addBaseCamp(team);															//i need to get the villian into that city
-				baseCamps.get(i).viewMenu();
-			}																					//something like if city is won baseCamps.get(i).finishCity();
+			//cityBeat = false;
+			//System.out.println("You have completed this city!");
 			
+		}
+		for (int i = 0; i < baseCamps.size(); i++) {//(baseCamp camp : baseCamps) {
+			baseCamps.get(i).setTeam(team);//camp.setTeam(team);
+			//System.out.println(villians.get(i).getTaunt());
+			baseCamps.get(i).setVillian(villians.get(i));
+			baseCamps.get(i).viewMenu();//camp.viewMenu();
+			System.out.println("FInihed the city");
 			cityBeat = false;
-			System.out.println("You have completed this city!");
-			
 		}
 		System.out.println("WHAT THE FUCK CUNT HOW HAVE U GINISHED IT ALREADY WWUT>?");			//At this point they must have gone though each city, will make super villian happen now
 

@@ -2,10 +2,12 @@ package games;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;//randomizer import
 import teamStuff.*;
+import villianStuff.*;
 
 public class diceRollGame {
 	public static Team thisTeam;
 	public static int luckynum = 1;
+	public static Villian thisVillian;
 	
 	public static boolean finish = false;
 	
@@ -17,7 +19,7 @@ public class diceRollGame {
 	}
 	public boolean calculateWinner(int hero, int villian) {
 		if (hero == villian) {
-			System.out.println("It is a draw, rolla again!");
+			System.out.println("It is a draw, roll again!");
 			return false;
 		} else if (hero > villian) {
 			System.out.println("You have won!");
@@ -55,6 +57,7 @@ public class diceRollGame {
 			Integer villian = this.getVillianRoll();
 			System.out.println("The Villian has rolled a " + villian);
 			lost = this.calculateWinner(hero, villian);
+			//System.out.println(lost);
 			int choice = 0;
 			if (lost == true) {
 				System.out.println("You have lost!");
@@ -84,13 +87,38 @@ public class diceRollGame {
 					finish = true;
 					break;
 				}
+				lost = false;
+			} else {
+				System.out.println("You Deal Damage Towards The Villian");
+				thisVillian.oneDefeat();
+				System.out.println("You have defeated the Villian " + thisVillian.getLossCount() + "/3 Times");
+				System.out.println("Options:\n(0) Switch Character\n(1) Continue Playing\n(2) Flee From Lair");
+				if (thisVillian.getLossCount() == 3) {
+					continuePlaying = false;
+					finish = true;
+				} else {
+				choice = this.getPlayerChoice();
+				if (choice == 0) {
+				continuePlaying = true;
+				selectChar = true;
+				break;
+				} else if (choice == 1){
+					continuePlaying = true;
+				} else if (choice == 2) {
+					continuePlaying = false;
+					finish = true;
+					break;
+				}
+				lost = false;}
 			}
 		}
 		}//need to at this point go to baseCamp menu
 	}
-	public static void playGame(Team team) {
+	public static void playGame(Team team, Villian vill) {
 		diceRollGame game = new diceRollGame();
 		thisTeam = team;
+		thisVillian = vill;
+		System.out.println("Villian Taunts: " + thisVillian.getTaunt());
 		game.gameSequence();
 		System.out.println("The game ended");
 	}
