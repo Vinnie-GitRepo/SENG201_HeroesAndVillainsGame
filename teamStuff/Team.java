@@ -29,7 +29,7 @@ public class Team {
 	/**
 	* A TreeSet which gets updated every time the workingInventory changes  
 	*/
-	public static TreeSet<String> displayInventory;
+	public static TreeSet<String> displayInventory = new TreeSet<String>();
 
 	
 	
@@ -116,7 +116,7 @@ public class Team {
 			    	System.out.println("Your input is invalid. Please enter a valid number");}
 				
 			}
-			correct = false;
+			//correct = false;
 		}
 	}
 	

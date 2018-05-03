@@ -1,12 +1,12 @@
 package teamStuff;
 
-public class IronFleshII extends Consumable{
+public class IronFleshII extends ConsumableItem {
 	
 	public IronFleshII() {
 		super("Iron Flesh II", 10, 25, true);
 	}
 	
-	public void apply() {
-		Hero.boostArmor(getPotency());
+	public void apply(Hero hero) {
+		hero.boostArmor(this.getPotency());
 	}
 }

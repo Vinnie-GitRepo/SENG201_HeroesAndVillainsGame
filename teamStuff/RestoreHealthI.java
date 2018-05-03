@@ -6,12 +6,8 @@ import java.util.TimerTask;
 public class RestoreHealthI extends ConsumableItem{
 	
 	private static int secondsPassed = 0;
-	
 	private static int defaultApplicationTime = 40;
-	
-	
 	private Timer time = new Timer();
-	
 	
 	
 	public RestoreHealthI() {
@@ -22,7 +18,6 @@ public class RestoreHealthI extends ConsumableItem{
 	
 	public void apply(Hero hero) {
 		int applicationTime = defaultApplicationTime - hero.getRecoveryBoost();
-		
 		TimerTask healOverTime = new TimerTask() {
 			
 			public void run() {
@@ -32,37 +27,34 @@ public class RestoreHealthI extends ConsumableItem{
 			
 				if(secondsPassed == 1*applicationTime) {                	//	First increment, restoring 25% of the potion's potency.
 					hero.restoreHealth(getPotency() / 4);
-				}
+					System.out.println("Health is now: " + hero.getCurrentHealth());}
 					
 				if(secondsPassed == 2*applicationTime) {					//	Second increment, restoring 25% of the potion's potency.
 					hero.restoreHealth(getPotency() / 4);
-				}
+					System.out.println("Health is now: " + hero.getCurrentHealth());}
 					
 				if(secondsPassed == 3*applicationTime) {					//	Third increment, restoring 25% of the potion's potency.
 					hero.restoreHealth(getPotency() / 4);
-				}
+					System.out.println("Health is now: " + hero.getCurrentHealth());}
 					
 				if(secondsPassed == 4*applicationTime) {					//	Fourth increment, restoring 25% of the potion's potency.
 					hero.restoreHealth(getPotency() / 4);
-				}  								
+					System.out.println("Health is now: " + hero.getCurrentHealth());
+					cancel();} 												//	Finished the healing process.  								
 			}
 		};
-		
-		time.scheduleAtFixedRate(healOverTime, 1000, 1000);
-		healOverTime.cancel();												//	Finished the healing process.
+		time.scheduleAtFixedRate(healOverTime, 1000, 1000);					//  Initiates the healing process.										
 	}
 	
 	
 	public static void main(String[] args) {
 		MerchantMan quod = new MerchantMan();
 		System.out.println(quod);
-		quod.damageHealth(10);
-		
+		quod.damageHealth(50);
 		
 		
 		RestoreHealthI heal = new RestoreHealthI();
 		heal.apply(quod);
-		
 		
 		
 	}
