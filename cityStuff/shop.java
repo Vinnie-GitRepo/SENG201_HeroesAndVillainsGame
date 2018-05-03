@@ -2,7 +2,8 @@ package cityStuff;
 import java.util.*;
 import teamStuff.*;
 
-public class shop extends baseCamp {
+
+public class shop extends baseCamp implements Consumable {
 	
 	public Integer[] 	healingPrice 	= 	{5,15,30};
 	
@@ -29,6 +30,15 @@ public class shop extends baseCamp {
 	}};
 	
 	public Team currentTeam;
+	
+	
+	public String getName(){
+		return "HI";
+	}
+	public void apply(Hero hero){
+		
+	}
+	
 	
 	//Show da menu oi
 	public void viewMenu() {
@@ -107,6 +117,17 @@ public class shop extends baseCamp {
 				this.viewMenu();
 				break;
 			case 2 :
+				if (healingStockLevel[2]/*healingStockLevel.get(1)*/ >= 1 && currentTeam.getMoney() >= healingPrice[2]) {
+					System.out.println("Immediate 25 Health Has Been Added To Your Inventory");
+					RestoreHealthIII healthIII = new RestoreHealthIII();
+					currentTeam.addItem(healthIII);
+					healingStockLevel[2] -= 1;//healingStockLevel.add(1,healingStockLevel.get(1) - 1);
+					currentTeam.addMoney(-healingPrice[2]);
+				} else if (currentTeam.getMoney() < healingPrice[2]){
+					System.out.println("Your Team Does Not Have Enough Money");
+				} else {
+						System.out.println("There Are Not Enough In Stock");
+				}
 				System.out.println("Immediate 25 Health Has Been Added To Your Inventory");
 				this.viewMenu();
 				break;

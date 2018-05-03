@@ -195,6 +195,7 @@ public class gameEnvironment {
 			System.out.println("FInihed the city");
 			cityBeat = false;
 		}
+		//super villian spot is here this will only be called if they finish each city
 		System.out.println("WHAT THE FUCK CUNT HOW HAVE U GINISHED IT ALREADY WWUT>?");			//At this point they must have gone though each city, will make super villian happen now
 
 	}
