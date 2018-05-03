@@ -4,7 +4,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import teamStuff.*;
 import villianStuff.*;
 
+
 public class baseCamp extends gameEnvironment implements menu {
+	
+	//public Random random = new Random();
+	
+	//public static String[] RandomEvents = {"Paper","Scissors","Rock"};
 	
 	public static shop shopMap = new shop();
 	
@@ -243,18 +248,82 @@ public class baseCamp extends gameEnvironment implements menu {
 		String direction = directions[pos];
 		String area = areas.get(pos);
 		foundPlace.set(pos, true);
+		Random random = new Random();
 		System.out.println("You have chosen to move " + direction + " into the " + area);
+		int RandNum;
 		switch(area) {
 		case "Shop" :
 			shopMap.setTeam(thisTeam);
 			shopMap.viewMenu();
+			RandNum = random.nextInt(2);
+			if (RandNum == 0) {
+				//System.out.println("You etting robbed or given something bitch!");
+				int eventNumber = new Random().nextInt(4);
+				switch(eventNumber){
+				case 0:
+					System.out.println("YOu are given SOmething dop");
+					break;
+				case 1:
+					System.out.println("You got some cash mullah");
+					break;
+				case 2:
+					System.out.println("Bugger, you got robbed, they stole your money");
+					break;
+				case 3:
+					System.out.println("Damn u lost an item");
+					break;
+				}
+			}
+			//System.out.println(RandNum);
 			this.viewMenu();
 			break;
 		case "PowerUpDen" :
 			PowerUpDenMap.viewMenu();
+			RandNum = random.nextInt(2);
+			if (RandNum == 0) {
+				//System.out.println("You etting robbed or given something bitch!");
+				int eventNumber = new Random().nextInt(4);
+				switch(eventNumber){
+				case 0:
+					System.out.println("YOu are given SOmething dop");
+					break;
+				case 1:
+					System.out.println("You got some cash mullah");
+					break;
+				case 2:
+					System.out.println("Bugger, you got robbed, they stole your money");
+					break;
+				case 3:
+					System.out.println("Damn u lost an item");
+					break;
+				}
+			}
+			//System.out.println(RandNum);
+			this.viewMenu();
 			break;
 		case "Hospital" :
 			hospitalMap.viewMenu();
+			RandNum = random.nextInt(2);
+			if (RandNum == 0) {
+				//System.out.println("You etting robbed or given something bitch!");
+				int eventNumber = new Random().nextInt(4);
+				switch(eventNumber){
+				case 0:
+					System.out.println("YOu are given SOmething dop");
+					break;
+				case 1:
+					System.out.println("You got some cash mullah");
+					break;
+				case 2:
+					System.out.println("Bugger, you got robbed, they stole your money");
+					break;
+				case 3:
+					System.out.println("Damn u lost an item");
+					break;
+				}
+			}
+			//System.out.println(RandNum);
+			this.viewMenu();
 			break;
 		case "Lair" :
 			lairMap.setTeam(thisTeam);
