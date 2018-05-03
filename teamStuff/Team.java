@@ -43,10 +43,10 @@ public class Team {
 		fillHeroArray();		// Lets you select and name heroes for your team
 		nameTeam();				// Lets you name your team of heroes
 		
-		// Setters based on the heroes selected
-		setBarterSkillSum();
-		setDeterrenceSum();
-		setFameSum();
+								
+		setBarterSkillSum();	//-------------------------------------
+		setDeterrenceSum();		// Setters based on the heroes selected
+		setFameSum();			//
 	}
 	
 	

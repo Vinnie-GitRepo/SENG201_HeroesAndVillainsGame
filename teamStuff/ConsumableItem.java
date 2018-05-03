@@ -43,6 +43,19 @@ public class ConsumableItem implements Consumable {
 		
 	}
 	
+	public String toString() {
+		String returnString = this.getName();
+		return returnString;
+	}
+	
+	public boolean equals(Object item) {
+		if (item instanceof Consumable) {
+			if (this.consumableName == ((ConsumableItem) item).getName()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 }
