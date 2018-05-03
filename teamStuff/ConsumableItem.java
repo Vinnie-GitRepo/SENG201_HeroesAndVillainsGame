@@ -1,6 +1,6 @@
 package teamStuff;
 
-public class ConsumableItem {
+public class ConsumableItem implements Consumable {
 	
 	
 	

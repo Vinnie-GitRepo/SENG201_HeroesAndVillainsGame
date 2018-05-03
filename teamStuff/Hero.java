@@ -171,6 +171,9 @@ public class Hero {
 			currentHealth -= (damage - heroArmor);
 			damageArmor(damage);}
 		
+		else if(heroArmor >= damage) {
+			damageArmor(damage);}
+		
 		if(currentHealth <= 0) {
 			currentHealth = 0;
 			deathHandling();}
@@ -178,11 +181,13 @@ public class Hero {
 	
 	
 	public void damageArmor(int damage) {
-		if(heroArmor > damage) {
-			heroArmor -= damage;}
-		
 		if(heroArmor <= damage) {
 			heroArmor = 0;}
+		
+		else if(heroArmor > damage) {
+			heroArmor -= damage;}
+		
+		
 	}
 	
 	
@@ -204,6 +209,7 @@ public class Hero {
 		String resultString = "Name: " + getName() 										// Name: (heroName)
 				            + "\nClass: " + heroClass 									// Class: (heroClass)
 				            + "\nHealth: " + getCurrentHealth() + "/" + getMaxHealth()  // Health: (currentHealth/maxHealth)
+				            + "\nRecovery: " + getRecoveryBoost()						// Recovery: (recoveryBoost)
 				            + "\nArmor: " + getArmor() 									// Armor: (heroArmor)
 				            + "\nBarter Skill: " + getBarterSkill() 					// Barter Skill: (barterSkill)
 				            + "\nFame: " + getFame() 									// Fame: (fame)
