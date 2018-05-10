@@ -12,14 +12,14 @@ public class Team {
 	
 	
 	
-	public static String teamName;
-	public static ArrayList<Hero> heroArray = new ArrayList<Hero>();
-	public static int teamSize;
-	public String position = "Base";
-	public int money = 100;
-	public int fameSum;
-	public int deterrenceSum;
-	public int barterSkillSum;
+	private static String teamName;
+	private static ArrayList<Hero> heroArray = new ArrayList<Hero>();
+	private static int teamSize;
+	private String position = "Base";
+	private int money = 100;
+	private int fameSum;
+	private int deterrenceSum;
+	private int barterSkillSum;
 	
 	/**
 	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
@@ -43,10 +43,9 @@ public class Team {
 		fillHeroArray();		// Lets you select and name heroes for your team
 		nameTeam();				// Lets you name your team of heroes
 		
-								
 		setBarterSkillSum();	//-------------------------------------
 		setDeterrenceSum();		// Setters based on the heroes selected
-		setFameSum();			//
+		setFameSum();			//-------------------------------------
 	}
 	
 	
@@ -137,6 +136,7 @@ public class Team {
 		else {
 			Team.teamName = name;}
 	}
+	
 	
 	
 	

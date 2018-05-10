@@ -1,5 +1,13 @@
 package teamStuff;
 
+
+/**
+ * This class is the super class for all the consumable items in the game.
+ * It contains a constructor for the attributes, and getter methods for them. 
+ * 
+ * @author vjj14
+ * @version
+ */
 public class ConsumableItem implements Consumable {
 	
 	
@@ -48,6 +56,10 @@ public class ConsumableItem implements Consumable {
 		return returnString;
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object item) {
 		if (item instanceof Consumable) {
 			if (this.consumableName == ((ConsumableItem) item).getName()) {

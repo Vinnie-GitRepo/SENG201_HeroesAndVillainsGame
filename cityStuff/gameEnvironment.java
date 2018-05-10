@@ -192,7 +192,7 @@ public class gameEnvironment {
 			//System.out.println(villians.get(i).getTaunt());
 			baseCamps.get(i).setVillian(villians.get(i));
 			baseCamps.get(i).viewMenu();//camp.viewMenu();
-			System.out.println("FInihed the city");
+			System.out.println("Finihed the city");
 			cityBeat = false;
 		}
 		//super villian spot is here this will only be called if they finish each city

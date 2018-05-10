@@ -4,6 +4,13 @@ import java.util.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Class for the Hero objects that comprise a team of heroes   
+ * 
+ * @author vjj14
+ * @version 
+ *
+ */
 public class Hero {
 	
 	public static int secondsPassed = 0;
@@ -19,7 +26,18 @@ public class Hero {
 	private int deterrence;
 	
 	
-	
+	/**
+	 * Constructor for the Hero class
+	 * 
+	 * @param health
+	 * @param theClass
+	 * @param recovery
+	 * @param armor
+	 * @param barter
+	 * @param luck
+	 * @param fame
+	 * @param deterrence
+	 */
 	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
 		
 		maxHealth = health;
@@ -35,7 +53,9 @@ public class Hero {
 	}
 	
 	
-	
+	/**
+	 * 
+	 */
 	public void nameHero() {
 		ArrayList<Hero> checkArray = Team.getHeroArray();
 		
@@ -115,7 +135,6 @@ public class Hero {
 	public void useConsumable(Consumable item) { 
 		item.apply(this);
 		Team.removeItem(item);
-		
 	}
 	
 	
