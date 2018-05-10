@@ -46,11 +46,21 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	//The initializer to a basecamp. This creates a layout for the
 	//city and saves it in the gameEnvironment
-	
+	/**
+	 * Allows for classes which inherit methods to access the Villian from this city
+	 * 
+	 * @return thisVillian
+	 */
 	public Villian getVillian() {
 		return thisVillian;
 	}
 	
+	
+	/**
+	 * This passes the given team into the current city, allowing for the teams status from the previous city to remain
+	 * 
+	 * @param team
+	 */
 	public baseCamp(Team team) {
 		thisTeam = team;
 		rand = new Random();
@@ -68,12 +78,22 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//final intializer
+	/**
+	 * This sets up the city with the map/layout which has been generated in the game environment
+	 * 
+	 * @param map
+	 */
 	public baseCamp(ArrayList map) {
 		areas = map;
 	}
 	
 	
-	
+	/**
+	 * This sets up the city with Villian that was generated in the game environment
+	 * it also will pass that Villian into the "lairMap"
+	 * 
+	 * @param vill
+	 */
 	public void setVillian(Villian vill) {
 		thisVillian = vill;
 		lairMap.setVillian(vill);
@@ -93,6 +113,10 @@ public class baseCamp extends gameEnvironment implements menu {
 	//This calls the game to exit from the basecamp menu
 	//should make this method give the option of saving if 
 	//we can work that out
+	/**
+	 * Used at any point to exit the game completly
+	 * 
+	 */
 	public void exitGame() {
 		System.out.println("Thank you for playing");
 		System.exit(0);
@@ -100,6 +124,11 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//Operates the menu choice as the menu is specific in each section
+	/**
+	 * Used for the command line only this method will hand the menu choice 
+	 * 
+	 * @param choice
+	 */
 	public void operateMenuChoice(int choice) {
 		switch(choice) 
 		{
@@ -131,6 +160,10 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//This will print out all the stats of the team
+	/**
+	 * Inherited from the Team class this method will show the user team stats, only used in the command line
+	 * 
+	 */
 	public void viewStats() {
 		System.out.println(thisTeam);
 		System.out.println("(0) Back To Menu");
@@ -144,17 +177,32 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	//Sends the team out
+	/**
+	 * This will send the team back to the game environment allowing for it to be passed into the next city/baseCamp
+	 * 
+	 * @return thisTeam
+	 */
 	public Team getTeam() {
 		return thisTeam;
 	}
 	
 	
 	//sets the team
+	/**
+	 * This will set the team which is in the game environment to be the team now being used in this city
+	 * 
+	 * @param team
+	 */
 	public void setTeam(Team team) {
 		thisTeam = team;
 	}
 	
 	//This is the menu generator in other sections has been hard coded
+	/**
+	 * A simple menu generator showing all the available options from within the basecamp
+	 * 
+	 *
+	 */
 	public void viewMenu() {
 		
 		System.out.println("Menu Options:");
@@ -180,6 +228,12 @@ public class baseCamp extends gameEnvironment implements menu {
 	//This is the map showing where each thing is, at some point
 	//need to make an if statement which works only if you have the map class
 	//or purchased a map.
+	/**
+	 * This method will obtain the map with all the known locations
+	 * If the map item is purchased it will allow for all areas to be known
+	 * If the MAPPERSON class is within the team it will allow for all areas to be known
+	 * 
+	 */
 	public void viewMap() {
 		
 		System.out.println("\nMap\n-------------");
@@ -217,6 +271,12 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	//If at any point the menu has been exited it will take you
 	//to the main menu
+	/**
+	 * This method is used to exit out of the menu item you are currently in
+	 * and take you back to the main menu
+	 * - Command Line
+	 * 
+	 */
 	public void exit() {
 		this.viewMenu();
 	}
@@ -236,7 +296,11 @@ public class baseCamp extends gameEnvironment implements menu {
 	}*/
 	
 	
-	
+	/**
+	 * This operates from the map allowing the team to move into the next area
+	 * 
+	 * @param pos
+	 */
 	public void movePlayer(int pos) {
 		
 		if (pos >= areas.size()) {
@@ -302,6 +366,7 @@ public class baseCamp extends gameEnvironment implements menu {
 			this.viewMenu();
 			break;
 		case "Hospital" :
+			hospitalMap.setTeam(thisTeam);
 			hospitalMap.viewMenu();
 			RandNum = random.nextInt(2);
 			if (RandNum == 0) {
@@ -354,6 +419,10 @@ public class baseCamp extends gameEnvironment implements menu {
 		}
 		
 	}
+	/**
+	 * This method finishes the city but will only be called once the Villian has lost 3 times
+	 * 
+	 */
 	public void finishCity() {
 		super.setTeam(thisTeam);
 	}
