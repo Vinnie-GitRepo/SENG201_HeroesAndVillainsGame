@@ -12,11 +12,24 @@ public class numberGuess {
 	
 	public static boolean finish = false;
 	
+	
+	/**
+	 * 
+	 * Gets the players choice for their guess of the number
+	 * 
+	 * @return num.nextInt();
+	 */
 	public int getHeroChoice() {
 		System.out.println("Choose a number between 0 and 10");
 		Scanner num = new Scanner(System.in);
 		return num.nextInt();//Integer.parseInt(num.nextLine());
 	}
+	
+	/**
+	 * 
+	 * Calculates whether or not the player needs to guess higher or lower
+	 * then prints out a statement letting them know
+	 */
 	public void higherOrLower(int guess, int num) {
 		if (guess > num) {
 			System.out.println("Guess Lower");
@@ -24,10 +37,24 @@ public class numberGuess {
 			System.out.println("Guess Higher");
 		}
 	}
+	
+	/**
+	 * 
+	 * Gets the players choice for the menu option
+	 * 
+	 * @return pos.nextInt();
+	 */
 	public int getPlayerChoice() {
 		Scanner pos = new Scanner(System.in);
 		return pos.nextInt();
 	}
+	
+	
+	/**
+	 * 
+	 * This is where the game actually runs calling other methods from numberGuess
+	 * 
+	 */
 	public void gameSequence() {
 		boolean continuePlaying = true;
 		boolean selectChar = false;
@@ -137,6 +164,15 @@ public class numberGuess {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * Initializes the game and passes in the team and villian
+	 * 
+	 * @param team
+	 * @param vill
+	 */
 	public static void playGame(Team team, Villian vill) {
 		thisVillian = vill;
 		thisTeam = team;

@@ -1,6 +1,6 @@
 package teamStuff;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -32,6 +32,13 @@ public class Team {
 	public static TreeSet<String> displayInventory = new TreeSet<String>();
 
 	
+	
+	
+	
+	
+	public ArrayList<Consumable> getInventory(){
+		return workingInventory;
+	}
 	
 	
 	/**
@@ -233,10 +240,21 @@ public class Team {
 		
 	
 	public void displayInventory() {
+		//ArrayList<Consumable> items = new ArrayList<Consumable>();
 		if (workingInventory.size() > 0) {
+			/*for (Consumable item : workingInventory) {
+				if (!items.contains(item)) {
+					items.add(item);
+				}
+			}
+			for (int i = 0; i < items.size(); i++) {
+				int itemFrequency = Collections.frequency(workingInventory, items.get(i));
+				System.out.println(items.get(i) + "(" + itemFrequency + ")"); 
+			}*/
 			for(String item : displayInventory) {
 				System.out.println(item);
 			}
+			
 		}
 		else {
 			System.out.println("You Have No Items Currently.");

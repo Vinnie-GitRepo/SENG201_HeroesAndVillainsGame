@@ -23,6 +23,11 @@ public class gameEnvironment {
 	
 	//This is used at any point if all of your super heroes
 	//have died it will exit the java application
+	/**
+	 * This can be called at any time if the team has lost
+	 * it will simply tell the player that they have lost and exit the game
+	 * 
+	 */
 	public void endGame() {
 		System.out.println("You have lost MWAHAHAHA!");
 		System.exit(0);
@@ -31,6 +36,11 @@ public class gameEnvironment {
 	
 	//cityBeat allows for the main programme to know whether
 	//the city has been beat or if the heroes have died
+	/**
+	 * cityBeat allows for the main programme to know whether
+	 * the city has been beat or if the heroes have died
+	 * 
+	 */
 	public void setCityBeat() {
 		cityBeat = true;
 	}
@@ -39,6 +49,12 @@ public class gameEnvironment {
 	//Adds to the array of baseCamps which contains each
 	//camp within the game. Basecamps are in effect citys
 	//as each city is centralized to a basecamp.
+	/**
+	 * Adds to the array of baseCamps which contains each
+	 * camp within the game. Basecamps are in effect citys
+	 * as each city is centralized to a basecamp.
+	 * 
+	 */
 	public void addBaseCamp(Team team) {
 		baseCamp Camp = new baseCamp(team);
 		baseCamps.add(Camp);
@@ -55,6 +71,12 @@ public class gameEnvironment {
 	
 	//This simply returns whatever the user has inputted.
 	//Should be turned into a interface though possibly
+	/**
+	 * This simply returns whatever the user has inputted.
+	 * Should be turned into a interface though possibly
+	 * 
+	 * @return pos.nextInt();
+	 */
 	public int getPlayerChoice() {
 		Scanner pos = new Scanner(System.in);
 		return pos.nextInt();
@@ -63,6 +85,10 @@ public class gameEnvironment {
 	
 	//Allows for other classes to get the team in order
 	//to edit or add
+	/**
+	 * Allows for other classes to get the team in order
+	 * to edit or add
+	 */
 	public Team getTeam() {
 		return team;
 	}
@@ -71,6 +97,11 @@ public class gameEnvironment {
 	//This is used when finishing a city the team is returned
 	//through the game and set to theTeam in order to move
 	//into the next city
+	/**
+	 * This is used when finishing a city the team is returned
+	 * through the game and set to theTeam in order to move
+	 * into the next city
+	 */
 	public void setTeam(Team theTeam) {
 		team = theTeam;
 	} 
@@ -78,6 +109,10 @@ public class gameEnvironment {
 	
 	//Generates each villian for each city and stores them within
 	//villians an ArrayList<villian>
+	/**
+	 * Generates each villian for each city and stores them within
+	 * villians an ArrayList<villian>
+	 */
 	public void generateVillians(int num) {
 		
 		ArrayList<String> villianNames = new ArrayList<String>() 
@@ -135,6 +170,11 @@ public class gameEnvironment {
 	
 	
 	//THE ACTUAL CITY GENERATOR
+	/**
+	 * This generates the city and how it will be laid out
+	 * 
+	 * @return areas
+	 */
 	public ArrayList<String> generateLayout() {
 		ArrayList<String> options = new ArrayList<String>()
 		{{add("Shop");
@@ -157,6 +197,12 @@ public class gameEnvironment {
 	}
 	
 	
+	
+	/**
+	 * Where the game is intialized and played
+	 * 
+	 * 
+	 */
 	public static void main(String[] args) {
 		int num = 0;
 		gameEnvironment game = new gameEnvironment();

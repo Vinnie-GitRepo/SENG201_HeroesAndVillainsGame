@@ -11,12 +11,34 @@ public class diceRollGame {
 	
 	public static boolean finish = false;
 	
+	/**
+	 * 
+	 * Gets the randomly generated roll from the hero
+	 * 
+	 * @return ThreadLocalRandom.current().nextInt(luckynum, 7)
+	 */
 	public int getHeroRoll() {
 		return ThreadLocalRandom.current().nextInt(luckynum, 7);
 	}
+	
+	/**
+	 * 
+	 * Gets the randomly generated roll for the Villian
+	 * 
+	 * @return ThreadLocalRandom.current().nextInt(1, 7)
+	 */
 	public int getVillianRoll() {
 		return ThreadLocalRandom.current().nextInt(1, 7);
 	}
+	
+	/**
+	 * 
+	 * Calculated the winner of the round
+	 * 
+	 * @param hero
+	 * @param villian
+	 * @return true or false
+	 */
 	public boolean calculateWinner(int hero, int villian) {
 		if (hero == villian) {
 			System.out.println("It is a draw, roll again!");
@@ -31,10 +53,25 @@ public class diceRollGame {
 			return true;
 		}
 	}
+	
+	/**
+	 * 
+	 * Gets the players choice for the menu option
+	 * 
+	 * @return pos.nextInt();
+	 */
 	public int getPlayerChoice() {
 		Scanner pos = new Scanner(System.in);
 		return pos.nextInt();
 	}
+	
+	
+	/**
+	 * 
+	 * This is where the main game happens
+	 * it will loop between each of the game operators
+	 * 
+	 */
 	public void gameSequence() {
 		boolean continuePlaying = true;
 		boolean selectChar = false;
@@ -114,6 +151,14 @@ public class diceRollGame {
 		}
 		}//need to at this point go to baseCamp menu
 	}
+	
+	
+	/**
+	 * Initializes the game
+	 * 
+	 * @param team
+	 * @param vill
+	 */
 	public static void playGame(Team team, Villian vill) {
 		diceRollGame game = new diceRollGame();
 		thisTeam = team;

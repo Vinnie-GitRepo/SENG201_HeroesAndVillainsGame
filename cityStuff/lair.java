@@ -7,7 +7,11 @@ import villianStuff.*;
 public class lair extends baseCamp {
 	public Team thisTeam;
 	public Villian thisVillian;
-	
+	/**
+	 * Shows the menu of for within the lair
+	 * uses a switch to choose what happens
+	 * 
+	 */
 	public void viewMenu() {
 		
 		System.out.println("Menu Options");
@@ -33,15 +37,34 @@ public class lair extends baseCamp {
 		}
 	}
 	
+	/**
+	 * Sets the Villian for within this lair
+	 * this is called within the the basecamp initializer
+	 * 
+	 * @param vill
+	 */
 	public void setVillian(Villian vill) {
 		thisVillian = vill;
 	}
 	
+	
+	/**
+	 * Sets the team to the lair allowing for stats to change
+	 * this is called within the the basecamp initializer
+	 * 
+	 * @param team
+	 */
 	public void setTeam(Team team) {
 		thisTeam = team;
 	}
 	
 	//The beggining of the whole battle section
+	
+	/**
+	 * Show a menu of game options
+	 * then uses a switch to choose which game is played and passes the team and villian into it
+	 * 
+	 */
 	public void displayBattleScreen() {
 
 		System.out.println("Select A Game");
@@ -63,7 +86,11 @@ public class lair extends baseCamp {
 	}
 	
 	
-	
+	/**
+	 * Used if user decides they do not wish to battle the villian
+	 * 
+	 *
+	 */
 	public void exit() {
 		System.out.println("Heading Back To The Base Camp");
 	}
