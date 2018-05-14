@@ -12,11 +12,16 @@ public class gameEnvironmentGuiRunTime {
 	
 	public static ArrayList<Villian> villians = new ArrayList<Villian>();
 	
+	public static ArrayList<String> getCurrentMap(int num){
+		return baseCamps.get(num).getMap();
+	}
+	
+	
 	public static ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
 	
 	public static Team team;
 	
-	public Random rand = new Random();
+	public static Random rand = new Random();
 	
 	public static boolean cityBeat = false;
 	
@@ -62,10 +67,12 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	//A likely unneeded function
-	public void addBaseCamp() {
-		baseCamp Camp = new baseCamp(this.generateLayout());
-		//System.out.println("made new one");
+	public static void addBaseCamp(ArrayList<String> map) {
+		baseCamp Camp = new baseCamp(map);
 		baseCamps.add(Camp);
+		//baseCamp Camp = new baseCamp(this.generateLayout());
+		//System.out.println("made new one");
+		//baseCamps.add(Camp);
 	}
 	
 	
@@ -113,7 +120,7 @@ public class gameEnvironmentGuiRunTime {
 	 * Generates each villian for each city and stores them within
 	 * villians an ArrayList<villian>
 	 */
-	public void generateVillians(int num) {
+	public static void generateVillians(int num) {
 		
 		ArrayList<String> villianNames = new ArrayList<String>() 
 		{{
@@ -175,7 +182,7 @@ public class gameEnvironmentGuiRunTime {
 	 * 
 	 * @return areas
 	 */
-	public ArrayList<String> generateLayout() {
+	public static ArrayList<String> generateLayout() {
 		ArrayList<String> options = new ArrayList<String>()
 		{{add("Shop");
 		add("PowerUpDen");
@@ -204,6 +211,11 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
+	
+	public static void setThingsUp(int num) {
+		//team = new Team();
+	}
+	
 	/**
 	 * Where the game is intialized and played
 	 * 
@@ -228,7 +240,7 @@ public class gameEnvironmentGuiRunTime {
 		System.out.println(team);																//Prints out the initial team showing stats
 		
 		for (int i = 0; i != num; i++) {														//THIS IS GENERATING HOW MANY CITIES THERE ARE
-			game.addBaseCamp();
+			//game.addBaseCamp();
 			//System.out.println("added camp");
 			//while (cityBeat == false) {
 				//game.addBaseCamp(team);															//i need to get the villian into that city

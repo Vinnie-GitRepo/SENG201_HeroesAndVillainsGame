@@ -52,6 +52,10 @@ public class baseCamp extends gameEnvironment implements menu {
 	 */
 	public ArrayList<String> areas = new ArrayList<String>();
 	
+	public ArrayList<String> getMap(){
+		return areas;
+	}
+	
 	/**
 	 * A list of options available to the player.
 	 */

@@ -1,10 +1,6 @@
 package teamStuff;
 
 import java.util.*;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.TreeSet;
 
 
 
@@ -71,7 +67,7 @@ public class Team {
 	public static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	
-	
+/*	
 <<<<<<< HEAD
 	public ArrayList<ConsumableItem> getInventory(){
 		return workingInventory;
@@ -81,7 +77,7 @@ public class Team {
 	
 
 >>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
-	
+	*/
 	
 	/**
 	 * Constructor for the Team Class
@@ -378,7 +374,7 @@ public class Team {
 	/**
 	 * @return workingInventory
 	 */
-	public ArrayList<Consumable> getInventory(){
+	public ArrayList<ConsumableItem> getInventory(){
 		return workingInventory;
 	}
 	
