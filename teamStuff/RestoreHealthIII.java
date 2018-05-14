@@ -1,66 +1,17 @@
 package teamStuff;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class RestoreHealthIII extends ConsumableItem {
-	
-	private int timeRemaining;
-	private static int secondsPassed;
-	private static int defaultApplicationTime = 40;
-	private Timer time = new Timer();
+public class RestoreHealthIII extends HealingItem {
 	
 	
+	/**
+	 * Constructor for a "Restore Health III" HealingItem.
+	 * Should have a greater price and potency than healing items of lower tiers.
+	 */
 	public RestoreHealthIII() {
-		super("Restore Health III", 200, 75, true);
+		super("Restore Health III", 200, 75, 40);
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see teamStuff.ConsumableItem#apply(teamStuff.Hero)
-	 */
-	public void apply(Hero hero) {
-		int applicationTime = defaultApplicationTime - hero.getRecoveryBoost();
-		timeRemaining = 4*applicationTime;
-		TimerTask healOverTime = new TimerTask() {
-			
-			public void run() {
-				
-				timeRemaining--;
-				secondsPassed++;
-				
-				System.out.println("Time remaining: " + timeRemaining);
-				
-			
-				if(secondsPassed == 1*applicationTime) {                	//	First increment, restoring 25% of the potion's potency.
-					hero.restoreHealth(getPotency() / 4);
-					System.out.println("Health is now: " + hero.getCurrentHealth());
-				}
-					
-				if(secondsPassed == 2*applicationTime) {					//	Second increment, restoring 25% of the potion's potency.
-					hero.restoreHealth(getPotency() / 4);
-					System.out.println("Health is now: " + hero.getCurrentHealth());
-				}
-					
-				if(secondsPassed == 3*applicationTime) {					//	Third increment, restoring 25% of the potion's potency.
-					hero.restoreHealth(getPotency() / 4);
-					System.out.println("Health is now: " + hero.getCurrentHealth());
-				}
-					
-				if(secondsPassed == 4*applicationTime) {					//	Fourth increment, restoring 25% of the potion's potency.
-					hero.restoreHealth(getPotency() / 4);
-					System.out.println("Health is now: " + hero.getCurrentHealth());
-					cancel(); 												//	Finished the healing process.
-				}  								
-			}
-		};
-		time.scheduleAtFixedRate(healOverTime, 1000, 1000);
-	}
-	
-	
-	public int getTimeRemaining() {
-		return timeRemaining;
-	}
 	
 	public static void main(String[] args) {
 		MerchantMan quod = new MerchantMan();

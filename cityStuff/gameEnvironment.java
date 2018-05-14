@@ -21,12 +21,10 @@ public class gameEnvironment {
 	public static boolean cityBeat = false;
 	
 	
-	//This is used at any point if all of your super heroes
-	//have died it will exit the java application
+	
 	/**
-	 * This can be called at any time if the team has lost
-	 * it will simply tell the player that they have lost and exit the game
-	 * 
+	 * Called if the team has lost.
+	 * Informs the player about their loss and exits the game. 
 	 */
 	public void endGame() {
 		System.out.println("You have lost MWAHAHAHA!");
@@ -34,25 +32,22 @@ public class gameEnvironment {
 	}
 	
 	
-	//cityBeat allows for the main programme to know whether
-	//the city has been beat or if the heroes have died
+	
 	/**
 	 * cityBeat allows for the main programme to know whether
 	 * the city has been beat or if the heroes have died
-	 * 
 	 */
 	public void setCityBeat() {
 		cityBeat = true;
 	}
 	
 	
-	//Adds to the array of baseCamps which contains each
-	//camp within the game. Basecamps are in effect citys
-	//as each city is centralized to a basecamp.
+	
 	/**
 	 * Adds to the array of baseCamps which contains each
 	 * camp within the game. Basecamps are in effect citys
-	 * as each city is centralized to a basecamp.
+	 * as each city is centralized to a basecamp. 
+	 * 
 	 * 
 	 */
 	public void addBaseCamp(Team team) {
@@ -69,34 +64,30 @@ public class gameEnvironment {
 	}
 	
 	
-	//This simply returns whatever the user has inputted.
-	//Should be turned into a interface though possibly
+	
 	/**
-	 * This simply returns whatever the user has inputted.
+	 * Returns user's input choice.
 	 * Should be turned into a interface though possibly
 	 * 
 	 * @return pos.nextInt();
 	 */
 	public int getPlayerChoice() {
 		Scanner pos = new Scanner(System.in);
+		// int playerChoice = pos.nextInt(); 
+		// return playerChoice;
 		return pos.nextInt();
 	}
 	
 	
-	//Allows for other classes to get the team in order
-	//to edit or add
 	/**
-	 * Allows for other classes to get the team in order
-	 * to edit or add
+	 * Allows other classes to access the team for adding and editing.
 	 */
 	public Team getTeam() {
 		return team;
 	}
 	
 	
-	//This is used when finishing a city the team is returned
-	//through the game and set to theTeam in order to move
-	//into the next city
+	
 	/**
 	 * This is used when finishing a city the team is returned
 	 * through the game and set to theTeam in order to move
@@ -107,11 +98,9 @@ public class gameEnvironment {
 	} 
 	
 	
-	//Generates each villian for each city and stores them within
-	//villians an ArrayList<villian>
 	/**
-	 * Generates each villian for each city and stores them within
-	 * villians an ArrayList<villian>
+	 * Generates villian for each city by randomly selecting from component lists. 
+	 * Stores them within an ArrayList<villain> named villains.
 	 */
 	public void generateVillians(int num) {
 		
@@ -138,9 +127,8 @@ public class gameEnvironment {
 		int numName;
 		int numPhrase;	
 		
-		//Villian Generating Loop
-		//Num is passed into it as it will only create as many
-		//vilians as there is towns
+		// Villian Generating Loop 
+		// Uses the num argument to create as many villains as there are towns.
 		for (int i = 0; i < num; i++) {
 			numName = rand.nextInt(villianNames.size());
 			numPhrase = rand.nextInt(catchPhrase.size());
@@ -157,7 +145,7 @@ public class gameEnvironment {
 			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
 			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
 			
-			//TEST TO MAKE SURE IT IS RANDOMIZING
+			// TEST TO MAKE SURE IT IS RANDOMIZING
 			//System.out.println(villians.get(i).getName()); 
 			//System.out.println(villians.get(i).getTaunt());
 		}
@@ -171,7 +159,7 @@ public class gameEnvironment {
 	
 	//THE ACTUAL CITY GENERATOR
 	/**
-	 * This generates the city and how it will be laid out
+	 * Generates a city and determines its layout.
 	 * 
 	 * @return areas
 	 */

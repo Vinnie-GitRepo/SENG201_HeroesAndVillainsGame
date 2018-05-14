@@ -11,14 +11,34 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	//public static String[] RandomEvents = {"Paper","Scissors","Rock"};
 	
+	/**
+	 * Item shop created for a city. 
+	 * Refreshes shop inventory and may change location when the city changes.
+	 */
 	public static shop shopMap = new shop();
 	
+	/**
+	 * Villain lair created for a city.
+	 * Changes villain, and may change location when the city changes. 
+	 */
 	public static lair lairMap = new lair();
 	
+	/**
+	 * Hospital created for a city.
+	 * May change location when the city changes.
+	 */
 	public static hospital hospitalMap = new hospital();
 	
+	/**
+	 * Power Up Den created for a city.
+	 * May change location when the city changes.
+	 */
 	public static powerUpDen PowerUpDenMap = new powerUpDen();
 	
+	/**
+	 * Stores the team's state of location discovery for a city.
+	 * Resets to false when entering a new city.
+	 */
 	public static ArrayList<Boolean> foundPlace = new ArrayList<Boolean>() 
 	{{
 	add(false);
@@ -27,8 +47,14 @@ public class baseCamp extends gameEnvironment implements menu {
 	add(false);
 	}};
 	
+	/**
+	 * A list of areas that are set according to a map made through random numbers. 
+	 */
 	public ArrayList<String> areas = new ArrayList<String>();
 	
+	/**
+	 * A list of options available to the player.
+	 */
 	public ArrayList<String> options = new ArrayList<String>()
 	{{add("Shop");
 	add("PowerUpDen");
@@ -36,9 +62,19 @@ public class baseCamp extends gameEnvironment implements menu {
 	add("Lair");
 	}};
 	
+	/**
+	 * An array of directions relative to the base camp that the team may travel from.  
+	 */
 	public String[] directions 	= 	{"North","East ","South","West "};
+	
+	/**
+	 * An array of options available to the team when located at the base camp.
+	 */
 	public String[] menu 		= 	{"View Stats", "View Map", "View Inventory", "Exit Game"};
 	
+	/**
+	 * 
+	 */
 	public Team thisTeam;
 	public Villian thisVillian;
 	public Random rand;
@@ -57,7 +93,8 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	
 	/**
-	 * This passes the given team into the current city, allowing for the teams status from the previous city to remain
+	 * This passes the given team into the current city. 
+	 * Allows for the retention of the team's status from previous cities
 	 * 
 	 * @param team
 	 */
@@ -70,6 +107,9 @@ public class baseCamp extends gameEnvironment implements menu {
 	
 	//Another initializer which is no longer used
 	//this is now used again in the latest update
+	/**
+	 * Initialises the basecamp without using team 
+	 */
 	public baseCamp() {
 		rand = new Random();
 		//System.out.println("ples"); got to here
@@ -159,10 +199,9 @@ public class baseCamp extends gameEnvironment implements menu {
 	}
 	
 	
-	//This will print out all the stats of the team
 	/**
 	 * Inherited from the Team class this method will show the user team stats, only used in the command line
-	 * 
+	 * Prints all the team's stats
 	 */
 	public void viewStats() {
 		System.out.println(thisTeam);
@@ -326,15 +365,19 @@ public class baseCamp extends gameEnvironment implements menu {
 				switch(eventNumber){
 				case 0:
 					System.out.println("YOu are given SOmething dop");
+					// [TODO Tell user what item was gifted]
 					break;
 				case 1:
 					System.out.println("You got some cash mullah");
+					// [TODO Tell user how much money was gifted]
 					break;
 				case 2:
 					System.out.println("Bugger, you got robbed, they stole your money");
+					// [TODO Tell user how much money was stolen]
 					break;
 				case 3:
 					System.out.println("Damn u lost an item");
+					// [TODO Tell user what item was lost/stolen]
 					break;
 				}
 			}
@@ -399,7 +442,7 @@ public class baseCamp extends gameEnvironment implements menu {
 				super.setCityBeat();
 				System.out.println("THis cit is beat");
 			}*/
-			if (thisTeam.heroArray.size() == 0) {
+			if (thisTeam.getHeroArray().size() == 0) {
 				super.endGame();// if there are no people in the team then you have lost the game
 			}
 			if (thisVillian.getLossCount() == 3) {

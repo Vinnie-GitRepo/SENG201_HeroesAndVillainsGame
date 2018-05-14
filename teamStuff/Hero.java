@@ -13,16 +13,80 @@ import java.util.TimerTask;
  */
 public class Hero {
 	
-	public static int secondsPassed = 0;
+	/**
+	 * The hero's name.
+	 */
 	private String heroName;
+	
+	
+	
+	/**
+	 * The hero's class.
+	 */
 	private String heroClass;
+	
+	
+	
+	/**
+	 * The hero's maximum health.
+	 * This value can only be increased.
+	 */
 	private int maxHealth;
+	
+	
+	
+	/**
+	 * The state of the hero's health.
+	 * Receives both damage and restoration.
+	 */
 	private int currentHealth;
+	
+	
+	
+	/**
+	 * The hero's innate ability to recover.
+	 * Determines how long an applied HealingItem takes to restore health.
+	 */
 	private int recoveryBoost;
+	
+	
+	
+	/**
+	 * The hero's protective armor level.
+	 * Receives damage instead of the hero, acting like extra health.
+	 */
 	private int heroArmor;
+	
+	
+	
+	/**
+	 * The hero's bartering skill.
+	 * Aids in lowering item shop prices for the team.
+	 */
 	private int barterSkill;
+	
+	
+	
+	/**
+	 * Determines whether the hero is lucky or not.
+	 * Affects games against villains in beneficial ways.
+	 */
 	private boolean luck;
+	
+	
+	
+	/**
+	 * The hero's fame.
+	 * Aids in increasing the team's chance of receiving gifts.
+	 */
 	private int fame;
+	
+	
+	
+	/**
+	 * The hero's deterrence.
+	 * Aids in deterring robberies against the team.
+	 */
 	private int deterrence;
 	
 	
@@ -54,7 +118,8 @@ public class Hero {
 	
 	
 	/**
-	 * 
+	 * The naming process for the hero.
+	 * Ensures the name chosen isn't already taken by another hero.
 	 */
 	public void nameHero() {
 		ArrayList<Hero> checkArray = Team.getHeroArray();
@@ -91,38 +156,102 @@ public class Hero {
 	//                    [GETTERS]
 	//------------------------------------------------
 	
+	
+	/**
+	 * Getter for the hero's name.
+	 * @return heroName
+	 */
 	public String getName() {
 		return heroName;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's class.
+	 * @return heroClass
+	 */
+	public String getHeroClass() {
+		return heroClass;
+	}
+	
+	
+	
+	
+	/**
+	 * Getter for the hero's max health.
+	 * @return maxHealth
+	 */
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's current health.
+	 * @return currenthealth
+	 */
 	public int getCurrentHealth() {
 		return currentHealth;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's recovery boost.
+	 * @return recoveryBoost
+	 */
 	public int getRecoveryBoost() {
 		return recoveryBoost;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's armor.
+	 * @return heroArmor
+	 */
 	public int getArmor() {
 		return heroArmor;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's bartering skill.
+	 * @return barterSkill
+	 */
 	public int getBarterSkill() {
 		return barterSkill;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's deterrence level.
+	 * @return deterrence
+	 */
 	public int getDeterrence() {
 		return deterrence;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's fame.
+	 * @return fame
+	 */
 	public int getFame() {
 		return fame;
 	}
 	
+	
+	
+	/**
+	 * Getter for the hero's luck.
+	 * @return luck
+	 */
 	public boolean getLuck() {
 		return luck;
 	}
@@ -132,12 +261,18 @@ public class Hero {
 	//------------------------------------------------
 	//              [CONSUMABLE METHODS]
 	//------------------------------------------------
+	
+	
 	public void useConsumable(Consumable item) { 
 		item.apply(this);
 		Team.removeItem(item);
 	}
 	
 	
+	/**
+	 * Executes the health restoration effect on the hero using a HealingItem.
+	 * @param amount
+	 */
 	public void restoreHealth(int amount) {
 		if(currentHealth + amount >= maxHealth) {
 			currentHealth = maxHealth;}
@@ -154,22 +289,51 @@ public class Hero {
 	//                    [BOOSTERS]
 	//------------------------------------------------
 	
+	
+	/**
+	 * Executes max health boost on the hero using an Augment Vitality PowerUp.  
+	 * @param healthBoost
+	 */
 	public void boostMaxHealth(int healthBoost) {
 		maxHealth += healthBoost;
 	}
 	
+	
+	
+	/**
+	 * Executes armor boost on the hero using an Iron Flesh PowerUp. 
+	 * @param armorBoost
+	 */
 	public void boostArmor(int armorBoost) {
 		heroArmor += armorBoost;
 	}
 	
+	
+	
+	/**
+	 * Executes barter skill boost on the hero using a Silver Tongue PowerUp. 
+	 * @param barterBoost
+	 */
 	public void boostBarterSkill(int barterBoost) {
 		barterSkill += barterBoost;
 	}
 	
+	
+	
+	/**
+	 * Executes fame boost for when the hero prevails against a villain. 
+	 * @param fameBoost
+	 */
 	public void boostFame(int fameBoost) {
 		fame += fameBoost;
 	}
 	
+	
+	
+	/**
+	 * Executes deterence boost for when the hero prevails agains a villain.
+	 * @param deterrenceBoost
+	 */
 	public void boostDeterrence(int deterrenceBoost) {
 		deterrence += deterrenceBoost;
 	}
@@ -180,10 +344,14 @@ public class Hero {
 	//              [DAMAGE & DEATH]
 	//------------------------------------------------
 	
+	
 	/**
-	 * Calculates how much damage is dealt, if any.
+	 * Ensures that health is never negative.
 	 * Reduces the damaged hero's armor, if any.
+	 * Calculates how much damage is dealt, if any.
 	 * Determines whether the damaged hero is dead.
+	 * 
+	 * @param damage
 	 */
 	public void damageHealth(int damage) {
 		if(heroArmor < damage) {
@@ -199,20 +367,26 @@ public class Hero {
 	}
 	
 	
+	
+	/**
+	 * Reduces the hero's armor according to the damage.
+	 * Ensures the hero's armor value is never negative.
+	 * 
+	 * @param damage
+	 */
 	public void damageArmor(int damage) {
 		if(heroArmor <= damage) {
 			heroArmor = 0;}
 		
 		else if(heroArmor > damage) {
 			heroArmor -= damage;}
-		
-		
 	}
 	
 	
+	
 	/**
-	 * Informs the player about a hero's death.
-	 * Removes dead hero from the team.
+	 * Informs user about the hero's death.
+	 * Removes the dead hero from the team.
 	 */
 	public void deathHandling() {
 		System.out.println(this.getName() + " has died");
@@ -223,7 +397,9 @@ public class Hero {
 	
 	
 
-	
+	/**
+	 * The hero's toString method, that prints the hero's attributes as desired.
+	 */
 	public String toString() {
 		String resultString = "Name: " + getName() 										// Name: (heroName)
 				            + "\nClass: " + heroClass 									// Class: (heroClass)

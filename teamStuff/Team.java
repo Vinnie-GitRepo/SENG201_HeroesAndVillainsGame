@@ -64,6 +64,11 @@ public class Team {
 	* A TreeSet which gets updated every time the workingInventory changes  
 	*/
 	public static TreeSet<String> displayInventory = new TreeSet<String>();
+	
+	
+	public static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
+	
+	public static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	
 	
@@ -248,6 +253,33 @@ public class Team {
 	}
 		
 		
+	public void addHealingItem(HealingItem healingItem) {
+		healingItems.add(healingItem);
+	}
+	
+	public void removeHealingItem(HealingItem healingItem) {
+		healingItems.remove(healingItem);
+	}
+	
+	public ArrayList<HealingItem> getHealingItems() {
+		return healingItems;
+	}
+	
+	
+	
+	public void addPowerUp(PowerUp powerUp) {
+		powerUps.add(powerUp);
+	}
+	
+	public void removePowerUp(PowerUp powerUp) {
+		powerUps.remove(powerUp);
+	}
+	
+	public ArrayList<PowerUp> getPowerUps() {
+		return powerUps;
+	}
+	
+	
 		
 	/**
 	* Adds a consumable item to the workingInventory
@@ -404,6 +436,10 @@ public class Team {
 		heroArray.remove(hero);
 	}
 	
+	/**
+	 * Changes the amount of money in the team's posession.
+	 * @param amount
+	 */
 	public void addMoney(int amount) {
 		money += amount;
 	}
