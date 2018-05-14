@@ -3,7 +3,7 @@ import java.util.*;
 import teamStuff.*;
 
 
-public class shop extends baseCamp implements Consumable {
+public class shop extends baseCamp {
 	
 	public Integer[] 	healingPrice 	= 	{5,15,30};
 	
@@ -92,7 +92,7 @@ public class shop extends baseCamp implements Consumable {
 				if (healingStockLevel[0]/*healingStockLevel.get(0)*/ >= 1 && currentTeam.getMoney() >= healingPrice[0]) {
 					System.out.println("1 Minute Full Health Has Been Added To Your Inventory");
 					RestoreHealthI healthI = new RestoreHealthI();
-					currentTeam.addItem(healthI);
+					currentTeam.addHealingItem(healthI);
 					healingStockLevel[0] -= 1;//healingStockLevel.add(0,healingStockLevel.get(0) - 1);
 					currentTeam.addMoney(-healingPrice[0]);}
 				else if (currentTeam.getMoney() < healingPrice[0]){
@@ -106,7 +106,7 @@ public class shop extends baseCamp implements Consumable {
 				if (healingStockLevel[1]/*healingStockLevel.get(1)*/ >= 1 && currentTeam.getMoney() >= healingPrice[1]) {
 					System.out.println("2 Minute Full Health Has Been Added To Your Inventory");
 					RestoreHealthII healthII = new RestoreHealthII();
-					currentTeam.addItem(healthII);
+					currentTeam.addHealingItem(healthII);
 					healingStockLevel[1] -= 1;//healingStockLevel.add(1,healingStockLevel.get(1) - 1);
 					currentTeam.addMoney(-healingPrice[1]);
 				} else if (currentTeam.getMoney() < healingPrice[1]){
@@ -120,7 +120,7 @@ public class shop extends baseCamp implements Consumable {
 				if (healingStockLevel[2]/*healingStockLevel.get(1)*/ >= 1 && currentTeam.getMoney() >= healingPrice[2]) {
 					System.out.println("Immediate 25 Health Has Been Added To Your Inventory");
 					RestoreHealthIII healthIII = new RestoreHealthIII();
-					currentTeam.addItem(healthIII);
+					currentTeam.addHealingItem(healthIII);
 					healingStockLevel[2] -= 1;//healingStockLevel.add(1,healingStockLevel.get(1) - 1);
 					currentTeam.addMoney(-healingPrice[2]);
 				} else if (currentTeam.getMoney() < healingPrice[2]){

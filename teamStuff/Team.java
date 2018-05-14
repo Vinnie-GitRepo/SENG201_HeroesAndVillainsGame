@@ -11,14 +11,48 @@ import java.util.TreeSet;
 public class Team {
 	
 	
-	
+	/**
+	 * Name of the team, which is between 2 and 10 characters in length.
+	 */
 	private static String teamName;
+	
+	/**
+	 * The array in which Hero objects are stored
+	 */
 	private static ArrayList<Hero> heroArray = new ArrayList<Hero>();
+	
+	/**
+	 * Determines the size of the heroArray, which is between 1 and 3 Heroes in length
+	 */
 	private static int teamSize;
+	
+	/**
+	 * 
+	 */
 	private String position = "Base";
+	
+	/**
+	 * The money the team has to spend on items, which is awarded to the team for victories. 
+	 * Can be gifted or stolen.
+	 */
 	private int money = 100;
+	
+	/**
+	 * This is the team's net fame.
+	 * Is used to increase chance of randomly receiving gifts.
+	 */
 	private int fameSum;
+	
+	/**
+	 * This is the team's net deterrence.
+	 * Is used to decrease chance of randomly being robbed.
+	 */
 	private int deterrenceSum;
+	
+	/**
+	 * This is the team's net bartering skill.
+	 * Is used to determine shop prices for the team.
+	 */
 	private int barterSkillSum;
 	
 	/**
@@ -30,15 +64,23 @@ public class Team {
 	* A TreeSet which gets updated every time the workingInventory changes  
 	*/
 	public static TreeSet<String> displayInventory = new TreeSet<String>();
+	
+	
+	public static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
+	
+	public static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	
 	
-	
-	
-	
+<<<<<<< HEAD
 	public ArrayList<ConsumableItem> getInventory(){
 		return workingInventory;
 	}
+=======
+	
+	
+
+>>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
 	
 	
 	/**
@@ -148,8 +190,8 @@ public class Team {
 	
 	
 	/**
-	 * Checks if choice is valid;
-	 * Creates a new hero of the selected type;
+	 * Checks if choice input is valid.
+	 * Creates a new hero of the selected type.
 	 * Adds the hero to the heroArray of the team.
 	 *  
 	 * @param choice
@@ -204,6 +246,7 @@ public class Team {
 	//------------------------------------------------
 	//                   [INVENTORY]
 	//------------------------------------------------
+	
 	/**
 	* Refreshes the displayInventory when the workingInventory changes
 	*/
@@ -216,11 +259,39 @@ public class Team {
 	}
 		
 		
+	public void addHealingItem(HealingItem healingItem) {
+		healingItems.add(healingItem);
+	}
+	
+	public void removeHealingItem(HealingItem healingItem) {
+		healingItems.remove(healingItem);
+	}
+	
+	public ArrayList<HealingItem> getHealingItems() {
+		return healingItems;
+	}
+	
+	
+	
+	public void addPowerUp(PowerUp powerUp) {
+		powerUps.add(powerUp);
+	}
+	
+	public void removePowerUp(PowerUp powerUp) {
+		powerUps.remove(powerUp);
+	}
+	
+	public ArrayList<PowerUp> getPowerUps() {
+		return powerUps;
+	}
+	
+	
 		
 	/**
 	* Adds a consumable item to the workingInventory
 	* Reshreshes displayInventory
-	* @param item
+	* 
+	* @param item			The Consumable being added
 	*/
 	public void addItem(ConsumableItem item) {    
 		workingInventory.add(item);
@@ -231,6 +302,7 @@ public class Team {
 	/**
 	* Removes a consumable item from the workingInventory
 	* Refreshes displayInventory
+	* 
 	* @param item
 	*/
 	public static void removeItem(Consumable item) {
@@ -238,7 +310,9 @@ public class Team {
 		refreshDisplayInventory();
 	}
 		
-	
+	/**
+	 * Accesses the team's inventory and lists each item type along with its frequency 
+	 */
 	public void displayInventory() {
 		//ArrayList<Consumable> items = new ArrayList<Consumable>();
 		if (workingInventory.size() > 0) {
@@ -266,26 +340,47 @@ public class Team {
 	//                   [GETTERS]
 	//------------------------------------------------
 	
+	/**
+	 * @return money attribute
+	 */
 	public int getMoney() {
 		return money;
 	}
 	
+	/**
+	 * @return heroArray
+	 */
 	public static ArrayList<Hero> getHeroArray() {
 		return heroArray;
 	}
 	
+	/**
+	 * @return fameSum
+	 */
 	public int getFameSum() {
 		return fameSum;
 	}
 	
+	/**
+	 * @return deterrenceSum
+	 */
 	public int getDeterrenceSum() {
 		return deterrenceSum;
 	}
 	
+	/**
+	 * @return barterSkillSum
+	 */
 	public int getBarterSkillSum() {
 		return barterSkillSum;
 	}
 	
+	/**
+	 * @return workingInventory
+	 */
+	public ArrayList<Consumable> getInventory(){
+		return workingInventory;
+	}
 	
 	
 	
@@ -293,19 +388,34 @@ public class Team {
 	//                   [SETTERS]
 	//------------------------------------------------
 	
+	/**
+	 * Sets the team's fameSum.
+	 * Refreshes the sum before iterating over the heroArray.
+	 */
 	public void setFameSum() {
+		fameSum = 0;
 		for(Hero hero : heroArray) {
 			fameSum += hero.getFame();
 		}
 	}
 	
+	/**
+	 * Sets the team's deterrenceSum.
+	 * Refreshes the sum before iterating over the heroArray.
+	 */
 	public void setDeterrenceSum() {
+		deterrenceSum = 0;
 		for(Hero hero : heroArray) {
 			deterrenceSum += hero.getDeterrence();
 		}
 	}
 	
+	/**
+	 * Sets the team's barterSkillSum.
+	 * Refreshes the sum before iterating over the heroArray.
+	 */
 	public void setBarterSkillSum() {
+		barterSkillSum = 0;
 		for(Hero hero : heroArray) {
 			barterSkillSum += hero.getBarterSkill();
 		}
@@ -324,10 +434,18 @@ public class Team {
 		}
 	}
 	
+	/**
+	 * Removes a dead hero from the team
+	 * @param hero
+	 */
 	public static void removeHero(Hero hero) {
 		heroArray.remove(hero);
 	}
 	
+	/**
+	 * Changes the amount of money in the team's posession.
+	 * @param amount
+	 */
 	public void addMoney(int amount) {
 		money += amount;
 	}
@@ -339,6 +457,9 @@ public class Team {
 	public String toString() {
 		String resultString = "\n\nHERO TEAM NAME: " + teamName 
 				            + "\nMONEY: " + money 
+				            + "\nTEAM FAME: " + fameSum
+				            + "\nTEAM DETERRENCE: " + deterrenceSum
+				            + "\nTEAM BARTER SKILL: " + barterSkillSum 
 				            + "\n-------------------------------------------\n\n";
 		
 		for(Hero hero: heroArray) {
