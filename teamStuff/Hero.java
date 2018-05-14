@@ -132,7 +132,7 @@ public class Hero {
 	//------------------------------------------------
 	//              [CONSUMABLE METHODS]
 	//------------------------------------------------
-	public void useConsumable(Consumable item) { 
+	public void useConsumable(ConsumableItem item) { 
 		item.apply(this);
 		Team.removeItem(item);
 	}

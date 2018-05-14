@@ -86,13 +86,13 @@ public class paperScissorsRock {
 		
 		thisTeam.selectHero();
 		int heroChoice = this.getPlayerChoice();
-		Hero currentHero = thisTeam.heroArray.get(heroChoice);
+		Hero currentHero = thisTeam.getHeroArray().get(heroChoice);
 		System.out.println("You Have Chosen To Play With " + currentHero.getName());
 		while ((finish == false) || (continuePlaying == true)){
 			if (selectChar) {
 				thisTeam.selectHero();
 				heroChoice = this.getPlayerChoice();
-				currentHero = thisTeam.heroArray.get(heroChoice);
+				currentHero = thisTeam.getHeroArray().get(heroChoice);
 				System.out.println("You Have Chosen To Play With " + currentHero.getName());
 				selectChar = false;}
 			while (finish == false) {
@@ -111,7 +111,7 @@ public class paperScissorsRock {
 					if (currentHero.getCurrentHealth() <= 0) {
 						currentHero.deathHandling();
 						choice = 0;
-						if (thisTeam.heroArray.size() == 0) {
+						if (thisTeam.getHeroArray().size() == 0) {
 							continuePlaying = false;
 							finish = true;
 							break;

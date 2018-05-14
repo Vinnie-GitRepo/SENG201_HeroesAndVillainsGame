@@ -24,7 +24,7 @@ public class Team {
 	/**
 	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
 	*/
-	public static ArrayList<Consumable> workingInventory = new ArrayList<Consumable>();
+	public static ArrayList<ConsumableItem> workingInventory = new ArrayList<ConsumableItem>();
 		
 	/**
 	* A TreeSet which gets updated every time the workingInventory changes  
@@ -36,7 +36,7 @@ public class Team {
 	
 	
 	
-	public ArrayList<Consumable> getInventory(){
+	public ArrayList<ConsumableItem> getInventory(){
 		return workingInventory;
 	}
 	
@@ -222,7 +222,7 @@ public class Team {
 	* Reshreshes displayInventory
 	* @param item
 	*/
-	public void addItem(Consumable item) {    
+	public void addItem(ConsumableItem item) {    
 		workingInventory.add(item);
 		refreshDisplayInventory();
 	}

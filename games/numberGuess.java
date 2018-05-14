@@ -64,7 +64,7 @@ public class numberGuess {
 		
 		int heroChoice = this.getPlayerChoice();
 		
-		Hero currentHero = thisTeam.heroArray.get(heroChoice);
+		Hero currentHero = thisTeam.getHeroArray().get(heroChoice);
 		
 		System.out.println("You Have Chosen To Play With " + currentHero.getName());
 		
@@ -74,7 +74,7 @@ public class numberGuess {
 			if (selectChar) {
 				thisTeam.selectHero();
 				heroChoice = this.getPlayerChoice();
-				currentHero = thisTeam.heroArray.get(heroChoice);
+				currentHero = thisTeam.getHeroArray().get(heroChoice);
 				System.out.println("You Have Chosen To Play With " + currentHero.getName());
 				selectChar = false;}
 			int villianNumber = ThreadLocalRandom.current().nextInt(1, 11);
@@ -116,7 +116,7 @@ public class numberGuess {
 						System.out.println(currentHero.getName() + " has taken 25 damage!");
 						currentHero.damageHealth(25);
 						System.out.println("The heroes health is currently " + currentHero.getCurrentHealth() + "/" +currentHero.getMaxHealth());
-						if (currentHero.getCurrentHealth() <= 0 && thisTeam.heroArray.size() == 0) {
+						if (currentHero.getCurrentHealth() <= 0 && thisTeam.getHeroArray().size() == 0) {
 							//currentHero.deathHandling();
 							choice = 0;
 							//if (thisTeam.heroArray.size() == 0) {
@@ -124,7 +124,7 @@ public class numberGuess {
 								finish = true;
 								break;
 							//}
-						} else if (currentHero.getCurrentHealth() <= 0 && thisTeam.heroArray.size() > 0) {
+						} else if (currentHero.getCurrentHealth() <= 0 && thisTeam.getHeroArray().size() > 0) {
 							boolean inputAccepted = false;
 							System.out.println("Options:\n(0) Switch Character\n(1) Flee From Lair");
 							choice = this.getPlayerChoice();

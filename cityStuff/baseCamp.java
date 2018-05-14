@@ -399,7 +399,7 @@ public class baseCamp extends gameEnvironment implements menu {
 				super.setCityBeat();
 				System.out.println("THis cit is beat");
 			}*/
-			if (thisTeam.heroArray.size() == 0) {
+			if (thisTeam.getHeroArray().size() == 0) {
 				super.endGame();// if there are no people in the team then you have lost the game
 			}
 			if (thisVillian.getLossCount() == 3) {

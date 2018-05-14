@@ -22,6 +22,8 @@ public class hospital extends baseCamp {
 			break;
 		case 1 :
 			//this.showPowerUpItems();
+			System.out.println("Still has time to go soz");
+			this.viewMenu();
 			break;
 		case 2 :
 			this.exit();
@@ -63,8 +65,10 @@ public class hospital extends baseCamp {
 		if (selection > currentTeam.getInventory().size()) {
 			this.viewMenu();
 		} else {
-			//current = currentTeam.getInventory().get(selection);
-			currentTeam.getInventory().get(selection).apply(hero);
+			current = currentTeam.getInventory().get(selection);
+			hero.useConsumable(currentTeam.getInventory().get(selection));
+			//.apply(hero);
+			System.out.println("Done");
 			this.viewMenu();
 		}
 		//workingInventory
