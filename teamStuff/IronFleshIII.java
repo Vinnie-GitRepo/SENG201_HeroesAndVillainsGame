@@ -1,15 +1,35 @@
 package teamStuff;
 
-public class IronFleshIII extends ConsumableItem {
+
+/**
+ * The third tier of armor increasing PowerUp, Iron Flesh III. 
+ * @author vjj14
+ *
+ */
+public class IronFleshIII extends PowerUp {
 	
+	
+	
+	/**
+	 * Constructs an Iron Flesh III PowerUp by calling the PowerUp constructor.
+	 */
 	public IronFleshIII() {
-		super("Iron Flesh III", 30, 40, true);
+		super("Iron Flesh III", "Armor boost", 30, 40);
 	}
 	
+	
+	
+	/**
+	 * Applies the PowerUp effect to the hero, increasing their armor by the PowerUp's potency.
+	 * @param hero
+	 */
 	public void apply(Hero hero) {
-		hero.boostArmor(this.getPotency());
-		System.out.println("Armor is now " + hero.getArmor());
+		hero.boostArmor(this.getPowerUpPotency());
+		System.out.println("The hero's armor is now: " + hero.getArmor());
 	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		
@@ -29,8 +49,6 @@ public class IronFleshIII extends ConsumableItem {
 		quod.damageHealth(125);
 		
 		System.out.println(quod);
-	
-		
-		
+		System.out.println(buff1);
 	}
 }

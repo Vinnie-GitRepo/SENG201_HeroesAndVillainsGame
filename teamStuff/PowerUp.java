@@ -2,8 +2,34 @@ package teamStuff;
 
 public class PowerUp {
 	
+	
+	/**
+	 * Name of the power up.
+	 */
 	private String powerUpName;
+	
+	
+	
+	/**
+	 * Type of the power up.
+	 * Denotes what hero attribute will receive a boost.
+	 */
+	private String powerUpType;
+	
+	
+	
+	/**
+	 * Potency of the power up.
+	 * This is the value used in power up application calculations.
+	 */
 	private int powerUpPotency;
+	
+	
+	
+	/**
+	 * Price of the power up.
+	 * This is the value used when calculating the team's money upon purchasing the power up
+	 */
 	private int powerUpPrice;
 	
 	
@@ -15,8 +41,9 @@ public class PowerUp {
 	 * @param potency
 	 * @param price
 	 */
-	public PowerUp(String name, int potency, int price) {
+	public PowerUp(String name, String type, int potency, int price) {
 		powerUpName = name;
+		powerUpType = type;
 		powerUpPotency = potency;
 		powerUpPrice = price;
 	}
@@ -31,6 +58,12 @@ public class PowerUp {
 		return powerUpName;
 	}
 	
+	
+	
+	
+	 public String getPowerUpType() {
+		 return powerUpType; 
+	 }
 	
 	
 	/**
@@ -49,6 +82,19 @@ public class PowerUp {
 	 */
 	public int getPowerUpPrice() {
 		return powerUpPrice;
+	}
+	
+	
+	/**
+	 * The toString method for the PowerUp class.
+	 * Prints out the result string when passing the PowerUp into a print statement.
+	 */
+	public String toString() {
+		String resultString = "Name: " + getPowerUpName() + "\n"
+							+ "Item Type: " + getPowerUpType() + "\n"
+							+ "Potency: " + getPowerUpPotency() + "\n"
+							+ "Price: " + getPowerUpPrice();
+		return resultString;
 	}
 	
 }
