@@ -1,6 +1,6 @@
 package teamStuff;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+//import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 public class AugmentVitalityIII extends ConsumableItem {
 	

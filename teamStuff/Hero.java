@@ -261,20 +261,16 @@ public class Hero {
 	//------------------------------------------------
 	//              [CONSUMABLE METHODS]
 	//------------------------------------------------
-<<<<<<< HEAD
-	public void useConsumable(ConsumableItem item) { 
-=======
-	
+
 	
 	public void useConsumable(Consumable item) { 
->>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
+//>>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
 		item.apply(this);
 		Team.removeItem(item);
 	}
 	
 	
 	/**
-	 * Executes the health restoration effect on the hero using a HealingItem.
 	 * @param amount
 	 */
 	public void restoreHealth(int amount) {

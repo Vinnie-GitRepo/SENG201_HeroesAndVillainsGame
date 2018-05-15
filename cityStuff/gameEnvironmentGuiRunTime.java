@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-
+import games.*;
 import teamStuff.Team;
 import villianStuff.Villian;
 
@@ -37,6 +37,8 @@ public class gameEnvironmentGuiRunTime {
 		System.out.println("You have lost MWAHAHAHA!");
 		System.exit(0);
 	}
+	
+	
 	
 	
 	//cityBeat allows for the main programme to know whether
@@ -96,7 +98,7 @@ public class gameEnvironmentGuiRunTime {
 	 * Allows for other classes to get the team in order
 	 * to edit or add
 	 */
-	public Team getTeam() {
+	public static Team getTeam() {
 		return team;
 	}
 	
@@ -213,7 +215,7 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	public static void setThingsUp(int num) {
-		//team = new Team();
+		team = new Team();
 	}
 	
 	/**

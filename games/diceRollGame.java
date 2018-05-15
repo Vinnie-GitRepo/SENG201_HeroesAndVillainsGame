@@ -17,8 +17,8 @@ public class diceRollGame {
 	 * 
 	 * @return ThreadLocalRandom.current().nextInt(luckynum, 7)
 	 */
-	public int getHeroRoll() {
-		return ThreadLocalRandom.current().nextInt(luckynum, 7);
+	public static int getHeroRoll() {
+		return ThreadLocalRandom.current().nextInt(0, 7);//luckynum
 	}
 	
 	/**
@@ -27,8 +27,31 @@ public class diceRollGame {
 	 * 
 	 * @return ThreadLocalRandom.current().nextInt(1, 7)
 	 */
-	public int getVillianRoll() {
+	public static int getVillianRoll() {
 		return ThreadLocalRandom.current().nextInt(1, 7);
+	}
+	
+	/**
+	 * 
+	 * Calculated the winner of the round
+	 * 
+	 * @param hero
+	 * @param villian
+	 * @return true or false
+	 */
+	public static String calculateWinnerGui(int hero, int villian) {
+		if (hero == villian) {
+			//System.out.println("It is a draw, roll again!");
+			return "Its A Draw, Roll Again";
+		} else if (hero > villian) {
+			//System.out.println("You have won!");
+			//finish = true;
+			return "You Have Won This Round!";
+		} else {
+			//System.out.println("You have lost you fucking loser!");
+			//finish = true;
+			return "You Have Lost This Round";
+		}
 	}
 	
 	/**
