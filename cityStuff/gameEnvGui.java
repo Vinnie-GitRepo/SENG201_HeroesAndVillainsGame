@@ -172,6 +172,7 @@ public class gameEnvGui {
 				//JOptionPane.showMessageDialog(null, i);
 				gameEnvironmentGuiRunTime.setNumOfCities(num);
 				gameEnvironmentGuiRunTime.generateVillians(num);
+				gameEnvironmentGuiRunTime.setCurrentVillian(0);
 				gameEnvironmentGuiRunTime.setThingsUp(num);
 				for (int l = 0; l != num; l++) {
 					ArrayList<String >map = gameEnvironmentGuiRunTime.generateLayout();
@@ -265,6 +266,7 @@ public class gameEnvGui {
 		char_1_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+				gameEnvironmentGuiRunTime.setCurrentHero(0);
 			}
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
@@ -275,6 +277,7 @@ public class gameEnvGui {
 		char_2_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+				gameEnvironmentGuiRunTime.setCurrentHero(1);
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
@@ -284,6 +287,7 @@ public class gameEnvGui {
 		char_3_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+				gameEnvironmentGuiRunTime.setCurrentHero(2);
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
@@ -322,8 +326,59 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				int hero = diceRollGame.getHeroRoll();
 				int vill = diceRollGame.getVillianRoll();
+				JOptionPane.showMessageDialog(null, "You Have Rolled A " + hero);
+				JOptionPane.showMessageDialog(null, "The Villian Has Rolled A " + vill);
 				String result = diceRollGame.calculateWinnerGui(hero, vill);
 				lblResult.setText(result);
+				if (hero > vill) {
+					gameEnvironmentGuiRunTime.getCurrentVillian().oneDefeat();
+					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + gameEnvironmentGuiRunTime.getCurrentVillian().getLossCount() + " Times");
+				} else if (hero < vill) {
+					if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).getCurrentHealth() - 25 == 0) {
+						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);
+						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
+						if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
+							lblHero.setVisible(false);
+							char_1_box.setVisible(false);
+						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
+							lblHero_1.setVisible(false);
+							char_2_box.setVisible(false);
+						} else {
+							lblHero_2.setVisible(false);
+							char_3_box.setVisible(false);
+						}
+						int stillAliveChar = 999;
+						for (int i = 0; i < gameEnvironmentGuiRunTime.getTeam().getHeroArray().size(); i++) {
+							if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
+								stillAliveChar = i;
+								gameEnvironmentGuiRunTime.setCurrentHero(i);
+								break;
+							}
+						}
+						if (stillAliveChar == 999) {
+							frame.getContentPane().removeAll();
+							frame.repaint();
+							lossGamePanel();
+						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
+							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+							char_1_box.setSelected(true);
+						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
+							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+							char_2_box.setSelected(true);
+						} else {
+							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+							char_3_box.setSelected(true);
+						}
+						System.out.println(gameEnvironmentGuiRunTime.getTeam().getHeroArray().size());
+					} else {
+						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
+						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+					}
+					//gameEnvironmentGuiRunTime.;
+					//if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().size() == 0) {
+						
+					//}
+				}
 			}
 		});
 		btnRollDice.setBounds(281, 389, 311, 138);
@@ -353,6 +408,10 @@ public class gameEnvGui {
 	
 	
 	private void paperScissorsRockPanel() {
+		frame.getContentPane().setLayout(null);
+	}
+	
+	private void lossGamePanel() {
 		frame.getContentPane().setLayout(null);
 	}
 }
