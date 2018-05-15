@@ -12,12 +12,58 @@ import java.util.TimerTask;
  */
 public class HealingItem {
 	
+	/**
+	 * Name of the healing item.
+	 * The tier (price and potency) of the item is described by the number.
+	 */
 	private String healingItemName;
-	private int healingItemPotency;					// NOTE: This potency must be divisible by four for incremental application.
+	
+	
+	
+	/**
+	 * Potency of the healing item.
+	 * This is the value used in healing item application calculations. 
+	 * This potency must be divisible by four for incremental application.
+	 */
+	private int healingItemPotency;					
+	
+	
+	
+	/**
+	 * Price of the healing item.
+	 * This is the value used when calculating the team's money upon purchasing the healing item.
+	 */
 	private int healingItemPrice;
+	
+	
+	
+	/**
+	 * Default application time for the healing item.
+	 * This value will be used for the applicationTime local variable.
+	 */
 	private int defaultApplicationTime;
+	
+	
+	
+	/**
+	 * The time passed since applying the healing item.
+	 * Is used by conditionals in apply(Hero hero) to increment the healing process.
+	 */
 	private int secondsPassed;
+	
+	
+	
+	/**
+	 * The time left until the healing item has been applied fully.
+	 * This is the time status value shown inside the hospital via getRemainingTime(). 
+	 */
 	private int timeRemaining;
+	
+	
+	
+	/**
+	 * Calls the TimerTask (main application body) within the apply(Hero hero) method.
+	 */
 	private Timer time = new Timer();
 	
 	
@@ -61,7 +107,7 @@ public class HealingItem {
 	
 	/**
 	 * Getter for the healing item's price.
-	 * @return
+	 * @return healingItemPrice
 	 */
 	public int getHealingItemPrice() {
 		return healingItemPrice;
@@ -123,4 +169,20 @@ public class HealingItem {
 		};
 		time.scheduleAtFixedRate(healOverTime, 1000, 1000);
 	}
+	
+	
+	
+	/**
+	 * The toString method for the HealingItem class.
+	 * Prints out the result string when passing the HealingItem into a print statement.
+	 */
+	public String toString() {
+		String resultString = "Name: " + getHealingItemName() + "\n"
+							+ "Item type: Healing Item" + "\n"
+							+ "Potency: " + getHealingItemPotency() + "\n"
+							+ "Price: " + getHealingItemPrice();
+		return resultString;
+	}
+	
+	
 }

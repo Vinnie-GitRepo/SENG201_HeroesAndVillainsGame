@@ -1,10 +1,17 @@
 package teamStuff;
 
+
+/**
+ * The first tier of HealingItem, Restore Health I.
+ * @author vjj14
+ *
+ */
 public class RestoreHealthI extends HealingItem{
 	
 	
+	
 	/**
-	 * Constructor for "Restore Health I" HealingItem
+	 * Constructs a Restore Health I HealingItem by calling the HealingItem constructor.
 	 * Should have a lower price and potency than healing items of higher tiers.
 	 */
 	public RestoreHealthI() {

@@ -99,8 +99,9 @@ public class gameEnvironment {
 	
 	
 	/**
-	 * Generates villian for each city by randomly selecting from component lists. 
-	 * Stores them within an ArrayList<villain> named villains.
+	 * Generates villian for each city. 
+	 * Constructs villain by randomly selecting from component lists. 
+	 * Stores the generated villain within an ArrayList<villain> named villains.
 	 */
 	public void generateVillians(int num) {
 		

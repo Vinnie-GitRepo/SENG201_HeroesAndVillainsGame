@@ -3,7 +3,12 @@ package teamStuff;
 import java.util.*;
 
 
-
+/**
+ * Class for the team of heroes.
+ * 
+ * @author vjj14
+ *
+ */
 public class Team {
 	
 	
@@ -12,20 +17,28 @@ public class Team {
 	 */
 	private static String teamName;
 	
+	
+	
 	/**
 	 * The array in which Hero objects are stored
 	 */
 	private static ArrayList<Hero> heroArray = new ArrayList<Hero>();
+	
+	
 	
 	/**
 	 * Determines the size of the heroArray, which is between 1 and 3 Heroes in length
 	 */
 	private static int teamSize;
 	
+	
+	
 	/**
 	 * 
 	 */
 	private String position = "Base";
+	
+	
 	
 	/**
 	 * The money the team has to spend on items, which is awarded to the team for victories. 
@@ -33,11 +46,15 @@ public class Team {
 	 */
 	private int money = 100;
 	
+	
+	
 	/**
 	 * This is the team's net fame.
 	 * Is used to increase chance of randomly receiving gifts.
 	 */
 	private int fameSum;
+	
+	
 	
 	/**
 	 * This is the team's net deterrence.
@@ -45,39 +62,46 @@ public class Team {
 	 */
 	private int deterrenceSum;
 	
+	
+	
 	/**
 	 * This is the team's net bartering skill.
 	 * Is used to determine shop prices for the team.
 	 */
 	private int barterSkillSum;
 	
+	
+	
 	/**
 	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
 	*/
 	public static ArrayList<ConsumableItem> workingInventory = new ArrayList<ConsumableItem>();
-		
+	
+	
+	
 	/**
-	* A TreeSet which gets updated every time the workingInventory changes  
+	* A TreeSet used to display the workingInventory which gets updated every time the workingInventory changes  
 	*/
 	public static TreeSet<String> displayInventory = new TreeSet<String>();
 	
 	
+	
+	/**
+	 * A list that stores the team's HealingItem objects.
+	 * A hero's use of any healing item in a hospital will result in it being removed from this list.
+	 */
 	public static ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>();
 	
+	
+	
+	/**
+	 * A list that stores the team's PowerUp objects.
+	 * A hero's use of any power up in a power up den will result in it being removed from this list.
+	 */
 	public static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	
-/*	
-<<<<<<< HEAD
-	public ArrayList<ConsumableItem> getInventory(){
-		return workingInventory;
-	}
-=======
 	
-	
-
->>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
-	*/
 	
 	/**
 	 * Constructor for the Team Class
@@ -243,6 +267,7 @@ public class Team {
 	//                   [INVENTORY]
 	//------------------------------------------------
 	
+	
 	/**
 	* Refreshes the displayInventory when the workingInventory changes
 	*/
@@ -254,29 +279,61 @@ public class Team {
 		} 
 	}
 		
-		
+	
+	/**
+	 * Adds a HealingItem to the healingItems list.
+	 * @param healingItem
+	 */
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
 	}
 	
+	
+	
+	/**
+	 * Removes a HealingItem from the healingItems list. 
+	 * @param healingItem
+	 */
 	public void removeHealingItem(HealingItem healingItem) {
 		healingItems.remove(healingItem);
 	}
 	
+	
+	
+	/**
+	 * Returns healingItems list. 
+	 * @return healingItems
+	 */
 	public ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
 	}
 	
 	
 	
+	/**
+	 * Adds a PowerUp to the powerUps list.
+	 * @param powerUp
+	 */
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
 	}
 	
+	
+	
+	/**
+	 * Removes a PowerUp from the powerUps list.
+	 * @param powerUp
+	 */
 	public void removePowerUp(PowerUp powerUp) {
 		powerUps.remove(powerUp);
 	}
 	
+	
+	
+	/**
+	 * Returns the powerUps list
+	 * @return powerUps
+	 */
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
 	}
@@ -295,6 +352,7 @@ public class Team {
 	}
 		
 		
+	
 	/**
 	* Removes a consumable item from the workingInventory
 	* Refreshes displayInventory
@@ -306,6 +364,8 @@ public class Team {
 		refreshDisplayInventory();
 	}
 		
+	
+	
 	/**
 	 * Accesses the team's inventory and lists each item type along with its frequency 
 	 */
@@ -336,12 +396,15 @@ public class Team {
 	//                   [GETTERS]
 	//------------------------------------------------
 	
+	
 	/**
 	 * @return money attribute
 	 */
 	public int getMoney() {
 		return money;
 	}
+	
+	
 	
 	/**
 	 * @return heroArray
@@ -350,12 +413,16 @@ public class Team {
 		return heroArray;
 	}
 	
+	
+	
 	/**
 	 * @return fameSum
 	 */
 	public int getFameSum() {
 		return fameSum;
 	}
+	
+	
 	
 	/**
 	 * @return deterrenceSum
@@ -364,12 +431,16 @@ public class Team {
 		return deterrenceSum;
 	}
 	
+	
+	
 	/**
 	 * @return barterSkillSum
 	 */
 	public int getBarterSkillSum() {
 		return barterSkillSum;
 	}
+	
+	
 	
 	/**
 	 * @return workingInventory
@@ -384,6 +455,7 @@ public class Team {
 	//                   [SETTERS]
 	//------------------------------------------------
 	
+	
 	/**
 	 * Sets the team's fameSum.
 	 * Refreshes the sum before iterating over the heroArray.
@@ -395,6 +467,8 @@ public class Team {
 		}
 	}
 	
+	
+	
 	/**
 	 * Sets the team's deterrenceSum.
 	 * Refreshes the sum before iterating over the heroArray.
@@ -405,6 +479,8 @@ public class Team {
 			deterrenceSum += hero.getDeterrence();
 		}
 	}
+	
+	
 	
 	/**
 	 * Sets the team's barterSkillSum.
@@ -423,6 +499,12 @@ public class Team {
 	//------------------------------------------------
 	//                [BATTLE METHODS]
 	//------------------------------------------------
+	
+	
+	/**
+	 * Prints out a list of heroes available to battle the villain.
+	 * 					[Command Line Code]
+	 */
 	public void selectHero () {
 		System.out.println("\nSelect a hero for battle!");
 		for (int i = 0; i < heroArray.size(); i++) {
@@ -449,7 +531,11 @@ public class Team {
 	
 	
 	
-	
+	/**
+	 * The toString method for the Team class. 
+	 * Prints Team stats and members in desired format.
+	 * Calls the toString method of the Hero class also.
+	 */
 	public String toString() {
 		String resultString = "\n\nHERO TEAM NAME: " + teamName 
 				            + "\nMONEY: " + money 
