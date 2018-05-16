@@ -38,6 +38,14 @@ public class numberGuess {
 		}
 	}
 	
+	public static String higherOrLowerGui(int guess, int num) {
+		if (guess > num) {
+			return "Guess Lower";
+		} else {
+			return "Guess Higher";
+		}
+	}
+	
 	/**
 	 * 
 	 * Gets the players choice for the menu option
@@ -50,6 +58,15 @@ public class numberGuess {
 	}
 	
 	
+	
+	public static int getVillianChoice() {
+		return ThreadLocalRandom.current().nextInt(1, 11);
+	}
+	
+	public static int getVillianChoice(int num) {//for if we imlement luck
+		
+		return ThreadLocalRandom.current().nextInt(1, num);
+	}
 	/**
 	 * 
 	 * This is where the game actually runs calling other methods from numberGuess
