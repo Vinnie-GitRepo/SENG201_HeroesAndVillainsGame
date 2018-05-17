@@ -29,7 +29,7 @@ public class Team {
 	/**
 	 * Determines the size of the heroArray, which is between 1 and 3 Heroes in length
 	 */
-	private static int teamSize;
+	private int teamSize;
 	
 	
 	
@@ -359,7 +359,7 @@ public class Team {
 	* 
 	* @param item
 	*/
-	public static void removeItem(Consumable item) {
+	public void removeItem(Consumable item) {
 		workingInventory.remove(item);
 		refreshDisplayInventory();
 	}
@@ -425,7 +425,11 @@ public class Team {
 	
 	
 	/**
-	 * @return deterrenceSum
+	 * @return deterrenceSumpublic void useConsumable(Consumable item) { 
+
+		item.apply(this);
+		Team.removeItem(item);
+	}
 	 */
 	public int getDeterrenceSum() {
 		return deterrenceSum;

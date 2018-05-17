@@ -36,6 +36,7 @@ public class TeamAndHeroTesting {
 	public void test2() {
 		Team test = new Team();
 		
+		
 	}
 
 }
