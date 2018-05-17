@@ -12,41 +12,41 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	
-	public static ArrayList<Villian> villians = new ArrayList<Villian>();
+	public ArrayList<Villian> villians = new ArrayList<Villian>();
 	
-	public static int currentHero;
+	public int currentHero;
 	
-	public static Villian currentVillian;
+	public Villian currentVillian;
 	
-	public static ArrayList<String> getCurrentMap(int num){
+	public ArrayList<String> getCurrentMap(int num){
 		return baseCamps.get(num).getMap();
 	}
 	
-	public static void setCurrentHero(int num) {
+	public void setCurrentHero(int num) {
 		currentHero = num;
 	}
 	
 	
-	public static int getCurrentHero() {
+	public int getCurrentHero() {
 		return currentHero;
 	}
 	
-	public static void setCurrentVillian(int num) {
+	public void setCurrentVillian(int num) {
 		currentVillian = villians.get(num);
 	}
 	
 	
-	public static Villian getCurrentVillian() {
+	public Villian getCurrentVillian() {
 		return currentVillian;
 	}
 	
-	public static ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
+	public ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
 	
-	public static Team team;
+	public Team team;
 	
-	public static Random rand = new Random();
+	public Random rand = new Random();
 	
-	public static boolean cityBeat = false;
+	public boolean cityBeat = false;
 	
 	
 	//This is used at any point if all of your super heroes
@@ -92,7 +92,7 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	//A likely unneeded function
-	public static void addBaseCamp(ArrayList<String> map) {
+	public void addBaseCamp(ArrayList<String> map) {
 		baseCamp Camp = new baseCamp(map);
 		baseCamps.add(Camp);
 		//baseCamp Camp = new baseCamp(this.generateLayout());
@@ -121,7 +121,7 @@ public class gameEnvironmentGuiRunTime {
 	 * Allows for other classes to get the team in order
 	 * to edit or add
 	 */
-	public static Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 	
@@ -145,7 +145,7 @@ public class gameEnvironmentGuiRunTime {
 	 * Generates each villian for each city and stores them within
 	 * villians an ArrayList<villian>
 	 */
-	public static void generateVillians(int num) {
+	public void generateVillians(int num) {
 		
 		ArrayList<String> villianNames = new ArrayList<String>() 
 		{{
@@ -207,7 +207,7 @@ public class gameEnvironmentGuiRunTime {
 	 * 
 	 * @return areas
 	 */
-	public static ArrayList<String> generateLayout() {
+	public ArrayList<String> generateLayout() {
 		ArrayList<String> options = new ArrayList<String>()
 		{{add("Shop");
 		add("PowerUpDen");
@@ -229,15 +229,15 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
-	public static int num_of_cities;
+	public int num_of_cities;
 	
-	public static void setNumOfCities(int num) {
+	public void setNumOfCities(int num) {
 		num_of_cities = num;
 	}
 	
 	
 	
-	public static void setThingsUp(int num) {
+	public void setThingsUp(int num) {
 		team = new Team();
 	}
 	
@@ -246,7 +246,7 @@ public class gameEnvironmentGuiRunTime {
 	 * 
 	 * 
 	 */
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		int num = 0;
 		gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
 		team = new Team();

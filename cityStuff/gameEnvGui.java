@@ -23,6 +23,7 @@ public class gameEnvGui {
 	public static int citiesFinished = 0;
 	public static int numOfGuesses = 0;
 	public static int vill;
+	public gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
 	private JFrame frame;
 
 	/**
@@ -47,11 +48,11 @@ public class gameEnvGui {
 	public gameEnvGui() {
 		initialize();
 		cityAmmountPanel();//change to team set up later
-		//baseCampPanel();
-		//villiansLairPanel();
-		//battleSelectionPanel();
-		//diceRollPanel();
-		//numberGuessPanel();
+//		baseCampPanel();
+//		villiansLairPanel();
+//		battleSelectionPanel();
+//		diceRollPanel();
+//		numberGuessPanel();
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class gameEnvGui {
 		JButton btnViewStats = new JButton("View Stats");
 		btnViewStats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, gameEnvironmentGuiRunTime.getTeam().toString());
+				JOptionPane.showMessageDialog(null, game.getTeam().toString());
 			}
 		});
 		btnViewStats.setBounds(384, 478, 165, 91);
@@ -109,7 +110,7 @@ public class gameEnvGui {
 		});
 		btnNorth.setBounds(405, 43, 117, 25);
 		frame.getContentPane().add(btnNorth);
-		btnNorth.setText(gameEnvironmentGuiRunTime.getCurrentMap(citiesFinished).get(0));
+		btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));
 		JButton btnEast = new JButton("East");
 		btnEast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,7 +123,7 @@ public class gameEnvGui {
 		});
 		btnEast.setBounds(737, 212, 117, 25);
 		frame.getContentPane().add(btnEast);
-		btnEast.setText(gameEnvironmentGuiRunTime.getCurrentMap(citiesFinished).get(1));
+		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
 		JButton btnSouth = new JButton("South");
 		btnSouth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +136,7 @@ public class gameEnvGui {
 		});
 		btnSouth.setBounds(405, 385, 117, 25);
 		frame.getContentPane().add(btnSouth);
-		btnSouth.setText(gameEnvironmentGuiRunTime.getCurrentMap(citiesFinished).get(2));
+		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
 		JButton btnWest = new JButton("West");
 		btnWest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +149,7 @@ public class gameEnvGui {
 		});
 		btnWest.setBounds(74, 212, 117, 25);
 		frame.getContentPane().add(btnWest);
-		btnWest.setText(gameEnvironmentGuiRunTime.getCurrentMap(citiesFinished).get(3));
+		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));
 	}
 	
 	private void cityAmmountPanel() {
@@ -172,16 +173,16 @@ public class gameEnvGui {
 				} catch (Exception lala) {
 					num = 3;
 				}
-				//JOptionPane.showMessageDialog(null, i);
-				gameEnvironmentGuiRunTime.setNumOfCities(num);
-				gameEnvironmentGuiRunTime.generateVillians(num);
-				gameEnvironmentGuiRunTime.setCurrentVillian(0);
-				gameEnvironmentGuiRunTime.setThingsUp(num);
+//				JOptionPane.showMessageDialog(null, i);
+				game.setNumOfCities(num);
+				game.generateVillians(num);
+				game.setCurrentVillian(0);
+				game.setThingsUp(num);
 				for (int l = 0; l != num; l++) {
-					ArrayList<String >map = gameEnvironmentGuiRunTime.generateLayout();
-					gameEnvironmentGuiRunTime.addBaseCamp(map);
+					ArrayList<String> map = game.generateLayout();
+					game.addBaseCamp(map);
 				}
-				//JOptionPane.showMessageDialog(null, gameEnvironmentGuiRunTime.num_of_cities);
+				//JOptionPane.showMessageDialog(null, game.num_of_cities);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				baseCampPanel();
@@ -255,7 +256,7 @@ public class gameEnvGui {
 		frame.getContentPane().setLayout(null);
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(361, 24, 269, 14);
-		lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
 		frame.getContentPane().add(lblBattlingWith);
 		
 		JLabel lblHero = new JLabel("hero1");
@@ -275,8 +276,8 @@ public class gameEnvGui {
 		JRadioButton char_1_box = new JRadioButton("");
 		char_1_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(0);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
+				game.setCurrentHero(0);
 			}
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
@@ -286,8 +287,8 @@ public class gameEnvGui {
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(1);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
+				game.setCurrentHero(1);
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
@@ -296,27 +297,27 @@ public class gameEnvGui {
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(2);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
+				game.setCurrentHero(2);
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
 		frame.getContentPane().add(char_3_box);
 		
 		try {
-			lblHero.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+			lblHero.setText(game.getTeam().getHeroArray().get(0).getName());
 		} catch (Exception noName0) {
 			lblHero.setVisible(false);
 			char_1_box.setVisible(false);
 		}
 		try {
-			lblHero_1.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+			lblHero_1.setText(game.getTeam().getHeroArray().get(1).getName());
 		} catch (Exception noName0) {
 			lblHero_1.setVisible(false);
 			char_2_box.setVisible(false);
 		}
 		try {
-			lblHero_2.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+			lblHero_2.setText(game.getTeam().getHeroArray().get(2).getName());
 		} catch (Exception noName0) {
 			lblHero_2.setVisible(false);
 			char_3_box.setVisible(false);
@@ -341,25 +342,25 @@ public class gameEnvGui {
 				String result = diceRollGame.calculateWinnerGui(hero, vill);
 				lblResult.setText(result);
 				if (hero > vill) {
-					gameEnvironmentGuiRunTime.getCurrentVillian().oneDefeat();
-					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + gameEnvironmentGuiRunTime.getCurrentVillian().getLossCount() + " Times");
-					if (gameEnvironmentGuiRunTime.getCurrentVillian().getLossCount() == 3) {
+					game.getCurrentVillian().oneDefeat();
+					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
+					if (game.getCurrentVillian().getLossCount() == 3) {
 						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
 						citiesFinished += 1;
 						frame.getContentPane().removeAll();
 						frame.repaint();
-						//gameEnvironmentGuiRunTime.setCurrentHero(citiesFinished);
-						gameEnvironmentGuiRunTime.setCurrentVillian(citiesFinished);
+						//game.setCurrentHero(citiesFinished);
+						game.setCurrentVillian(citiesFinished);
 						baseCampPanel();
 					}
 				} else if (hero < vill) {
-					if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).getCurrentHealth() - 25 == 0) {
-						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
 						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
-						if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
+						if (game.getCurrentHero() == 0) {
 							lblHero.setVisible(false);
 							char_1_box.setVisible(false);
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
+						} else if (game.getCurrentHero() == 1) {
 							lblHero_1.setVisible(false);
 							char_2_box.setVisible(false);
 						} else {
@@ -367,10 +368,10 @@ public class gameEnvGui {
 							char_3_box.setVisible(false);
 						}
 						int stillAliveChar = 999;
-						for (int i = 0; i < gameEnvironmentGuiRunTime.getTeam().getHeroArray().size(); i++) {
-							if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
+						for (int i = 0; i < game.getTeam().getHeroArray().size(); i++) {
+							if (game.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
 								stillAliveChar = i;
-								gameEnvironmentGuiRunTime.setCurrentHero(i);
+								game.setCurrentHero(i);
 								break;
 							}
 						}
@@ -378,23 +379,23 @@ public class gameEnvGui {
 							frame.getContentPane().removeAll();
 							frame.repaint();
 							lossGamePanel();
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+						} else if (game.getCurrentHero() == 0) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
 							char_1_box.setSelected(true);
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+						} else if (game.getCurrentHero() == 1) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
 							char_2_box.setSelected(true);
 						} else {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
 							char_3_box.setSelected(true);
 						}
-						System.out.println(gameEnvironmentGuiRunTime.getTeam().getHeroArray().size());
+						System.out.println(game.getTeam().getHeroArray().size());
 					} else {
 						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
-						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
 					}
-					//gameEnvironmentGuiRunTime.;
-					//if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().size() == 0) {
+					//game.;
+					//if (game.getTeam().getHeroArray().size() == 0) {
 						
 					//}
 				}
@@ -406,7 +407,7 @@ public class gameEnvGui {
 		JButton btnViewStats_1 = new JButton("View Stats");
 		btnViewStats_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, gameEnvironmentGuiRunTime.getTeam().toString());
+				JOptionPane.showMessageDialog(null, game.getTeam().toString());
 			}
 		});
 		btnViewStats_1.setBounds(499, 400, 311, 138);
@@ -425,7 +426,7 @@ public class gameEnvGui {
 		
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(361, 24, 269, 14);
-		lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
 		frame.getContentPane().add(lblBattlingWith);
 		
 		JComboBox comboBox = new JComboBox();
@@ -455,8 +456,8 @@ public class gameEnvGui {
 		JRadioButton char_1_box = new JRadioButton("");
 		char_1_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(0);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
+				game.setCurrentHero(0);
 			}
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
@@ -466,8 +467,8 @@ public class gameEnvGui {
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(1);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
+				game.setCurrentHero(1);
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
@@ -476,16 +477,16 @@ public class gameEnvGui {
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
-				gameEnvironmentGuiRunTime.setCurrentHero(2);
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
+				game.setCurrentHero(2);
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
 		frame.getContentPane().add(char_3_box);
 		
 		try {
-			if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
-			lblHero.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
+			lblHero.setText(game.getTeam().getHeroArray().get(0).getName());
 			} else {
 				lblHero.setVisible(false);
 				char_1_box.setVisible(false);
@@ -495,8 +496,8 @@ public class gameEnvGui {
 			char_1_box.setVisible(false);
 		}
 		try {
-			if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getCurrentHealth() > 0) {
-			lblHero_1.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+			if (game.getTeam().getHeroArray().get(1).getCurrentHealth() > 0) {
+			lblHero_1.setText(game.getTeam().getHeroArray().get(1).getName());
 			} else {
 				lblHero_1.setVisible(false);
 				char_2_box.setVisible(false);
@@ -506,8 +507,8 @@ public class gameEnvGui {
 			char_2_box.setVisible(false);
 		}
 		try {
-			if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getCurrentHealth() > 0) {
-			lblHero_2.setText(gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+			if (game.getTeam().getHeroArray().get(2).getCurrentHealth() > 0) {
+			lblHero_2.setText(game.getTeam().getHeroArray().get(2).getName());
 			} else {
 				lblHero_2.setVisible(false);
 				char_3_box.setVisible(false);
@@ -534,38 +535,40 @@ public class gameEnvGui {
 		frame.getContentPane().setLayout(null);
 		btnConfirmYourGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int hero = Integer.parseInt((String) comboBox.getEditor().getItem());
-				if (hero != vill && numOfGuesses < 2) {//need to make it not take 3 times
+				
+				JOptionPane.showMessageDialog(null, comboBox.getSelectedItem());
+				int hero = Integer.parseInt((String) comboBox.getSelectedItem());
+				numOfGuesses += 1;
+				if (hero != vill && numOfGuesses < 2) {
 					lblResult.setText(numberGuess.higherOrLowerGui(hero, vill));
-					numOfGuesses += 1;
 				}  else if (hero == vill && numOfGuesses < 2) {
-					gameEnvironmentGuiRunTime.getCurrentVillian().oneDefeat();
-					numOfGuesses += 1;
+					game.getCurrentVillian().oneDefeat();
+//					numOfGuesses += 1;
 					//something about getting it right in a num of guesses
 					numOfGuesses = 0;
-					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + gameEnvironmentGuiRunTime.getCurrentVillian().getLossCount() + " Times");
+					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					vill = numberGuess.getVillianChoice();
 					lblNewLabel.setText(Integer.toString(vill));
-					if (gameEnvironmentGuiRunTime.getCurrentVillian().getLossCount() == 3) {
+					if (game.getCurrentVillian().getLossCount() == 3) {
 						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
 						citiesFinished += 1;
 						frame.getContentPane().removeAll();
 						frame.repaint();
-						//gameEnvironmentGuiRunTime.setCurrentHero(citiesFinished);
-						gameEnvironmentGuiRunTime.setCurrentVillian(citiesFinished);
+//						game.setCurrentHero(citiesFinished);
+						game.setCurrentVillian(citiesFinished);
 						baseCampPanel();
 					}
 				} else {
 					vill = numberGuess.getVillianChoice();
 					lblNewLabel.setText(Integer.toString(vill));
-					if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).getCurrentHealth() - 25 == 0) {
-						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
 						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
 						numOfGuesses = 0;
-						if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
+						if (game.getCurrentHero() == 0) {
 							lblHero.setVisible(false);
 							char_1_box.setVisible(false);
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
+						} else if (game.getCurrentHero() == 1) {
 							lblHero_1.setVisible(false);
 							char_2_box.setVisible(false);
 						} else {
@@ -573,10 +576,10 @@ public class gameEnvGui {
 							char_3_box.setVisible(false);
 						}
 						int stillAliveChar = 999;
-						for (int i = 0; i < gameEnvironmentGuiRunTime.getTeam().getHeroArray().size(); i++) {
-							if (gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
+						for (int i = 0; i < game.getTeam().getHeroArray().size(); i++) {
+							if (game.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
 								stillAliveChar = i;
-								gameEnvironmentGuiRunTime.setCurrentHero(i);
+								game.setCurrentHero(i);
 								break;
 							}
 						}
@@ -584,29 +587,29 @@ public class gameEnvGui {
 							frame.getContentPane().removeAll();
 							frame.repaint();
 							lossGamePanel();
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 0) {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(0).getName());
+						} else if (game.getCurrentHero() == 0) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
 							char_1_box.setSelected(true);
-						} else if (gameEnvironmentGuiRunTime.getCurrentHero() == 1) {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(1).getName());
+						} else if (game.getCurrentHero() == 1) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
 							char_2_box.setSelected(true);
 						} else {
-							lblBattlingWith.setText("Battle With: " + gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(2).getName());
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
 							char_3_box.setSelected(true);
 						}
-						System.out.println(gameEnvironmentGuiRunTime.getTeam().getHeroArray().size());
+						System.out.println(game.getTeam().getHeroArray().size());
 					} else {
 						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
 						numOfGuesses = 0;
-						gameEnvironmentGuiRunTime.getTeam().getHeroArray().get(gameEnvironmentGuiRunTime.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
 					}
 				}
-				}
-			});
+			}
+		});
 		JButton btnViewStats_1 = new JButton("View Stats");
 		btnViewStats_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, gameEnvironmentGuiRunTime.getTeam().toString());
+				JOptionPane.showMessageDialog(null, game.getTeam().toString());
 			}
 		});
 		btnViewStats_1.setBounds(274, 460, 311, 126);
