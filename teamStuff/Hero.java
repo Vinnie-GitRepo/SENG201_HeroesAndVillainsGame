@@ -406,7 +406,7 @@ public class Hero {
 	 */
 	public void deathHandling() {
 		System.out.println(this.getName() + " has died");
-		Team.removeHero(this);
+		//Team.removeHero(this);
 	}
 	
 	

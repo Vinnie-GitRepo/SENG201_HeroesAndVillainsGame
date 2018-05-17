@@ -4,18 +4,41 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import games.*;
-import teamStuff.Team;
+import teamStuff.*;
 import villianStuff.Villian;
 
 
 public class gameEnvironmentGuiRunTime {
 	
+	
+	
 	public static ArrayList<Villian> villians = new ArrayList<Villian>();
+	
+	public static int currentHero;
+	
+	public static Villian currentVillian;
 	
 	public static ArrayList<String> getCurrentMap(int num){
 		return baseCamps.get(num).getMap();
 	}
 	
+	public static void setCurrentHero(int num) {
+		currentHero = num;
+	}
+	
+	
+	public static int getCurrentHero() {
+		return currentHero;
+	}
+	
+	public static void setCurrentVillian(int num) {
+		currentVillian = villians.get(num);
+	}
+	
+	
+	public static Villian getCurrentVillian() {
+		return currentVillian;
+	}
 	
 	public static ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
 	

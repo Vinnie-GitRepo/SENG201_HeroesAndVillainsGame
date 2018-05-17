@@ -544,7 +544,9 @@ public class Team {
 				            + "\n-------------------------------------------\n\n";
 		
 		for(Hero hero: heroArray) {
+			if (hero.getCurrentHealth() > 0) {
 			resultString += hero.toString() + "\n";
+			}
 		}
 		
 		resultString += "-------------------------------------------";
