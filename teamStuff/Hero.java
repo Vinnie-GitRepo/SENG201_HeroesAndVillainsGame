@@ -263,11 +263,6 @@ public class Hero {
 	//------------------------------------------------
 
 	
-	public void useConsumable(Consumable item) { 
-//>>>>>>> 38277bb16a11d4140feb83eacab7b5d8fd863936
-		item.apply(this);
-		Team.removeItem(item);
-	}
 	
 	
 	/**
