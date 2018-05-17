@@ -84,6 +84,18 @@ public class PowerUp {
 		return powerUpPrice;
 	}
 	
+	public void apply(Hero hero) {
+		if(this instanceof SilverTongueI || this instanceof SilverTongueII || this instanceof SilverTongueIII) {
+			hero.boostBarterSkill(getPowerUpPotency());
+		}
+		else if(this instanceof IronFleshI || this instanceof IronFleshII || this instanceof IronFleshIII) {
+			hero.boostArmor(getPowerUpPotency());
+		}
+		else if(this instanceof AugmentVitalityI || this instanceof AugmentVitalityII || this instanceof AugmentVitalityIII) {
+			hero.boostMaxHealth(getPowerUpPotency());
+		}
+	}
+	
 	
 	/**
 	 * The toString method for the PowerUp class.

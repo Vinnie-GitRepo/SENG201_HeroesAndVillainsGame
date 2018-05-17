@@ -191,7 +191,7 @@ public class Team {
 	
 	
 	/**
-	 *  Has the player name the team in accordance with the length restrictions.
+	 * Has the player name the team in accordance with the length restrictions.
 	 */
 	public void nameTeam() {
 		
@@ -210,9 +210,9 @@ public class Team {
 	
 	
 	/**
-	 * Checks if choice input is valid.
-	 * Creates a new hero of the selected type.
-	 * Adds the hero to the heroArray of the team.
+	 * Checks if choice input is valid.<br>
+	 * Creates a new hero of the selected type.<br>
+	 * Adds the hero to the heroArray of the team.<br>
 	 *  
 	 * @param choice
 	 */
@@ -294,7 +294,7 @@ public class Team {
 	 * Removes a HealingItem from the healingItems list. 
 	 * @param healingItem
 	 */
-	public void removeHealingItem(HealingItem healingItem) {
+	public static void removeHealingItem(HealingItem healingItem) {
 		healingItems.remove(healingItem);
 	}
 	
@@ -324,7 +324,7 @@ public class Team {
 	 * Removes a PowerUp from the powerUps list.
 	 * @param powerUp
 	 */
-	public void removePowerUp(PowerUp powerUp) {
+	public static void removePowerUp(PowerUp powerUp) {
 		powerUps.remove(powerUp);
 	}
 	
@@ -457,7 +457,7 @@ public class Team {
 	
 	
 	/**
-	 * Sets the team's fameSum.
+	 * Sets the team's fameSum.<br>
 	 * Refreshes the sum before iterating over the heroArray.
 	 */
 	public void setFameSum() {
@@ -470,7 +470,7 @@ public class Team {
 	
 	
 	/**
-	 * Sets the team's deterrenceSum.
+	 * Sets the team's deterrenceSum.<br>
 	 * Refreshes the sum before iterating over the heroArray.
 	 */
 	public void setDeterrenceSum() {
@@ -483,7 +483,7 @@ public class Team {
 	
 	
 	/**
-	 * Sets the team's barterSkillSum.
+	 * Sets the team's barterSkillSum.<br>
 	 * Refreshes the sum before iterating over the heroArray.
 	 */
 	public void setBarterSkillSum() {
@@ -532,9 +532,8 @@ public class Team {
 	
 	
 	/**
-	 * The toString method for the Team class. 
-	 * Prints Team stats and members in desired format.
-	 * Calls the toString method of the Hero class also.
+	 * The toString method for the Team class.<br>
+	 * Calls the toString method of the Hero class, printing the Team stats and members in desired format.
 	 */
 	public String toString() {
 		String resultString = "\n\nHERO TEAM NAME: " + teamName 

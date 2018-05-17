@@ -16,14 +16,4 @@ public class IronFleshII extends PowerUp {
 	public IronFleshII() {
 		super("Iron Flesh II", "Armor boost", 10, 25);
 	}
-	
-	
-	
-	/**
-	 * Applies the PowerUp effect to the hero, increasing their armor by the PowerUp's potency.
-	 * @param hero
-	 */
-	public void apply(Hero hero) {
-		hero.boostArmor(this.getPowerUpPotency());
-	}
 }

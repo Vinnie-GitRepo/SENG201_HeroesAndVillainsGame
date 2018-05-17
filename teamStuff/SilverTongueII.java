@@ -16,14 +16,4 @@ public class SilverTongueII extends PowerUp {
 	public SilverTongueII() {
 		super("Silver Tongue II", "Barter Skill boost", 20, 55);
 	}
-	
-	
-	
-	/**
-	 * Applies the PowerUp effect to the hero, increasing their barter skill by the PowerUp's potency.
-	 * @param hero
-	 */
-	public void apply(Hero hero) {
-		hero.boostBarterSkill(this.getPowerUpPotency());
-	}
 }

@@ -9,7 +9,6 @@ import java.util.TimerTask;
  * Class for the Hero objects that comprise a team of heroes   
  * 
  * @author vjj14
- * @version 
  *
  */
 public class Hero {
@@ -272,6 +271,22 @@ public class Hero {
 	
 	
 	/**
+	 * Use a HealingItem, item, by applying its effect to the hero, and removing it from the team's inventory.
+	 * @param item
+	 */
+	public void useHealingItem(HealingItem item) {
+		item.apply(this);
+		Team.removeHealingItem(item);
+	}
+	
+	
+	public void usePowerUp(PowerUp item) {
+		item.apply(this);
+		Team.removePowerUp(item);
+	}
+	
+	
+	/**
 	 * @param amount
 	 */
 	public void restoreHealth(int amount) {
@@ -413,5 +428,18 @@ public class Hero {
 		return resultString;
 	}
 	
+	
+	public static void main(String[] args) {
+		MerchantMan quod = new MerchantMan();
+		SilverTongueI buff1 = new SilverTongueI();
+		SilverTongueII buff2 = new SilverTongueII();
+		SilverTongueIII buff3 = new SilverTongueIII();
+		buff1.apply(quod);
+		//buff2.apply(quod);
+		//buff3.apply(quod);
+		System.out.println(quod);
+		
+		
+	}
 	
 }

@@ -16,14 +16,4 @@ public class AugmentVitalityI extends PowerUp {
 	public AugmentVitalityI() {
 		super("Augment Vitality I", "Health boost", 20, 10);
 	}
-	
-	
-	
-	/**
-	 * Applies the PowerUp effect to the hero, increasing their maximum health by the PowerUp's potency. 
-	 * @param hero
-	 */
-	public void apply(Hero hero) {
-		hero.boostMaxHealth(this.getPowerUpPotency());
-	}
 }
