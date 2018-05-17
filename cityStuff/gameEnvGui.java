@@ -47,12 +47,14 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-		cityAmmountPanel();//change to team set up later
+//		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
 //		villiansLairPanel();
 //		battleSelectionPanel();
 //		diceRollPanel();
 //		numberGuessPanel();
+//		paperScissorsRockPanel();
+		teamInitializerPanel();
 	}
 
 	/**
@@ -64,6 +66,8 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+
 		
 		
 		
@@ -224,7 +228,9 @@ public class gameEnvGui {
 		JButton btnNewButton_3 = new JButton("Paper Scissors Rock");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				paperScissorsRockPanel();
 			}
 		});
 		btnNewButton_3.setBounds(87, 139, 179, 118);
@@ -541,7 +547,7 @@ public class gameEnvGui {
 				numOfGuesses += 1;
 				if (hero != vill && numOfGuesses < 2) {
 					lblResult.setText(numberGuess.higherOrLowerGui(hero, vill));
-				}  else if (hero == vill && numOfGuesses < 2) {
+				}  else if (hero == vill) {
 					game.getCurrentVillian().oneDefeat();
 //					numOfGuesses += 1;
 					//something about getting it right in a num of guesses
@@ -620,10 +626,158 @@ public class gameEnvGui {
 	
 	
 	private void paperScissorsRockPanel() {
+
+		//int numOfGuesses = 0;
+		vill = numberGuess.getVillianChoice();
 		frame.getContentPane().setLayout(null);
+		
+		JLabel lblBattlingWith = new JLabel("Battling With ");
+		lblBattlingWith.setBounds(373, 24, 269, 14);
+		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
+		frame.getContentPane().add(lblBattlingWith);
+		
+		JLabel lblResult = new JLabel("You Need To Roll The Dice First!");
+		lblResult.setBounds(293, 137, 304, 55);
+		frame.getContentPane().add(lblResult);
+		
+		
+		JLabel lblHero = new JLabel("hero1");
+		lblHero.setBounds(56, 24, 46, 14);
+		frame.getContentPane().add(lblHero);
+		
+		
+		JLabel lblHero_1 = new JLabel("hero2");
+		lblHero_1.setBounds(56, 98, 46, 14);
+		frame.getContentPane().add(lblHero_1);
+		
+		JLabel lblHero_2 = new JLabel("hero3");
+		lblHero_2.setBounds(56, 175, 46, 14);
+		frame.getContentPane().add(lblHero_2);
+		
+		
+		JRadioButton char_1_box = new JRadioButton("");
+		char_1_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
+				game.setCurrentHero(0);
+			}
+		});
+		char_1_box.setBounds(66, 45, 97, 23);
+		char_1_box.setSelected(true);
+		frame.getContentPane().add(char_1_box);
+		
+		JRadioButton char_2_box = new JRadioButton("");
+		char_2_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
+				game.setCurrentHero(1);
+			}
+		});
+		char_2_box.setBounds(66, 119, 97, 23);
+		frame.getContentPane().add(char_2_box);
+		
+		JRadioButton char_3_box = new JRadioButton("");
+		char_3_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
+				game.setCurrentHero(2);
+			}
+		});
+		char_3_box.setBounds(66, 196, 97, 23);
+		frame.getContentPane().add(char_3_box);
+		
+		try {
+			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
+			lblHero.setText(game.getTeam().getHeroArray().get(0).getName());
+			} else {
+				lblHero.setVisible(false);
+				char_1_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero.setVisible(false);
+			char_1_box.setVisible(false);
+		}
+		try {
+			if (game.getTeam().getHeroArray().get(1).getCurrentHealth() > 0) {
+			lblHero_1.setText(game.getTeam().getHeroArray().get(1).getName());
+			} else {
+				lblHero_1.setVisible(false);
+				char_2_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero_1.setVisible(false);
+			char_2_box.setVisible(false);
+		}
+		try {
+			if (game.getTeam().getHeroArray().get(2).getCurrentHealth() > 0) {
+			lblHero_2.setText(game.getTeam().getHeroArray().get(2).getName());
+			} else {
+				lblHero_2.setVisible(false);
+				char_3_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero_2.setVisible(false);
+			char_3_box.setVisible(false);
+		}
+		
+		ButtonGroup charsForBattle = new ButtonGroup();
+		charsForBattle.add(char_1_box);
+		charsForBattle.add(char_2_box);
+		charsForBattle.add(char_3_box);
+		frame.getContentPane().setLayout(null);
+		JButton btnViewStats_1 = new JButton("View Stats");
+		btnViewStats_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getTeam().toString());
+			}
+		});
+		btnViewStats_1.setBounds(304, 458, 311, 126);
+		frame.getContentPane().add(btnViewStats_1);
+		
+		JButton btnPaper = new JButton("Paper");
+		btnPaper.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPaper.setBounds(163, 305, 144, 119);
+		frame.getContentPane().add(btnPaper);
+		
+		JButton btnScissors = new JButton("Scissors");
+		btnScissors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnScissors.setBounds(382, 305, 144, 119);
+		frame.getContentPane().add(btnScissors);
+		
+		JButton btnScissors_1 = new JButton("Rock");
+		btnScissors_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnScissors_1.setBounds(608, 305, 144, 119);
+		frame.getContentPane().add(btnScissors_1);
+		
+		
+	
+		
 	}
 	
 	private void lossGamePanel() {
 		frame.getContentPane().setLayout(null);
+	}
+	
+	private void teamInitializerPanel() {
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblCreateYourTeam = new JLabel("Create Your Team");
+		lblCreateYourTeam.setBounds(362, 12, 146, 15);
+		frame.getContentPane().add(lblCreateYourTeam);
+		
+		JRadioButton rdbtnBanana = new JRadioButton("banana");
+		rdbtnBanana.setBounds(389, 254, 149, 23);
+		frame.getContentPane().add(rdbtnBanana);
+		
+		
 	}
 }
