@@ -47,14 +47,14 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-//		cityAmmountPanel();//change to team set up later
+		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
 //		villiansLairPanel();
 //		battleSelectionPanel();
 //		diceRollPanel();
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
-		teamInitializerPanel();
+//		teamInitializerPanel();
 	}
 
 	/**
@@ -626,9 +626,13 @@ public class gameEnvGui {
 	
 	
 	private void paperScissorsRockPanel() {
-
+//		ArrayList<String> villianOptions = new ArrayList<String>();
+//		villianOptions.add("Paper");
+//		villianOptions.add("Scissors");
+//		villianOptions.add("Rock");
+		paperScissorsRock paperGame = new paperScissorsRock();
 		//int numOfGuesses = 0;
-		vill = numberGuess.getVillianChoice();
+//		vill = numberGuess.getVillianChoice();
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblBattlingWith = new JLabel("Battling With ");
@@ -734,7 +738,84 @@ public class gameEnvGui {
 		btnViewStats_1.setBounds(304, 458, 311, 126);
 		frame.getContentPane().add(btnViewStats_1);
 		
-		JButton btnPaper = new JButton("Paper");
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Paper", "Scissors", "Rock"}));
+		comboBox.setBounds(383, 278, 105, 22);
+		frame.getContentPane().add(comboBox);
+		
+		JButton btnConfirmYourGuess = new JButton("Confirm Your Guess");
+		btnConfirmYourGuess.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String outcome = comboBox.getSelectedItem() + paperGame.getVillianChoice();
+				outcome = paperGame.getOutCome(outcome);
+				JOptionPane.showMessageDialog(null, outcome);
+				switch(outcome) {
+				case "You Have Won":
+					game.getCurrentVillian().oneDefeat();
+					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
+					if (game.getCurrentVillian().getLossCount() == 3) {
+						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
+						citiesFinished += 1;
+						frame.getContentPane().removeAll();
+						frame.repaint();
+						//game.setCurrentHero(citiesFinished);
+						game.setCurrentVillian(citiesFinished);
+						baseCampPanel();
+					}
+					break;
+				case "The Villian Has Won":
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
+						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
+						if (game.getCurrentHero() == 0) {
+							lblHero.setVisible(false);
+							char_1_box.setVisible(false);
+						} else if (game.getCurrentHero() == 1) {
+							lblHero_1.setVisible(false);
+							char_2_box.setVisible(false);
+						} else {
+							lblHero_2.setVisible(false);
+							char_3_box.setVisible(false);
+						}
+						int stillAliveChar = 999;
+						for (int i = 0; i < game.getTeam().getHeroArray().size(); i++) {
+							if (game.getTeam().getHeroArray().get(i).getCurrentHealth() != 0) {
+								stillAliveChar = i;
+								game.setCurrentHero(i);
+								break;
+							}
+						}
+						if (stillAliveChar == 999) {
+							frame.getContentPane().removeAll();
+							frame.repaint();
+							lossGamePanel();
+						} else if (game.getCurrentHero() == 0) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
+							char_1_box.setSelected(true);
+						} else if (game.getCurrentHero() == 1) {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(1).getName());
+							char_2_box.setSelected(true);
+						} else {
+							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(2).getName());
+							char_3_box.setSelected(true);
+						}
+						System.out.println(game.getTeam().getHeroArray().size());
+					} else {
+						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+					}
+					break;
+				case "It Is A Draw, Next Round!":
+					break;
+				}
+			}
+		});
+		btnConfirmYourGuess.setBounds(304, 312, 311, 126);
+		frame.getContentPane().add(btnConfirmYourGuess);
+		frame.getContentPane().setLayout(null);
+		
+		/*JButton btnPaper = new JButton("Paper");
 		btnPaper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -755,9 +836,10 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+
 		btnScissors_1.setBounds(608, 305, 144, 119);
 		frame.getContentPane().add(btnScissors_1);
-		
+		*/
 		
 	
 		
