@@ -29,46 +29,38 @@ public class paperScissorsRock {
 		return num.nextInt();//Integer.parseInt(num.nextLine());
 	}
 	
-	public void getOutCome(String outcome) {
+	public String getOutCome(String outcome) {
+		String to_return = "hi";
 		switch(outcome) {
 		case "PaperScissors" :
-			System.out.println("The Villian Has Won");
-			heroWon = false;
+			to_return = "The Villian Has Won";
 			break;
 		case "PaperRock" :
-			System.out.println("You Have Won");
-			heroWon = true;
+			to_return = "You Have Won";
 			break;
 		case "ScissorsPaper" :
-			System.out.println("You Have Won");
-			heroWon = true;
+			to_return = "You Have Won";
 			break;
 		case "ScissorsRock" :
-			System.out.println("The Villian Has Won");
-			heroWon = false;
+			to_return = "The Villian Has Won";
 			break;
 		case "RockScissors" :
-			System.out.println("You Have Won");
-			heroWon = true;
+			to_return = "You Have Won";
 			break;
 		case "RockPaper" :
-			System.out.println("The Villian Has Won");
-			heroWon = false;
+			to_return = "The Villian Has Won";
 			break;
 		case "RockRock" :
-			System.out.println("It Is A Draw, Next Round!");
-			draw = true;
+			to_return = "It Is A Draw, Next Round!";
 			break;
 		case "PaperPaper" :
-			System.out.println("It Is A Draw, Next Round!");
-			draw = true;
+			to_return = "It Is A Draw, Next Round!";
 			break;
 		case "ScissorsScissors" :
-			System.out.println("It Is A Draw, Next Round!");
-			draw = true;
+			to_return = "It Is A Draw, Next Round!";
 			break;
 		}
-		
+		return to_return;
 	}
 	
 	public int getPlayerChoice() {
@@ -77,6 +69,11 @@ public class paperScissorsRock {
 	}
 	
 	
+	
+	public String getVillianChoice() {
+		Random rand = new Random();
+		return options[rand.nextInt(3)];
+	}
 	
 	public void gameSequence() {
 		//boolean heroWon = true;
