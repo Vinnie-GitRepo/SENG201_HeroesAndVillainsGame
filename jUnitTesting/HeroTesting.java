@@ -17,8 +17,7 @@ public class HeroTesting {
 	@Test
 	public void testMerchant() {
 		MerchantMan testHero = new MerchantMan();
-		
-		expectedOutput = 
+	
 	}
 	
 	

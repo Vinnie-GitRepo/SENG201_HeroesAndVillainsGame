@@ -34,13 +34,6 @@ public class Team {
 	
 	
 	/**
-	 * 
-	 */
-	private String position = "Base";
-	
-	
-	
-	/**
 	 * The money the team has to spend on items, which is awarded to the team for victories. 
 	 * Can be gifted or stolen.
 	 */
