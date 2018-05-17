@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
+import java.awt.Font;
+import java.awt.Color;
 
 public class gameEnvGui {
 	public static int citiesFinished = 0;
@@ -25,6 +27,7 @@ public class gameEnvGui {
 	public static int vill;
 	public gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
 	private JFrame frame;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -770,13 +773,94 @@ public class gameEnvGui {
 	private void teamInitializerPanel() {
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblCreateYourTeam = new JLabel("Create Your Team");
-		lblCreateYourTeam.setBounds(362, 12, 146, 15);
-		frame.getContentPane().add(lblCreateYourTeam);
+		JLabel lblAssembleYourTeam = new JLabel("ASSEMBLE  YOUR  TEAM");
+		lblAssembleYourTeam.setFont(new Font("Arvo", Font.BOLD, 24));
+		lblAssembleYourTeam.setBounds(327, 12, 313, 31);
+		frame.getContentPane().add(lblAssembleYourTeam);
 		
-		JRadioButton rdbtnBanana = new JRadioButton("banana");
-		rdbtnBanana.setBounds(389, 254, 149, 23);
-		frame.getContentPane().add(rdbtnBanana);
+		JButton btnHeroType1 = new JButton("");
+		btnHeroType1.setBackground(Color.DARK_GRAY);
+		btnHeroType1.setBounds(46, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType1);
+		
+		JButton btnHeroType2 = new JButton("");
+		btnHeroType2.setBackground(Color.DARK_GRAY);
+		btnHeroType2.setBounds(200, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType2);
+		
+		JButton btnHeroType3 = new JButton("");
+		btnHeroType3.setBackground(Color.DARK_GRAY);
+		btnHeroType3.setBounds(350, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType3);
+		
+		JButton btnHeroType4 = new JButton("");
+		btnHeroType4.setBackground(Color.DARK_GRAY);
+		btnHeroType4.setBounds(503, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType4);
+		
+		JButton btnHeroType5 = new JButton("");
+		btnHeroType5.setBackground(Color.DARK_GRAY);
+		btnHeroType5.setBounds(649, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType5);
+		
+		JButton btnHeroType6 = new JButton("");
+		btnHeroType6.setBackground(Color.DARK_GRAY);
+		btnHeroType6.setBounds(798, 142, 117, 126);
+		frame.getContentPane().add(btnHeroType6);
+		
+		JLabel lblMerchant = new JLabel("MERCHANT");
+		lblMerchant.setBounds(69, 280, 82, 15);
+		frame.getContentPane().add(lblMerchant);
+		
+		JLabel lblTank = new JLabel("TANK");
+		lblTank.setBounds(235, 280, 48, 15);
+		frame.getContentPane().add(lblTank);
+		
+		JLabel lblCartographer = new JLabel("CARTOGRAPHER");
+		lblCartographer.setBounds(360, 280, 127, 15);
+		frame.getContentPane().add(lblCartographer);
+		
+		JLabel lblSupport = new JLabel("SUPPORT");
+		lblSupport.setBounds(527, 280, 70, 15);
+		frame.getContentPane().add(lblSupport);
+		
+		JLabel lblLuckyboii = new JLabel("LUCKYBOII");
+		lblLuckyboii.setBounds(666, 280, 82, 15);
+		frame.getContentPane().add(lblLuckyboii);
+		
+		JLabel lblAntihero = new JLabel("ANTI HERO");
+		lblAntihero.setBounds(821, 280, 88, 15);
+		frame.getContentPane().add(lblAntihero);
+		
+		JButton btnProceed = new JButton("PROCEED");
+		btnProceed.setBounds(413, 579, 117, 25);
+		frame.getContentPane().add(btnProceed);
+		
+		textField = new JTextField();
+		textField.setBounds(57, 384, 176, 31);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNameHero = new JLabel("NAME YOUR");
+		lblNameHero.setBounds(110, 351, 88, 25);
+		frame.getContentPane().add(lblNameHero);
+		
+		JLabel lblNameClashMessage = new JLabel("INVALID: Another hero has taken this name.");
+		lblNameClashMessage.setForeground(new Color(255, 0, 0));
+		lblNameClashMessage.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNameClashMessage.setBounds(251, 392, 313, 15);
+		frame.getContentPane().add(lblNameClashMessage);
+		lblNameClashMessage.setVisible(false);
+		
+		JLabel lblSelectHeroesFor = new JLabel("SELECT  AND  NAME  HERO  CLASSES  TO  ADD  TO  YOUR  TEAM");
+		lblSelectHeroesFor.setFont(new Font("Arvo", Font.BOLD, 16));
+		lblSelectHeroesFor.setBounds(211, 55, 526, 31);
+		frame.getContentPane().add(lblSelectHeroesFor);
+		
+		JButton btnNewButton_4 = new JButton("Add to team");
+		btnNewButton_4.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
+		btnNewButton_4.setBounds(57, 415, 176, 25);
+		frame.getContentPane().add(btnNewButton_4);
 		
 		
 	}
