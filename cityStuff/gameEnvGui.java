@@ -34,10 +34,12 @@ public class gameEnvGui {
 	public static int numOfGuesses = 0;
 	public static int numOfHeroes;
 	public static int vill;
+	public Hero heroToAdd;
 	public gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
+	private JTextField teamNameEntryBox;
 
 	/**
 	 * Launch the application.
@@ -67,12 +69,10 @@ public class gameEnvGui {
 //		diceRollPanel();
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
-<<<<<<< HEAD
-		teamInitializerPanel();
-=======
 //		teamInitializerPanel();
 //		shopPanel();
->>>>>>> 52b36cea84c197f7b20490e4903a1ec88293e2d5
+		teamNamePanel();
+
 	}
 
 	/**
@@ -84,16 +84,56 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+	}
+	
+	
+	
+	
+	private void teamNamePanel() {
+		JLabel lblNameYourTeam = new JLabel("NAME   YOUR   TEAM   OF   HEROES");
+		lblNameYourTeam.setFont(new Font("Arvo", Font.BOLD, 40));
+		lblNameYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNameYourTeam.setBounds(12, 47, 914, 52);
+		frame.getContentPane().add(lblNameYourTeam);
+		
+		teamNameEntryBox = new JTextField();
+		teamNameEntryBox.setFont(new Font("Arvo", Font.BOLD, 70));
+		teamNameEntryBox.setBounds(118, 135, 713, 107);
+		frame.getContentPane().add(teamNameEntryBox);
+		teamNameEntryBox.setColumns(10);
+		
+		JLabel lblTeamNameError = new JLabel("INVALID ENTRY: The team name must be between 2 and 10 characters in length.");
+		lblTeamNameError.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblTeamNameError.setForeground(new Color(255, 0, 0));
+		lblTeamNameError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTeamNameError.setBounds(12, 254, 914, 52);
+		frame.getContentPane().add(lblTeamNameError);
+		lblTeamNameError.setVisible(false);
+		
+		JButton btnProceedToCamp = new JButton("PROCEED  TO  CAMP");
+		btnProceedToCamp.setFont(new Font("Dialog", Font.BOLD, 22));
+		btnProceedToCamp.setBounds(287, 503, 339, 88);
+		frame.getContentPane().add(btnProceedToCamp);
+		
+		JLabel lblBeginQuest = new JLabel("[sort code before making blank]");
+		lblBeginQuest.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBeginQuest.setBounds(12, 446, 914, 45);
+		frame.getContentPane().add(lblBeginQuest);
+		
+		JButton btnSubmitTeamName = new JButton("Confirm Name");
+		btnSubmitTeamName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(teamNameEntryBox.getText().length() < 2 || teamNameEntryBox.getText().length() > 10) {
+					lblTeamNameError.setVisible(true);
+					
+				}
+			}
+		});
+		btnSubmitTeamName.setBounds(371, 318, 177, 25);
+		frame.getContentPane().add(btnSubmitTeamName);
 		
 		
 		
-
-		
-		
-		
-		
-		
-
 	}
 	private void baseCampPanel() {
 		frame.getContentPane().setLayout(null);
@@ -260,8 +300,8 @@ public class gameEnvGui {
 				//JOptionPane.showMessageDialog(null, game.num_of_cities);
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				baseCampPanel();
-//				teamInitializerPanel();//for vinnie test
+//				baseCampPanel();
+				teamInitializerPanel();//for vinnie test
 			}
 		});
 		btnNewButton.setBounds(363, 321, 171, 86);
@@ -1076,18 +1116,28 @@ public class gameEnvGui {
 	private void teamInitializerPanel() {
 		frame.getContentPane().setLayout(null);
 
-		Hero heroToAdd = new Hero(0, "placeholder", 0, 0, 0, false, 0, 0);
 		
 		
 		
 		
 		
-		JLabel lblNameHero = new JLabel("NAME YOUR");
+		
+		JLabel lblNameHero = new JLabel("Hero Name");
 		lblNameHero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNameHero.setBounds(256, 461, 418, 25);
+		lblNameHero.setBounds(257, 425, 418, 25);
 		frame.getContentPane().add(lblNameHero);
 		
 		
+		heroNameEntryBox = new JTextField();
+		heroNameEntryBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		heroNameEntryBox.setBounds(359, 462, 209, 31);
+		frame.getContentPane().add(heroNameEntryBox);
+		heroNameEntryBox.setColumns(10);
+		heroNameEntryBox.setEnabled(false);
 		
 		
 		
@@ -1096,11 +1146,11 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR MERCHANT");
 				heroNameEntryBox.setEnabled(true);
-				Hero heroToAdd = new MerchantMan();
+				heroToAdd = new MerchantMan();
 			}
 		});
 		btnHeroType1.setBackground(Color.DARK_GRAY);
-		btnHeroType1.setBounds(46, 142, 117, 126);
+		btnHeroType1.setBounds(34, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType1);
 		
 		
@@ -1111,11 +1161,11 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR TANK");
 				heroNameEntryBox.setEnabled(true);
-				Hero heroToAdd = new Tank();
+				heroToAdd = new Tank();
 			}
 		});
 		btnHeroType2.setBackground(Color.DARK_GRAY);
-		btnHeroType2.setBounds(200, 142, 117, 126);
+		btnHeroType2.setBounds(191, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType2);
 		
 		
@@ -1126,11 +1176,11 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR CARTOGRAPHER");
 				heroNameEntryBox.setEnabled(true);
-				Hero heroToAdd = new Cartographer();
+				heroToAdd = new Cartographer();
 			}
 		});
 		btnHeroType3.setBackground(Color.DARK_GRAY);
-		btnHeroType3.setBounds(350, 142, 117, 126);
+		btnHeroType3.setBounds(338, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType3);
 		
 		
@@ -1141,11 +1191,11 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR SUPPORT");
 				heroNameEntryBox.setEnabled(true);
-				Hero heroToAdd = new Support();
+				heroToAdd = new Support();
 			}
 		});
 		btnHeroType4.setBackground(Color.DARK_GRAY);
-		btnHeroType4.setBounds(503, 142, 117, 126);
+		btnHeroType4.setBounds(484, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType4);
 		
 		
@@ -1156,11 +1206,11 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR LUCKY BOII");
 				heroNameEntryBox.setEnabled(true);
-				Hero heroToAdd = new LuckyBoii();
+				heroToAdd = new LuckyBoii();
 			}
 		});
 		btnHeroType5.setBackground(Color.DARK_GRAY);
-		btnHeroType5.setBounds(649, 142, 117, 126);
+		btnHeroType5.setBounds(636, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType5);
 		
 		
@@ -1170,11 +1220,12 @@ public class gameEnvGui {
 		btnHeroType6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR ANTI-HERO");
-				Hero heroToAdd = new EdgyScaryFiendLord();
+				heroNameEntryBox.setEnabled(true);
+				heroToAdd = new EdgyScaryFiendLord();
 			}
 		});
 		btnHeroType6.setBackground(Color.DARK_GRAY);
-		btnHeroType6.setBounds(798, 142, 117, 126);
+		btnHeroType6.setBounds(792, 142, 117, 126);
 		frame.getContentPane().add(btnHeroType6);
 		
 		
@@ -1192,27 +1243,33 @@ public class gameEnvGui {
 		
 		
 		JLabel lblMerchant = new JLabel("MERCHANT");
-		lblMerchant.setBounds(69, 280, 82, 15);
+		lblMerchant.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMerchant.setBounds(56, 280, 82, 15);
 		frame.getContentPane().add(lblMerchant);
 		
 		JLabel lblTank = new JLabel("TANK");
-		lblTank.setBounds(235, 280, 48, 15);
+		lblTank.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTank.setBounds(226, 280, 41, 15);
 		frame.getContentPane().add(lblTank);
 		
 		JLabel lblCartographer = new JLabel("CARTOGRAPHER");
-		lblCartographer.setBounds(360, 280, 127, 15);
+		lblCartographer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCartographer.setBounds(338, 280, 117, 15);
 		frame.getContentPane().add(lblCartographer);
 		
 		JLabel lblSupport = new JLabel("SUPPORT");
-		lblSupport.setBounds(527, 280, 70, 15);
+		lblSupport.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSupport.setBounds(484, 280, 117, 15);
 		frame.getContentPane().add(lblSupport);
 		
 		JLabel lblLuckyboii = new JLabel("LUCKYBOII");
-		lblLuckyboii.setBounds(666, 280, 82, 15);
+		lblLuckyboii.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLuckyboii.setBounds(646, 280, 107, 15);
 		frame.getContentPane().add(lblLuckyboii);
 		
 		JLabel lblAntihero = new JLabel("ANTI HERO");
-		lblAntihero.setBounds(821, 280, 88, 15);
+		lblAntihero.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAntihero.setBounds(802, 280, 88, 15);
 		frame.getContentPane().add(lblAntihero);
 		
 		
@@ -1221,7 +1278,7 @@ public class gameEnvGui {
 		JLabel lblNameClashMessage = new JLabel("INVALID ENTRY: Another hero has taken this name.");
 		lblNameClashMessage.setForeground(new Color(255, 0, 0));
 		lblNameClashMessage.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNameClashMessage.setBounds(235, 422, 465, 15);
+		lblNameClashMessage.setBounds(234, 367, 465, 15);
 		frame.getContentPane().add(lblNameClashMessage);
 		lblNameClashMessage.setVisible(false);
 		
@@ -1234,15 +1291,7 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblSelectHeroesFor);
 		
 		
-		heroNameEntryBox = new JTextField();
-		heroNameEntryBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		heroNameEntryBox.setBounds(359, 498, 209, 31);
-		frame.getContentPane().add(heroNameEntryBox);
-		heroNameEntryBox.setColumns(10);
+		
 		
 		
 		JButton btnAddToTeam = new JButton("Add to team");
@@ -1250,30 +1299,70 @@ public class gameEnvGui {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				if(game.getTeam().getHeroArray().size() >= 1) {
-					
-					for(Hero hero : game.getTeam().getHeroArray()) {
-						boolean done = false;
+				
+				if(game.getHeroList().size() >= 1) {
+					boolean nameChecked = false;
+					String name = heroNameEntryBox.getText();
+					for (int i = 0; i < game.getHeroList().size(); i++) {
 						
-						while (done == false) {
-							
-							if(heroNameEntryBox.getText().equals(hero.getName())) {
-								lblNameClashMessage.setVisible(true);}
-							
-							else {
-								heroToAdd.setHeroName(heroNameEntryBox.getText());
-								lblNameClashMessage.setVisible(false);
-								done = true;}
+						if (name.equals(game.getHeroList().get(i).getName())) {
+							lblNameClashMessage.setVisible(true);
+							nameChecked = true;
 						}
 					}
+					if (nameChecked == false) {
+						//JOptionPane.showMessageDialog(null, heroToAdd.toString() + "other");
+						heroToAdd.setHeroName(heroNameEntryBox.getText());
+						//JOptionPane.showMessageDialog(null, heroToAdd.toString() + "other");
+						game.getHeroList().add(heroToAdd);
+					
+						// after it has added the char
+						if (numOfHeroes == game.getHeroList().size()) {
+							frame.getContentPane().removeAll();
+							frame.repaint();
+							baseCampPanel();
+//							teamInitializerPanel();//for vinnie test
+						} 
+						else {
+							frame.getContentPane().removeAll();
+							frame.repaint();
+//							baseCampPanel();
+							teamInitializerPanel();//for vinnie test
+						}
+					}
+//					
+				} 
+				else {
+					//JOptionPane.showMessageDialog(null, heroToAdd.toString());
+					heroToAdd.setHeroName(heroNameEntryBox.getText());
+					//JOptionPane.showMessageDialog(null, heroToAdd.toString());
+					game.getHeroList().add(heroToAdd);
+				
+					// after it has added the char
+					if (numOfHeroes == game.getHeroList().size()) {
+						frame.getContentPane().removeAll();
+						frame.repaint();
+						baseCampPanel();
+//						teamInitializerPanel();//for vinnie test
+					} 
+					else {
+						frame.getContentPane().removeAll();
+						frame.repaint();
+//						baseCampPanel();
+						teamInitializerPanel();//for vinnie test
+					}
 				}
-				heroToAdd.setHeroName(heroNameEntryBox.getText());
-				game.getTeam().addHero(heroToAdd);
 			}
 		});
 		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		btnAddToTeam.setBounds(360, 528, 208, 53);
+		btnAddToTeam.setBounds(360, 493, 208, 53);
 		frame.getContentPane().add(btnAddToTeam);
+		
+		JLabel lblAssembleYourTeam = new JLabel("ASSEMBLE  YOUR  TEAM  OF  HEROES");
+		lblAssembleYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAssembleYourTeam.setFont(new Font("Arvo", Font.BOLD, 30));
+		lblAssembleYourTeam.setBounds(165, 29, 643, 53);
+		frame.getContentPane().add(lblAssembleYourTeam);
 		
 		
 		

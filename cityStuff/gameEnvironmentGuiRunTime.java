@@ -139,6 +139,10 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
+	public ArrayList<Hero> getHeroList() {
+		return this.getTeam().getHeroArray();
+	}
+	
 	//This is used when finishing a city the team is returned
 	//through the game and set to theTeam in order to move
 	//into the next city
