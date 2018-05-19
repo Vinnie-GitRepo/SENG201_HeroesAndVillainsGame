@@ -113,7 +113,7 @@ public class Hero {
 		this.luck = luck;
 		this.fame = fame;
 		this.deterrence = deterrence;
-		nameHero();
+		//nameHero();
 	}
 	
 	
@@ -150,6 +150,9 @@ public class Hero {
 	
 	
 	
+	public void setHeroName(String name) {
+		heroName = name;
+	}
 	
 	
 	//------------------------------------------------
@@ -255,6 +258,16 @@ public class Hero {
 	public boolean getLuck() {
 		return luck;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

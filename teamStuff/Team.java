@@ -101,13 +101,13 @@ public class Team {
 	 */
 	public Team() {
 
-		chooseTeamSize();		// Determines the size of the heroArray of the team
-		fillHeroArray();		// Lets you select and name heroes for your team
-		nameTeam();				// Lets you name your team of heroes
-		
-		setBarterSkillSum();	//-------------------------------------
-		setDeterrenceSum();		// Setters based on the heroes selected
-		setFameSum();			//-------------------------------------
+//		chooseTeamSize();		// Determines the size of the heroArray of the team
+//		fillHeroArray();		// Lets you select and name heroes for your team
+//		nameTeam();				// Lets you name your team of heroes
+//		
+//		setBarterSkillSum();	//-------------------------------------
+//		setDeterrenceSum();		// Setters based on the heroes selected
+//		setFameSum();			//-------------------------------------
 	}
 	
 	
@@ -492,6 +492,11 @@ public class Team {
 	
 	
 	
+	
+	
+	public void addHero(Hero hero) {
+		heroArray.add(hero);
+	}
 	
 	//------------------------------------------------
 	//                [BATTLE METHODS]
