@@ -5,6 +5,7 @@ import cityStuff.*;
 import games.*;
 import teamStuff.Cartographer;
 import teamStuff.EdgyScaryFiendLord;
+import teamStuff.HealingItem;
 import teamStuff.Hero;
 import teamStuff.LuckyBoii;
 import teamStuff.MerchantMan;
@@ -12,24 +13,18 @@ import teamStuff.Support;
 import teamStuff.Tank;
 
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
 import java.awt.Font;
 import java.awt.Color;
 
 public class gameEnvGui {
+	public static String selectedHealingItem;
 	public static int citiesFinished = 0;
 	public static int numOfGuesses = 0;
 	public static int numOfHeroes;
@@ -39,8 +34,13 @@ public class gameEnvGui {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
+<<<<<<< HEAD
 	private JTextField teamNameEntryBox;
 
+=======
+	private Timer timer = new Timer();
+	
+>>>>>>> f99483e57428fd16686fcf5e9bec91ea365aaba7
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +62,7 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-//		cityAmmountPanel();//change to team set up later
+		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
 //		villiansLairPanel();
 //		battleSelectionPanel();
@@ -71,7 +71,11 @@ public class gameEnvGui {
 //		paperScissorsRockPanel();
 //		teamInitializerPanel();
 //		shopPanel();
+<<<<<<< HEAD
 		teamNamePanel();
+=======
+//		hospitalPanel();
+>>>>>>> f99483e57428fd16686fcf5e9bec91ea365aaba7
 
 	}
 
@@ -84,6 +88,7 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+<<<<<<< HEAD
 	}
 	
 	
@@ -134,10 +139,25 @@ public class gameEnvGui {
 		
 		
 		
+=======
+
+
+		
+		
+		
+
+		
+
+>>>>>>> f99483e57428fd16686fcf5e9bec91ea365aaba7
 	}
 	private void baseCampPanel() {
 		frame.getContentPane().setLayout(null);
 		JButton btnNewButton_1 = new JButton("View Inventory");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getTeam().viewInventory());
+			}
+		});
 		btnNewButton_1.setBounds(55, 478, 165, 91);
 		frame.getContentPane().add(btnNewButton_1);
 		
@@ -154,6 +174,7 @@ public class gameEnvGui {
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				citiesFinished += 1;
+				game.setCurrentShop(citiesFinished);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				baseCampPanel();
@@ -177,6 +198,7 @@ public class gameEnvGui {
 					case "Power Up Den":
 						break;
 					case "Hospital":
+						hospitalPanel();
 						break;
 				}
 			}
@@ -199,6 +221,7 @@ public class gameEnvGui {
 					case "Power Up Den":
 						break;
 					case "Hospital":
+						hospitalPanel();
 						break;
 				}
 			}
@@ -221,6 +244,7 @@ public class gameEnvGui {
 					case "Power Up Den":
 						break;
 					case "Hospital":
+						hospitalPanel();
 						break;
 				}
 //				if (btnSouth.getText() == "Lair") {
@@ -246,6 +270,7 @@ public class gameEnvGui {
 					case "Power Up Den":
 						break;
 					case "Hospital":
+						hospitalPanel();
 						break;
 				}
 			}
@@ -742,6 +767,192 @@ public class gameEnvGui {
 		
 	}
 	
+	private void hospitalPanel() {
+		
+		JLabel lblApplyTo = new JLabel("Apply To:");
+		lblApplyTo.setBounds(421, 231, 70, 15);
+		frame.getContentPane().add(lblApplyTo);
+		
+		
+		JLabel lblHero = new JLabel("hero1");
+		lblHero.setBounds(245, 264, 46, 14);
+		frame.getContentPane().add(lblHero);
+		
+		
+		
+		JLabel lblHero_1 = new JLabel("hero2");
+		lblHero_1.setBounds(441, 264, 46, 14);
+		frame.getContentPane().add(lblHero_1);
+		
+		JLabel lblHero_2 = new JLabel("hero3");
+		lblHero_2.setBounds(627, 264, 46, 14);
+		frame.getContentPane().add(lblHero_2);
+		
+		
+		JRadioButton char_1_box = new JRadioButton("");
+		char_1_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblApplyTo.setText("Apply To: " + game.getTeam().getHeroArray().get(0).getName());
+				game.setCurrentHero(0);
+			}
+		});
+		char_1_box.setBounds(255, 286, 97, 23);
+		char_1_box.setSelected(true);
+		frame.getContentPane().add(char_1_box);
+		
+		JRadioButton char_2_box = new JRadioButton("");
+		char_2_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblApplyTo.setText("Apply To: " + game.getTeam().getHeroArray().get(1).getName());
+				game.setCurrentHero(1);
+			}
+		});
+		char_2_box.setBounds(451, 286, 97, 23);
+		frame.getContentPane().add(char_2_box);
+		
+		JRadioButton char_3_box = new JRadioButton("");
+		char_3_box.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblApplyTo.setText("Apply To: " + game.getTeam().getHeroArray().get(2).getName());
+				game.setCurrentHero(2);
+			}
+		});
+		char_3_box.setBounds(637, 286, 97, 23);
+		frame.getContentPane().add(char_3_box);
+		
+		try {
+			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
+			lblHero.setText(game.getTeam().getHeroArray().get(0).getName());
+			} else {
+				lblHero.setVisible(false);
+				char_1_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero.setVisible(false);
+			char_1_box.setVisible(false);
+		}
+		try {
+			if (game.getTeam().getHeroArray().get(1).getCurrentHealth() > 0) {
+			lblHero_1.setText(game.getTeam().getHeroArray().get(1).getName());
+			} else {
+				lblHero_1.setVisible(false);
+				char_2_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero_1.setVisible(false);
+			char_2_box.setVisible(false);
+		}
+		try {
+			if (game.getTeam().getHeroArray().get(2).getCurrentHealth() > 0) {
+			lblHero_2.setText(game.getTeam().getHeroArray().get(2).getName());
+			} else {
+				lblHero_2.setVisible(false);
+				char_3_box.setVisible(false);
+			}
+		} catch (Exception noName0) {
+			lblHero_2.setVisible(false);
+			char_3_box.setVisible(false);
+		}
+		
+		ButtonGroup charsForBattle = new ButtonGroup();
+		charsForBattle.add(char_1_box);
+		charsForBattle.add(char_2_box);
+		charsForBattle.add(char_3_box);
+		
+		
+		JLabel lblAvaiableHealingItems = new JLabel("Avaiable Healing Items");
+		lblAvaiableHealingItems.setBounds(369, 22, 177, 15);
+		frame.getContentPane().add(lblAvaiableHealingItems);
+		
+		JButton btnNewButton_4 = new JButton("Restore Health I");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedHealingItem = btnNewButton_4.getText();
+			}
+		});
+		btnNewButton_4.setBounds(135, 55, 189, 81);
+		frame.getContentPane().add(btnNewButton_4);
+		
+		JButton btnRestoreHealthIi_1 = new JButton("Restore Health II");
+		btnRestoreHealthIi_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedHealingItem = btnRestoreHealthIi_1.getText();
+			}
+		});
+		btnRestoreHealthIi_1.setBounds(357, 55, 189, 81);
+		frame.getContentPane().add(btnRestoreHealthIi_1);
+		
+		JButton btnRestoreHealthIi = new JButton("Restore Health III");
+		btnRestoreHealthIi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedHealingItem = btnRestoreHealthIi.getText();
+			}
+		});
+		btnRestoreHealthIi.setBounds(571, 55, 189, 81);
+		frame.getContentPane().add(btnRestoreHealthIi);
+		
+		JLabel HealthIStock = new JLabel("New label");
+		HealthIStock.setBounds(196, 148, 70, 15);
+		frame.getContentPane().add(HealthIStock);
+		HealthIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(0))));
+		
+		
+		JLabel HealthIIStock = new JLabel("New label");
+		HealthIIStock.setBounds(421, 148, 70, 15);
+		frame.getContentPane().add(HealthIIStock);
+		HealthIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(1))));
+		
+		JLabel HealthIIIStock = new JLabel("New label");
+		HealthIIIStock.setBounds(645, 148, 70, 15);
+		frame.getContentPane().add(HealthIIIStock);
+		HealthIIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(2))));
+		
+	
+		
+		
+		
+		JButton btnNewButton_5 = new JButton("Apply To Hero");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean applyIt = false;
+				int count = 0;
+				for (HealingItem item : game.getTeam().getHealingItems()) {
+					if (item.getHealingItemName().equals(selectedHealingItem)) {//should add to check if the num underneath is actually in the array or use a try catch
+						applyIt = true;
+						break;
+					}
+					count++;
+				}
+				if (applyIt == true) {
+					game.getTeam().getHeroArray().get(game.getCurrentHero()).useHealingItem(game.getTeam().getHealingItems().get(count));
+					frame.getContentPane().removeAll();
+					frame.repaint();
+					hospitalPanel();
+					timer.setVisible(true);
+//					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 0) {
+////						JOptionPane.showMessageDialog(null, game.getTeam().getHealingItems().get(count).getTimeRemaining());
+//					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "YOU DONT HAVE THIS ITEM!");
+				}
+			}
+		});
+		btnNewButton_5.setBounds(194, 380, 215, 100);
+		frame.getContentPane().add(btnNewButton_5);
+		
+		JButton btnExit_1 = new JButton("Exit");
+		btnExit_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				baseCampPanel();
+			}
+		});
+		btnExit_1.setBounds(518, 380, 215, 100);
+		frame.getContentPane().add(btnExit_1);
+		
+	}
 	
 	private void shopPanel() {
 		JLabel lblTeamsCurrentInventory = new JLabel("Teams Current Inventory");
@@ -749,15 +960,22 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblTeamsCurrentInventory);
 		
 		JLabel itemName = new JLabel("Selected Item Name");
-		itemName.setBounds(46, 449, 135, 15);
+		itemName.setBounds(35, 554, 135, 15);
 		frame.getContentPane().add(itemName);
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.setBounds(527, 415, 178, 154);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				baseCampPanel();
+			}
+		});
+		btnExit.setBounds(515, 515, 178, 70);
 		frame.getContentPane().add(btnExit);
 		
 		JLabel lblAvailableHealingItems = new JLabel("Available Healing Items");
-		lblAvailableHealingItems.setBounds(372, 83, 238, 15);
+		lblAvailableHealingItems.setBounds(372, 75, 238, 15);
 		frame.getContentPane().add(lblAvailableHealingItems);
 		
 		JLabel lblAvailablePowerUps = new JLabel("Available Power Ups");
@@ -780,7 +998,7 @@ public class gameEnvGui {
 				itemName.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
 			}
 		});
-		health2.setBounds(406, 104, 104, 70);
+		health2.setBounds(407, 102, 104, 70);
 		frame.getContentPane().add(health2);
 		health2.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
 		
@@ -794,29 +1012,105 @@ public class gameEnvGui {
 		frame.getContentPane().add(health3);
 		health3.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
 		
+		
+		
+		
+//		THE BEGGINING OF THE POWER UP SECTION
 		JButton powerUp1 = new JButton("p1");
-		powerUp1.setBounds(66, 263, 104, 70);
+		powerUp1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(0).getPowerUpName());
+			}
+		});
+		powerUp1.setBounds(192, 250, 104, 70);
 		frame.getContentPane().add(powerUp1);
+		powerUp1.setText(game.getCurrentShop().getPowerUpItems.get(0).getPowerUpName());
 		
 		JButton powerUp2 = new JButton("p2");
-		powerUp2.setBounds(202, 263, 104, 70);
+		powerUp2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
+			}
+		});
+		powerUp2.setBounds(407, 250, 104, 70);
 		frame.getContentPane().add(powerUp2);
+		powerUp2.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
 		
 		JButton powerUp3 = new JButton("p3");
-		powerUp3.setBounds(337, 263, 104, 70);
+		powerUp3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
+			}
+		});
+		powerUp3.setBounds(640, 249, 104, 70);
 		frame.getContentPane().add(powerUp3);
+		powerUp3.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
 		
 		JButton powerUp4 = new JButton("p4");
-		powerUp4.setBounds(469, 263, 104, 70);
+		powerUp4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(3).getPowerUpName());
+			}
+		});
+		powerUp4.setBounds(192, 332, 104, 70);
 		frame.getContentPane().add(powerUp4);
+		powerUp4.setText(game.getCurrentShop().getPowerUpItems.get(3).getPowerUpName());
 		
 		JButton powerUp5 = new JButton("p5");
-		powerUp5.setBounds(601, 263, 104, 70);
+		powerUp5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
+			}
+		});
+		powerUp5.setBounds(407, 332, 104, 70);
 		frame.getContentPane().add(powerUp5);
+		powerUp5.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
 		
 		JButton powerUp6 = new JButton("p6");
-		powerUp6.setBounds(731, 263, 104, 70);
+		powerUp6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
+			}
+		});
+		powerUp6.setBounds(640, 331, 104, 70);
 		frame.getContentPane().add(powerUp6);
+		powerUp6.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
+		
+		JButton powerUp7 = new JButton("p7");
+		powerUp7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(6).getPowerUpName());
+			}
+		});
+		powerUp7.setBounds(192, 415, 104, 70);
+		frame.getContentPane().add(powerUp7);
+		powerUp7.setText(game.getCurrentShop().getPowerUpItems.get(6).getPowerUpName());
+		
+		JButton powerUp8 = new JButton("p8");
+		powerUp8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(7).getPowerUpName());
+			}
+		});
+		powerUp8.setBounds(407, 415, 104, 70);
+		frame.getContentPane().add(powerUp8);
+		powerUp8.setText(game.getCurrentShop().getPowerUpItems.get(7).getPowerUpName());
+		
+		JButton powerUp9 = new JButton("p9");
+		powerUp9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getPowerUpItems.get(8).getPowerUpName());
+			}
+		});
+		powerUp9.setBounds(640, 414, 104, 70);
+		frame.getContentPane().add(powerUp9);
+		powerUp9.setText(game.getCurrentShop().getPowerUpItems.get(8).getPowerUpName());
+		
+		JLabel lblSelectedItem = new JLabel("Selected Item");
+		lblSelectedItem.setBounds(45, 491, 104, 15);
+		frame.getContentPane().add(lblSelectedItem);
+		
+		
 		
 		ButtonGroup itemsToChoose = new ButtonGroup();
 		itemsToChoose.add(health1);
@@ -828,23 +1122,72 @@ public class gameEnvGui {
 		itemsToChoose.add(powerUp4);
 		itemsToChoose.add(powerUp5);
 		itemsToChoose.add(powerUp6);
+		itemsToChoose.add(powerUp6);
+		itemsToChoose.add(powerUp7);
+		itemsToChoose.add(powerUp8);
+		itemsToChoose.add(powerUp9);
 		
 		
+//		STOCK LEVEL LABELS
+		JLabel HIT1 = new JLabel("r1Stock");
+		HIT1.setBounds(314, 132, 70, 15);
+		frame.getContentPane().add(HIT1);
+		HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
 		
-		JLabel lblRstock = new JLabel("r1Stock");
-		lblRstock.setBounds(215, 186, 70, 15);
-		frame.getContentPane().add(lblRstock);
-		lblRstock.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
+		JLabel HIT2 = new JLabel("r1Stock");
+		HIT2.setBounds(529, 132, 70, 15);
+		frame.getContentPane().add(HIT2);
+		HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
 		
-		JLabel label = new JLabel("r1Stock");
-		label.setBounds(427, 186, 70, 15);
-		frame.getContentPane().add(label);
-		label.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
+		JLabel HIT3 = new JLabel("r1Stock");
+		HIT3.setBounds(762, 132, 70, 15);
+		frame.getContentPane().add(HIT3);
+		HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
 		
-		JLabel label_1 = new JLabel("r1Stock");
-		label_1.setBounds(674, 186, 70, 15);
-		frame.getContentPane().add(label_1);
-		label_1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
+		JLabel PUP1 = new JLabel("null");
+		PUP1.setBounds(314, 278, 70, 15);
+		frame.getContentPane().add(PUP1);
+		PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
+		
+		JLabel PUP2 = new JLabel("null");
+		PUP2.setBounds(529, 278, 70, 15);
+		frame.getContentPane().add(PUP2);
+		PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
+		
+		JLabel PUP3 = new JLabel("null");
+		PUP3.setBounds(762, 278, 70, 15);
+		frame.getContentPane().add(PUP3);
+		PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
+		
+		JLabel PUP4 = new JLabel("null");
+		PUP4.setBounds(314, 360, 70, 15);
+		frame.getContentPane().add(PUP4);
+		PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
+		
+		JLabel PUP5 = new JLabel("null");
+		PUP5.setBounds(529, 360, 70, 15);
+		frame.getContentPane().add(PUP5);
+		PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
+		
+		JLabel PUP6 = new JLabel("null");
+		PUP6.setBounds(762, 360, 70, 15);
+		frame.getContentPane().add(PUP6);
+		PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
+		
+		JLabel PUP7 = new JLabel("null");
+		PUP7.setBounds(319, 443, 70, 15);
+		frame.getContentPane().add(PUP7);
+		PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
+		
+		JLabel PUP8 = new JLabel("null");
+		PUP8.setBounds(529, 443, 70, 15);
+		frame.getContentPane().add(PUP8);
+		PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
+		
+		JLabel PUP9 = new JLabel("null");
+		PUP9.setBounds(762, 443, 70, 15);
+		frame.getContentPane().add(PUP9);
+		PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
 		
 		
 		JButton purchaseButton = new JButton("Purchase Selected Item");
@@ -855,35 +1198,119 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getHealingStockLevel()[0] > 0) {
 						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(0));
 						game.getCurrentShop().getHealingStockLevel()[0] -= 1;
+						HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
 					break;
 				case "Restore Health II":
+					if (game.getCurrentShop().getHealingStockLevel()[1] > 0) {
+						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(1));
+						game.getCurrentShop().getHealingStockLevel()[1] -= 1;
+						HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Restore Health III":
+					if (game.getCurrentShop().getHealingStockLevel()[2] > 0) {
+						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(2));
+						game.getCurrentShop().getHealingStockLevel()[2] -= 1;
+						HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Iron Flesh I":
+					if (game.getCurrentShop().getPowerUpStockLevel()[0] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(0));
+						game.getCurrentShop().getPowerUpStockLevel()[0] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Iron Flesh II":
+					if (game.getCurrentShop().getPowerUpStockLevel()[1] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(1));
+						game.getCurrentShop().getPowerUpStockLevel()[1] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Iron Flesh III":
+					if (game.getCurrentShop().getPowerUpStockLevel()[2] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(2));
+						game.getCurrentShop().getPowerUpStockLevel()[2] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Silver Tongue I":
+					if (game.getCurrentShop().getPowerUpStockLevel()[3] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(3));
+						game.getCurrentShop().getPowerUpStockLevel()[3] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Silver Tongue II":
+					if (game.getCurrentShop().getPowerUpStockLevel()[4] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(4));
+						game.getCurrentShop().getPowerUpStockLevel()[4] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				case "Silver Tongue III":
+					if (game.getCurrentShop().getPowerUpStockLevel()[5] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(5));
+						game.getCurrentShop().getPowerUpStockLevel()[5] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
+					break;
+				case "Augment Vitality I":
+					if (game.getCurrentShop().getPowerUpStockLevel()[6] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(6));
+						game.getCurrentShop().getPowerUpStockLevel()[6] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
+					break;
+				case "Augment Vitality II":
+					if (game.getCurrentShop().getPowerUpStockLevel()[7] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(7));
+						game.getCurrentShop().getPowerUpStockLevel()[7] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
+					break;
+				case "Augment Vitality III":
+					if (game.getCurrentShop().getPowerUpStockLevel()[8] > 0) {
+						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(8));
+						game.getCurrentShop().getPowerUpStockLevel()[8] -= 1;
+						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
 					break;
 				}
 			}
 		});
-		purchaseButton.setBounds(229, 415, 178, 154);
+		purchaseButton.setBounds(229, 515, 178, 70);
 		frame.getContentPane().add(purchaseButton);
 		
-		JLabel lblSelectedItem = new JLabel("Selected Item");
-		lblSelectedItem.setBounds(54, 403, 104, 15);
-		frame.getContentPane().add(lblSelectedItem);
+		
+		
+		
 		
 
 		
