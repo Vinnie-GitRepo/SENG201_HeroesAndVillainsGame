@@ -14,7 +14,11 @@ public class gameEnvironmentGuiRunTime {
 	
 	public ArrayList<Villian> villians = new ArrayList<Villian>();
 	
+	public ArrayList<shop> shops = new ArrayList<shop>();
+	
 	public int currentHero;
+	
+	public shop currentShop;
 	
 	public Villian currentVillian;
 	
@@ -38,6 +42,15 @@ public class gameEnvironmentGuiRunTime {
 	
 	public Villian getCurrentVillian() {
 		return currentVillian;
+	}
+	
+	public void setCurrentShop(int num) {
+		currentShop = shops.get(num);
+	}
+	
+	
+	public shop getCurrentShop() {
+		return currentShop;
 	}
 	
 	public ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
@@ -239,6 +252,10 @@ public class gameEnvironmentGuiRunTime {
 	
 	public void setThingsUp(int num) {
 		team = new Team();
+		for (int i = 0; i < num; i++) {
+			shop newShop = new shop();
+			shops.add(newShop);
+		}
 	}
 	
 	/**

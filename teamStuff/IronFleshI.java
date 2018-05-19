@@ -16,4 +16,5 @@ public class IronFleshI extends PowerUp {
 	public IronFleshI() {
 		super("Iron Flesh I", "Armor boost", 5, 15);
 	}
+
 }
