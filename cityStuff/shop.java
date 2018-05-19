@@ -13,16 +13,38 @@ public class shop extends baseCamp {
 	public Integer[] getHealingStockLevel() {
 		return healingStockLevel;
 	}
-	public RestoreHealthI I = new RestoreHealthI();
-	public RestoreHealthII II = new RestoreHealthII();
-	public RestoreHealthIII III = new RestoreHealthIII();
-	
+//	public RestoreHealthI I = new RestoreHealthI();
+//	public RestoreHealthII II = new RestoreHealthII();
+//	public RestoreHealthIII III = new RestoreHealthIII();
+	public ArrayList<HealingItem> getHealingItems(){
+		return healingItems;
+	}
 	public ArrayList<HealingItem> healingItems = new ArrayList<HealingItem>(){{
-		add(I);
-		add(II);
-		add(III);
+		add(new RestoreHealthI());
+		add(new RestoreHealthII());
+		add(new RestoreHealthIII());
 		}};
 	
+		
+		public Integer[] powerUpStockLevel = {9,8,7,6,5,4,3,2,1};
+		public Integer[] getPowerUpStockLevel() {
+			return powerUpStockLevel;
+		}
+
+		public ArrayList<PowerUp> getPowerUpItems(){
+			return getPowerUpItems;
+		}
+		public ArrayList<PowerUp> getPowerUpItems = new ArrayList<PowerUp>(){{
+			add(new IronFleshI());
+			add(new IronFleshII());
+			add(new IronFleshIII());
+			add(new AugmentVitalityI());
+			add(new AugmentVitalityII());
+			add(new AugmentVitalityIII());
+			add(new SilverTongueI());
+			add(new SilverTongueII());
+			add(new SilverTongueIII());
+			}};
 	/*public static ArrayList<Integer> healingStockLevel = new ArrayList<Integer>() 
 	{{
 	add(5);
@@ -30,22 +52,20 @@ public class shop extends baseCamp {
 	add(1);
 	}};*/
 	
-	public ArrayList<HealingItem> getHealingItems(){
-		return healingItems;
-	}
+	
 		
-	public Integer[] 	powerUpPrice 	= 	{5,15,30};
-	
-	//public String[] 	powerUpItems 	= 	{"Augment Vitality","Iron Flesh", "Silver Tongue"};
-	
-	public ArrayList<PowerUp> powerUpItems = new ArrayList<PowerUp>();
-	
-	public static ArrayList<Integer> powerUpStockLevel = new ArrayList<Integer>() 
-	{{
-	add(5);
-	add(3);
-	add(1);
-	}};
+//	public Integer[] 	powerUpPrice 	= 	{5,15,30};
+//	
+//	//public String[] 	powerUpItems 	= 	{"Augment Vitality","Iron Flesh", "Silver Tongue"};
+//	
+//	public ArrayList<PowerUp> powerUpItems = new ArrayList<PowerUp>();
+//	
+//	public static ArrayList<Integer> powerUpStockLevel = new ArrayList<Integer>() 
+//	{{
+//	add(5);
+//	add(3);
+//	add(1);
+//	}};
 	
 	public Team currentTeam;
 	

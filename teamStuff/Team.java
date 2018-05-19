@@ -95,19 +95,31 @@ public class Team {
 
 	
 	
+	public String viewInventory() {
+		String words = "HEALING ITEMS\n";
+		for (HealingItem item : healingItems) {
+			words = words + item.getHealingItemName() + "\n";
+		}
+		words = words + "\nPOWER UP ITEMS\n";
+		for (PowerUp item : powerUps) {
+			words = words + item.getPowerUpName() + "\n";
+		}
+		return words;
+	}
+	
 	
 	/**
 	 * Constructor for the Team Class
 	 */
 	public Team() {
 
-//		chooseTeamSize();		// Determines the size of the heroArray of the team
-//		fillHeroArray();		// Lets you select and name heroes for your team
-//		nameTeam();				// Lets you name your team of heroes
-//		
-//		setBarterSkillSum();	//-------------------------------------
-//		setDeterrenceSum();		// Setters based on the heroes selected
-//		setFameSum();			//-------------------------------------
+		chooseTeamSize();		// Determines the size of the heroArray of the team
+		fillHeroArray();		// Lets you select and name heroes for your team
+		nameTeam();				// Lets you name your team of heroes
+		
+		setBarterSkillSum();	//-------------------------------------
+		setDeterrenceSum();		// Setters based on the heroes selected
+		setFameSum();			//-------------------------------------
 	}
 	
 	
@@ -364,6 +376,7 @@ public class Team {
 	 */
 	public void displayInventory() {
 		//ArrayList<Consumable> items = new ArrayList<Consumable>();
+		String stuff = "";
 		if (workingInventory.size() > 0) {
 			/*for (Consumable item : workingInventory) {
 				if (!items.contains(item)) {
@@ -375,7 +388,8 @@ public class Team {
 				System.out.println(items.get(i) + "(" + itemFrequency + ")"); 
 			}*/
 			for(String item : displayInventory) {
-				System.out.println(item);
+				//System.out.println(item);
+				stuff = stuff + item.toString() + "\n";
 			}
 			
 		}
