@@ -32,6 +32,7 @@ import java.awt.Color;
 public class gameEnvGui {
 	public static int citiesFinished = 0;
 	public static int numOfGuesses = 0;
+	public static int numOfHeroes;
 	public static int vill;
 	public gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
 	private JFrame frame;
@@ -66,7 +67,12 @@ public class gameEnvGui {
 //		diceRollPanel();
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
+<<<<<<< HEAD
 		teamInitializerPanel();
+=======
+//		teamInitializerPanel();
+//		shopPanel();
+>>>>>>> 52b36cea84c197f7b20490e4903a1ec88293e2d5
 	}
 
 	/**
@@ -78,6 +84,8 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		
 		
 
 		
@@ -119,8 +127,17 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				if (btnNorth.getText() == "Lair") {
-					villiansLairPanel();
+				switch(btnNorth.getText()) {
+					case "Lair":
+						villiansLairPanel();
+						break;
+					case "Shop":
+						shopPanel();
+						break;
+					case "Power Up Den":
+						break;
+					case "Hospital":
+						break;
 				}
 			}
 		});
@@ -132,8 +149,17 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				if (btnEast.getText() == "Lair") {
-					villiansLairPanel();
+				switch(btnEast.getText()) {
+					case "Lair":
+						villiansLairPanel();
+						break;
+					case "Shop":
+						shopPanel();
+						break;
+					case "Power Up Den":
+						break;
+					case "Hospital":
+						break;
 				}
 			}
 		});
@@ -145,9 +171,21 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				if (btnSouth.getText() == "Lair") {
-					villiansLairPanel();
+				switch(btnSouth.getText()) {
+					case "Lair":
+						villiansLairPanel();
+						break;
+					case "Shop":
+						shopPanel();
+						break;
+					case "Power Up Den":
+						break;
+					case "Hospital":
+						break;
 				}
+//				if (btnSouth.getText() == "Lair") {
+//					villiansLairPanel();
+//				} 
 			}
 		});
 		btnSouth.setBounds(405, 385, 117, 25);
@@ -158,8 +196,17 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				if (btnWest.getText() == "Lair") {
-					villiansLairPanel();
+				switch(btnWest.getText()) {
+					case "Lair":
+						villiansLairPanel();
+						break;
+					case "Shop":
+						shopPanel();
+						break;
+					case "Power Up Den":
+						break;
+					case "Hospital":
+						break;
 				}
 			}
 		});
@@ -179,6 +226,11 @@ public class gameEnvGui {
 		comboBox.setBounds(419, 151, 61, 24);
 		frame.getContentPane().add(comboBox);
 		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		comboBox_1.setBounds(419, 249, 61, 24);
+		frame.getContentPane().add(comboBox_1);
+		
 		JButton btnNewButton = new JButton("Confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -189,6 +241,12 @@ public class gameEnvGui {
 				} catch (Exception lala) {
 					num = 3;
 				}
+				String k = (String)comboBox_1.getSelectedItem();
+				try {
+					numOfHeroes = Integer.parseInt(k);
+				} catch (Exception lala) {
+					numOfHeroes = 1;
+				}
 //				JOptionPane.showMessageDialog(null, i);
 				game.setNumOfCities(num);
 				game.generateVillians(num);
@@ -198,14 +256,22 @@ public class gameEnvGui {
 					ArrayList<String> map = game.generateLayout();
 					game.addBaseCamp(map);
 				}
+				game.setCurrentShop(0);
 				//JOptionPane.showMessageDialog(null, game.num_of_cities);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				baseCampPanel();
+//				teamInitializerPanel();//for vinnie test
 			}
 		});
-		btnNewButton.setBounds(363, 229, 171, 86);
+		btnNewButton.setBounds(363, 321, 171, 86);
 		frame.getContentPane().add(btnNewButton);
+		
+		JLabel lblHowManyHeroes = new JLabel("How Many Heroes Would You LIke ");
+		lblHowManyHeroes.setBounds(310, 197, 412, 15);
+		frame.getContentPane().add(lblHowManyHeroes);
+		
+		
 	}
 	
 	
@@ -636,6 +702,152 @@ public class gameEnvGui {
 		
 	}
 	
+	
+	private void shopPanel() {
+		JLabel lblTeamsCurrentInventory = new JLabel("Teams Current Inventory");
+		lblTeamsCurrentInventory.setBounds(372, 12, 238, 15);
+		frame.getContentPane().add(lblTeamsCurrentInventory);
+		
+		JLabel itemName = new JLabel("Selected Item Name");
+		itemName.setBounds(46, 449, 135, 15);
+		frame.getContentPane().add(itemName);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.setBounds(527, 415, 178, 154);
+		frame.getContentPane().add(btnExit);
+		
+		JLabel lblAvailableHealingItems = new JLabel("Available Healing Items");
+		lblAvailableHealingItems.setBounds(372, 83, 238, 15);
+		frame.getContentPane().add(lblAvailableHealingItems);
+		
+		JLabel lblAvailablePowerUps = new JLabel("Available Power Ups");
+		lblAvailablePowerUps.setBounds(372, 223, 238, 15);
+		frame.getContentPane().add(lblAvailablePowerUps);
+		
+		JButton health1 = new JButton("r1");
+		health1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getHealingItems().get(0).getHealingItemName());
+			}
+		});
+		health1.setBounds(192, 104, 104, 70);
+		frame.getContentPane().add(health1);
+		health1.setText(game.getCurrentShop().getHealingItems().get(0).getHealingItemName());
+		
+		JButton health2 = new JButton("r2");
+		health2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
+			}
+		});
+		health2.setBounds(406, 104, 104, 70);
+		frame.getContentPane().add(health2);
+		health2.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
+		
+		JButton health3 = new JButton("r3");
+		health3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemName.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
+			}
+		});
+		health3.setBounds(640, 104, 104, 70);
+		frame.getContentPane().add(health3);
+		health3.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
+		
+		JButton powerUp1 = new JButton("p1");
+		powerUp1.setBounds(66, 263, 104, 70);
+		frame.getContentPane().add(powerUp1);
+		
+		JButton powerUp2 = new JButton("p2");
+		powerUp2.setBounds(202, 263, 104, 70);
+		frame.getContentPane().add(powerUp2);
+		
+		JButton powerUp3 = new JButton("p3");
+		powerUp3.setBounds(337, 263, 104, 70);
+		frame.getContentPane().add(powerUp3);
+		
+		JButton powerUp4 = new JButton("p4");
+		powerUp4.setBounds(469, 263, 104, 70);
+		frame.getContentPane().add(powerUp4);
+		
+		JButton powerUp5 = new JButton("p5");
+		powerUp5.setBounds(601, 263, 104, 70);
+		frame.getContentPane().add(powerUp5);
+		
+		JButton powerUp6 = new JButton("p6");
+		powerUp6.setBounds(731, 263, 104, 70);
+		frame.getContentPane().add(powerUp6);
+		
+		ButtonGroup itemsToChoose = new ButtonGroup();
+		itemsToChoose.add(health1);
+		itemsToChoose.add(health2);
+		itemsToChoose.add(health3);
+		itemsToChoose.add(powerUp1);
+		itemsToChoose.add(powerUp2);
+		itemsToChoose.add(powerUp3);
+		itemsToChoose.add(powerUp4);
+		itemsToChoose.add(powerUp5);
+		itemsToChoose.add(powerUp6);
+		
+		
+		
+		JLabel lblRstock = new JLabel("r1Stock");
+		lblRstock.setBounds(215, 186, 70, 15);
+		frame.getContentPane().add(lblRstock);
+		lblRstock.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
+		
+		JLabel label = new JLabel("r1Stock");
+		label.setBounds(427, 186, 70, 15);
+		frame.getContentPane().add(label);
+		label.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
+		
+		JLabel label_1 = new JLabel("r1Stock");
+		label_1.setBounds(674, 186, 70, 15);
+		frame.getContentPane().add(label_1);
+		label_1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
+		
+		
+		JButton purchaseButton = new JButton("Purchase Selected Item");
+		purchaseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switch(itemName.getText()) {
+				case "Restore Health I":
+					if (game.getCurrentShop().getHealingStockLevel()[0] > 0) {
+						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(0));
+						game.getCurrentShop().getHealingStockLevel()[0] -= 1;
+					} else {
+						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+					}
+					break;
+				case "Restore Health II":
+					break;
+				case "Restore Health III":
+					break;
+				case "Iron Flesh I":
+					break;
+				case "Iron Flesh II":
+					break;
+				case "Iron Flesh III":
+					break;
+				case "Silver Tongue I":
+					break;
+				case "Silver Tongue II":
+					break;
+				case "Silver Tongue III":
+					break;
+				}
+			}
+		});
+		purchaseButton.setBounds(229, 415, 178, 154);
+		frame.getContentPane().add(purchaseButton);
+		
+		JLabel lblSelectedItem = new JLabel("Selected Item");
+		lblSelectedItem.setBounds(54, 403, 104, 15);
+		frame.getContentPane().add(lblSelectedItem);
+		
+
+		
+	}
 	
 	private void paperScissorsRockPanel() {
 //		ArrayList<String> villianOptions = new ArrayList<String>();
