@@ -113,9 +113,9 @@ public class Team {
 	 */
 	public Team() {
 
-		chooseTeamSize();		// Determines the size of the heroArray of the team
-		fillHeroArray();		// Lets you select and name heroes for your team
-		nameTeam();				// Lets you name your team of heroes
+		//chooseTeamSize();		// Determines the size of the heroArray of the team
+		//fillHeroArray();		// Lets you select and name heroes for your team
+		//nameTeam();				// Lets you name your team of heroes
 		
 		setBarterSkillSum();	//-------------------------------------
 		setDeterrenceSum();		// Setters based on the heroes selected
@@ -403,9 +403,17 @@ public class Team {
 	//                   [GETTERS]
 	//------------------------------------------------
 	
+	/**
+	 * @return teamName
+	 */
+	public String getName() {
+		return teamName;
+	}
+	
+	
 	
 	/**
-	 * @return money attribute
+	 * @return money 
 	 */
 	public int getMoney() {
 		return money;
@@ -432,11 +440,7 @@ public class Team {
 	
 	
 	/**
-	 * @return deterrenceSumpublic void useConsumable(Consumable item) { 
-
-		item.apply(this);
-		Team.removeItem(item);
-	}
+	 * @return deterrenceSum
 	 */
 	public int getDeterrenceSum() {
 		return deterrenceSum;
@@ -507,7 +511,21 @@ public class Team {
 	
 	
 	
+	/**
+	 * Sets the name for the team.<br>
+	 * Is called when submitting a name of valid length into the teamNameEntryBox
+	 * @param name
+	 */
+	public void nameTeam(String name) {
+		teamName = name;
+	}
 	
+	
+	
+	/**
+	 * Adds a hero to the team's heroArray.
+	 * @param hero
+	 */
 	public void addHero(Hero hero) {
 		heroArray.add(hero);
 	}
