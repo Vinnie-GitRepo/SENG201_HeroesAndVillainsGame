@@ -227,7 +227,7 @@ public class gameEnvironmentGuiRunTime {
 	public ArrayList<String> generateLayout() {
 		ArrayList<String> options = new ArrayList<String>()
 		{{add("Shop");
-		add("PowerUpDen");
+		add("Power Up Den");
 		add("Hospital");
 		add("Lair");
 		}};

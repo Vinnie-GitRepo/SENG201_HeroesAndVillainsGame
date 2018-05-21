@@ -5,14 +5,18 @@ public class Villian {
 	public int lossCount = 0;
 	public boolean defeated = false;
 	public String battleCry;
-	public boolean switchGame;
+	public boolean favGame;
 	
-	public Villian(String Name, String BattleCry, boolean Switch) {
+	public Villian(String Name, String BattleCry, boolean Fav) {
 		name = Name;
 		battleCry = BattleCry;
-		switchGame = Switch;
+		favGame = Fav;
 	}
 	
+	
+	public boolean hasFavGame() {
+		return favGame;
+	}
 	public void oneDefeat() {
 		lossCount += 1;
 	}
