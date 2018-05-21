@@ -40,16 +40,9 @@ public class gameEnvGui {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
-
 	private JTextField teamNameEntryBox;
-
-<<<<<<< HEAD
-
 	private Timer timer = new Timer();
-	
-=======
-	private Timer timer = new Timer();
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
+//	private Timer timer = new Timer();
 
 	/**
 	 * Launch the application.
@@ -72,29 +65,23 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-<<<<<<< HEAD
 		cityAmmountPanel();//change to team set up later
 //		teamInitializerPanel();
 //		teamNamePanel();
-=======
 //		cityAmmountPanel();//change to team set up later
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
 //		baseCampPanel();
 //		villiansLairPanel();
 //		battleSelectionPanel();
 //		diceRollPanel();
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
-<<<<<<< HEAD
 //		shopPanel();
 //		hospitalPanel();
-=======
 //		teamInitializerPanel();
-		shopPanel();
+//		shopPanel();
 //		teamNamePanel();
 //		hospitalPanel();
 //		powerUpDenPanel();
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
 
 
 	}
@@ -108,10 +95,6 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
 	}
 	
 	
@@ -177,13 +160,6 @@ public class gameEnvGui {
 		});
 		btnSubmitTeamName.setBounds(371, 318, 177, 25);
 		frame.getContentPane().add(btnSubmitTeamName);
-<<<<<<< HEAD
-		
-		
-		
-
-=======
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
 	}
 	private void baseCampPanel() {
 		frame.getContentPane().setLayout(null);
@@ -208,6 +184,7 @@ public class gameEnvGui {
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				game.makeAllUnfound();
 				citiesFinished += 1;
 				game.setCurrentShop(citiesFinished);
 				frame.getContentPane().removeAll();
@@ -221,6 +198,9 @@ public class gameEnvGui {
 		JButton btnNorth = new JButton("North");
 		btnNorth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+//				btnNorth.setText(game.getMapPlace(0));
+				btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));
+				game.setFoundPlaceTrue(0);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				switch(btnNorth.getText()) {
@@ -241,10 +221,13 @@ public class gameEnvGui {
 		});
 		btnNorth.setBounds(405, 43, 117, 25);
 		frame.getContentPane().add(btnNorth);
-		btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));
+		btnNorth.setText(game.getMapPlace(0,citiesFinished));
+//		btnNorth.setText("???");
 		JButton btnEast = new JButton("East");
 		btnEast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
+				game.setFoundPlaceTrue(1);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				switch(btnEast.getText()) {
@@ -265,10 +248,13 @@ public class gameEnvGui {
 		});
 		btnEast.setBounds(737, 212, 117, 25);
 		frame.getContentPane().add(btnEast);
-		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
+		btnEast.setText(game.getMapPlace(1,citiesFinished));
+//		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
 		JButton btnSouth = new JButton("South");
 		btnSouth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
+				game.setFoundPlaceTrue(2);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				switch(btnSouth.getText()) {
@@ -292,10 +278,13 @@ public class gameEnvGui {
 		});
 		btnSouth.setBounds(405, 385, 117, 25);
 		frame.getContentPane().add(btnSouth);
-		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
+		btnSouth.setText(game.getMapPlace(2,citiesFinished));
+//		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
 		JButton btnWest = new JButton("West");
 		btnWest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnWest.setText(game.getCurrentMap(citiesFinished).get(3));
+				game.setFoundPlaceTrue(3);
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				switch(btnWest.getText()) {
@@ -316,7 +305,8 @@ public class gameEnvGui {
 		});
 		btnWest.setBounds(74, 212, 117, 25);
 		frame.getContentPane().add(btnWest);
-		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));
+		btnWest.setText(game.getMapPlace(3,citiesFinished));
+//		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));
 	}
 	
 	private void cityAmmountPanel() {
@@ -988,19 +978,16 @@ public class gameEnvGui {
 					frame.getContentPane().removeAll();
 					frame.repaint();
 					hospitalPanel();
-<<<<<<< HEAD
 					//timer.setVisible(true);
 //					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 0) {
 ////						JOptionPane.showMessageDialog(null, game.getTeam().getHealingItems().get(count).getTimeRemaining());
 //					}
-=======
-					timer.setVisible(true);				
+//					timer.setVisible(true);				
 					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 110) {
 //						JOptionPane.showMessageDialog(null, game.getTeam().getHealingItems().get(count).getTimeRemaining());
 					}
 					JOptionPane.showMessageDialog(null, "got out of loop");
-					timer.setVisible(false);
->>>>>>> 4a4bf9ed97c8e21f118ef0ec831afd77dba0f9b6
+//					timer.setVisible(false);
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "YOU DONT HAVE THIS ITEM!");

@@ -10,20 +10,49 @@ import villianStuff.Villian;
 
 public class gameEnvironmentGuiRunTime {
 	
+	public static boolean[] foundPlaces = {false, false, false, false};
 	
+	public static ArrayList<Villian> villians = new ArrayList<Villian>();
 	
-	public ArrayList<Villian> villians = new ArrayList<Villian>();
+	public static ArrayList<shop> shops = new ArrayList<shop>();
 	
-	public ArrayList<shop> shops = new ArrayList<shop>();
+	public static int currentHero;
 	
-	public int currentHero;
+	public static ArrayList<String> thisMap;
 	
-	public shop currentShop;
+	public static shop currentShop;
 	
-	public Villian currentVillian;
+	public static Villian currentVillian;
+	
+	public void makeAllUnfound() {
+		foundPlaces[0] = false;
+		foundPlaces[1] = false;
+		foundPlaces[2] = false;
+		foundPlaces[3] = false;
+	}
+	
+	public void setFoundPlaceTrue(int num) {
+		foundPlaces[num] = true;
+	}
+	
+	public String getMapPlace(int num, int city) {
+//		System.out.println(num);
+//		System.out.println(foundPlaces[num]);
+		if (foundPlaces[num] == true) {
+			return baseCamps.get(city).getMap().get(num);
+		} else {
+			//foundPlaces[num] = true;
+			return "???";
+		}
+//		return "ga";
+	}
 	
 	public ArrayList<String> getCurrentMap(int num){
 		return baseCamps.get(num).getMap();
+	}
+	
+	public boolean[] getFoundPlaces() {
+		return foundPlaces;
 	}
 	
 	public void setCurrentHero(int num) {
