@@ -30,6 +30,8 @@ import java.awt.Image;
 import java.awt.Color;
 
 public class gameEnvGui {
+	public static int buyingItem;
+	public static String buyingType;
 	public static String selectedHealingItem;
 	public static String selectedPowerUp;
 	public static int citiesFinished = 0;
@@ -83,6 +85,7 @@ public class gameEnvGui {
 //		teamNamePanel();
 //		hospitalPanel();
 //		powerUpDenPanel();
+//		villianBeatPanel();
 
 
 	}
@@ -185,7 +188,9 @@ public class gameEnvGui {
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.makeAllUnfound();
+				if (!game.hasMap) {
+					game.makeAllUnfound();
+				}
 				citiesFinished += 1;
 				game.setCurrentShop(citiesFinished);
 				frame.getContentPane().removeAll();
@@ -222,8 +227,8 @@ public class gameEnvGui {
 		});
 		btnNorth.setBounds(405, 43, 117, 25);
 		frame.getContentPane().add(btnNorth);
-//		btnNorth.setText(game.getMapPlace(0,citiesFinished));//this is the correct one
-		btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));//this is used for testing
+		btnNorth.setText(game.getMapPlace(0,citiesFinished));//this is the correct one
+//		btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));//this is used for testing
 //		btnNorth.setText("???");
 		JButton btnEast = new JButton("East");
 		btnEast.addActionListener(new ActionListener() {
@@ -250,8 +255,8 @@ public class gameEnvGui {
 		});
 		btnEast.setBounds(737, 212, 117, 25);
 		frame.getContentPane().add(btnEast);
-//		btnEast.setText(game.getMapPlace(1,citiesFinished));//this is the correct one
-		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));//test one
+		btnEast.setText(game.getMapPlace(1,citiesFinished));//this is the correct one
+//		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));//test one
 //		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
 		JButton btnSouth = new JButton("South");
 		btnSouth.addActionListener(new ActionListener() {
@@ -281,8 +286,8 @@ public class gameEnvGui {
 		});
 		btnSouth.setBounds(405, 385, 117, 25);
 		frame.getContentPane().add(btnSouth);
-//		btnSouth.setText(game.getMapPlace(2,citiesFinished));//correct one
-		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));//testone
+		btnSouth.setText(game.getMapPlace(2,citiesFinished));//correct one
+//		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));//testone
 //		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
 		JButton btnWest = new JButton("West");
 		btnWest.addActionListener(new ActionListener() {
@@ -309,8 +314,8 @@ public class gameEnvGui {
 		});
 		btnWest.setBounds(74, 212, 117, 25);
 		frame.getContentPane().add(btnWest);
-//		btnWest.setText(game.getMapPlace(3,citiesFinished));//correct one
-		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));//test one
+		btnWest.setText(game.getMapPlace(3,citiesFinished));//correct one
+//		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));//test one
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/team.gif")).getImage().getScaledInstance(553, 376, Image.SCALE_SMOOTH)));
@@ -551,14 +556,9 @@ public class gameEnvGui {
 					game.getCurrentVillian().oneDefeat();
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
-						game.makeAllUnfound();
-						citiesFinished += 1;
 						frame.getContentPane().removeAll();
 						frame.repaint();
-						//game.setCurrentHero(citiesFinished);
-						game.setCurrentVillian(citiesFinished);
-						baseCampPanel();
+						villianBeatPanel();
 					}
 				} else if (hero < vill) {
 					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
@@ -756,14 +756,9 @@ public class gameEnvGui {
 					vill = numberGuess.getVillianChoice();
 					lblNewLabel.setText(Integer.toString(vill));
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
-						game.makeAllUnfound();
-						citiesFinished += 1;
 						frame.getContentPane().removeAll();
 						frame.repaint();
-//						game.setCurrentHero(citiesFinished);
-						game.setCurrentVillian(citiesFinished);
-						baseCampPanel();
+						villianBeatPanel();
 					}
 				} else {
 					vill = numberGuess.getVillianChoice();
@@ -1034,7 +1029,7 @@ public class gameEnvGui {
 		
 		//itemName.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		JLabel itemImg = new JLabel("Selected Item Name");
-		itemImg.setBounds(35, 515, 53, 51);
+		itemImg.setBounds(55, 515, 53, 51);
 		frame.getContentPane().add(itemImg);
 		itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
@@ -1054,7 +1049,7 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblAvailableHealingItems);
 		
 		JLabel lblAvailablePowerUps = new JLabel("Available Power Ups");
-		lblAvailablePowerUps.setBounds(372, 223, 238, 15);
+		lblAvailablePowerUps.setBounds(372, 205, 238, 15);
 		frame.getContentPane().add(lblAvailablePowerUps);
 		
 		JButton health1 = new JButton("r1");
@@ -1101,7 +1096,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp1.setBounds(192, 297, 104, 23);
+		powerUp1.setBounds(192, 279, 104, 23);
 		frame.getContentPane().add(powerUp1);
 		powerUp1.setText(game.getCurrentShop().getPowerUpItems.get(0).getPowerUpName());
 		
@@ -1112,7 +1107,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp2.setBounds(407, 297, 104, 23);
+		powerUp2.setBounds(407, 279, 104, 23);
 		frame.getContentPane().add(powerUp2);
 		powerUp2.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
 		
@@ -1123,7 +1118,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp3.setBounds(640, 297, 104, 22);
+		powerUp3.setBounds(640, 279, 104, 22);
 		frame.getContentPane().add(powerUp3);
 		powerUp3.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
 		
@@ -1134,7 +1129,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp4.setBounds(192, 379, 104, 23);
+		powerUp4.setBounds(192, 372, 104, 23);
 		frame.getContentPane().add(powerUp4);
 		powerUp4.setText(game.getCurrentShop().getPowerUpItems.get(3).getPowerUpName());
 		
@@ -1145,7 +1140,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp5.setBounds(407, 379, 104, 23);
+		powerUp5.setBounds(407, 372, 104, 23);
 		frame.getContentPane().add(powerUp5);
 		powerUp5.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
 		
@@ -1156,7 +1151,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp6.setBounds(640, 378, 104, 23);
+		powerUp6.setBounds(640, 371, 104, 23);
 		frame.getContentPane().add(powerUp6);
 		powerUp6.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
 		
@@ -1233,32 +1228,32 @@ public class gameEnvGui {
 		HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
 		
 		JLabel PUP1 = new JLabel("null");
-		PUP1.setBounds(314, 278, 70, 15);
+		PUP1.setBounds(314, 260, 70, 15);
 		frame.getContentPane().add(PUP1);
 		PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
 		
 		JLabel PUP2 = new JLabel("null");
-		PUP2.setBounds(529, 278, 70, 15);
+		PUP2.setBounds(529, 260, 70, 15);
 		frame.getContentPane().add(PUP2);
 		PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
 		
 		JLabel PUP3 = new JLabel("null");
-		PUP3.setBounds(762, 278, 70, 15);
+		PUP3.setBounds(762, 260, 70, 15);
 		frame.getContentPane().add(PUP3);
 		PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
 		
 		JLabel PUP4 = new JLabel("null");
-		PUP4.setBounds(314, 360, 70, 15);
+		PUP4.setBounds(314, 353, 70, 15);
 		frame.getContentPane().add(PUP4);
 		PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
 		
 		JLabel PUP5 = new JLabel("null");
-		PUP5.setBounds(529, 360, 70, 15);
+		PUP5.setBounds(529, 353, 70, 15);
 		frame.getContentPane().add(PUP5);
 		PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
 		
 		JLabel PUP6 = new JLabel("null");
-		PUP6.setBounds(762, 360, 70, 15);
+		PUP6.setBounds(762, 353, 70, 15);
 		frame.getContentPane().add(PUP6);
 		PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
 		
@@ -1283,114 +1278,186 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				switch(itemName.getText()) {
 				case "Restore Health I":
-					if (game.getCurrentShop().getHealingStockLevel()[0] > 0) {
-						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(0));
-						game.getCurrentShop().getHealingStockLevel()[0] -= 1;
-						HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 0;
+					buyingType = "Healing Potion";
+//					if (game.getCurrentShop().getHealingStockLevel()[0] > 0) {
+//						if (game.getTeam().getMoney() > game.getCurrentShop().getHealingItems().get(0).getHealingItemPrice()) {
+//							game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(0));
+//							game.getCurrentShop().getHealingStockLevel()[0] -= 1;
+//							HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
+//							game.getTeam().addMoney(-game.getCurrentShop().getHealingItems().get(0).getHealingItemPrice());
+//						} else {
+//							JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
+//						}
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Restore Health II":
-					if (game.getCurrentShop().getHealingStockLevel()[1] > 0) {
-						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(1));
-						game.getCurrentShop().getHealingStockLevel()[1] -= 1;
-						HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 1;
+					buyingType = "Healing Potion";
+//					if (game.getCurrentShop().getHealingStockLevel()[1] > 0) {
+//						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(1));
+//						game.getCurrentShop().getHealingStockLevel()[1] -= 1;
+//						HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Restore Health III":
-					if (game.getCurrentShop().getHealingStockLevel()[2] > 0) {
-						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(2));
-						game.getCurrentShop().getHealingStockLevel()[2] -= 1;
-						HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 2;
+					buyingType = "Healing Potion";
+//					if (game.getCurrentShop().getHealingStockLevel()[2] > 0) {
+//						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(2));
+//						game.getCurrentShop().getHealingStockLevel()[2] -= 1;
+//						HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Iron Flesh I":
-					if (game.getCurrentShop().getPowerUpStockLevel()[0] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(0));
-						game.getCurrentShop().getPowerUpStockLevel()[0] -= 1;
-						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 0;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[0] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(0));
+//						game.getCurrentShop().getPowerUpStockLevel()[0] -= 1;
+//						PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Iron Flesh II":
-					if (game.getCurrentShop().getPowerUpStockLevel()[1] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(1));
-						game.getCurrentShop().getPowerUpStockLevel()[1] -= 1;
-						PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 1;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[1] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(1));
+//						game.getCurrentShop().getPowerUpStockLevel()[1] -= 1;
+//						PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Iron Flesh III":
-					if (game.getCurrentShop().getPowerUpStockLevel()[2] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(2));
-						game.getCurrentShop().getPowerUpStockLevel()[2] -= 1;
-						PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 2;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[2] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(2));
+//						game.getCurrentShop().getPowerUpStockLevel()[2] -= 1;
+//						PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Augment Vitality I":
-					if (game.getCurrentShop().getPowerUpStockLevel()[3] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(3));
-						game.getCurrentShop().getPowerUpStockLevel()[3] -= 1;
-						PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 3;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[3] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(3));
+//						game.getCurrentShop().getPowerUpStockLevel()[3] -= 1;
+//						PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Augment Vitality II":
-					if (game.getCurrentShop().getPowerUpStockLevel()[4] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(4));
-						game.getCurrentShop().getPowerUpStockLevel()[4] -= 1;
-						PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 4;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[4] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(4));
+//						game.getCurrentShop().getPowerUpStockLevel()[4] -= 1;
+//						PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Augment Vitality III":
-					if (game.getCurrentShop().getPowerUpStockLevel()[5] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(5));
-						game.getCurrentShop().getPowerUpStockLevel()[5] -= 1;
-						PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 5;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[5] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(5));
+//						game.getCurrentShop().getPowerUpStockLevel()[5] -= 1;
+//						PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Silver Tongue I":
-					if (game.getCurrentShop().getPowerUpStockLevel()[6] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(6));
-						game.getCurrentShop().getPowerUpStockLevel()[6] -= 1;
-						PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 6;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[6] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(6));
+//						game.getCurrentShop().getPowerUpStockLevel()[6] -= 1;
+//						PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Silver Tongue II":
-					if (game.getCurrentShop().getPowerUpStockLevel()[7] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(7));
-						game.getCurrentShop().getPowerUpStockLevel()[7] -= 1;
-						PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
+					buyingItem = 7;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[7] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(7));
+//						game.getCurrentShop().getPowerUpStockLevel()[7] -= 1;
+//						PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
 					break;
 				case "Silver Tongue III":
-					if (game.getCurrentShop().getPowerUpStockLevel()[8] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(8));
-						game.getCurrentShop().getPowerUpStockLevel()[8] -= 1;
-						PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
+					buyingItem = 8;
+					buyingType = "Power Up";
+//					if (game.getCurrentShop().getPowerUpStockLevel()[8] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(8));
+//						game.getCurrentShop().getPowerUpStockLevel()[8] -= 1;
+//						PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
+					break;
+				default:
+					if (game.hasMap) {
+						JOptionPane.showMessageDialog(null, "ONLY SOMEONE TRULY LOST\nNEEDS MORE THAN ONE MAP");
+					} else {
+						JOptionPane.showMessageDialog(null, "WISE PURCHASE TRAVELLER");//CAUSE ITS A MAP
+					}
+					
+					buyingType = "Map";
+				}
+				if (buyingType == "Healing Potion") {
+				if (game.getCurrentShop().getHealingStockLevel()[buyingItem] > 0) {
+					if (game.getTeam().getMoney() > game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice()) {
+						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(buyingItem));
+						game.getCurrentShop().getHealingStockLevel()[buyingItem] -= 1;
+//						HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[buyingItem]));
+						game.getTeam().addMoney(-game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice());
+						JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemName());
+					} else {
+						JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+				}} else if (buyingType == "Power Up") {
+					if (game.getCurrentShop().getPowerUpStockLevel()[buyingItem] > 0) {
+						if (game.getTeam().getMoney() > game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice()) {
+							game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(buyingItem));
+							game.getCurrentShop().getPowerUpStockLevel()[buyingItem] -= 1;
+//							HIT1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[buyingItem]));
+							game.getTeam().addMoney(-game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice());
+							JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpName());
+						} else {
+							JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
+						}
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
-					break;
+				} else {
+					game.makeAllFound();
+					game.hasMap = true;
 				}
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				shopPanel();
+				
 			}
 		});
 		purchaseButton.setBounds(229, 515, 178, 70);
@@ -1412,32 +1479,32 @@ public class gameEnvGui {
 		frame.getContentPane().add(r3);
 		
 		JLabel p1 = new JLabel("New label");
-		p1.setBounds(216, 242, 53, 51);
+		p1.setBounds(216, 224, 53, 51);
 		frame.getContentPane().add(p1);
 		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p2 = new JLabel("New label");
-		p2.setBounds(434, 241, 46, 52);
+		p2.setBounds(434, 223, 46, 52);
 		frame.getContentPane().add(p2);
 		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p3 = new JLabel("New label");
-		p3.setBounds(668, 241, 46, 52);
+		p3.setBounds(668, 223, 46, 52);
 		frame.getContentPane().add(p3);
 		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p5 = new JLabel("New label");
-		p5.setBounds(434, 323, 46, 52);
+		p5.setBounds(434, 316, 46, 52);
 		frame.getContentPane().add(p5);
 		p5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p4 = new JLabel("New label");
-		p4.setBounds(216, 324, 53, 51);
+		p4.setBounds(216, 317, 53, 51);
 		frame.getContentPane().add(p4);
 		p4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p6 = new JLabel("New label");
-		p6.setBounds(668, 323, 46, 52);
+		p6.setBounds(668, 316, 46, 52);
 		frame.getContentPane().add(p6);
 		p6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
@@ -1455,6 +1522,24 @@ public class gameEnvGui {
 		p9.setBounds(668, 406, 46, 52);
 		frame.getContentPane().add(p9);
 		p9.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		JButton buyMap = new JButton("Map");
+		buyMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+			}
+		});
+		buyMap.setBounds(21, 297, 104, 23);
+		frame.getContentPane().add(buyMap);
+		
+		JLabel lblSpecialItems = new JLabel("Special Items");
+		lblSpecialItems.setBounds(45, 224, 117, 15);
+		frame.getContentPane().add(lblSpecialItems);
+		
+		JLabel mapLabel = new JLabel("New label");
+		mapLabel.setBounds(45, 242, 53, 51);
+		frame.getContentPane().add(mapLabel);
+		mapLabel.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		
 		
@@ -1593,14 +1678,9 @@ public class gameEnvGui {
 					game.getCurrentVillian().oneDefeat();
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
-						game.makeAllUnfound();
-						citiesFinished += 1;
 						frame.getContentPane().removeAll();
 						frame.repaint();
-						//game.setCurrentHero(citiesFinished);
-						game.setCurrentVillian(citiesFinished);
-						baseCampPanel();
+						villianBeatPanel();
 					}
 					break;
 				case "The Villian Has Won":
@@ -2206,5 +2286,33 @@ public class gameEnvGui {
 		
 		
 		
+	}
+	
+	private void villianBeatPanel() {
+		frame.getContentPane().setLayout(null);
+		JButton btnProceedToCamp = new JButton("PROCEED  TO  CAMP");
+		btnProceedToCamp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
+				game.makeAllUnfound();
+				citiesFinished += 1;
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				//game.setCurrentHero(citiesFinished);
+				game.setCurrentVillian(citiesFinished);
+				if (citiesFinished < game.getNumOfCities()) {
+					baseCampPanel();
+				} else {
+					finalVillianPanel();
+				}
+			}
+		});
+		btnProceedToCamp.setFont(new Font("Dialog", Font.BOLD, 22));
+		btnProceedToCamp.setBounds(287, 503, 339, 88);
+		frame.getContentPane().add(btnProceedToCamp);
+	}
+	
+	private void finalVillianPanel() {
+		frame.getContentPane().setLayout(null);
 	}
 }
