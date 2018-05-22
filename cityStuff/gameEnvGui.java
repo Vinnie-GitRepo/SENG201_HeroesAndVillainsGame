@@ -28,6 +28,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class gameEnvGui {
 	public static int buyingItem;
@@ -45,7 +47,7 @@ public class gameEnvGui {
 	private JTextField heroNameEntryBox;
 	private JTextField teamNameEntryBox;
 	private Timer timer = new Timer();
-//	private Timer timer = new Timer();
+
 
 	/**
 	 * Launch the application.
@@ -68,10 +70,9 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-//		cityAmmountPanel();//change to team set up later
-		teamInitializerPanel();
+		cityAmmountPanel();//change to team set up later
+//		teamInitializerPanel();
 //		teamNamePanel();
-//		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
 //		villiansLairPanel();
 //		battleSelectionPanel();
@@ -79,10 +80,6 @@ public class gameEnvGui {
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
 //		shopPanel();
-//		hospitalPanel();
-//		teamInitializerPanel();
-//		shopPanel();
-//		teamNamePanel();
 //		hospitalPanel();
 //		powerUpDenPanel();
 //		villianBeatPanel();
@@ -326,20 +323,25 @@ public class gameEnvGui {
 	private void cityAmmountPanel() {
 		frame.getContentPane().setLayout(null);
 		JLabel lblHowManyCities = new JLabel("How Many Cities Would You Like To Save?");
-		lblHowManyCities.setBounds(310, 84, 412, 15);
+		lblHowManyCities.setFont(new Font("Tahoma", Font.BOLD, 35));
+		lblHowManyCities.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHowManyCities.setBounds(10, 43, 914, 61);
 		frame.getContentPane().add(lblHowManyCities);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"3", "4", "5", "6"}));
-		comboBox.setBounds(419, 151, 61, 24);
+		comboBox.setBounds(419, 115, 50, 41);
 		frame.getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
-		comboBox_1.setBounds(419, 249, 61, 24);
+		comboBox_1.setBounds(419, 290, 50, 41);
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Confirm");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 30));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String i = (String)comboBox.getSelectedItem();
@@ -368,15 +370,16 @@ public class gameEnvGui {
 				//JOptionPane.showMessageDialog(null, game.num_of_cities);
 				frame.getContentPane().removeAll();
 				frame.repaint();
-//				baseCampPanel();
 				teamInitializerPanel();//for vinnie test
 			}
 		});
-		btnNewButton.setBounds(363, 321, 171, 86);
+		btnNewButton.setBounds(359, 405, 171, 86);
 		frame.getContentPane().add(btnNewButton);
 		
-		JLabel lblHowManyHeroes = new JLabel("How Many Heroes Would You LIke ");
-		lblHowManyHeroes.setBounds(310, 197, 412, 15);
+		JLabel lblHowManyHeroes = new JLabel("How Many Heroes Would You Like? ");
+		lblHowManyHeroes.setFont(new Font("Tahoma", Font.BOLD, 35));
+		lblHowManyHeroes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHowManyHeroes.setBounds(10, 238, 914, 41);
 		frame.getContentPane().add(lblHowManyHeroes);
 		
 		
@@ -2049,19 +2052,18 @@ public class gameEnvGui {
 	private void teamInitializerPanel() {
 		frame.getContentPane().setLayout(null);
 		
-		
 		JLabel lblNameHero = new JLabel("");
+		lblNameHero.setFont(new Font("Arial Black", Font.ITALIC, 18));
 		lblNameHero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNameHero.setBounds(10, 425, 914, 25);
+		lblNameHero.setBounds(10, 401, 914, 49);
 		frame.getContentPane().add(lblNameHero);
 		
-		
 		heroNameEntryBox = new JTextField(); 
-		heroNameEntryBox.setBounds(359, 462, 209, 31);
+		heroNameEntryBox.setHorizontalAlignment(SwingConstants.CENTER);
+		heroNameEntryBox.setBounds(360, 462, 208, 31);
 		frame.getContentPane().add(heroNameEntryBox);
 		heroNameEntryBox.setColumns(10);
 		heroNameEntryBox.setEnabled(false);
-		
 		
 		JLabel lblNameClashMessage = new JLabel("INVALID ENTRY: Another hero has taken this name; please enter a different name.");
 		lblNameClashMessage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2071,73 +2073,81 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblNameClashMessage);
 		lblNameClashMessage.setVisible(false);
 		
+		JButton btnAddToTeam = new JButton("");
+		btnAddToTeam.setForeground(new Color(255, 255, 255));
+		btnAddToTeam.setBackground(new Color(75, 0, 130));
 		
+		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 28));
+		btnAddToTeam.setBounds(360, 493, 208, 53);
+		frame.getContentPane().add(btnAddToTeam);
 		
-		JButton btnAddToTeam = new JButton("Add to team");
 		btnAddToTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(game.getHeroList().size() >= 1) {
-					boolean nameChecked = false;
-					String name = heroNameEntryBox.getText();
 					
-					for (int i = 0; i < game.getHeroList().size(); i++) {
-						if (name.equals(game.getHeroList().get(i).getName())) {
-							lblNameClashMessage.setVisible(true);
-							nameChecked = true;
-						}
-					}
+						boolean nameChecked = false;
+						String name = heroNameEntryBox.getText();
 					
-					if (nameChecked == false) {
+						for (int i = 0; i < game.getHeroList().size(); i++) {
+								if (name.equals(game.getHeroList().get(i).getName())) {
+										lblNameClashMessage.setVisible(true);
+										nameChecked = true;}}
+					
+						if (nameChecked == false) {
+								heroToAdd.setHeroName(heroNameEntryBox.getText());
+								game.getHeroList().add(heroToAdd);	
+							
+								// after it has added the char
+								if (numOfHeroes == game.getHeroList().size()) {
+										frame.getContentPane().removeAll();
+										frame.repaint();
+										teamNamePanel();} 
+								else {
+										frame.getContentPane().removeAll();
+										frame.repaint();
+										teamInitializerPanel();}}} 
+				
+				else {
 						heroToAdd.setHeroName(heroNameEntryBox.getText());
 						game.getHeroList().add(heroToAdd);
-					
+				
 						// after it has added the char
 						if (numOfHeroes == game.getHeroList().size()) {
-							frame.getContentPane().removeAll();
-							frame.repaint();
-							teamNamePanel();
-						} 
+								frame.getContentPane().removeAll();
+								frame.repaint();
+								teamNamePanel();} 
 						else {
-							frame.getContentPane().removeAll();
-							frame.repaint();
-							teamInitializerPanel();
-						}
-					}
-//					
-				} 
-				else {
-					heroToAdd.setHeroName(heroNameEntryBox.getText());
-					game.getHeroList().add(heroToAdd);
-				
-					// after it has added the char
-					if (numOfHeroes == game.getHeroList().size()) {
-						frame.getContentPane().removeAll();
-						frame.repaint();
-						teamNamePanel();
-					} 
-					else {
-						frame.getContentPane().removeAll();
-						frame.repaint();
-						teamInitializerPanel();
-					}
+								frame.getContentPane().removeAll();
+								frame.repaint();
+								teamInitializerPanel();}
 				}
 			}
 		});
-		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
-		btnAddToTeam.setBounds(360, 493, 208, 53);
-		frame.getContentPane().add(btnAddToTeam);
 		btnAddToTeam.setEnabled(false);
 		
 		
 		
 		
 		JButton btnHeroType1 = new JButton("");
+		btnHeroType1.setForeground(new Color(255, 255, 255));
+		btnHeroType1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType1.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType1.setText("");
+			}
+		});
 		btnHeroType1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR MERCHANT");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new MerchantMan();
 			}
 		});
@@ -2149,11 +2159,24 @@ public class gameEnvGui {
 		
 		
 		JButton btnHeroType2 = new JButton("");
+		btnHeroType2.setForeground(new Color(255, 255, 255));
+		btnHeroType2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType2.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType2.setText("");
+			}
+		});
 		btnHeroType2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR TANK");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new Tank();
 			}
 		});
@@ -2165,11 +2188,24 @@ public class gameEnvGui {
 		
 		
 		JButton btnHeroType3 = new JButton("");
+		btnHeroType3.setForeground(new Color(255, 255, 255));
+		btnHeroType3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType3.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType3.setText("");
+			}
+		});
 		btnHeroType3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR CARTOGRAPHER");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new Cartographer();
 			}
 		});
@@ -2181,11 +2217,24 @@ public class gameEnvGui {
 		
 		
 		JButton btnHeroType4 = new JButton("");
+		btnHeroType4.setForeground(new Color(255, 255, 255));
+		btnHeroType4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType4.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType4.setText("");
+			}
+		});
 		btnHeroType4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR SUPPORT");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new Support();
 			}
 		});
@@ -2197,11 +2246,24 @@ public class gameEnvGui {
 		
 		
 		JButton btnHeroType5 = new JButton("");
+		btnHeroType5.setForeground(new Color(255, 255, 255));
+		btnHeroType5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType5.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType5.setText("");
+			}
+		});
 		btnHeroType5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR LUCKY BOII");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new LuckyBoii();
 			}
 		});
@@ -2213,11 +2275,24 @@ public class gameEnvGui {
 		
 		
 		JButton btnHeroType6 = new JButton("");
+		btnHeroType6.setForeground(new Color(255, 255, 255));
+		btnHeroType6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnHeroType6.setText("Choose");
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHeroType6.setText("");
+			}
+		});
 		btnHeroType6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNameHero.setText("NAME YOUR ANTI-HERO");
 				heroNameEntryBox.setEnabled(true);
 				btnAddToTeam.setEnabled(true);
+				btnAddToTeam.setText("Add to team");
 				heroToAdd = new EdgyScaryFiendLord();
 			}
 		});
