@@ -66,8 +66,8 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-		cityAmmountPanel();//change to team set up later
-//		teamInitializerPanel();
+//		cityAmmountPanel();//change to team set up later
+		teamInitializerPanel();
 //		teamNamePanel();
 //		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
@@ -1987,7 +1987,7 @@ public class gameEnvGui {
 		lblNameClashMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNameClashMessage.setForeground(new Color(255, 0, 0));
 		lblNameClashMessage.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNameClashMessage.setBounds(10, 357, 914, 25);
+		lblNameClashMessage.setBounds(10, 365, 914, 25);
 		frame.getContentPane().add(lblNameClashMessage);
 		lblNameClashMessage.setVisible(false);
 		
@@ -2062,7 +2062,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType1.setBackground(Color.DARK_GRAY);
-		btnHeroType1.setBounds(34, 142, 117, 126);
+		btnHeroType1.setBounds(34, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType1);
 		
 		
@@ -2078,7 +2078,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType2.setBackground(Color.DARK_GRAY);
-		btnHeroType2.setBounds(191, 142, 117, 126);
+		btnHeroType2.setBounds(191, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType2);
 		
 		
@@ -2094,7 +2094,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType3.setBackground(Color.DARK_GRAY);
-		btnHeroType3.setBounds(338, 142, 117, 126);
+		btnHeroType3.setBounds(338, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType3);
 		
 		
@@ -2110,7 +2110,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType4.setBackground(Color.DARK_GRAY);
-		btnHeroType4.setBounds(484, 142, 117, 126);
+		btnHeroType4.setBounds(484, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType4);
 		
 		
@@ -2126,7 +2126,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType5.setBackground(Color.DARK_GRAY);
-		btnHeroType5.setBounds(636, 142, 117, 126);
+		btnHeroType5.setBounds(636, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType5);
 		
 		
@@ -2142,7 +2142,7 @@ public class gameEnvGui {
 			}
 		});
 		btnHeroType6.setBackground(Color.DARK_GRAY);
-		btnHeroType6.setBounds(792, 142, 117, 126);
+		btnHeroType6.setBounds(792, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType6);
 		
 		
@@ -2160,33 +2160,39 @@ public class gameEnvGui {
 		
 		
 		JLabel lblMerchant = new JLabel("MERCHANT");
+		lblMerchant.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblMerchant.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMerchant.setBounds(56, 280, 82, 15);
+		lblMerchant.setBounds(34, 147, 117, 15);
 		frame.getContentPane().add(lblMerchant);
 		
 		JLabel lblTank = new JLabel("TANK");
+		lblTank.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblTank.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTank.setBounds(226, 280, 41, 15);
+		lblTank.setBounds(191, 148, 117, 15);
 		frame.getContentPane().add(lblTank);
 		
 		JLabel lblCartographer = new JLabel("CARTOGRAPHER");
+		lblCartographer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCartographer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCartographer.setBounds(338, 280, 117, 15);
+		lblCartographer.setBounds(338, 148, 117, 15);
 		frame.getContentPane().add(lblCartographer);
 		
 		JLabel lblSupport = new JLabel("SUPPORT");
+		lblSupport.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblSupport.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSupport.setBounds(484, 280, 117, 15);
+		lblSupport.setBounds(484, 148, 117, 15);
 		frame.getContentPane().add(lblSupport);
 		
 		JLabel lblLuckyboii = new JLabel("LUCKYBOII");
+		lblLuckyboii.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblLuckyboii.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLuckyboii.setBounds(646, 280, 107, 15);
+		lblLuckyboii.setBounds(636, 148, 117, 15);
 		frame.getContentPane().add(lblLuckyboii);
 		
 		JLabel lblAntihero = new JLabel("ANTI HERO");
+		lblAntihero.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAntihero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAntihero.setBounds(802, 280, 88, 15);
+		lblAntihero.setBounds(792, 148, 117, 15);
 		frame.getContentPane().add(lblAntihero);
 
 		JLabel lblSelectHeroesFor = new JLabel("CHOOSE  THE  CLASS  OF  THIS  HERO");
@@ -2200,6 +2206,42 @@ public class gameEnvGui {
 		lblAssembleYourTeam.setFont(new Font("Arvo", Font.BOLD, 30));
 		lblAssembleYourTeam.setBounds(10, 29, 914, 53);
 		frame.getContentPane().add(lblAssembleYourTeam);
+		
+		JButton btnMerchantInfo = new JButton("CLASS INFO");
+		btnMerchantInfo.setForeground(new Color(255, 255, 255));
+		btnMerchantInfo.setBackground(new Color(75, 0, 130));
+		btnMerchantInfo.setBounds(34, 294, 117, 23);
+		frame.getContentPane().add(btnMerchantInfo);
+		
+		JButton btnTankInfo = new JButton("CLASS INFO");
+		btnTankInfo.setBackground(new Color(75, 0, 130));
+		btnTankInfo.setForeground(new Color(255, 255, 255));
+		btnTankInfo.setBounds(191, 294, 117, 23);
+		frame.getContentPane().add(btnTankInfo);
+		
+		JButton btnCartographerInfo = new JButton("CLASS INFO");
+		btnCartographerInfo.setForeground(new Color(255, 255, 255));
+		btnCartographerInfo.setBackground(new Color(75, 0, 130));
+		btnCartographerInfo.setBounds(338, 294, 117, 23);
+		frame.getContentPane().add(btnCartographerInfo);
+		
+		JButton btnSupportInfo = new JButton("CLASS INFO");
+		btnSupportInfo.setForeground(new Color(255, 255, 255));
+		btnSupportInfo.setBackground(new Color(75, 0, 130));
+		btnSupportInfo.setBounds(484, 294, 117, 23);
+		frame.getContentPane().add(btnSupportInfo);
+		
+		JButton btnLuckyInfo = new JButton("CLASS INFO");
+		btnLuckyInfo.setForeground(new Color(255, 255, 255));
+		btnLuckyInfo.setBackground(new Color(75, 0, 130));
+		btnLuckyInfo.setBounds(636, 294, 117, 23);
+		frame.getContentPane().add(btnLuckyInfo);
+		
+		JButton btnAntiHeroInfo = new JButton("CLASS INFO");
+		btnAntiHeroInfo.setBackground(new Color(75, 0, 130));
+		btnAntiHeroInfo.setForeground(new Color(255, 255, 255));
+		btnAntiHeroInfo.setBounds(792, 294, 117, 23);
+		frame.getContentPane().add(btnAntiHeroInfo);
 		
 		
 		
