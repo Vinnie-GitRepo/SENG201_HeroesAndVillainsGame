@@ -12,6 +12,8 @@ public class gameEnvironmentGuiRunTime {
 	
 	public static boolean[] foundPlaces = {false, false, false, false};
 	
+	public static boolean hasMap = false;
+	
 	public static ArrayList<Villian> villians = new ArrayList<Villian>();
 	
 	public static ArrayList<shop> shops = new ArrayList<shop>();
@@ -24,6 +26,10 @@ public class gameEnvironmentGuiRunTime {
 	
 	public static Villian currentVillian;
 	
+	public void hasMap() {
+		hasMap = true;
+	}
+	
 	public void makeAllUnfound() {
 		foundPlaces[0] = false;
 		foundPlaces[1] = false;
@@ -31,8 +37,19 @@ public class gameEnvironmentGuiRunTime {
 		foundPlaces[3] = false;
 	}
 	
+	public void makeAllFound() {
+		foundPlaces[0] = true;
+		foundPlaces[1] = true;
+		foundPlaces[2] = true;
+		foundPlaces[3] = true;
+	}
+	
 	public void setFoundPlaceTrue(int num) {
 		foundPlaces[num] = true;
+	}
+	
+	public int getNumOfCities() {
+		return baseCamps.size();
 	}
 	
 	public String getMapPlace(int num, int city) {
