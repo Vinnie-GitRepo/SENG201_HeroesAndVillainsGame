@@ -20,11 +20,7 @@ public class LuckyBoii extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence).
 	 */
 	public LuckyBoii() {
-<<<<<<< HEAD
-		super(100, "LuckyBoii", 6, 10, 10, true, 0, 5);
-=======
 		super(100, "LuckyBoii", 20, 10, 10, true, 0, 5, new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/lucky-boii.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
->>>>>>> b002efe764264ae5ecfa81284c2cb9ef9637134a
 	}
 	
 }

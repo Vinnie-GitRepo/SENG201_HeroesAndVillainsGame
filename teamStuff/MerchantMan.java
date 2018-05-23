@@ -22,10 +22,6 @@ public class MerchantMan extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public MerchantMan() {
-<<<<<<< HEAD
-		super(75, "Merchant", 6, 0, 50, false, 5, -20);
-=======
 		super(75, "Merchant", 10, 0, 50, false, 5, -20, new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/merchant.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
->>>>>>> b002efe764264ae5ecfa81284c2cb9ef9637134a
 	}
 }

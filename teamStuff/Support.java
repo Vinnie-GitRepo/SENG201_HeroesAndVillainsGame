@@ -21,11 +21,7 @@ public class Support extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public Support() {
-<<<<<<< HEAD
-		super(100, "Support", 9, 0, 0, false, 20, 5);
-=======
 		super(100, "Support", 30, 0, 0, false, 20, 5,new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/support.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
->>>>>>> b002efe764264ae5ecfa81284c2cb9ef9637134a
 	}
 	
 	
