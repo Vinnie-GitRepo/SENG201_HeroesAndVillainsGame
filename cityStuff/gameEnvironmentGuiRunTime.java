@@ -30,8 +30,26 @@ public class gameEnvironmentGuiRunTime {
 	
 	public static Villian currentVillian;
 	
-	public void hasMap() {
+//	public static boolean hasCartographer;
+	
+	public static boolean luck = false;
+	
+	public void giveLuck() {
+		luck = true;
+	}
+	
+	public boolean hasLuck() {
+		return luck;
+	}
+	
+//	public static boolean hasMerchant;
+	
+	public void giveMap() {
 		hasMap = true;
+	}
+	
+	public boolean hasMap() {
+		return hasMap;
 	}
 	
 	public void makeAllUnfound() {
@@ -257,9 +275,14 @@ public class gameEnvironmentGuiRunTime {
 			{
 				switchGame = true;
 			}
-			
+			Random thing = new Random();
+			int changeNum = thing.nextInt(2);
+			boolean changes = true;
+			if (changeNum == 1) {
+				changes = false;
+			}
 			Villian baddy = new Villian(villianNames.get(numName), 
-					catchPhrase.get(numPhrase), switchGame, villianIcons.get(i));
+					catchPhrase.get(numPhrase), switchGame, villianIcons.get(i), changes);
 			villians.add(baddy);
 			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
 			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups

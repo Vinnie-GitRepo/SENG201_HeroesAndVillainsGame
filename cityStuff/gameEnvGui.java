@@ -33,6 +33,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class gameEnvGui {
+	public static int luckynumDice = 0;
+	public static int luckynumGuess = 1;
+	public static int luckynumPSR = 3;
 	public static int buyingItem;
 	public static String buyingType;
 	public static String selectedHealingItem;
@@ -47,7 +50,10 @@ public class gameEnvGui {
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
 	private JTextField teamNameEntryBox;
-	private Timer timer = new Timer();
+	public Timer timer;// = new Timer();
+	public int remaining;
+	public ActionListener countdown;
+	public HealingItem current;
 
 
 	/**
@@ -71,7 +77,7 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-//		gameStartPanel();
+		gameStartPanel();
 //		cityAmmountPanel();//change to team set up later
 //		teamInitializerPanel();
 //		teamNamePanel();
@@ -82,7 +88,7 @@ public class gameEnvGui {
 //		numberGuessPanel();
 //		paperScissorsRockPanel();
 //		shopPanel();
-		hospitalPanel();
+//		hospitalPanel();
 //		powerUpDenPanel();
 //		villianBeatPanel();
 
@@ -216,6 +222,9 @@ public class gameEnvGui {
 	
 	private void baseCampPanel() {
 		frame.getContentPane().setLayout(null);
+		if (game.hasMap()) {
+			game.makeAllFound();
+		}
 		
 		JButton btnNewButton_1 = new JButton("View Inventory");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -367,6 +376,7 @@ public class gameEnvGui {
 		btnWest.setText(game.getMapPlace(3,citiesFinished));//correct one
 //		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));//test one
 		
+
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/team.gif")).getImage().getScaledInstance(553, 376, Image.SCALE_SMOOTH)));
 		lblNewLabel_1.setBounds(260, 124, 431, 173);
@@ -394,13 +404,13 @@ public class gameEnvGui {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"3", "4", "5", "6"}));
-		comboBox.setBounds(419, 115, 50, 41);
+		comboBox.setBounds(376, 115, 93, 41);
 		frame.getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
-		comboBox_1.setBounds(419, 290, 50, 41);
+		comboBox_1.setBounds(376, 290, 93, 41);
 		frame.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Confirm");
@@ -552,6 +562,9 @@ public class gameEnvGui {
 	}
 	
 	private void diceRollPanel() {
+		if (game.hasLuck()) {
+			luckynumDice = 3;
+		}
 		frame.getContentPane().setLayout(null);
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(361, 24, 269, 14);
@@ -559,16 +572,16 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblBattlingWith);
 		
 		JLabel lblHero = new JLabel("hero1");
-		lblHero.setBounds(56, 24, 46, 14);
+		lblHero.setBounds(56, 24, 107, 14);
 		frame.getContentPane().add(lblHero);
 		
 		
 		JLabel lblHero_1 = new JLabel("hero2");
-		lblHero_1.setBounds(56, 98, 46, 14);
+		lblHero_1.setBounds(56, 98, 107, 14);
 		frame.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
-		lblHero_2.setBounds(56, 175, 46, 14);
+		lblHero_2.setBounds(56, 175, 107, 14);
 		frame.getContentPane().add(lblHero_2);
 		
 		
@@ -634,23 +647,37 @@ public class gameEnvGui {
 		JButton btnRollDice = new JButton("Roll Dice");
 		btnRollDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int hero = diceRollGame.getHeroRoll();
+				int hero = diceRollGame.getHeroRoll(luckynumDice);
 				int vill = diceRollGame.getVillianRoll();
 				JOptionPane.showMessageDialog(null, "You Have Rolled A " + hero);
 				JOptionPane.showMessageDialog(null, "The Villian Has Rolled A " + vill);
 				String result = diceRollGame.calculateWinnerGui(hero, vill);
 				lblResult.setText(result);
 				if (hero > vill) {
+//					JOptionPane.showMessageDialog(null, "It Should Change The Game");
 					game.getCurrentVillian().oneDefeat();
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					if (game.getCurrentVillian().getLossCount() == 3) {
 						frame.getContentPane().removeAll();
 						frame.repaint();
 						villianBeatPanel();
+					} else if (game.getCurrentVillian().changesTheGame() == true){
+//						JOptionPane.showMessageDialog(null, "CHangin game");
+						Random rand = new Random();
+						int newGame = rand.nextInt(3);
+						frame.getContentPane().removeAll();
+						frame.repaint();
+						if (newGame == 0) {
+							paperScissorsRockPanel();
+						} else if (newGame == 1){
+							numberGuessPanel();
+						} else {
+							diceRollPanel();
+						}
 					}
 				} else if (hero < vill) {
-					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - game.getCurrentVillian().getDamageAmmount() == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());
 						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
 						if (game.getCurrentHero() == 0) {
 							lblHero.setVisible(false);
@@ -686,8 +713,8 @@ public class gameEnvGui {
 						}
 						System.out.println(game.getTeam().getHeroArray().size());
 					} else {
-						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+						JOptionPane.showMessageDialog(null, "Your Hero Takes " + game.getCurrentVillian().getDamageAmmount() + " Damage");
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
 					}
 					//game.;
 					//if (game.getTeam().getHeroArray().size() == 0) {
@@ -712,10 +739,13 @@ public class gameEnvGui {
 	
 	private void numberGuessPanel() {
 		//int numOfGuesses = 0;
-		vill = numberGuess.getVillianChoice();
+		if (game.hasLuck()) {
+			luckynumGuess = 4;
+		}
+		vill = numberGuess.getVillianChoice(luckynumGuess);
 		frame.getContentPane().setLayout(null);
 		JLabel lblWhatsYourGuess = new JLabel("Whats Your Guess?");
-		lblWhatsYourGuess.setBounds(373, 253, 129, 14);
+		lblWhatsYourGuess.setBounds(342, 253, 160, 14);
 		frame.getContentPane().add(lblWhatsYourGuess);
 		
 		JLabel lblBattlingWith = new JLabel("Battling With ");
@@ -724,7 +754,12 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblBattlingWith);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		if (game.hasLuck()) {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"5", "6", "7", "8", "9", "10"}));
+		} else {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		}
+		
 		comboBox.setBounds(383, 278, 65, 22);
 		frame.getContentPane().add(comboBox);
 		
@@ -841,18 +876,30 @@ public class gameEnvGui {
 					//something about getting it right in a num of guesses
 					numOfGuesses = 0;
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
-					vill = numberGuess.getVillianChoice();
+					vill = numberGuess.getVillianChoice(luckynumGuess);
 					lblNewLabel.setText(Integer.toString(vill));
 					if (game.getCurrentVillian().getLossCount() == 3) {
 						frame.getContentPane().removeAll();
 						frame.repaint();
 						villianBeatPanel();
+					} else if (game.getCurrentVillian().changesTheGame()){
+						Random rand = new Random();
+						int newGame = rand.nextInt(2);
+						frame.getContentPane().removeAll();
+						frame.repaint();
+						if (newGame == 0) {
+							paperScissorsRockPanel();
+						} else if (newGame == 1){
+							numberGuessPanel();
+						} else {
+							diceRollPanel();
+						}
 					}
 				} else {
-					vill = numberGuess.getVillianChoice();
+					vill = numberGuess.getVillianChoice(luckynumGuess);
 					lblNewLabel.setText(Integer.toString(vill));
-					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - game.getCurrentVillian().getDamageAmmount() == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());
 						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
 						numOfGuesses = 0;
 						if (game.getCurrentHero() == 0) {
@@ -889,9 +936,9 @@ public class gameEnvGui {
 						}
 						System.out.println(game.getTeam().getHeroArray().size());
 					} else {
-						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
+						JOptionPane.showMessageDialog(null, "Your Hero Takes " + game.getCurrentVillian().getDamageAmmount() + " Damage");
 						numOfGuesses = 0;
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
 					}
 				}
 			}
@@ -909,7 +956,10 @@ public class gameEnvGui {
 	}
 	
 	private void hospitalPanel() {
-		
+//		JProgressBar healthBar;
+//		healthBar = new JProgressBar();
+//		healthBar.setMinimum(0);
+//		healthBar.setMaximum(20);
 		JLabel lblApplyTo = new JLabel("Apply To:");
 		lblApplyTo.setBounds(432, 206, 70, 15);
 		frame.getContentPane().add(lblApplyTo);
@@ -1086,9 +1136,6 @@ public class gameEnvGui {
 		frame.getContentPane().add(HealthIIIStock);
 		HealthIIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(2))));
 		
-	
-		
-		
 		
 		JButton btnNewButton_5 = new JButton("Apply To Hero");
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -1103,27 +1150,18 @@ public class gameEnvGui {
 					count++;
 				}
 				if (applyIt == true) {
-					game.getTeam().getHeroArray().get(game.getCurrentHero()).useHealingItem(game.getTeam().getHealingItems().get(count));
+					current = game.getTeam().getHealingItems().get(count);
+					game.getTeam().getHeroArray().get(game.getCurrentHero()).useHealingItem(current);
 					frame.getContentPane().removeAll();
 					frame.repaint();
 					hospitalPanel();
-					//timer.setVisible(true);
-//					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 0) {
-////						JOptionPane.showMessageDialog(null, game.getTeam().getHealingItems().get(count).getTimeRemaining());
-//					}
-//					timer.setVisible(true);				
-					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 110) {
-//						JOptionPane.showMessageDialog(null, game.getTeam().getHealingItems().get(count).getTimeRemaining());
-					}
-					JOptionPane.showMessageDialog(null, "got out of loop");
-//					timer.setVisible(false);
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "YOU DONT HAVE THIS ITEM!");
 				}
 			}
 		});
-		btnNewButton_5.setBounds(194, 380, 215, 100);
+		btnNewButton_5.setBounds(194, 380, 215, 44);
 		frame.getContentPane().add(btnNewButton_5);
 		
 		JButton btnExit_1 = new JButton("Exit");
@@ -1134,22 +1172,203 @@ public class gameEnvGui {
 				baseCampPanel();
 			}
 		});
-		btnExit_1.setBounds(518, 380, 215, 100);
+		btnExit_1.setBounds(518, 380, 215, 44);
 		frame.getContentPane().add(btnExit_1);
+		
+		JButton button = new JButton("View Time Remaining");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "You Have " + current.getTimeRemaining() + " Seconds Left");
+			}
+		});
+		button.setBounds(369, 493, 215, 44);
+		frame.getContentPane().add(button);
+		
+
+	    
 		
 
 		
 	}
 	
 	private void shopPanel() {
-		JLabel lblTeamsCurrentInventory = new JLabel("Teams Current Inventory");
-		lblTeamsCurrentInventory.setBounds(372, 12, 238, 15);
-		frame.getContentPane().add(lblTeamsCurrentInventory);
 		frame.getContentPane().setBackground(UIManager.getColor("OptionPane.warningDialog.border.background"));
 		JLabel itemName = new JLabel("Selected Item Name");
 		itemName.setBounds(751, 572, 135, 15);
 		frame.getContentPane().add(itemName);
 		itemName.setVisible(false);
+		
+		JButton btnNewButton_1 = new JButton("View Inventory");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getTeam().viewInventory());
+			}
+		});
+		btnNewButton_1.setBounds(372, 14, 165, 38);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		
+		JLabel stck1 = new JLabel("Stock");
+		stck1.setBounds(314, 127, 70, 15);
+		frame.getContentPane().add(stck1);
+		
+		JLabel stck2 = new JLabel("Stock");
+		stck2.setBounds(515, 127, 70, 15);
+		frame.getContentPane().add(stck2);
+		
+		JLabel stck3 = new JLabel("Stock");
+		stck3.setBounds(721, 127, 70, 15);
+		frame.getContentPane().add(stck3);
+		
+		
+		JLabel stck4 = new JLabel("Stock");
+		stck4.setBounds(314, 260, 70, 15);
+		frame.getContentPane().add(stck4);
+		
+		JLabel stck5 = new JLabel("Stock");
+		stck5.setBounds(515, 260, 70, 15);
+		frame.getContentPane().add(stck5);
+		
+		JLabel stck6 = new JLabel("Stock");
+		stck6.setBounds(702, 260, 70, 15);
+		frame.getContentPane().add(stck6);
+		
+		JLabel stck7 = new JLabel("Stock");
+		stck7.setBounds(314, 360, 70, 15);
+		frame.getContentPane().add(stck7);
+		
+		JLabel stck8 = new JLabel("Stock");
+		stck8.setBounds(515, 360, 70, 15);
+		frame.getContentPane().add(stck8);
+		
+		JLabel stck9 = new JLabel("Stock");
+		stck9.setBounds(702, 360, 70, 15);
+		frame.getContentPane().add(stck9);
+		
+		JLabel stck10 = new JLabel("Stock");
+		stck10.setBounds(314, 476, 70, 15);
+		frame.getContentPane().add(stck10);
+		
+		JLabel stck11 = new JLabel("Stock");
+		stck11.setBounds(515, 476, 70, 15);
+		frame.getContentPane().add(stck11);
+		
+		JLabel stck12 = new JLabel("Stock");
+		stck12.setBounds(721, 476, 70, 15);
+		frame.getContentPane().add(stck12);
+		
+		
+		
+		
+		
+		JLabel pr1 = new JLabel("Price");
+		pr1.setBounds(314, 96, 70, 15);
+		frame.getContentPane().add(pr1);
+		
+		JLabel pr2 = new JLabel("Price");
+		pr2.setBounds(515, 96, 70, 15);
+		frame.getContentPane().add(pr2);
+		
+		JLabel pr3 = new JLabel("Price");
+		pr3.setBounds(721, 96, 70, 15);
+		frame.getContentPane().add(pr3);
+		
+		JLabel pr4 = new JLabel("Price");
+		pr4.setBounds(314, 223, 70, 15);
+		frame.getContentPane().add(pr4);
+		
+		JLabel pr5 = new JLabel("Price");
+		pr5.setBounds(515, 223, 70, 15);
+		frame.getContentPane().add(pr5);
+		
+		JLabel pr6 = new JLabel("Price");
+		pr6.setBounds(702, 223, 70, 15);
+		frame.getContentPane().add(pr6);
+		
+		JLabel pr7 = new JLabel("Price");
+		pr7.setBounds(314, 326, 70, 15);
+		frame.getContentPane().add(pr7);
+		
+		JLabel pr8 = new JLabel("Price");
+		pr8.setBounds(515, 326, 70, 15);
+		frame.getContentPane().add(pr8);
+		
+		JLabel pr9 = new JLabel("Price");
+		pr9.setBounds(702, 326, 70, 15);
+		frame.getContentPane().add(pr9);
+		
+		JLabel pr10 = new JLabel("Price");
+		pr10.setBounds(314, 433, 70, 15);
+		frame.getContentPane().add(pr10);
+		
+		JLabel pr11 = new JLabel("Price");
+		pr11.setBounds(515, 433, 70, 15);
+		frame.getContentPane().add(pr11);
+		
+		JLabel pr12 = new JLabel("Price");
+		pr12.setBounds(721, 433, 70, 15);
+		frame.getContentPane().add(pr12);
+		
+		
+		JLabel ip1 = new JLabel("0");
+		ip1.setBounds(314, 111, 70, 15);
+		frame.getContentPane().add(ip1);
+		ip1.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(0).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip2 = new JLabel("0");
+		ip2.setBounds(515, 111, 70, 15);
+		frame.getContentPane().add(ip2);
+		ip2.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(1).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip3 = new JLabel("0");
+		ip3.setBounds(721, 111, 70, 15);
+		frame.getContentPane().add(ip3);
+		ip3.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(2).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip4 = new JLabel("0");
+		ip4.setBounds(324, 239, 70, 15);
+		frame.getContentPane().add(ip4);
+		ip4.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(0).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip5 = new JLabel("0");
+		ip5.setBounds(525, 239, 70, 15);
+		frame.getContentPane().add(ip5);
+		ip5.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(1).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip6 = new JLabel("0");
+		ip6.setBounds(731, 239, 70, 15);
+		frame.getContentPane().add(ip6);
+		ip6.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(2).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip7 = new JLabel("0");
+		ip7.setBounds(324, 339, 70, 15);
+		frame.getContentPane().add(ip7);
+		ip7.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(3).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip8 = new JLabel("0");
+		ip8.setBounds(525, 339, 70, 15);
+		frame.getContentPane().add(ip8);
+		ip8.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(4).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip9 = new JLabel("0");
+		ip9.setBounds(731, 339, 70, 15);
+		frame.getContentPane().add(ip9);
+		ip9.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(5).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip10 = new JLabel("0");
+		ip10.setBounds(324, 449, 70, 15);
+		frame.getContentPane().add(ip10);
+		ip10.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(6).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip11 = new JLabel("0");
+		ip11.setBounds(525, 449, 70, 15);
+		frame.getContentPane().add(ip11);
+		ip11.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(7).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		
+		JLabel ip12 = new JLabel("0");
+		ip12.setBounds(731, 449, 70, 15);
+		frame.getContentPane().add(ip12);
+		ip12.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(8).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
 		
 		
 		//itemName.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
@@ -1199,7 +1418,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		health2.setBounds(407, 151, 117, 21);
+		health2.setBounds(382, 148, 117, 21);
 		frame.getContentPane().add(health2);
 		health2.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
 		
@@ -1210,7 +1429,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		health3.setBounds(640, 151, 123, 23);
+		health3.setBounds(580, 147, 123, 23);
 		frame.getContentPane().add(health3);
 		health3.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
 		
@@ -1236,7 +1455,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp2.setBounds(407, 279, 104, 23);
+		powerUp2.setBounds(389, 279, 104, 23);
 		frame.getContentPane().add(powerUp2);
 		powerUp2.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
 		
@@ -1247,7 +1466,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp3.setBounds(640, 279, 104, 22);
+		powerUp3.setBounds(580, 280, 104, 22);
 		frame.getContentPane().add(powerUp3);
 		powerUp3.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
 		
@@ -1269,7 +1488,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp5.setBounds(407, 372, 104, 23);
+		powerUp5.setBounds(389, 372, 104, 23);
 		frame.getContentPane().add(powerUp5);
 		powerUp5.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
 		
@@ -1280,7 +1499,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp6.setBounds(640, 371, 104, 23);
+		powerUp6.setBounds(580, 372, 104, 23);
 		frame.getContentPane().add(powerUp6);
 		powerUp6.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
 		
@@ -1302,7 +1521,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp8.setBounds(407, 489, 104, 23);
+		powerUp8.setBounds(389, 489, 104, 23);
 		frame.getContentPane().add(powerUp8);
 		powerUp8.setText(game.getCurrentShop().getPowerUpItems.get(7).getPowerUpName());
 		
@@ -1313,7 +1532,7 @@ public class gameEnvGui {
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
-		powerUp9.setBounds(640, 489, 104, 22);
+		powerUp9.setBounds(580, 490, 104, 22);
 		frame.getContentPane().add(powerUp9);
 		powerUp9.setText(game.getCurrentShop().getPowerUpItems.get(8).getPowerUpName());
 		
@@ -1342,62 +1561,62 @@ public class gameEnvGui {
 		
 //		STOCK LEVEL LABELS
 		JLabel HIT1 = new JLabel("r1Stock");
-		HIT1.setBounds(314, 132, 70, 15);
+		HIT1.setBounds(314, 154, 70, 15);
 		frame.getContentPane().add(HIT1);
 		HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
 		
 		JLabel HIT2 = new JLabel("r1Stock");
-		HIT2.setBounds(529, 132, 70, 15);
+		HIT2.setBounds(515, 151, 70, 15);
 		frame.getContentPane().add(HIT2);
 		HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
 		
 		JLabel HIT3 = new JLabel("r1Stock");
-		HIT3.setBounds(762, 132, 70, 15);
+		HIT3.setBounds(721, 150, 70, 15);
 		frame.getContentPane().add(HIT3);
 		HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
 		
 		JLabel PUP1 = new JLabel("null");
-		PUP1.setBounds(314, 260, 70, 15);
+		PUP1.setBounds(324, 282, 70, 15);
 		frame.getContentPane().add(PUP1);
 		PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
 		
 		JLabel PUP2 = new JLabel("null");
-		PUP2.setBounds(529, 260, 70, 15);
+		PUP2.setBounds(521, 282, 70, 15);
 		frame.getContentPane().add(PUP2);
 		PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
 		
 		JLabel PUP3 = new JLabel("null");
-		PUP3.setBounds(762, 260, 70, 15);
+		PUP3.setBounds(712, 283, 70, 15);
 		frame.getContentPane().add(PUP3);
 		PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
 		
 		JLabel PUP4 = new JLabel("null");
-		PUP4.setBounds(314, 353, 70, 15);
+		PUP4.setBounds(324, 376, 70, 15);
 		frame.getContentPane().add(PUP4);
 		PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
 		
 		JLabel PUP5 = new JLabel("null");
-		PUP5.setBounds(529, 353, 70, 15);
+		PUP5.setBounds(525, 380, 70, 15);
 		frame.getContentPane().add(PUP5);
 		PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
 		
 		JLabel PUP6 = new JLabel("null");
-		PUP6.setBounds(762, 353, 70, 15);
+		PUP6.setBounds(702, 380, 70, 15);
 		frame.getContentPane().add(PUP6);
 		PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
 		
 		JLabel PUP7 = new JLabel("null");
-		PUP7.setBounds(319, 470, 70, 15);
+		PUP7.setBounds(314, 497, 70, 15);
 		frame.getContentPane().add(PUP7);
 		PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
 		
 		JLabel PUP8 = new JLabel("null");
-		PUP8.setBounds(529, 470, 70, 15);
+		PUP8.setBounds(525, 493, 70, 15);
 		frame.getContentPane().add(PUP8);
 		PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
 		
 		JLabel PUP9 = new JLabel("null");
-		PUP9.setBounds(726, 452, 70, 15);
+		PUP9.setBounds(721, 493, 70, 15);
 		frame.getContentPane().add(PUP9);
 		PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
 		
@@ -1558,7 +1777,10 @@ public class gameEnvGui {
 						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(buyingItem));
 						game.getCurrentShop().getHealingStockLevel()[buyingItem] -= 1;
 //						HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[buyingItem]));
-						game.getTeam().addMoney(-game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice());
+//						JOptionPane.showMessageDialog(null, game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice());
+//						JOptionPane.showMessageDialog(null, game.getTeam().getBarterSkillSum());
+//						JOptionPane.showMessageDialog(null, game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice()-game.getTeam().getBarterSkillSum());
+						game.getTeam().addMoney(-(game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice() - game.getTeam().getBarterSkillSum()));
 						JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemName());
 					} else {
 						JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
@@ -1571,7 +1793,7 @@ public class gameEnvGui {
 							game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(buyingItem));
 							game.getCurrentShop().getPowerUpStockLevel()[buyingItem] -= 1;
 //							HIT1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[buyingItem]));
-							game.getTeam().addMoney(-game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice());
+							game.getTeam().addMoney(-(game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
 							JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpName());
 						} else {
 							JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
@@ -1604,12 +1826,12 @@ public class gameEnvGui {
 		frame.getContentPane().add(r1);
 		
 		JLabel r2 = new JLabel("New label");
-		r2.setBounds(668, 95, 46, 52);
+		r2.setBounds(608, 91, 46, 52);
 		r2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r2);
 		
 		JLabel r3 = new JLabel("New label");
-		r3.setBounds(434, 95, 46, 52);
+		r3.setBounds(409, 92, 46, 52);
 		r3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r3);
 		
@@ -1619,17 +1841,17 @@ public class gameEnvGui {
 		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p2 = new JLabel("New label");
-		p2.setBounds(434, 223, 46, 52);
+		p2.setBounds(416, 223, 46, 52);
 		frame.getContentPane().add(p2);
 		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p3 = new JLabel("New label");
-		p3.setBounds(668, 223, 46, 52);
+		p3.setBounds(608, 224, 46, 52);
 		frame.getContentPane().add(p3);
 		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p5 = new JLabel("New label");
-		p5.setBounds(434, 316, 46, 52);
+		p5.setBounds(416, 316, 46, 52);
 		frame.getContentPane().add(p5);
 		p5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
@@ -1639,12 +1861,12 @@ public class gameEnvGui {
 		p4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p6 = new JLabel("New label");
-		p6.setBounds(668, 316, 46, 52);
+		p6.setBounds(608, 317, 46, 52);
 		frame.getContentPane().add(p6);
 		p6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p8 = new JLabel("New label");
-		p8.setBounds(434, 433, 46, 52);
+		p8.setBounds(416, 433, 46, 52);
 		frame.getContentPane().add(p8);
 		p8.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
@@ -1654,7 +1876,7 @@ public class gameEnvGui {
 		p7.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p9 = new JLabel("New label");
-		p9.setBounds(668, 433, 46, 52);
+		p9.setBounds(608, 434, 46, 52);
 		frame.getContentPane().add(p9);
 		p9.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
@@ -1701,6 +1923,19 @@ public class gameEnvGui {
 		frame.getContentPane().add(lblInfo);
 		
 
+
+		
+
+		
+
+		
+
+		
+
+		
+		
+		
+
 		
 
 		
@@ -1711,6 +1946,9 @@ public class gameEnvGui {
 //		villianOptions.add("Paper");
 //		villianOptions.add("Scissors");
 //		villianOptions.add("Rock");
+		if (game.hasLuck()) {
+			luckynumPSR = 2;
+		}
 		paperScissorsRock paperGame = new paperScissorsRock();
 		//int numOfGuesses = 0;
 //		vill = numberGuess.getVillianChoice();
@@ -1821,14 +2059,19 @@ public class gameEnvGui {
 		
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Paper", "Scissors", "Rock"}));
+		if (game.hasLuck()) {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Paper", "Scissors"}));
+		} else {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Paper", "Scissors", "Rock"}));
+		}
+		
 		comboBox.setBounds(383, 278, 105, 22);
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnConfirmYourGuess = new JButton("Confirm Your Guess");
 		btnConfirmYourGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String outcome = comboBox.getSelectedItem() + paperGame.getVillianChoice();
+				String outcome = comboBox.getSelectedItem() + paperGame.getVillianChoice(luckynumPSR);
 				outcome = paperGame.getOutCome(outcome);
 				JOptionPane.showMessageDialog(null, outcome);
 				switch(outcome) {
@@ -1839,11 +2082,23 @@ public class gameEnvGui {
 						frame.getContentPane().removeAll();
 						frame.repaint();
 						villianBeatPanel();
+					} else if (game.getCurrentVillian().changesTheGame()){
+						Random rand = new Random();
+						int newGame = rand.nextInt(2);
+						frame.getContentPane().removeAll();
+						frame.repaint();
+						if (newGame == 0) {
+							paperScissorsRockPanel();
+						} else if (newGame == 1){
+							numberGuessPanel();
+						} else {
+							diceRollPanel();
+						}
 					}
 					break;
 				case "The Villian Has Won":
-					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - 25 == 0) {
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);
+					if (game.getTeam().getHeroArray().get(game.getCurrentHero()).getCurrentHealth() - game.getCurrentVillian().getDamageAmmount() == 0) {
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());
 						JOptionPane.showMessageDialog(null, "Your Hero Is Dead!");
 						if (game.getCurrentHero() == 0) {
 							lblHero.setVisible(false);
@@ -1879,9 +2134,12 @@ public class gameEnvGui {
 						}
 						System.out.println(game.getTeam().getHeroArray().size());
 					} else {
-						JOptionPane.showMessageDialog(null, "Your Hero Takes 25 Damage");
-						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(25);//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
+						JOptionPane.showMessageDialog(null, "Your Hero Takes " + game.getCurrentVillian().getDamageAmmount() + " Damage");
+						game.getTeam().getHeroArray().get(game.getCurrentHero()).damageHealth(game.getCurrentVillian().getDamageAmmount());//method works if there is only 1 person in the team, however when there are 2 or more then a person  gets removed and the array shrinks but doesnt go into the catch
 					}
+					frame.getContentPane().removeAll();
+					frame.repaint();
+					paperScissorsRockPanel();
 					break;
 				case "It Is A Draw, Next Round!":
 					break;
@@ -2170,6 +2428,7 @@ public class gameEnvGui {
 					game.getTeam().getHeroArray().get(game.getCurrentHero()).usePowerUp(game.getTeam().getPowerUps().get(count));//.useHealingItem(game.getTeam().getHealingItems().get(count));
 					frame.getContentPane().removeAll();
 					frame.repaint();
+					game.getTeam().setBarterSkillSum();
 					powerUpDenPanel();
 //					timer.setVisible(true);				
 //					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 110) {
@@ -2268,6 +2527,7 @@ public class gameEnvGui {
 										teamInitializerPanel();}}} 
 				
 				else {
+						
 						heroToAdd.setHeroName(heroNameEntryBox.getText());
 						game.getHeroList().add(heroToAdd);
 				
@@ -2280,6 +2540,12 @@ public class gameEnvGui {
 								frame.getContentPane().removeAll();
 								frame.repaint();
 								teamInitializerPanel();}
+				}
+				if (heroToAdd.getHeroClass() == "Cartographer") {
+//					JOptionPane.showMessageDialog(null, "u should have a mp!");
+					game.giveMap();
+				} else if (heroToAdd.getHeroClass() == "LuckyBoii") {
+					game.giveLuck();
 				}
 			}
 		});
@@ -2572,27 +2838,31 @@ public class gameEnvGui {
 		JButton btnProceedToCamp = new JButton("PROCEED  TO  CAMP");
 		btnProceedToCamp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				game.getTeam().addMoney(100);
 				JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
 				game.makeAllUnfound();
+				if (game.hasMap()) {
+					game.makeAllFound();
+				}
+				
 				citiesFinished += 1;
 				frame.getContentPane().removeAll();
 				frame.repaint();
 				//game.setCurrentHero(citiesFinished);
 				game.setCurrentVillian(citiesFinished);
 				if (citiesFinished < game.getNumOfCities()) {
+					if (citiesFinished + 1 == game.getNumOfCities()) {
+					game.getCurrentVillian().superVillian();
+					}
 					baseCampPanel();
 				} else {
-					finalVillianPanel();
+//					finishGamePanel();
 				}
 			}
 		});
 		btnProceedToCamp.setFont(new Font("Dialog", Font.BOLD, 22));
 		btnProceedToCamp.setBounds(287, 503, 339, 88);
 		frame.getContentPane().add(btnProceedToCamp);
-	}
-	
-	private void finalVillianPanel() {
-		frame.getContentPane().setLayout(null);
 	}
 }
 

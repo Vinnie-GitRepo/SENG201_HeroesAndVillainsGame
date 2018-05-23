@@ -17,6 +17,10 @@ public class diceRollGame {
 	 * 
 	 * @return ThreadLocalRandom.current().nextInt(luckynum, 7)
 	 */
+	public static int getHeroRoll(int luckynum) {
+		return ThreadLocalRandom.current().nextInt(luckynum, 7);//luckynum
+	}
+	
 	public static int getHeroRoll() {
 		return ThreadLocalRandom.current().nextInt(0, 7);//luckynum
 	}
