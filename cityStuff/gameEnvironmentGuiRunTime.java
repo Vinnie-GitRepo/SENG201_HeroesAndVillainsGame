@@ -207,6 +207,91 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
+	public MerchantMan getMerchant() {
+		MerchantMan info = new MerchantMan();
+		return info;
+	}
+	
+	public Tank getTank() {
+		Tank info = new Tank();
+		return info;
+	}
+	
+	public Cartographer getCartographer() {
+		Cartographer info = new Cartographer();
+		return info;
+	}
+	
+	public Support getSupport() {
+		Support info = new Support();
+		return info;
+	}
+	
+	public LuckyBoii getLuckyBoii() {
+		LuckyBoii info = new LuckyBoii();
+		return info;
+	}
+	
+	public EdgyScaryFiendLord getAntiHero() {
+		EdgyScaryFiendLord info = new EdgyScaryFiendLord();
+		return info;
+	}
+	
+	
+	public RestoreHealthI getRHI() {
+		RestoreHealthI info = new RestoreHealthI();
+		return info;
+	}
+	
+	
+	public RestoreHealthII getRHII() {
+		RestoreHealthII info = new RestoreHealthII();
+		return info;
+	}
+	
+	
+	public RestoreHealthIII getRHIII() {
+		RestoreHealthIII info = new RestoreHealthIII();
+		return info;
+	}
+	
+	
+	public AugmentVitalityI getAVI() {
+		AugmentVitalityI info = new AugmentVitalityI();
+		return info;
+	}
+	
+	
+	public AugmentVitalityII getAVII() {
+		AugmentVitalityII info = new AugmentVitalityII();
+		return info;
+	}
+	
+	
+	public AugmentVitalityIII getAVIII() {
+		AugmentVitalityIII info = new AugmentVitalityIII();
+		return info;
+	}
+	
+	
+	public IronFleshI getIFI() {
+		IronFleshI info = new IronFleshI();
+		return info;
+	}
+	
+	
+	public IronFleshII getIFII() {
+		IronFleshII info = new IronFleshII();
+		return info;
+	}
+	
+	
+	public IronFleshIII getIFIII() {
+		IronFleshIII info = new IronFleshIII();
+		return info;
+	}
+	
+	
 	public ArrayList<Hero> getHeroList() {
 		return this.getTeam().getHeroArray();
 	}

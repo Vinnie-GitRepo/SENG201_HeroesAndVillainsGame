@@ -21,7 +21,9 @@ public class EdgyScaryFiendLord extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.   
 	 */
 	public EdgyScaryFiendLord() {
-		super(150, "Edgy Anti-Hero", 20, 25, 10, false, 10, 50, new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/anti-hero.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		super(150, "Anti Hero", 20, 25, 10, false, 10, 50, new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/anti-hero.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 	}
+	
+	
 	
 }	

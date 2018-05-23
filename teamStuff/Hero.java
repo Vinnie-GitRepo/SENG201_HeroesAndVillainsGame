@@ -447,6 +447,40 @@ public class Hero {
 	
 	
 	
+	public String getFullInfo() {
+		String info = "HERO CLASS: ANTI-HERO\n\n\n"
+					
+					+ getHeroClass() + " Health: " + getMaxHealth() + "\n"
+					+ "This is the hero's lifeforce; one'll most surely die without any...\n\n"
+					
+					+ getHeroClass() + " Recovery: " + getRecoveryBoost() + "\n"
+					+ "This is the hero's innate ability to bond with healing items, hastening their application.\n\n"
+					
+					+ getHeroClass() + " Armor: " + getArmor() + "\n"
+					+ "This is the hero's armor, which bears the damage of any attack, acting as additional health, and fading as battles rage.\n\n"
+					
+					+ getHeroClass() + " Barter Skill: " + getBarterSkill() + "\n"
+					+ "This is the hero's ability to haggle with shopkeepers, helping the team get cheap items.\n\n"
+					
+					+ getHeroClass() + " Fame: " + getFame() + "\n"
+					+ "This is the hero's public renown; a team of famous heroes attracts those bearing gifts!\n\n"
+					
+					+ getHeroClass() + " Deterrence: " + getDeterrence() + "\n"
+					+ "This is the hero's intimidating prescence; a team of scary heroes deters thievery.\n\n";
+		
+		
+		
+		if(this instanceof Cartographer) {
+			   info +="This hero comes with a map, revealing all the locations of every city.";
+		}
+		else if(this instanceof LuckyBoii) {
+			   info +="This hero is lucky enough to have a better chance at winning games. That could be useful.";
+		}
+		
+		return info;
+	}
+	
+	
 
 	/**
 	 * The hero's toString method, that prints the hero's attributes as desired.

@@ -109,6 +109,8 @@ public class gameEnvGui {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		
 	}
 	
 	private void gameStartPanel() {
@@ -153,48 +155,14 @@ public class gameEnvGui {
 		
 	}
 	
-	private void gameEndPanel() {
-		
-		JButton btnExitGame_1 = new JButton("EXIT GAME");
-		btnExitGame_1.setBackground(new Color(75, 0, 130));
-		btnExitGame_1.setForeground(new Color(255, 255, 255));
-		btnExitGame_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnExitGame_1.setFont(new Font("Dialog", Font.BOLD, 50));
-		btnExitGame_1.setBounds(299, 441, 347, 120);
-		frame.getContentPane().add(btnExitGame_1);
-		
-		JLabel lblEndMessage = new JLabel("TEAM NAME: " + game.getTeam().getName());
-		lblEndMessage.setForeground(new Color(0, 0, 0));
-		lblEndMessage.setFont(new Font("Arvo", Font.BOLD, 40));
-		lblEndMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEndMessage.setBounds(12, 138, 914, 84);
-		frame.getContentPane().add(lblEndMessage);
-		
-		JLabel lblDisplayGameTime = new JLabel("COMPLETION TIME: " + getGameTime() + " seconds.");
-		lblDisplayGameTime.setForeground(new Color(0, 0, 0));
-		lblDisplayGameTime.setFont(new Font("Arvo", Font.BOLD, 40));
-		lblDisplayGameTime.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDisplayGameTime.setBounds(12, 234, 914, 52);
-		frame.getContentPane().add(lblDisplayGameTime);
-		
-		JLabel lblPlaythroughInfo = new JLabel("PLAYTHROUGH   INFORMATION");
-		lblPlaythroughInfo.setForeground(new Color(0, 0, 0));
-		lblPlaythroughInfo.setFont(new Font("Arvo", Font.BOLD, 50));
-		lblPlaythroughInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlaythroughInfo.setBounds(12, 12, 914, 94);
-		frame.getContentPane().add(lblPlaythroughInfo);
-		
-		JLabel lblOurThanks = new JLabel("Thank you for playing!");
-		lblOurThanks.setForeground(new Color(0, 0, 0));
-		lblOurThanks.setFont(new Font("EB Garamond 08", Font.ITALIC, 40));
-		lblOurThanks.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOurThanks.setBounds(12, 377, 914, 52);
-		frame.getContentPane().add(lblOurThanks);
-	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private void teamNamePanel() {
 		JLabel lblNameYourTeam = new JLabel("NAME   YOUR   TEAM   OF   HEROES");
@@ -226,7 +194,7 @@ public class gameEnvGui {
 				game.getTeam().setFameSum();
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				baseCampPanel();   //   UNCOMMENT   WHEN   READY
+				baseCampPanel();   
 //				setFinished(true); //MOVE TO finishGamePanel()
 //				gameEndPanel();    //MOVE TO finishGamePanel()
 				
@@ -253,7 +221,7 @@ public class gameEnvGui {
 					game.getTeam().nameTeam(teamNameEntryBox.getText());
 					lblTeamNameError.setVisible(false);
 					btnProceedToCamp.setVisible(true);
-					lblBeginQuest.setText("Go forth, " + game.getTeam().getName() + ", and vanquish darstardly villains who've many cities under their rule!");
+					lblBeginQuest.setText("Go forth, " + game.getTeam().getName() + ", and vanquish darstardly villains, who've many cities under their rule!");
 				}
 			}
 		});
@@ -1896,11 +1864,12 @@ public class gameEnvGui {
 		purchaseButton.setBounds(216, 534, 227, 70);
 		frame.getContentPane().add(purchaseButton);
 		
+		
 		JLabel r1 = new JLabel("New label");
 		r1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
+				JOptionPane.showMessageDialog(null, game.getRHI().toString());
 			}
 		});
 		r1.setBounds(216, 96, 53, 51);
@@ -1908,26 +1877,58 @@ public class gameEnvGui {
 		frame.getContentPane().add(r1);
 		
 		JLabel r2 = new JLabel("New label");
-		r2.setBounds(608, 91, 46, 52);
+		r2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, game.getRHII().toString());
+			}
+		});
+		r2.setBounds(409, 92, 46, 52);
 		r2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r2);
 		
 		JLabel r3 = new JLabel("New label");
-		r3.setBounds(409, 92, 46, 52);
+		r3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, game.getRHIII().toString());
+			}
+		});
+		r3.setBounds(608, 91, 46, 52);
 		r3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r3);
 		
+		
+		
 		JLabel p1 = new JLabel("New label");
+		p1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, game.getAVI().toString());
+			}
+		});
 		p1.setBounds(216, 224, 53, 51);
 		frame.getContentPane().add(p1);
 		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p2 = new JLabel("New label");
+		p2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, game.getAVII().toString());
+			}
+		});
 		p2.setBounds(416, 223, 46, 52);
 		frame.getContentPane().add(p2);
 		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p3 = new JLabel("New label");
+		p3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, game.getAVIII().toString());
+			}
+		});
 		p3.setBounds(608, 224, 46, 52);
 		frame.getContentPane().add(p3);
 		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
@@ -2857,37 +2858,79 @@ public class gameEnvGui {
 		lblAssembleYourTeam.setBounds(10, 29, 914, 53);
 		frame.getContentPane().add(lblAssembleYourTeam);
 		
+		
+		
 		JButton btnMerchantInfo = new JButton("CLASS INFO");
+		btnMerchantInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getMerchant().getFullInfo());	
+			}
+		});
 		btnMerchantInfo.setForeground(new Color(255, 255, 255));
 		btnMerchantInfo.setBackground(new Color(75, 0, 130));
 		btnMerchantInfo.setBounds(34, 294, 117, 23);
 		frame.getContentPane().add(btnMerchantInfo);
 		
+		
+		
 		JButton btnTankInfo = new JButton("CLASS INFO");
+		btnTankInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getTank().getFullInfo());
+			}
+		});
 		btnTankInfo.setBackground(new Color(75, 0, 130));
 		btnTankInfo.setForeground(new Color(255, 255, 255));
 		btnTankInfo.setBounds(191, 294, 117, 23);
 		frame.getContentPane().add(btnTankInfo);
 		
+		
+		
 		JButton btnCartographerInfo = new JButton("CLASS INFO");
+		btnCartographerInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getCartographer().getFullInfo());
+			}
+		});
 		btnCartographerInfo.setForeground(new Color(255, 255, 255));
 		btnCartographerInfo.setBackground(new Color(75, 0, 130));
 		btnCartographerInfo.setBounds(338, 294, 117, 23);
 		frame.getContentPane().add(btnCartographerInfo);
 		
+		
+		
 		JButton btnSupportInfo = new JButton("CLASS INFO");
+		btnSupportInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getSupport().getFullInfo());
+			}
+		});
 		btnSupportInfo.setForeground(new Color(255, 255, 255));
 		btnSupportInfo.setBackground(new Color(75, 0, 130));
 		btnSupportInfo.setBounds(484, 294, 117, 23);
 		frame.getContentPane().add(btnSupportInfo);
 		
+		
+		
 		JButton btnLuckyInfo = new JButton("CLASS INFO");
+		btnLuckyInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getLuckyBoii().getFullInfo());
+			}
+		});
 		btnLuckyInfo.setForeground(new Color(255, 255, 255));
 		btnLuckyInfo.setBackground(new Color(75, 0, 130));
 		btnLuckyInfo.setBounds(636, 294, 117, 23);
 		frame.getContentPane().add(btnLuckyInfo);
 		
+		
+		
 		JButton btnAntiHeroInfo = new JButton("CLASS INFO");
+		btnAntiHeroInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, game.getAntiHero().getFullInfo());
+			}
+		});
 		btnAntiHeroInfo.setBackground(new Color(75, 0, 130));
 		btnAntiHeroInfo.setForeground(new Color(255, 255, 255));
 		btnAntiHeroInfo.setBounds(792, 294, 117, 23);
@@ -2935,7 +2978,10 @@ public class gameEnvGui {
 		btnFinishPlaythrough.setFont(new Font("Arvo", Font.BOLD, 30));
 		btnFinishPlaythrough.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				setFinished(true); 
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				gameEndPanel();    
 			}
 		});
 		btnFinishPlaythrough.setBounds(274, 409, 405, 116);
@@ -2961,6 +3007,61 @@ public class gameEnvGui {
 	}
 	
 	
-	
+	private void gameEndPanel() {
+		
+		JButton btnExitGame_1 = new JButton("EXIT GAME");
+		btnExitGame_1.setBackground(new Color(75, 0, 130));
+		btnExitGame_1.setForeground(new Color(255, 255, 255));
+		btnExitGame_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnExitGame_1.setFont(new Font("Dialog", Font.BOLD, 50));
+		btnExitGame_1.setBounds(279, 492, 398, 69);
+		frame.getContentPane().add(btnExitGame_1);
+		
+		JLabel lblEndMessage = new JLabel("TEAM NAME: " + game.getTeam().getName());
+		lblEndMessage.setForeground(new Color(0, 0, 0));
+		lblEndMessage.setFont(new Font("Arvo", Font.BOLD, 40));
+		lblEndMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEndMessage.setBounds(12, 138, 914, 84);
+		frame.getContentPane().add(lblEndMessage);
+		
+		JLabel lblDisplayGameTime = new JLabel("COMPLETION TIME: " + getGameTime() + " seconds.");
+		lblDisplayGameTime.setForeground(new Color(0, 0, 0));
+		lblDisplayGameTime.setFont(new Font("Arvo", Font.BOLD, 40));
+		lblDisplayGameTime.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDisplayGameTime.setBounds(12, 234, 914, 52);
+		frame.getContentPane().add(lblDisplayGameTime);
+		
+		JLabel lblPlaythroughInfo = new JLabel("PLAYTHROUGH   INFORMATION");
+		lblPlaythroughInfo.setForeground(new Color(0, 0, 0));
+		lblPlaythroughInfo.setFont(new Font("Arvo", Font.BOLD, 50));
+		lblPlaythroughInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPlaythroughInfo.setBounds(12, 12, 914, 94);
+		frame.getContentPane().add(lblPlaythroughInfo);
+		
+		JLabel lblOurThanks = new JLabel("Thank you for playing!");
+		lblOurThanks.setForeground(new Color(0, 0, 0));
+		lblOurThanks.setFont(new Font("EB Garamond 08", Font.ITALIC, 45));
+		lblOurThanks.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOurThanks.setBounds(12, 368, 914, 52);
+		frame.getContentPane().add(lblOurThanks);
+		
+		JButton btnPlayAgain = new JButton("PLAY AGAIN");
+		btnPlayAgain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				gameStartPanel();
+			}
+		});
+		btnPlayAgain.setBackground(new Color(75, 0, 130));
+		btnPlayAgain.setForeground(new Color(255, 255, 255));
+		btnPlayAgain.setFont(new Font("Dialog", Font.BOLD, 50));
+		btnPlayAgain.setBounds(279, 427, 398, 69);
+		frame.getContentPane().add(btnPlayAgain);
+	}
 }
 
