@@ -38,6 +38,43 @@ public class gameEnvironmentGuiRunTime {
 		luck = true;
 	}
 	
+	
+	public String randomEvent() {
+		String theEvent ="Your Team Had A Safe Journey Back";
+		Random happen = new Random();
+		boolean event = happen.nextBoolean();
+//		System.out.println(event);
+		if (event) {
+			int number = happen.nextInt(4);
+//			System.out.println(number);
+			switch(number) {
+			case 0:
+				theEvent = "Your Team Has Been Given An Item!";
+				int itemNum = happen.nextInt(3);
+				System.out.println(itemNum);
+				team.addHealingItem(currentShop.getHealingItems().get(itemNum));
+				break;
+			case 1:
+				theEvent = "Your Team Has Lost An Item!";
+				try {
+				team.getHealingItems().remove(happen.nextInt(team.getHealingItems().size()));//team.removeHealingItem(currentShop.getHealingItems().get(happen.nextInt(4)));//removeItem(currentShop.getHealingItems().get(happen.nextInt(4)));
+				} catch (Exception e) {
+					theEvent = "Someone Tried To Rob You But You Got Nothin!";
+				}
+				break;
+			case 2:
+				theEvent = "Your Team Has Been Given Some Money!";
+				team.addMoney(100);
+				break;
+			case 3:
+				theEvent = "Your Team Has Been Robbed Of Some Money!";
+				team.addMoney(-50);
+				break;
+			}
+		}
+		return theEvent;
+	}
+	
 	public boolean hasLuck() {
 		return luck;
 	}
@@ -277,10 +314,10 @@ public class gameEnvironmentGuiRunTime {
 			}
 			Random thing = new Random();
 			int changeNum = thing.nextInt(2);
-			boolean changes = true;
-			if (changeNum == 1) {
-				changes = false;
-			}
+			boolean changes = false;
+//			if (changeNum == 1) {
+//				changes = true;
+//			}
 			Villian baddy = new Villian(villianNames.get(numName), 
 					catchPhrase.get(numPhrase), switchGame, villianIcons.get(i), changes);
 			villians.add(baddy);
