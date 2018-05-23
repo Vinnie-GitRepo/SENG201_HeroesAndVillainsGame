@@ -5,6 +5,7 @@ import cityStuff.*;
 import games.*;
 import teamStuff.Cartographer;
 import teamStuff.EdgyScaryFiendLord;
+import teamStuff.HealingItem;
 import teamStuff.Hero;
 import teamStuff.LuckyBoii;
 import teamStuff.MerchantMan;
@@ -23,11 +24,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
+
 import java.util.Collections;
 import java.util.Random;
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,11 +39,10 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class gameEnvGui {
-<<<<<<< HEAD
-=======
+
 	public static String selectedHealingItem;
 	public static String selectedPowerUp;
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 	public static int citiesFinished = 0;
 	public static int numOfGuesses = 0;
 	public static int numOfHeroes;
@@ -54,11 +53,10 @@ public class gameEnvGui {
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
 	private JTextField teamNameEntryBox;
-<<<<<<< HEAD
-=======
+
 	private Timer timer = new Timer();
 //	private Timer timer = new Timer();
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 
 	/**
 	 * Launch the application.
@@ -81,12 +79,11 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-<<<<<<< HEAD
-=======
+
 		cityAmmountPanel();//change to team set up later
 //		teamInitializerPanel();
 //		teamNamePanel();
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 //		cityAmmountPanel();//change to team set up later
 //		baseCampPanel();
 //		villiansLairPanel();
@@ -98,14 +95,14 @@ public class gameEnvGui {
 //		hospitalPanel();
 //		teamInitializerPanel();
 //		shopPanel();
-<<<<<<< HEAD
-		teamNamePanel();
-=======
+
+//		teamNamePanel();
+
 //		teamNamePanel();
 //		hospitalPanel();
 //		powerUpDenPanel();
 
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 
 	}
 
@@ -172,26 +169,18 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				if(teamNameEntryBox.getText().length() < 2 || teamNameEntryBox.getText().length() > 10) {
 					lblTeamNameError.setVisible(true);
-<<<<<<< HEAD
-=======
 				}
 				else {
 					game.getTeam().nameTeam(teamNameEntryBox.getText());
 					lblTeamNameError.setVisible(false);
 					btnProceedToCamp.setVisible(true);
 					lblBeginQuest.setText("Go forth, " + game.getTeam().getName() + ", and vanquish darstardly villains who've many cities under their rule!");
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
 				}
 			}
 		});
 		btnSubmitTeamName.setBounds(371, 318, 177, 25);
 		frame.getContentPane().add(btnSubmitTeamName);
-<<<<<<< HEAD
-		
-		
-		
-=======
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
+
 	}
 	private void baseCampPanel() {
 		frame.getContentPane().setLayout(null);
@@ -836,8 +825,7 @@ public class gameEnvGui {
 		
 	}
 	
-<<<<<<< HEAD
-=======
+
 	private void hospitalPanel() {
 		
 		JLabel lblApplyTo = new JLabel("Apply To:");
@@ -1033,7 +1021,6 @@ public class gameEnvGui {
 		frame.getContentPane().add(btnExit_1);
 		
 	}
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
 	
 	private void shopPanel() {
 		JLabel lblTeamsCurrentInventory = new JLabel("Teams Current Inventory");
@@ -1158,29 +1145,28 @@ public class gameEnvGui {
 				case "Iron Flesh I":
 					break;
 				case "Iron Flesh II":
-<<<<<<< HEAD
 					break;
-				case "Iron Flesh III":
-					break;
-				case "Silver Tongue I":
-					break;
-				case "Silver Tongue II":
-					break;
-				case "Silver Tongue III":
-=======
-					if (game.getCurrentShop().getPowerUpStockLevel()[1] > 0) {
-						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(1));
-						game.getCurrentShop().getPowerUpStockLevel()[1] -= 1;
-						PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
-					} else {
-						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
-					}
-					break;
+				//case "Iron Flesh III":
+					//break;
+				//case "Silver Tongue I":
+					//break;
+				//case "Silver Tongue II":
+					//break;
+				//case "Silver Tongue III":
+					
+//					if (game.getCurrentShop().getPowerUpStockLevel()[1] > 0) {
+//						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(1));
+//						game.getCurrentShop().getPowerUpStockLevel()[1] -= 1;
+//						//PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
+//					} else {
+//						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
+//					}
+					//break;
 				case "Iron Flesh III":
 					if (game.getCurrentShop().getPowerUpStockLevel()[2] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(2));
 						game.getCurrentShop().getPowerUpStockLevel()[2] -= 1;
-						PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
+						//PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1189,7 +1175,7 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[3] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(3));
 						game.getCurrentShop().getPowerUpStockLevel()[3] -= 1;
-						PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
+						//PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1198,7 +1184,7 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[4] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(4));
 						game.getCurrentShop().getPowerUpStockLevel()[4] -= 1;
-						PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
+						//PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1207,7 +1193,7 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[5] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(5));
 						game.getCurrentShop().getPowerUpStockLevel()[5] -= 1;
-						PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
+						//PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1216,7 +1202,7 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[6] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(6));
 						game.getCurrentShop().getPowerUpStockLevel()[6] -= 1;
-						PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
+						//PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1225,7 +1211,7 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[7] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(7));
 						game.getCurrentShop().getPowerUpStockLevel()[7] -= 1;
-						PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
+						//PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
@@ -1234,11 +1220,10 @@ public class gameEnvGui {
 					if (game.getCurrentShop().getPowerUpStockLevel()[8] > 0) {
 						game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(8));
 						game.getCurrentShop().getPowerUpStockLevel()[8] -= 1;
-						PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
+						//PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
 					} else {
 						JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 					}
->>>>>>> a79a103f2e034468aff2cee4abd2cd8421c4b75b
 					break;
 				}
 			}
@@ -1611,7 +1596,7 @@ public class gameEnvGui {
 		});
 		btnPUP4.setBounds(135, 152, 189, 58);
 		frame.getContentPane().add(btnPUP4);
-		
+		                                                                                                                        
 		
 		JButton btnPUP5 = new JButton("Augment Vitality II");
 		btnPUP5.addActionListener(new ActionListener() {
