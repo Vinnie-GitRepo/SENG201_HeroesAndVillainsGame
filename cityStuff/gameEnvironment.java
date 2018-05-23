@@ -140,11 +140,11 @@ public class gameEnvironment {
 				switchGame = true;
 			}
 			
-			Villian baddy = new Villian(villianNames.get(numName), 
-					catchPhrase.get(numPhrase), switchGame);
-			villians.add(baddy);
-			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
-			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
+//			Villian baddy = new Villian(villianNames.get(numName), 
+//					catchPhrase.get(numPhrase), switchGame);
+//			villians.add(baddy);
+//			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
+//			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
 			
 			// TEST TO MAKE SURE IT IS RANDOMIZING
 			//System.out.println(villians.get(i).getName()); 

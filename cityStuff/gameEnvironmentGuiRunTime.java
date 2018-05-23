@@ -1,8 +1,12 @@
 package cityStuff;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+
+import javax.swing.ImageIcon;
+
 import games.*;
 import teamStuff.*;
 import villianStuff.Villian;
@@ -229,7 +233,15 @@ public class gameEnvironmentGuiRunTime {
 		add("catchPhrase NUMBER 5");
 		add("catchPhrase NUMBER 6");
 		}};
-
+		
+		ArrayList<ImageIcon> villianIcons = new ArrayList<ImageIcon>() {{
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill1.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill2.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill3.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill4.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill5.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill6.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+		}};
 		int numName;
 		int numPhrase;	
 		
@@ -247,7 +259,7 @@ public class gameEnvironmentGuiRunTime {
 			}
 			
 			Villian baddy = new Villian(villianNames.get(numName), 
-					catchPhrase.get(numPhrase), switchGame);
+					catchPhrase.get(numPhrase), switchGame, villianIcons.get(i));
 			villians.add(baddy);
 			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
 			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
@@ -282,7 +294,6 @@ public class gameEnvironmentGuiRunTime {
 		ArrayList<String> areas = new ArrayList<String>();
 		int size = options.size();
 		int num;
-		
 		for (int i = size - 1; i != -1; i--) {
 			num = rand.nextInt(i + 1);
 			areas.add(options.get(num));
