@@ -26,6 +26,7 @@ import java.util.TimerTask;
 
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -42,7 +43,7 @@ public class gameEnvGui {
 	public static int vill;
 	public Hero heroToAdd;
 	public gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
-	private JFrame frame;
+	private JFrame frmHeroesVsVillains;
 	private JTextField textField;
 	private JTextField heroNameEntryBox;
 	private JTextField teamNameEntryBox;
@@ -57,7 +58,7 @@ public class gameEnvGui {
 			public void run() {
 				try {
 					gameEnvGui window = new gameEnvGui();
-					window.frame.setVisible(true);
+					window.frmHeroesVsVillains.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,7 +71,8 @@ public class gameEnvGui {
 	 */
 	public gameEnvGui() {
 		initialize();
-		cityAmmountPanel();//change to team set up later
+		gameStartPanel();
+//		cityAmmountPanel();//change to team set up later
 //		teamInitializerPanel();
 //		teamNamePanel();
 //		baseCampPanel();
@@ -91,14 +93,58 @@ public class gameEnvGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setBounds(100, 100, 940, 642);
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains = new JFrame();
+		frmHeroesVsVillains.setTitle("Heroes vs. Villains");
+		frmHeroesVsVillains.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frmHeroesVsVillains.setBounds(100, 100, 940, 642);
+		frmHeroesVsVillains.setResizable(false);
+		frmHeroesVsVillains.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
+		
+		
 	}
 	
+	private void gameStartPanel() {
+		frmHeroesVsVillains.getContentPane().setLayout(null);
+		JLabel lblNewLabel_3 = new JLabel("HEROES  VS  VILLAINS");
+		lblNewLabel_3.setForeground(new Color(0, 0, 0));
+		lblNewLabel_3.setFont(new Font("Arvo", Font.BOLD | Font.ITALIC, 60));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(12, 44, 914, 82);
+		frmHeroesVsVillains.getContentPane().add(lblNewLabel_3);
+		
+		JButton btnQuitGame = new JButton("QUIT");
+		btnQuitGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnQuitGame.setForeground(new Color(255, 255, 255));
+		btnQuitGame.setBackground(new Color(75, 0, 130));
+		btnQuitGame.setFont(new Font("Dialog", Font.BOLD, 70));
+		btnQuitGame.setBounds(313, 404, 319, 129);
+		frmHeroesVsVillains.getContentPane().add(btnQuitGame);
+		
+		JButton btnPlayGame = new JButton("PLAY");
+		btnPlayGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
+				cityAmmountPanel();
+			}
+		});
+		btnPlayGame.setBackground(new Color(75, 0, 130));
+		btnPlayGame.setForeground(new Color(255, 255, 255));
+		btnPlayGame.setFont(new Font("Dialog", Font.BOLD, 70));
+		btnPlayGame.setBounds(313, 280, 319, 129);
+		frmHeroesVsVillains.getContentPane().add(btnPlayGame);
+		
+		JLabel lblBackGround = new JLabel("");
+		lblBackGround.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/StartScreenArt.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		lblBackGround.setBounds(0, 0, 938, 616);
+		frmHeroesVsVillains.getContentPane().add(lblBackGround);
+		
+	}
 	
 	
 	
@@ -107,13 +153,13 @@ public class gameEnvGui {
 		lblNameYourTeam.setFont(new Font("Arvo", Font.BOLD, 40));
 		lblNameYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNameYourTeam.setBounds(12, 47, 914, 52);
-		frame.getContentPane().add(lblNameYourTeam);
+		frmHeroesVsVillains.getContentPane().add(lblNameYourTeam);
 		
 		teamNameEntryBox = new JTextField();
 		teamNameEntryBox.setFont(new Font("Arvo", Font.BOLD, 70));
 		teamNameEntryBox.setHorizontalAlignment(SwingConstants.CENTER);
 		teamNameEntryBox.setBounds(118, 135, 713, 107);
-		frame.getContentPane().add(teamNameEntryBox);
+		frmHeroesVsVillains.getContentPane().add(teamNameEntryBox);
 		teamNameEntryBox.setColumns(10);
 		
 		JLabel lblTeamNameError = new JLabel("INVALID ENTRY: The team name must be between 2 and 10 characters in length.");
@@ -121,7 +167,7 @@ public class gameEnvGui {
 		lblTeamNameError.setForeground(new Color(255, 0, 0));
 		lblTeamNameError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTeamNameError.setBounds(12, 254, 914, 52);
-		frame.getContentPane().add(lblTeamNameError);
+		frmHeroesVsVillains.getContentPane().add(lblTeamNameError);
 		lblTeamNameError.setVisible(false);
 		
 		JButton btnProceedToCamp = new JButton("PROCEED  TO  CAMP");
@@ -130,21 +176,21 @@ public class gameEnvGui {
 				game.getTeam().setBarterSkillSum();
 				game.getTeam().setDeterrenceSum();
 				game.getTeam().setFameSum();
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
 		btnProceedToCamp.setFont(new Font("Dialog", Font.BOLD, 22));
 		btnProceedToCamp.setBounds(287, 503, 339, 88);
-		frame.getContentPane().add(btnProceedToCamp);
+		frmHeroesVsVillains.getContentPane().add(btnProceedToCamp);
 		btnProceedToCamp.setVisible(false);
 		
 		JLabel lblBeginQuest = new JLabel("");
 		lblBeginQuest.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lblBeginQuest.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBeginQuest.setBounds(12, 446, 914, 45);
-		frame.getContentPane().add(lblBeginQuest);
+		frmHeroesVsVillains.getContentPane().add(lblBeginQuest);
 		
 		JButton btnSubmitTeamName = new JButton("Confirm Name");
 		btnSubmitTeamName.addActionListener(new ActionListener() {
@@ -161,10 +207,15 @@ public class gameEnvGui {
 			}
 		});
 		btnSubmitTeamName.setBounds(371, 318, 177, 25);
-		frame.getContentPane().add(btnSubmitTeamName);
+		frmHeroesVsVillains.getContentPane().add(btnSubmitTeamName);
 	}
+	
+	
+	
+	
+	
 	private void baseCampPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		
 		JButton btnNewButton_1 = new JButton("View Inventory");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -173,7 +224,7 @@ public class gameEnvGui {
 			}
 		});
 		btnNewButton_1.setBounds(55, 478, 165, 91);
-		frame.getContentPane().add(btnNewButton_1);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_1);
 		
 		JButton btnViewStats = new JButton("View Stats");
 		btnViewStats.addActionListener(new ActionListener() {
@@ -182,7 +233,7 @@ public class gameEnvGui {
 			}
 		});
 		btnViewStats.setBounds(384, 478, 165, 91);
-		frame.getContentPane().add(btnViewStats);
+		frmHeroesVsVillains.getContentPane().add(btnViewStats);
 		
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
@@ -192,13 +243,13 @@ public class gameEnvGui {
 				}
 				citiesFinished += 1;
 				game.setCurrentShop(citiesFinished);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
 		btnExitGame.setBounds(708, 478, 165, 91);
-		frame.getContentPane().add(btnExitGame);
+		frmHeroesVsVillains.getContentPane().add(btnExitGame);
 		
 		JButton btnNorth = new JButton("North");
 		btnNorth.addActionListener(new ActionListener() {
@@ -206,8 +257,8 @@ public class gameEnvGui {
 //				btnNorth.setText(game.getMapPlace(0));
 				btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));
 				game.setFoundPlaceTrue(0);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				switch(btnNorth.getText()) {
 					case "Lair":
 						villiansLairPanel();
@@ -225,7 +276,7 @@ public class gameEnvGui {
 			}
 		});
 		btnNorth.setBounds(405, 43, 117, 25);
-		frame.getContentPane().add(btnNorth);
+		frmHeroesVsVillains.getContentPane().add(btnNorth);
 		btnNorth.setText(game.getMapPlace(0,citiesFinished));//this is the correct one
 //		btnNorth.setText(game.getCurrentMap(citiesFinished).get(0));//this is used for testing
 //		btnNorth.setText("???");
@@ -234,8 +285,8 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
 				game.setFoundPlaceTrue(1);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				switch(btnEast.getText()) {
 					case "Lair":
 						villiansLairPanel();
@@ -253,7 +304,7 @@ public class gameEnvGui {
 			}
 		});
 		btnEast.setBounds(737, 212, 117, 25);
-		frame.getContentPane().add(btnEast);
+		frmHeroesVsVillains.getContentPane().add(btnEast);
 		btnEast.setText(game.getMapPlace(1,citiesFinished));//this is the correct one
 //		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));//test one
 //		btnEast.setText(game.getCurrentMap(citiesFinished).get(1));
@@ -262,8 +313,8 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
 				game.setFoundPlaceTrue(2);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				switch(btnSouth.getText()) {
 					case "Lair":
 						villiansLairPanel();
@@ -284,7 +335,7 @@ public class gameEnvGui {
 			}
 		});
 		btnSouth.setBounds(405, 385, 117, 25);
-		frame.getContentPane().add(btnSouth);
+		frmHeroesVsVillains.getContentPane().add(btnSouth);
 		btnSouth.setText(game.getMapPlace(2,citiesFinished));//correct one
 //		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));//testone
 //		btnSouth.setText(game.getCurrentMap(citiesFinished).get(2));
@@ -293,8 +344,8 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				btnWest.setText(game.getCurrentMap(citiesFinished).get(3));
 				game.setFoundPlaceTrue(3);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				switch(btnWest.getText()) {
 					case "Lair":
 						villiansLairPanel();
@@ -312,45 +363,45 @@ public class gameEnvGui {
 			}
 		});
 		btnWest.setBounds(74, 212, 117, 25);
-		frame.getContentPane().add(btnWest);
+		frmHeroesVsVillains.getContentPane().add(btnWest);
 		btnWest.setText(game.getMapPlace(3,citiesFinished));//correct one
 //		btnWest.setText(game.getCurrentMap(citiesFinished).get(3));//test one
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/team.gif")).getImage().getScaledInstance(553, 376, Image.SCALE_SMOOTH)));
 		lblNewLabel_1.setBounds(260, 124, 431, 173);
-		frame.getContentPane().add(lblNewLabel_1);
+		frmHeroesVsVillains.getContentPane().add(lblNewLabel_1);
 		
 		JLabel compass = new JLabel("");
 		compass.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/compass.png")).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
 		compass.setBounds(0, -272, 949, 740);
-		frame.getContentPane().add(compass);
+		frmHeroesVsVillains.getContentPane().add(compass);
 		
 		JLabel backGround = new JLabel("New label");
 		backGround.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/finalBackground.jpg")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		backGround.setBounds(0, -64, 949, 740);
-		frame.getContentPane().add(backGround);
+		frmHeroesVsVillains.getContentPane().add(backGround);
 	}
 	
 	private void cityAmmountPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JLabel lblHowManyCities = new JLabel("How Many Cities Would You Like To Save?");
 		lblHowManyCities.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lblHowManyCities.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHowManyCities.setBounds(10, 43, 914, 61);
-		frame.getContentPane().add(lblHowManyCities);
+		frmHeroesVsVillains.getContentPane().add(lblHowManyCities);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"3", "4", "5", "6"}));
 		comboBox.setBounds(419, 115, 50, 41);
-		frame.getContentPane().add(comboBox);
+		frmHeroesVsVillains.getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 30));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
 		comboBox_1.setBounds(419, 290, 50, 41);
-		frame.getContentPane().add(comboBox_1);
+		frmHeroesVsVillains.getContentPane().add(comboBox_1);
 		
 		JButton btnNewButton = new JButton("Confirm");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -380,42 +431,47 @@ public class gameEnvGui {
 				}
 				game.setCurrentShop(0);
 				//JOptionPane.showMessageDialog(null, game.num_of_cities);
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				teamInitializerPanel();//for vinnie test
 			}
 		});
 		btnNewButton.setBounds(359, 405, 171, 86);
-		frame.getContentPane().add(btnNewButton);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton);
 		
 		JLabel lblHowManyHeroes = new JLabel("How Many Heroes Would You Like? ");
 		lblHowManyHeroes.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lblHowManyHeroes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHowManyHeroes.setBounds(10, 238, 914, 41);
-		frame.getContentPane().add(lblHowManyHeroes);
+		frmHeroesVsVillains.getContentPane().add(lblHowManyHeroes);
 		
 		
 	}
 	
 	
 	private void villiansLairPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JButton btnNewButton_2 = new JButton("Flee From The Lair");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
+<<<<<<< HEAD
 		btnNewButton_2.setBounds(162, 420, 652, 73);
 		frame.getContentPane().add(btnNewButton_2);
+=======
+		btnNewButton_2.setBounds(129, 244, 241, 90);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_2);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		JButton btnBattleTheVillian = new JButton("Battle The Villian");
 		btnBattleTheVillian.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				if (game.getCurrentVillian().hasFavGame() == true) {
 					JOptionPane.showMessageDialog(null, "THE VILLIAN HAS A FAVOURITE GAME\nYOU HAVE NO CHOICE\nMWAHAHAHA");
 					Random gameNum = new Random();
@@ -438,6 +494,7 @@ public class gameEnvGui {
 				
 			}
 		});
+<<<<<<< HEAD
 		btnBattleTheVillian.setBounds(162, 518, 647, 73);
 		frame.getContentPane().add(btnBattleTheVillian);
 		
@@ -460,72 +517,83 @@ public class gameEnvGui {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(0, 0, 938, 616);
 		frame.getContentPane().add(lblNewLabel_2);
+=======
+		btnBattleTheVillian.setBounds(525, 244, 241, 90);
+		frmHeroesVsVillains.getContentPane().add(btnBattleTheVillian);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(0, 0, 938, 616);
+		frmHeroesVsVillains.getContentPane().add(lblNewLabel_2);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		lblNewLabel_2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/lairWall.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		
 		
 		
+<<<<<<< HEAD
 		
 		
 		
 		
 		
+=======
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 	}
 	
 	private void battleSelectionPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JButton btnNewButton_3 = new JButton("Paper Scissors Rock");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				paperScissorsRockPanel();
 			}
 		});
 		btnNewButton_3.setBounds(87, 139, 179, 118);
-		frame.getContentPane().add(btnNewButton_3);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_3);
 		
 		JButton btnGuessTheRandom = new JButton("Guess The Random Number");
 		btnGuessTheRandom.setBounds(359, 139, 179, 118);
 		btnGuessTheRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				numberGuessPanel();
 			}
 		});
-		frame.getContentPane().add(btnGuessTheRandom);
+		frmHeroesVsVillains.getContentPane().add(btnGuessTheRandom);
 		
 		JButton btnRollTheDice = new JButton("Roll The Dice");
 		btnRollTheDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				diceRollPanel();
 			}
 		});
 		btnRollTheDice.setBounds(630, 139, 179, 118);
-		frame.getContentPane().add(btnRollTheDice);
+		frmHeroesVsVillains.getContentPane().add(btnRollTheDice);
 	}
 	
 	private void diceRollPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(361, 24, 269, 14);
 		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
-		frame.getContentPane().add(lblBattlingWith);
+		frmHeroesVsVillains.getContentPane().add(lblBattlingWith);
 		
 		JLabel lblHero = new JLabel("hero1");
 		lblHero.setBounds(56, 24, 46, 14);
-		frame.getContentPane().add(lblHero);
+		frmHeroesVsVillains.getContentPane().add(lblHero);
 		
 		
 		JLabel lblHero_1 = new JLabel("hero2");
 		lblHero_1.setBounds(56, 98, 46, 14);
-		frame.getContentPane().add(lblHero_1);
+		frmHeroesVsVillains.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
 		lblHero_2.setBounds(56, 175, 46, 14);
-		frame.getContentPane().add(lblHero_2);
+		frmHeroesVsVillains.getContentPane().add(lblHero_2);
 		
 		
 		JRadioButton char_1_box = new JRadioButton("");
@@ -537,7 +605,7 @@ public class gameEnvGui {
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
 		char_1_box.setSelected(true);
-		frame.getContentPane().add(char_1_box);
+		frmHeroesVsVillains.getContentPane().add(char_1_box);
 		
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
@@ -547,7 +615,7 @@ public class gameEnvGui {
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
-		frame.getContentPane().add(char_2_box);
+		frmHeroesVsVillains.getContentPane().add(char_2_box);
 		
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
@@ -557,7 +625,7 @@ public class gameEnvGui {
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
-		frame.getContentPane().add(char_3_box);
+		frmHeroesVsVillains.getContentPane().add(char_3_box);
 		
 		try {
 			lblHero.setText(game.getTeam().getHeroArray().get(0).getName());
@@ -585,7 +653,7 @@ public class gameEnvGui {
 		
 		JLabel lblResult = new JLabel("You Need To Roll The Dice First!");
 		lblResult.setBounds(281, 137, 304, 55);
-		frame.getContentPane().add(lblResult);
+		frmHeroesVsVillains.getContentPane().add(lblResult);
 		
 		JButton btnRollDice = new JButton("Roll Dice");
 		btnRollDice.addActionListener(new ActionListener() {
@@ -600,8 +668,8 @@ public class gameEnvGui {
 					game.getCurrentVillian().oneDefeat();
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						frame.getContentPane().removeAll();
-						frame.repaint();
+						frmHeroesVsVillains.getContentPane().removeAll();
+						frmHeroesVsVillains.repaint();
 						villianBeatPanel();
 					}
 				} else if (hero < vill) {
@@ -627,8 +695,8 @@ public class gameEnvGui {
 							}
 						}
 						if (stillAliveChar == 999) {
-							frame.getContentPane().removeAll();
-							frame.repaint();
+							frmHeroesVsVillains.getContentPane().removeAll();
+							frmHeroesVsVillains.repaint();
 							lossGamePanel();
 						} else if (game.getCurrentHero() == 0) {
 							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
@@ -653,7 +721,7 @@ public class gameEnvGui {
 			}
 		});
 		btnRollDice.setBounds(119, 400, 311, 138);
-		frame.getContentPane().add(btnRollDice);
+		frmHeroesVsVillains.getContentPane().add(btnRollDice);
 		
 		JButton btnViewStats_1 = new JButton("View Stats");
 		btnViewStats_1.addActionListener(new ActionListener() {
@@ -662,45 +730,45 @@ public class gameEnvGui {
 			}
 		});
 		btnViewStats_1.setBounds(499, 400, 311, 138);
-		frame.getContentPane().add(btnViewStats_1);
+		frmHeroesVsVillains.getContentPane().add(btnViewStats_1);
 		
 	}
 	
 	private void numberGuessPanel() {
 		//int numOfGuesses = 0;
 		vill = numberGuess.getVillianChoice();
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JLabel lblWhatsYourGuess = new JLabel("Whats Your Guess?");
 		lblWhatsYourGuess.setBounds(373, 253, 129, 14);
-		frame.getContentPane().add(lblWhatsYourGuess);
+		frmHeroesVsVillains.getContentPane().add(lblWhatsYourGuess);
 		
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(361, 24, 269, 14);
 		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
-		frame.getContentPane().add(lblBattlingWith);
+		frmHeroesVsVillains.getContentPane().add(lblBattlingWith);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox.setBounds(383, 278, 65, 22);
-		frame.getContentPane().add(comboBox);
+		frmHeroesVsVillains.getContentPane().add(comboBox);
 		
 		JLabel lblResult = new JLabel("You Need To Roll The Dice First!");
 		lblResult.setBounds(281, 137, 304, 55);
-		frame.getContentPane().add(lblResult);
+		frmHeroesVsVillains.getContentPane().add(lblResult);
 		
 		
 		JLabel lblHero = new JLabel("hero1");
 		lblHero.setBounds(56, 24, 46, 14);
-		frame.getContentPane().add(lblHero);
+		frmHeroesVsVillains.getContentPane().add(lblHero);
 		
 		
 		JLabel lblHero_1 = new JLabel("hero2");
 		lblHero_1.setBounds(56, 98, 46, 14);
-		frame.getContentPane().add(lblHero_1);
+		frmHeroesVsVillains.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
 		lblHero_2.setBounds(56, 175, 46, 14);
-		frame.getContentPane().add(lblHero_2);
+		frmHeroesVsVillains.getContentPane().add(lblHero_2);
 		
 		
 		JRadioButton char_1_box = new JRadioButton("");
@@ -712,7 +780,7 @@ public class gameEnvGui {
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
 		char_1_box.setSelected(true);
-		frame.getContentPane().add(char_1_box);
+		frmHeroesVsVillains.getContentPane().add(char_1_box);
 		
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
@@ -722,7 +790,7 @@ public class gameEnvGui {
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
-		frame.getContentPane().add(char_2_box);
+		frmHeroesVsVillains.getContentPane().add(char_2_box);
 		
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
@@ -732,7 +800,7 @@ public class gameEnvGui {
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
-		frame.getContentPane().add(char_3_box);
+		frmHeroesVsVillains.getContentPane().add(char_3_box);
 		
 		try {
 			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
@@ -776,13 +844,13 @@ public class gameEnvGui {
 		
 		JLabel lblNewLabel = new JLabel("CurrentAnswer");
 		lblNewLabel.setBounds(795, 505, 73, 14);
-		frame.getContentPane().add(lblNewLabel);
+		frmHeroesVsVillains.getContentPane().add(lblNewLabel);
 		lblNewLabel.setText(Integer.toString(vill));
 		
 		JButton btnConfirmYourGuess = new JButton("Confirm Your Guess");
 		btnConfirmYourGuess.setBounds(274, 311, 311, 126);
-		frame.getContentPane().add(btnConfirmYourGuess);
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().add(btnConfirmYourGuess);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		btnConfirmYourGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -800,8 +868,8 @@ public class gameEnvGui {
 					vill = numberGuess.getVillianChoice();
 					lblNewLabel.setText(Integer.toString(vill));
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						frame.getContentPane().removeAll();
-						frame.repaint();
+						frmHeroesVsVillains.getContentPane().removeAll();
+						frmHeroesVsVillains.repaint();
 						villianBeatPanel();
 					}
 				} else {
@@ -830,8 +898,8 @@ public class gameEnvGui {
 							}
 						}
 						if (stillAliveChar == 999) {
-							frame.getContentPane().removeAll();
-							frame.repaint();
+							frmHeroesVsVillains.getContentPane().removeAll();
+							frmHeroesVsVillains.repaint();
 							lossGamePanel();
 						} else if (game.getCurrentHero() == 0) {
 							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
@@ -859,7 +927,7 @@ public class gameEnvGui {
 			}
 		});
 		btnViewStats_1.setBounds(274, 460, 311, 126);
-		frame.getContentPane().add(btnViewStats_1);
+		frmHeroesVsVillains.getContentPane().add(btnViewStats_1);
 		
 		
 	}
@@ -868,22 +936,22 @@ public class gameEnvGui {
 		
 		JLabel lblApplyTo = new JLabel("Apply To:");
 		lblApplyTo.setBounds(421, 231, 70, 15);
-		frame.getContentPane().add(lblApplyTo);
+		frmHeroesVsVillains.getContentPane().add(lblApplyTo);
 		
 		
 		JLabel lblHero = new JLabel("hero1");
 		lblHero.setBounds(245, 264, 46, 14);
-		frame.getContentPane().add(lblHero);
+		frmHeroesVsVillains.getContentPane().add(lblHero);
 		
 		
 		
 		JLabel lblHero_1 = new JLabel("hero2");
 		lblHero_1.setBounds(441, 264, 46, 14);
-		frame.getContentPane().add(lblHero_1);
+		frmHeroesVsVillains.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
 		lblHero_2.setBounds(627, 264, 46, 14);
-		frame.getContentPane().add(lblHero_2);
+		frmHeroesVsVillains.getContentPane().add(lblHero_2);
 		
 		
 		JRadioButton char_1_box = new JRadioButton("");
@@ -896,7 +964,7 @@ public class gameEnvGui {
 		});
 		char_1_box.setBounds(227, 342, 97, 23);
 		char_1_box.setSelected(true);
-		frame.getContentPane().add(char_1_box);
+		frmHeroesVsVillains.getContentPane().add(char_1_box);
 		
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.setHorizontalAlignment(SwingConstants.CENTER);
@@ -906,8 +974,13 @@ public class gameEnvGui {
 				game.setCurrentHero(1);
 			}
 		});
+<<<<<<< HEAD
 		char_2_box.setBounds(421, 342, 97, 23);
 		frame.getContentPane().add(char_2_box);
+=======
+		char_2_box.setBounds(451, 286, 97, 23);
+		frmHeroesVsVillains.getContentPane().add(char_2_box);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.setHorizontalAlignment(SwingConstants.CENTER);
@@ -917,8 +990,13 @@ public class gameEnvGui {
 				game.setCurrentHero(2);
 			}
 		});
+<<<<<<< HEAD
 		char_3_box.setBounds(607, 342, 97, 23);
 		frame.getContentPane().add(char_3_box);
+=======
+		char_3_box.setBounds(637, 286, 97, 23);
+		frmHeroesVsVillains.getContentPane().add(char_3_box);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -991,7 +1069,7 @@ public class gameEnvGui {
 		
 		JLabel lblAvaiableHealingItems = new JLabel("Avaiable Healing Items");
 		lblAvaiableHealingItems.setBounds(369, 22, 177, 15);
-		frame.getContentPane().add(lblAvaiableHealingItems);
+		frmHeroesVsVillains.getContentPane().add(lblAvaiableHealingItems);
 		
 		JButton btnNewButton_4 = new JButton("Restore Health I");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -1000,7 +1078,7 @@ public class gameEnvGui {
 			}
 		});
 		btnNewButton_4.setBounds(135, 55, 189, 81);
-		frame.getContentPane().add(btnNewButton_4);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_4);
 		
 		selectedHealingItem = btnNewButton_4.getText();
 		
@@ -1011,7 +1089,7 @@ public class gameEnvGui {
 			}
 		});
 		btnRestoreHealthIi_1.setBounds(357, 55, 189, 81);
-		frame.getContentPane().add(btnRestoreHealthIi_1);
+		frmHeroesVsVillains.getContentPane().add(btnRestoreHealthIi_1);
 		
 		JButton btnRestoreHealthIi = new JButton("Restore Health III");
 		btnRestoreHealthIi.addActionListener(new ActionListener() {
@@ -1020,22 +1098,22 @@ public class gameEnvGui {
 			}
 		});
 		btnRestoreHealthIi.setBounds(571, 55, 189, 81);
-		frame.getContentPane().add(btnRestoreHealthIi);
+		frmHeroesVsVillains.getContentPane().add(btnRestoreHealthIi);
 		
 		JLabel HealthIStock = new JLabel("New label");
 		HealthIStock.setBounds(196, 148, 70, 15);
-		frame.getContentPane().add(HealthIStock);
+		frmHeroesVsVillains.getContentPane().add(HealthIStock);
 		HealthIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(0))));
 		
 		
 		JLabel HealthIIStock = new JLabel("New label");
 		HealthIIStock.setBounds(421, 148, 70, 15);
-		frame.getContentPane().add(HealthIIStock);
+		frmHeroesVsVillains.getContentPane().add(HealthIIStock);
 		HealthIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(1))));
 		
 		JLabel HealthIIIStock = new JLabel("New label");
 		HealthIIIStock.setBounds(645, 148, 70, 15);
-		frame.getContentPane().add(HealthIIIStock);
+		frmHeroesVsVillains.getContentPane().add(HealthIIIStock);
 		HealthIIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(2))));
 		
 	
@@ -1056,8 +1134,8 @@ public class gameEnvGui {
 				}
 				if (applyIt == true) {
 					game.getTeam().getHeroArray().get(game.getCurrentHero()).useHealingItem(game.getTeam().getHealingItems().get(count));
-					frame.getContentPane().removeAll();
-					frame.repaint();
+					frmHeroesVsVillains.getContentPane().removeAll();
+					frmHeroesVsVillains.repaint();
 					hospitalPanel();
 					//timer.setVisible(true);
 //					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 0) {
@@ -1076,18 +1154,18 @@ public class gameEnvGui {
 			}
 		});
 		btnNewButton_5.setBounds(194, 380, 215, 100);
-		frame.getContentPane().add(btnNewButton_5);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_5);
 		
 		JButton btnExit_1 = new JButton("Exit");
 		btnExit_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
 		btnExit_1.setBounds(518, 380, 215, 100);
-		frame.getContentPane().add(btnExit_1);
+		frmHeroesVsVillains.getContentPane().add(btnExit_1);
 		
 
 		
@@ -1096,30 +1174,46 @@ public class gameEnvGui {
 	private void shopPanel() {
 		JLabel lblTeamsCurrentInventory = new JLabel("Teams Current Inventory");
 		lblTeamsCurrentInventory.setBounds(372, 12, 238, 15);
-		frame.getContentPane().add(lblTeamsCurrentInventory);
-		frame.getContentPane().setBackground(UIManager.getColor("OptionPane.warningDialog.border.background"));
+		frmHeroesVsVillains.getContentPane().add(lblTeamsCurrentInventory);
+		frmHeroesVsVillains.getContentPane().setBackground(UIManager.getColor("OptionPane.warningDialog.border.background"));
 		JLabel itemName = new JLabel("Selected Item Name");
 		itemName.setBounds(751, 572, 135, 15);
+<<<<<<< HEAD
 		frame.getContentPane().add(itemName);
+=======
+		frmHeroesVsVillains.getContentPane().add(itemName);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		itemName.setVisible(false);
 		
 		
 		//itemName.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		JLabel itemImg = new JLabel("Selected Item Name");
 		itemImg.setBounds(45, 310, 53, 51);
+<<<<<<< HEAD
 		frame.getContentPane().add(itemImg);
+=======
+		frmHeroesVsVillains.getContentPane().add(itemImg);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
 		btnExit.setBounds(495, 534, 238, 70);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnExit);
+=======
+		frmHeroesVsVillains.getContentPane().add(btnExit);
+		
+		JLabel currentItemInfo = new JLabel("");
+		currentItemInfo.setBounds(28, 400, 70, 15);
+		frmHeroesVsVillains.getContentPane().add(currentItemInfo);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		JLabel currentItemInfo = new JLabel("");
 		currentItemInfo.setBounds(28, 400, 70, 15);
@@ -1127,11 +1221,11 @@ public class gameEnvGui {
 		
 		JLabel lblAvailableHealingItems = new JLabel("Available Healing Items");
 		lblAvailableHealingItems.setBounds(372, 64, 238, 15);
-		frame.getContentPane().add(lblAvailableHealingItems);
+		frmHeroesVsVillains.getContentPane().add(lblAvailableHealingItems);
 		
 		JLabel lblAvailablePowerUps = new JLabel("Available Power Ups");
 		lblAvailablePowerUps.setBounds(384, 196, 238, 15);
-		frame.getContentPane().add(lblAvailablePowerUps);
+		frmHeroesVsVillains.getContentPane().add(lblAvailablePowerUps);
 		
 		JButton health1 = new JButton("r1");
 		health1.addActionListener(new ActionListener() {
@@ -1141,7 +1235,7 @@ public class gameEnvGui {
 			}
 		});
 		health1.setBounds(185, 150, 123, 23);
-		frame.getContentPane().add(health1);
+		frmHeroesVsVillains.getContentPane().add(health1);
 		health1.setText(game.getCurrentShop().getHealingItems().get(0).getHealingItemName());
 		
 		JButton health2 = new JButton("r2");
@@ -1152,7 +1246,7 @@ public class gameEnvGui {
 			}
 		});
 		health2.setBounds(407, 151, 117, 21);
-		frame.getContentPane().add(health2);
+		frmHeroesVsVillains.getContentPane().add(health2);
 		health2.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
 		
 		JButton health3 = new JButton("r3");
@@ -1163,7 +1257,7 @@ public class gameEnvGui {
 			}
 		});
 		health3.setBounds(640, 151, 123, 23);
-		frame.getContentPane().add(health3);
+		frmHeroesVsVillains.getContentPane().add(health3);
 		health3.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
 		
 		
@@ -1178,7 +1272,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp1.setBounds(173, 279, 123, 23);
-		frame.getContentPane().add(powerUp1);
+		frmHeroesVsVillains.getContentPane().add(powerUp1);
 		powerUp1.setText(game.getCurrentShop().getPowerUpItems.get(0).getPowerUpName());
 		
 		JButton powerUp2 = new JButton("p2");
@@ -1189,7 +1283,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp2.setBounds(407, 279, 104, 23);
-		frame.getContentPane().add(powerUp2);
+		frmHeroesVsVillains.getContentPane().add(powerUp2);
 		powerUp2.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
 		
 		JButton powerUp3 = new JButton("p3");
@@ -1200,7 +1294,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp3.setBounds(640, 279, 104, 22);
-		frame.getContentPane().add(powerUp3);
+		frmHeroesVsVillains.getContentPane().add(powerUp3);
 		powerUp3.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
 		
 		JButton powerUp4 = new JButton("p4");
@@ -1211,7 +1305,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp4.setBounds(173, 372, 123, 23);
-		frame.getContentPane().add(powerUp4);
+		frmHeroesVsVillains.getContentPane().add(powerUp4);
 		powerUp4.setText(game.getCurrentShop().getPowerUpItems.get(3).getPowerUpName());
 		
 		JButton powerUp5 = new JButton("p5");
@@ -1222,7 +1316,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp5.setBounds(407, 372, 104, 23);
-		frame.getContentPane().add(powerUp5);
+		frmHeroesVsVillains.getContentPane().add(powerUp5);
 		powerUp5.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
 		
 		JButton powerUp6 = new JButton("p6");
@@ -1233,7 +1327,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp6.setBounds(640, 371, 104, 23);
-		frame.getContentPane().add(powerUp6);
+		frmHeroesVsVillains.getContentPane().add(powerUp6);
 		powerUp6.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
 		
 		JButton powerUp7 = new JButton("p7");
@@ -1244,7 +1338,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp7.setBounds(173, 489, 123, 23);
-		frame.getContentPane().add(powerUp7);
+		frmHeroesVsVillains.getContentPane().add(powerUp7);
 		powerUp7.setText(game.getCurrentShop().getPowerUpItems.get(6).getPowerUpName());
 		
 		JButton powerUp8 = new JButton("p8");
@@ -1255,7 +1349,7 @@ public class gameEnvGui {
 			}
 		});
 		powerUp8.setBounds(407, 489, 104, 23);
-		frame.getContentPane().add(powerUp8);
+		frmHeroesVsVillains.getContentPane().add(powerUp8);
 		powerUp8.setText(game.getCurrentShop().getPowerUpItems.get(7).getPowerUpName());
 		
 		JButton powerUp9 = new JButton("p9");
@@ -1266,12 +1360,16 @@ public class gameEnvGui {
 			}
 		});
 		powerUp9.setBounds(640, 489, 104, 22);
-		frame.getContentPane().add(powerUp9);
+		frmHeroesVsVillains.getContentPane().add(powerUp9);
 		powerUp9.setText(game.getCurrentShop().getPowerUpItems.get(8).getPowerUpName());
 		
 		JLabel lblSelectedItem = new JLabel("Selected Item");
 		lblSelectedItem.setBounds(21, 283, 104, 15);
+<<<<<<< HEAD
 		frame.getContentPane().add(lblSelectedItem);
+=======
+		frmHeroesVsVillains.getContentPane().add(lblSelectedItem);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 //		r1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		
@@ -1295,62 +1393,62 @@ public class gameEnvGui {
 //		STOCK LEVEL LABELS
 		JLabel HIT1 = new JLabel("r1Stock");
 		HIT1.setBounds(314, 132, 70, 15);
-		frame.getContentPane().add(HIT1);
+		frmHeroesVsVillains.getContentPane().add(HIT1);
 		HIT1.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[0]));
 		
 		JLabel HIT2 = new JLabel("r1Stock");
 		HIT2.setBounds(529, 132, 70, 15);
-		frame.getContentPane().add(HIT2);
+		frmHeroesVsVillains.getContentPane().add(HIT2);
 		HIT2.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[1]));
 		
 		JLabel HIT3 = new JLabel("r1Stock");
 		HIT3.setBounds(762, 132, 70, 15);
-		frame.getContentPane().add(HIT3);
+		frmHeroesVsVillains.getContentPane().add(HIT3);
 		HIT3.setText(String.valueOf(game.getCurrentShop().getHealingStockLevel()[2]));
 		
 		JLabel PUP1 = new JLabel("null");
 		PUP1.setBounds(314, 260, 70, 15);
-		frame.getContentPane().add(PUP1);
+		frmHeroesVsVillains.getContentPane().add(PUP1);
 		PUP1.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[0]));
 		
 		JLabel PUP2 = new JLabel("null");
 		PUP2.setBounds(529, 260, 70, 15);
-		frame.getContentPane().add(PUP2);
+		frmHeroesVsVillains.getContentPane().add(PUP2);
 		PUP2.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[1]));
 		
 		JLabel PUP3 = new JLabel("null");
 		PUP3.setBounds(762, 260, 70, 15);
-		frame.getContentPane().add(PUP3);
+		frmHeroesVsVillains.getContentPane().add(PUP3);
 		PUP3.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[2]));
 		
 		JLabel PUP4 = new JLabel("null");
 		PUP4.setBounds(314, 353, 70, 15);
-		frame.getContentPane().add(PUP4);
+		frmHeroesVsVillains.getContentPane().add(PUP4);
 		PUP4.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[3]));
 		
 		JLabel PUP5 = new JLabel("null");
 		PUP5.setBounds(529, 353, 70, 15);
-		frame.getContentPane().add(PUP5);
+		frmHeroesVsVillains.getContentPane().add(PUP5);
 		PUP5.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[4]));
 		
 		JLabel PUP6 = new JLabel("null");
 		PUP6.setBounds(762, 353, 70, 15);
-		frame.getContentPane().add(PUP6);
+		frmHeroesVsVillains.getContentPane().add(PUP6);
 		PUP6.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[5]));
 		
 		JLabel PUP7 = new JLabel("null");
 		PUP7.setBounds(319, 470, 70, 15);
-		frame.getContentPane().add(PUP7);
+		frmHeroesVsVillains.getContentPane().add(PUP7);
 		PUP7.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[6]));
 		
 		JLabel PUP8 = new JLabel("null");
 		PUP8.setBounds(529, 470, 70, 15);
-		frame.getContentPane().add(PUP8);
+		frmHeroesVsVillains.getContentPane().add(PUP8);
 		PUP8.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[7]));
 		
 		JLabel PUP9 = new JLabel("null");
 		PUP9.setBounds(726, 452, 70, 15);
-		frame.getContentPane().add(PUP9);
+		frmHeroesVsVillains.getContentPane().add(PUP9);
 		PUP9.setText(String.valueOf(game.getCurrentShop().getPowerUpStockLevel()[8]));
 		
 		
@@ -1535,14 +1633,18 @@ public class gameEnvGui {
 					game.makeAllFound();
 					game.hasMap = true;
 				}
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				shopPanel();
 				
 			}
 		});
 		purchaseButton.setBounds(216, 534, 227, 70);
+<<<<<<< HEAD
 		frame.getContentPane().add(purchaseButton);
+=======
+		frmHeroesVsVillains.getContentPane().add(purchaseButton);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		JLabel r1 = new JLabel("New label");
 		r1.addMouseListener(new MouseAdapter() {
@@ -1553,61 +1655,61 @@ public class gameEnvGui {
 		});
 		r1.setBounds(216, 96, 53, 51);
 		r1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		frame.getContentPane().add(r1);
+		frmHeroesVsVillains.getContentPane().add(r1);
 		
 		JLabel r2 = new JLabel("New label");
 		r2.setBounds(668, 95, 46, 52);
 		r2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		frame.getContentPane().add(r2);
+		frmHeroesVsVillains.getContentPane().add(r2);
 		
 		JLabel r3 = new JLabel("New label");
 		r3.setBounds(434, 95, 46, 52);
 		r3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		frame.getContentPane().add(r3);
+		frmHeroesVsVillains.getContentPane().add(r3);
 		
 		JLabel p1 = new JLabel("New label");
 		p1.setBounds(216, 224, 53, 51);
-		frame.getContentPane().add(p1);
+		frmHeroesVsVillains.getContentPane().add(p1);
 		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p2 = new JLabel("New label");
 		p2.setBounds(434, 223, 46, 52);
-		frame.getContentPane().add(p2);
+		frmHeroesVsVillains.getContentPane().add(p2);
 		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p3 = new JLabel("New label");
 		p3.setBounds(668, 223, 46, 52);
-		frame.getContentPane().add(p3);
+		frmHeroesVsVillains.getContentPane().add(p3);
 		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p5 = new JLabel("New label");
 		p5.setBounds(434, 316, 46, 52);
-		frame.getContentPane().add(p5);
+		frmHeroesVsVillains.getContentPane().add(p5);
 		p5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p4 = new JLabel("New label");
 		p4.setBounds(216, 317, 53, 51);
-		frame.getContentPane().add(p4);
+		frmHeroesVsVillains.getContentPane().add(p4);
 		p4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p6 = new JLabel("New label");
 		p6.setBounds(668, 316, 46, 52);
-		frame.getContentPane().add(p6);
+		frmHeroesVsVillains.getContentPane().add(p6);
 		p6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p8 = new JLabel("New label");
 		p8.setBounds(434, 433, 46, 52);
-		frame.getContentPane().add(p8);
+		frmHeroesVsVillains.getContentPane().add(p8);
 		p8.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p7 = new JLabel("New label");
 		p7.setBounds(216, 433, 53, 58);
-		frame.getContentPane().add(p7);
+		frmHeroesVsVillains.getContentPane().add(p7);
 		p7.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel p9 = new JLabel("New label");
 		p9.setBounds(668, 433, 46, 52);
-		frame.getContentPane().add(p9);
+		frmHeroesVsVillains.getContentPane().add(p9);
 		p9.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JButton buyMap = new JButton("Map");
@@ -1617,6 +1719,7 @@ public class gameEnvGui {
 			}
 		});
 		buyMap.setBounds(21, 177, 104, 23);
+<<<<<<< HEAD
 		frame.getContentPane().add(buyMap);
 		
 		JLabel lblSpecialItems = new JLabel("Special Items");
@@ -1626,31 +1729,46 @@ public class gameEnvGui {
 		JLabel mapLabel = new JLabel("New label");
 		mapLabel.setBounds(45, 122, 53, 51);
 		frame.getContentPane().add(mapLabel);
+=======
+		frmHeroesVsVillains.getContentPane().add(buyMap);
+		
+		JLabel lblSpecialItems = new JLabel("Special Items");
+		lblSpecialItems.setBounds(32, 96, 117, 15);
+		frmHeroesVsVillains.getContentPane().add(lblSpecialItems);
+		
+		JLabel mapLabel = new JLabel("New label");
+		mapLabel.setBounds(45, 122, 53, 51);
+		frmHeroesVsVillains.getContentPane().add(mapLabel);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		mapLabel.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf = new JLabel("hello");
 		shelf.setBounds(161, 419, 653, 113);
 		shelf.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
-		frame.getContentPane().add(shelf);
+		frmHeroesVsVillains.getContentPane().add(shelf);
 		
 		JLabel shelf2 = new JLabel("hello");
 		shelf2.setBounds(163, 314, 651, 107);
-		frame.getContentPane().add(shelf2);
+		frmHeroesVsVillains.getContentPane().add(shelf2);
 		shelf2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf3 = new JLabel("hello");
 		shelf3.setBounds(161, 205, 635, 109);
-		frame.getContentPane().add(shelf3);
+		frmHeroesVsVillains.getContentPane().add(shelf3);
 		shelf3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf4 = new JLabel("hello");
 		shelf4.setBounds(161, 85, 635, 109);
-		frame.getContentPane().add(shelf4);
+		frmHeroesVsVillains.getContentPane().add(shelf4);
 		shelf4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel lblInfo = new JLabel("Item Info");
 		lblInfo.setBounds(32, 373, 70, 15);
+<<<<<<< HEAD
 		frame.getContentPane().add(lblInfo);
+=======
+		frmHeroesVsVillains.getContentPane().add(lblInfo);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 
 		
@@ -1666,30 +1784,30 @@ public class gameEnvGui {
 		paperScissorsRock paperGame = new paperScissorsRock();
 		//int numOfGuesses = 0;
 //		vill = numberGuess.getVillianChoice();
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		
 		JLabel lblBattlingWith = new JLabel("Battling With ");
 		lblBattlingWith.setBounds(373, 24, 269, 14);
 		lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
-		frame.getContentPane().add(lblBattlingWith);
+		frmHeroesVsVillains.getContentPane().add(lblBattlingWith);
 		
 		JLabel lblResult = new JLabel("You Need To Roll The Dice First!");
 		lblResult.setBounds(293, 137, 304, 55);
-		frame.getContentPane().add(lblResult);
+		frmHeroesVsVillains.getContentPane().add(lblResult);
 		
 		
 		JLabel lblHero = new JLabel("hero1");
 		lblHero.setBounds(56, 24, 46, 14);
-		frame.getContentPane().add(lblHero);
+		frmHeroesVsVillains.getContentPane().add(lblHero);
 		
 		
 		JLabel lblHero_1 = new JLabel("hero2");
 		lblHero_1.setBounds(56, 98, 46, 14);
-		frame.getContentPane().add(lblHero_1);
+		frmHeroesVsVillains.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
 		lblHero_2.setBounds(56, 175, 46, 14);
-		frame.getContentPane().add(lblHero_2);
+		frmHeroesVsVillains.getContentPane().add(lblHero_2);
 		
 		
 		JRadioButton char_1_box = new JRadioButton("");
@@ -1701,7 +1819,7 @@ public class gameEnvGui {
 		});
 		char_1_box.setBounds(66, 45, 97, 23);
 		char_1_box.setSelected(true);
-		frame.getContentPane().add(char_1_box);
+		frmHeroesVsVillains.getContentPane().add(char_1_box);
 		
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
@@ -1711,7 +1829,7 @@ public class gameEnvGui {
 			}
 		});
 		char_2_box.setBounds(66, 119, 97, 23);
-		frame.getContentPane().add(char_2_box);
+		frmHeroesVsVillains.getContentPane().add(char_2_box);
 		
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
@@ -1721,7 +1839,7 @@ public class gameEnvGui {
 			}
 		});
 		char_3_box.setBounds(66, 196, 97, 23);
-		frame.getContentPane().add(char_3_box);
+		frmHeroesVsVillains.getContentPane().add(char_3_box);
 		
 		try {
 			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
@@ -1761,7 +1879,7 @@ public class gameEnvGui {
 		charsForBattle.add(char_1_box);
 		charsForBattle.add(char_2_box);
 		charsForBattle.add(char_3_box);
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JButton btnViewStats_1 = new JButton("View Stats");
 		btnViewStats_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1769,13 +1887,13 @@ public class gameEnvGui {
 			}
 		});
 		btnViewStats_1.setBounds(304, 458, 311, 126);
-		frame.getContentPane().add(btnViewStats_1);
+		frmHeroesVsVillains.getContentPane().add(btnViewStats_1);
 		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Paper", "Scissors", "Rock"}));
 		comboBox.setBounds(383, 278, 105, 22);
-		frame.getContentPane().add(comboBox);
+		frmHeroesVsVillains.getContentPane().add(comboBox);
 		
 		JButton btnConfirmYourGuess = new JButton("Confirm Your Guess");
 		btnConfirmYourGuess.addActionListener(new ActionListener() {
@@ -1788,8 +1906,8 @@ public class gameEnvGui {
 					game.getCurrentVillian().oneDefeat();
 					JOptionPane.showMessageDialog(null, "You Have Bet The Villian " + game.getCurrentVillian().getLossCount() + " Times");
 					if (game.getCurrentVillian().getLossCount() == 3) {
-						frame.getContentPane().removeAll();
-						frame.repaint();
+						frmHeroesVsVillains.getContentPane().removeAll();
+						frmHeroesVsVillains.repaint();
 						villianBeatPanel();
 					}
 					break;
@@ -1816,8 +1934,8 @@ public class gameEnvGui {
 							}
 						}
 						if (stillAliveChar == 999) {
-							frame.getContentPane().removeAll();
-							frame.repaint();
+							frmHeroesVsVillains.getContentPane().removeAll();
+							frmHeroesVsVillains.repaint();
 							lossGamePanel();
 						} else if (game.getCurrentHero() == 0) {
 							lblBattlingWith.setText("Battle With: " + game.getTeam().getHeroArray().get(0).getName());
@@ -1841,8 +1959,8 @@ public class gameEnvGui {
 			}
 		});
 		btnConfirmYourGuess.setBounds(304, 312, 311, 126);
-		frame.getContentPane().add(btnConfirmYourGuess);
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().add(btnConfirmYourGuess);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		
 		/*JButton btnPaper = new JButton("Paper");
 		btnPaper.addActionListener(new ActionListener() {
@@ -1875,27 +1993,27 @@ public class gameEnvGui {
 	}
 	
 	private void lossGamePanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 	}
 	
 	
 	private void powerUpDenPanel() {
 		JLabel lblApplyTo = new JLabel("Apply To:");
 		lblApplyTo.setBounds(422, 343, 70, 15);
-		frame.getContentPane().add(lblApplyTo);
+		frmHeroesVsVillains.getContentPane().add(lblApplyTo);
 		
 		
 		JLabel lblHero = new JLabel("hero1");
 		lblHero.setBounds(246, 376, 46, 14);
-		frame.getContentPane().add(lblHero);
+		frmHeroesVsVillains.getContentPane().add(lblHero);
 		
 		JLabel lblHero_1 = new JLabel("hero2");
 		lblHero_1.setBounds(442, 376, 46, 14);
-		frame.getContentPane().add(lblHero_1);
+		frmHeroesVsVillains.getContentPane().add(lblHero_1);
 		
 		JLabel lblHero_2 = new JLabel("hero3");
 		lblHero_2.setBounds(628, 376, 46, 14);
-		frame.getContentPane().add(lblHero_2);
+		frmHeroesVsVillains.getContentPane().add(lblHero_2);
 		
 		
 		JRadioButton char_1_box = new JRadioButton("");
@@ -1907,7 +2025,7 @@ public class gameEnvGui {
 		});
 		char_1_box.setBounds(256, 398, 97, 23);
 		char_1_box.setSelected(true);
-		frame.getContentPane().add(char_1_box);
+		frmHeroesVsVillains.getContentPane().add(char_1_box);
 		
 		JRadioButton char_2_box = new JRadioButton("");
 		char_2_box.addActionListener(new ActionListener() {
@@ -1917,7 +2035,7 @@ public class gameEnvGui {
 			}
 		});
 		char_2_box.setBounds(452, 398, 97, 23);
-		frame.getContentPane().add(char_2_box);
+		frmHeroesVsVillains.getContentPane().add(char_2_box);
 		
 		JRadioButton char_3_box = new JRadioButton("");
 		char_3_box.addActionListener(new ActionListener() {
@@ -1927,7 +2045,7 @@ public class gameEnvGui {
 			}
 		});
 		char_3_box.setBounds(638, 398, 97, 23);
-		frame.getContentPane().add(char_3_box);
+		frmHeroesVsVillains.getContentPane().add(char_3_box);
 		
 		try {
 			if (game.getTeam().getHeroArray().get(0).getCurrentHealth() > 0) {
@@ -1972,7 +2090,7 @@ public class gameEnvGui {
 		
 		JLabel lblAvaiableHealingItems = new JLabel("Avaiable Power Up Items");
 		lblAvaiableHealingItems.setBounds(369, 22, 177, 15);
-		frame.getContentPane().add(lblAvaiableHealingItems);
+		frmHeroesVsVillains.getContentPane().add(lblAvaiableHealingItems);
 		
 		JButton btnPUP1 = new JButton("Iron Flesh I");
 		btnPUP1.addActionListener(new ActionListener() {
@@ -1981,7 +2099,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP1.setBounds(135, 55, 189, 58);
-		frame.getContentPane().add(btnPUP1);
+		frmHeroesVsVillains.getContentPane().add(btnPUP1);
 		
 		selectedPowerUp = btnPUP1.getText();
 		
@@ -1992,7 +2110,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP2.setBounds(357, 55, 189, 58);
-		frame.getContentPane().add(btnPUP2);
+		frmHeroesVsVillains.getContentPane().add(btnPUP2);
 		
 		JButton btnPUP3 = new JButton("Iron Flesh III");
 		btnPUP3.addActionListener(new ActionListener() {
@@ -2001,7 +2119,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP3.setBounds(571, 55, 189, 58);
-		frame.getContentPane().add(btnPUP3);
+		frmHeroesVsVillains.getContentPane().add(btnPUP3);
 		
 		JButton btnPUP4 = new JButton("Augment Vitality I");
 		btnPUP4.addActionListener(new ActionListener() {
@@ -2010,7 +2128,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP4.setBounds(135, 152, 189, 58);
-		frame.getContentPane().add(btnPUP4);
+		frmHeroesVsVillains.getContentPane().add(btnPUP4);
 		
 		
 		JButton btnPUP5 = new JButton("Augment Vitality II");
@@ -2020,7 +2138,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP5.setBounds(357, 152, 189, 58);
-		frame.getContentPane().add(btnPUP5);
+		frmHeroesVsVillains.getContentPane().add(btnPUP5);
 		
 		JButton btnPUP6 = new JButton("Augment Vitality III");
 		btnPUP6.addActionListener(new ActionListener() {
@@ -2029,7 +2147,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP6.setBounds(571, 152, 189, 58);
-		frame.getContentPane().add(btnPUP6);
+		frmHeroesVsVillains.getContentPane().add(btnPUP6);
 		
 		JButton btnPUP7 = new JButton("Silver Tongue I");
 		btnPUP7.addActionListener(new ActionListener() {
@@ -2038,7 +2156,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP7.setBounds(135, 249, 189, 58);
-		frame.getContentPane().add(btnPUP7);
+		frmHeroesVsVillains.getContentPane().add(btnPUP7);
 		
 		JButton btnPUP8 = new JButton("Silver Tongue II");
 		btnPUP8.addActionListener(new ActionListener() {
@@ -2047,7 +2165,7 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP8.setBounds(357, 249, 189, 58);
-		frame.getContentPane().add(btnPUP8);
+		frmHeroesVsVillains.getContentPane().add(btnPUP8);
 		
 		JButton btnPUP9 = new JButton("Silver Tongue III");
 		btnPUP9.addActionListener(new ActionListener() {
@@ -2056,54 +2174,54 @@ public class gameEnvGui {
 			}
 		});
 		btnPUP9.setBounds(571, 249, 189, 58);
-		frame.getContentPane().add(btnPUP9);
+		frmHeroesVsVillains.getContentPane().add(btnPUP9);
 		
 		
 		
 		JLabel stockPUP1 = new JLabel("New label");
 		stockPUP1.setBounds(196, 125, 70, 15);
-		frame.getContentPane().add(stockPUP1);
+		frmHeroesVsVillains.getContentPane().add(stockPUP1);
 		stockPUP1.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(0))));
 		
 		
 		JLabel stockPUP2 = new JLabel("New label");
 		stockPUP2.setBounds(423, 125, 70, 15);
-		frame.getContentPane().add(stockPUP2);
+		frmHeroesVsVillains.getContentPane().add(stockPUP2);
 		stockPUP2.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(1))));
 		
 		JLabel stockPUP3 = new JLabel("New label");
 		stockPUP3.setBounds(645, 125, 70, 15);
-		frame.getContentPane().add(stockPUP3);
+		frmHeroesVsVillains.getContentPane().add(stockPUP3);
 		stockPUP3.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(2))));
 		
 		JLabel stockPUP4 = new JLabel("0");
 		stockPUP4.setBounds(196, 222, 70, 15);
-		frame.getContentPane().add(stockPUP4);
+		frmHeroesVsVillains.getContentPane().add(stockPUP4);
 		stockPUP4.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(3))));
 		
 		JLabel stockPUP5 = new JLabel("0");
 		stockPUP5.setBounds(421, 222, 70, 15);
-		frame.getContentPane().add(stockPUP5);
+		frmHeroesVsVillains.getContentPane().add(stockPUP5);
 		stockPUP5.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(4))));
 		
 		JLabel stockPUP6 = new JLabel("0");
 		stockPUP6.setBounds(645, 222, 70, 15);
-		frame.getContentPane().add(stockPUP6);
+		frmHeroesVsVillains.getContentPane().add(stockPUP6);
 		stockPUP6.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(5))));
 		
 		JLabel stockPUP7 = new JLabel("0");
 		stockPUP7.setBounds(196, 319, 70, 15);
-		frame.getContentPane().add(stockPUP7);
+		frmHeroesVsVillains.getContentPane().add(stockPUP7);
 		stockPUP7.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(6))));
 		
 		JLabel stockPUP8 = new JLabel("0");
 		stockPUP8.setBounds(421, 319, 70, 15);
-		frame.getContentPane().add(stockPUP8);
+		frmHeroesVsVillains.getContentPane().add(stockPUP8);
 		stockPUP8.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(7))));
 		
 		JLabel stockPUP9 = new JLabel("0");
 		stockPUP9.setBounds(645, 319, 70, 15);
-		frame.getContentPane().add(stockPUP9);
+		frmHeroesVsVillains.getContentPane().add(stockPUP9);
 		stockPUP9.setText(String.valueOf(Collections.frequency(game.getTeam().getPowerUps(), game.getCurrentShop().getPowerUpItems().get(8))));
 		
 		JButton btnNewButton_5 = new JButton("Apply To Hero");
@@ -2120,8 +2238,8 @@ public class gameEnvGui {
 				}
 				if (applyIt == true) {
 					game.getTeam().getHeroArray().get(game.getCurrentHero()).usePowerUp(game.getTeam().getPowerUps().get(count));//.useHealingItem(game.getTeam().getHealingItems().get(count));
-					frame.getContentPane().removeAll();
-					frame.repaint();
+					frmHeroesVsVillains.getContentPane().removeAll();
+					frmHeroesVsVillains.repaint();
 					powerUpDenPanel();
 //					timer.setVisible(true);				
 //					while(game.getTeam().getHealingItems().get(count).getTimeRemaining() > 110) {
@@ -2136,18 +2254,18 @@ public class gameEnvGui {
 			}
 		});
 		btnNewButton_5.setBounds(196, 452, 215, 100);
-		frame.getContentPane().add(btnNewButton_5);
+		frmHeroesVsVillains.getContentPane().add(btnNewButton_5);
 		
 		JButton btnExit_1 = new JButton("Exit");
 		btnExit_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				baseCampPanel();
 			}
 		});
 		btnExit_1.setBounds(520, 452, 215, 100);
-		frame.getContentPane().add(btnExit_1);
+		frmHeroesVsVillains.getContentPane().add(btnExit_1);
 		
 		
 		
@@ -2157,7 +2275,7 @@ public class gameEnvGui {
 	}
 	
 	private void teamInitializerPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		
 		
 		
@@ -2167,12 +2285,12 @@ public class gameEnvGui {
 		lblNameHero.setFont(new Font("Arial Black", Font.ITALIC, 18));
 		lblNameHero.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNameHero.setBounds(10, 401, 914, 49);
-		frame.getContentPane().add(lblNameHero);
+		frmHeroesVsVillains.getContentPane().add(lblNameHero);
 		
 		heroNameEntryBox = new JTextField(); 
 		heroNameEntryBox.setHorizontalAlignment(SwingConstants.CENTER);
 		heroNameEntryBox.setBounds(360, 462, 208, 31);
-		frame.getContentPane().add(heroNameEntryBox);
+		frmHeroesVsVillains.getContentPane().add(heroNameEntryBox);
 		heroNameEntryBox.setColumns(10);
 		heroNameEntryBox.setEnabled(false);
 		
@@ -2181,7 +2299,7 @@ public class gameEnvGui {
 		lblNameClashMessage.setForeground(new Color(255, 0, 0));
 		lblNameClashMessage.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblNameClashMessage.setBounds(10, 365, 914, 25);
-		frame.getContentPane().add(lblNameClashMessage);
+		frmHeroesVsVillains.getContentPane().add(lblNameClashMessage);
 		lblNameClashMessage.setVisible(false);
 		
 		JButton btnAddToTeam = new JButton("");
@@ -2190,7 +2308,7 @@ public class gameEnvGui {
 		
 		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 28));
 		btnAddToTeam.setBounds(360, 493, 208, 53);
-		frame.getContentPane().add(btnAddToTeam);
+		frmHeroesVsVillains.getContentPane().add(btnAddToTeam);
 		
 		btnAddToTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -2211,12 +2329,12 @@ public class gameEnvGui {
 							
 								// after it has added the char
 								if (numOfHeroes == game.getHeroList().size()) {
-										frame.getContentPane().removeAll();
-										frame.repaint();
+										frmHeroesVsVillains.getContentPane().removeAll();
+										frmHeroesVsVillains.repaint();
 										teamNamePanel();} 
 								else {
-										frame.getContentPane().removeAll();
-										frame.repaint();
+										frmHeroesVsVillains.getContentPane().removeAll();
+										frmHeroesVsVillains.repaint();
 										teamInitializerPanel();}}} 
 				
 				else {
@@ -2225,12 +2343,12 @@ public class gameEnvGui {
 				
 						// after it has added the char
 						if (numOfHeroes == game.getHeroList().size()) {
-								frame.getContentPane().removeAll();
-								frame.repaint();
+								frmHeroesVsVillains.getContentPane().removeAll();
+								frmHeroesVsVillains.repaint();
 								teamNamePanel();} 
 						else {
-								frame.getContentPane().removeAll();
-								frame.repaint();
+								frmHeroesVsVillains.getContentPane().removeAll();
+								frmHeroesVsVillains.repaint();
 								teamInitializerPanel();}
 				}
 			}
@@ -2264,9 +2382,13 @@ public class gameEnvGui {
 		});
 		btnHeroType1.setBackground(Color.DARK_GRAY);
 		btnHeroType1.setBounds(34, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType1);
 		btnHeroType1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/merchant.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 		
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType1);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2295,8 +2417,13 @@ public class gameEnvGui {
 		});
 		btnHeroType2.setBackground(Color.DARK_GRAY);
 		btnHeroType2.setBounds(191, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType2);
 		btnHeroType2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/tank.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType2);
+		
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2324,8 +2451,13 @@ public class gameEnvGui {
 		});
 		btnHeroType3.setBackground(Color.DARK_GRAY);
 		btnHeroType3.setBounds(338, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType3);
 		btnHeroType3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/cartographer.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType3);
+		
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2353,8 +2485,13 @@ public class gameEnvGui {
 		});
 		btnHeroType4.setBackground(Color.DARK_GRAY);
 		btnHeroType4.setBounds(484, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType4);
 		btnHeroType4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/support.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType4);
+		
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2382,8 +2519,13 @@ public class gameEnvGui {
 		});
 		btnHeroType5.setBackground(Color.DARK_GRAY);
 		btnHeroType5.setBounds(636, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType5);
 		btnHeroType5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/lucky-boii.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType5);
+		
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2411,8 +2553,13 @@ public class gameEnvGui {
 		});
 		btnHeroType6.setBackground(Color.DARK_GRAY);
 		btnHeroType6.setBounds(792, 169, 117, 126);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnHeroType6);
 		btnHeroType6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/anti-hero.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+=======
+		frmHeroesVsVillains.getContentPane().add(btnHeroType6);
+		
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 		
 		
@@ -2431,84 +2578,85 @@ public class gameEnvGui {
 		lblMerchant.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblMerchant.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMerchant.setBounds(34, 147, 117, 15);
-		frame.getContentPane().add(lblMerchant);
+		frmHeroesVsVillains.getContentPane().add(lblMerchant);
 		
 		JLabel lblTank = new JLabel("TANK");
 		lblTank.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblTank.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTank.setBounds(191, 148, 117, 15);
-		frame.getContentPane().add(lblTank);
+		frmHeroesVsVillains.getContentPane().add(lblTank);
 		
 		JLabel lblCartographer = new JLabel("CARTOGRAPHER");
 		lblCartographer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCartographer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCartographer.setBounds(338, 148, 117, 15);
-		frame.getContentPane().add(lblCartographer);
+		frmHeroesVsVillains.getContentPane().add(lblCartographer);
 		
 		JLabel lblSupport = new JLabel("SUPPORT");
 		lblSupport.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblSupport.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSupport.setBounds(484, 148, 117, 15);
-		frame.getContentPane().add(lblSupport);
+		frmHeroesVsVillains.getContentPane().add(lblSupport);
 		
 		JLabel lblLuckyboii = new JLabel("LUCKYBOII");
 		lblLuckyboii.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblLuckyboii.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLuckyboii.setBounds(636, 148, 117, 15);
-		frame.getContentPane().add(lblLuckyboii);
+		frmHeroesVsVillains.getContentPane().add(lblLuckyboii);
 		
 		JLabel lblAntihero = new JLabel("ANTI HERO");
 		lblAntihero.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAntihero.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAntihero.setBounds(792, 148, 117, 15);
-		frame.getContentPane().add(lblAntihero);
+		frmHeroesVsVillains.getContentPane().add(lblAntihero);
 
 		JLabel lblSelectHeroesFor = new JLabel("CHOOSE  THE  CLASS  OF  THIS  HERO");
 		lblSelectHeroesFor.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSelectHeroesFor.setFont(new Font("Arvo", Font.BOLD, 16));
 		lblSelectHeroesFor.setBounds(10, 83, 914, 31);
-		frame.getContentPane().add(lblSelectHeroesFor);
+		frmHeroesVsVillains.getContentPane().add(lblSelectHeroesFor);
 		
 		JLabel lblAssembleYourTeam = new JLabel("ASSEMBLE  YOUR  TEAM  OF  HEROES");
 		lblAssembleYourTeam.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssembleYourTeam.setFont(new Font("Arvo", Font.BOLD, 30));
 		lblAssembleYourTeam.setBounds(10, 29, 914, 53);
-		frame.getContentPane().add(lblAssembleYourTeam);
+		frmHeroesVsVillains.getContentPane().add(lblAssembleYourTeam);
 		
 		JButton btnMerchantInfo = new JButton("CLASS INFO");
 		btnMerchantInfo.setForeground(new Color(255, 255, 255));
 		btnMerchantInfo.setBackground(new Color(75, 0, 130));
 		btnMerchantInfo.setBounds(34, 294, 117, 23);
-		frame.getContentPane().add(btnMerchantInfo);
+		frmHeroesVsVillains.getContentPane().add(btnMerchantInfo);
 		
 		JButton btnTankInfo = new JButton("CLASS INFO");
 		btnTankInfo.setBackground(new Color(75, 0, 130));
 		btnTankInfo.setForeground(new Color(255, 255, 255));
 		btnTankInfo.setBounds(191, 294, 117, 23);
-		frame.getContentPane().add(btnTankInfo);
+		frmHeroesVsVillains.getContentPane().add(btnTankInfo);
 		
 		JButton btnCartographerInfo = new JButton("CLASS INFO");
 		btnCartographerInfo.setForeground(new Color(255, 255, 255));
 		btnCartographerInfo.setBackground(new Color(75, 0, 130));
 		btnCartographerInfo.setBounds(338, 294, 117, 23);
-		frame.getContentPane().add(btnCartographerInfo);
+		frmHeroesVsVillains.getContentPane().add(btnCartographerInfo);
 		
 		JButton btnSupportInfo = new JButton("CLASS INFO");
 		btnSupportInfo.setForeground(new Color(255, 255, 255));
 		btnSupportInfo.setBackground(new Color(75, 0, 130));
 		btnSupportInfo.setBounds(484, 294, 117, 23);
-		frame.getContentPane().add(btnSupportInfo);
+		frmHeroesVsVillains.getContentPane().add(btnSupportInfo);
 		
 		JButton btnLuckyInfo = new JButton("CLASS INFO");
 		btnLuckyInfo.setForeground(new Color(255, 255, 255));
 		btnLuckyInfo.setBackground(new Color(75, 0, 130));
 		btnLuckyInfo.setBounds(636, 294, 117, 23);
-		frame.getContentPane().add(btnLuckyInfo);
+		frmHeroesVsVillains.getContentPane().add(btnLuckyInfo);
 		
 		JButton btnAntiHeroInfo = new JButton("CLASS INFO");
 		btnAntiHeroInfo.setBackground(new Color(75, 0, 130));
 		btnAntiHeroInfo.setForeground(new Color(255, 255, 255));
 		btnAntiHeroInfo.setBounds(792, 294, 117, 23);
+<<<<<<< HEAD
 		frame.getContentPane().add(btnAntiHeroInfo);
 		
 
@@ -2517,19 +2665,22 @@ public class gameEnvGui {
 		
 		
 		
+=======
+		frmHeroesVsVillains.getContentPane().add(btnAntiHeroInfo);
+>>>>>>> 4fa56330cae607bf456b9094f0692f8a96177d93
 		
 	}
 	
 	private void villianBeatPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 		JButton btnProceedToCamp = new JButton("PROCEED  TO  CAMP");
 		btnProceedToCamp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null, "You Destroyed The Villian!");
 				game.makeAllUnfound();
 				citiesFinished += 1;
-				frame.getContentPane().removeAll();
-				frame.repaint();
+				frmHeroesVsVillains.getContentPane().removeAll();
+				frmHeroesVsVillains.repaint();
 				//game.setCurrentHero(citiesFinished);
 				game.setCurrentVillian(citiesFinished);
 				if (citiesFinished < game.getNumOfCities()) {
@@ -2541,10 +2692,11 @@ public class gameEnvGui {
 		});
 		btnProceedToCamp.setFont(new Font("Dialog", Font.BOLD, 22));
 		btnProceedToCamp.setBounds(287, 503, 339, 88);
-		frame.getContentPane().add(btnProceedToCamp);
+		frmHeroesVsVillains.getContentPane().add(btnProceedToCamp);
 	}
 	
 	private void finalVillianPanel() {
-		frame.getContentPane().setLayout(null);
+		frmHeroesVsVillains.getContentPane().setLayout(null);
 	}
 }
+
