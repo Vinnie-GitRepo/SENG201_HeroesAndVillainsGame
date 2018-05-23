@@ -70,9 +70,9 @@ public class paperScissorsRock {
 	
 	
 	
-	public String getVillianChoice() {
+	public String getVillianChoice(int num) {
 		Random rand = new Random();
-		return options[rand.nextInt(3)];
+		return options[rand.nextInt(num)];
 	}
 	
 	public void gameSequence() {

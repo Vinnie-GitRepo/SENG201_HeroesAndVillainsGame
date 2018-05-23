@@ -3,6 +3,12 @@ package teamStuff;
 import java.util.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
+import cityStuff.gameEnvGui;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -19,6 +25,8 @@ public class Hero {
 	private String heroName;
 	
 	
+	
+	private ImageIcon icon;
 	
 	/**
 	 * The hero's class.
@@ -109,7 +117,7 @@ public class Hero {
 	 * @param fame
 	 * @param deterrence
 	 */
-	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence) {
+	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence, ImageIcon image) {
 		
 		maxHealth = health;
 		currentHealth = maxHealth;
@@ -120,6 +128,7 @@ public class Hero {
 		this.luck = luck;
 		this.fame = fame;
 		this.deterrence = deterrence;
+		icon = image;
 		//nameHero();
 	}
 	
@@ -176,6 +185,10 @@ public class Hero {
 	}
 	
 	
+	
+	public ImageIcon getIcon() {
+		return icon;
+	}
 	
 	/**
 	 * Getter for the hero's class.
