@@ -17,6 +17,6 @@ public class Tank extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public Tank() {
-		super(200, "Tank", 25, 50, -30, false, 0, 10);
+		super(200, "Tank", 7, 50, -30, false, 0, 10);
 	}
 }

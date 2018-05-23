@@ -17,6 +17,6 @@ public class MerchantMan extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public MerchantMan() {
-		super(75, "Merchant", 10, 0, 50, false, 5, -20);
+		super(75, "Merchant", 6, 0, 50, false, 5, -20);
 	}
 }

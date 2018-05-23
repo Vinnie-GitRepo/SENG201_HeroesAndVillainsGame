@@ -17,7 +17,7 @@ public class Support extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public Support() {
-		super(100, "Support", 30, 0, 0, false, 20, 5);
+		super(100, "Support", 9, 0, 0, false, 20, 5);
 	}
 	
 	

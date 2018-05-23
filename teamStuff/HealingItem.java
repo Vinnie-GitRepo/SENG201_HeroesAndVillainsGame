@@ -177,11 +177,15 @@ public class HealingItem {
 	 * Prints out the result string when passing the HealingItem into a print statement.
 	 */
 	public String toString() {
-		String resultString = "Name: " + getHealingItemName() + "\n"
-							+ "Item type: Healing Item" + "\n"
-							+ "Potency: " + getHealingItemPotency() + "\n"
-							+ "Price: " + getHealingItemPrice();
-		return resultString;
+			
+			String resultString = "Name: " + getHealingItemName() + "\n"
+								+ "Item Type: Healing Item" + "\n"
+								+ "Potency: " + getHealingItemPotency() + "\n"
+								+ "Price: " + getHealingItemPrice() + "\n"
+								+ "Description: A restorative concoction, perfect for wounded heroes.\n"
+								+ "Item Effect: Will restore " + getHealingItemPotency() + " health in 25% increments over time.\n";   	
+			
+			return resultString;
 	}
 	
 	

@@ -18,6 +18,6 @@ public class Cartographer extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.
 	 */
 	public Cartographer() {
-		super(100, "Cartographer", 0, 0, 0, false, 0, 0);
+		super(100, "Cartographer", 5, 0, 0, false, 0, 0);
 	}
 }

@@ -16,7 +16,7 @@ public class LuckyBoii extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence).
 	 */
 	public LuckyBoii() {
-		super(100, "LuckyBoii", 20, 10, 10, true, 0, 5);
+		super(100, "LuckyBoii", 6, 10, 10, true, 0, 5);
 	}
 	
 }

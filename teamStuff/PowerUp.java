@@ -102,10 +102,25 @@ public class PowerUp {
 	 * Prints out the result string when passing the PowerUp into a print statement.
 	 */
 	public String toString() {
+		
 		String resultString = "Name: " + getPowerUpName() + "\n"
 							+ "Item Type: " + getPowerUpType() + "\n"
 							+ "Potency: " + getPowerUpPotency() + "\n"
-							+ "Price: " + getPowerUpPrice();
+							+ "Price: " + getPowerUpPrice() + "\n";
+		
+		if(this instanceof SilverTongueI || this instanceof SilverTongueII || this instanceof SilverTongueIII) {
+			resultString += "Description: This power up heightens one's ability to coerce shopkeepers into accepting less favourable deals.\n" 
+						  + "Item effect: Upon application this power up will increase a hero's bartering skill by " + getPowerUpPotency() + ".\n";
+		}
+		else if(this instanceof IronFleshI || this instanceof IronFleshII || this instanceof IronFleshIII) {
+			resultString += "Description: This power up hardens one's being, shielding them, but the effect fades with each blow.\n"
+						  + "Item effect: Upon application this power up will increase a hero's armor by " + getPowerUpPotency() + ".\n";
+		}
+		else if(this instanceof AugmentVitalityI || this instanceof AugmentVitalityII || this instanceof AugmentVitalityIII) {
+			resultString += "Description: This power up stimulates one's cell growth and energy efficiency, extending their lifeforce.\n"
+					      + "Item effect: Upon application this power up will increase a hero's maximum health by " + getPowerUpPotency() + ".\n";
+		}
+		
 		return resultString;
 	}
 	

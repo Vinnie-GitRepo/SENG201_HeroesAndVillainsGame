@@ -28,7 +28,7 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's maximum health.
+	 * The hero's maximum health.<br>
 	 * This value can only be increased.
 	 */
 	private int maxHealth;
@@ -36,7 +36,7 @@ public class Hero {
 	
 	
 	/**
-	 * The state of the hero's health.
+	 * The state of the hero's health.<br>
 	 * Receives both damage and restoration.
 	 */
 	private int currentHealth;
@@ -44,7 +44,7 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's innate ability to recover.
+	 * The hero's innate ability to recover.<br>
 	 * Determines how long an applied HealingItem takes to restore health.
 	 */
 	private int recoveryBoost;
@@ -52,7 +52,7 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's protective armor level.
+	 * The hero's protective armor level.<br>
 	 * Receives damage instead of the hero, acting like extra health.
 	 */
 	private int heroArmor;
@@ -60,7 +60,7 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's bartering skill.
+	 * The hero's bartering skill.<br>
 	 * Aids in lowering item shop prices for the team.
 	 */
 	private int barterSkill;
@@ -68,7 +68,7 @@ public class Hero {
 	
 	
 	/**
-	 * Determines whether the hero is lucky or not.
+	 * Determines whether the hero is lucky or not.<br>
 	 * Affects games against villains in beneficial ways.
 	 */
 	private boolean luck;
@@ -76,7 +76,7 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's fame.
+	 * The hero's fame.<br>
 	 * Aids in increasing the team's chance of receiving gifts.
 	 */
 	private int fame;
@@ -84,11 +84,18 @@ public class Hero {
 	
 	
 	/**
-	 * The hero's deterrence.
+	 * The hero's deterrence.<br>
 	 * Aids in deterring robberies against the team.
 	 */
 	private int deterrence;
 	
+	
+	
+	/**
+	 * A boolean showing whether the Hero has a HealingItem applied.<br>
+	 * If this attribute is true then this hero should not be able to apply another HealingItem.
+	 */
+	private boolean currentlyHealing = false;
 	
 	/**
 	 * Constructor for the Hero class

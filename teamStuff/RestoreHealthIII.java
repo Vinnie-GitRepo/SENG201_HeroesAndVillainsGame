@@ -15,7 +15,7 @@ public class RestoreHealthIII extends HealingItem {
 	 * Should have a greater price and potency than healing items of lower tiers.
 	 */
 	public RestoreHealthIII() {
-		super("Restore Health III", 200, 75, 40);
+		super("Restore Health III", 200, 75, 10);
 		
 	}
 	

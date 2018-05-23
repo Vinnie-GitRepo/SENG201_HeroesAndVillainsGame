@@ -17,7 +17,7 @@ public class EdgyScaryFiendLord extends Hero {
 	 * To understand: super(Health, Class, Recovery, Armor, Barter Skill, Luck Status, Fame, Deterrence.   
 	 */
 	public EdgyScaryFiendLord() {
-		super(150, "Edgy Anti-Hero", 20, 25, 10, false, 10, 50);
+		super(150, "Edgy Anti-Hero", 8, 25, 10, false, 10, 50);
 	}
 	
 }	
