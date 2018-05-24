@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 
 import cityStuff.gameEnvGui;
 /**
- * The LuckyBoii class of hero, whose luck affects gameplay in their favour. Fairly unremarkable otherwise...
+ * The LuckyBoii class of hero, whose luck affects gameplay in their favour.<br> 
+ *                     Fairly unremarkable otherwise...
  * 
  * @author vjj14
  *

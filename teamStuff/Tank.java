@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import cityStuff.gameEnvGui;
 
 /**
- * The Tank class of hero, who's iron form withstands more damage than lesser beings.
+ * The Tank class of hero, who's iron form withstands more damage than lesser beings.<br>
  *       However Tank heroes are prime targets for explotative shopkeepers. 
  *       
  * @author vjj14
