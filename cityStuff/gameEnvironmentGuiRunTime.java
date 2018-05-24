@@ -32,6 +32,37 @@ public class gameEnvironmentGuiRunTime {
 	
 	private static boolean luck = false;
 	
+	private boolean healingItemInUse = false;
+	
+	public void refresh() {
+		healingItemInUse = false;
+		luck = false;
+		currentVillian = null;
+		currentShop = null;
+		thisMap = null;
+		currentHero = 0;
+		shops = new ArrayList<shop>();
+		villians = new ArrayList<Villian>();
+		hasMap = false;
+		foundPlaces[0] = false;
+		foundPlaces[1] = false;
+		foundPlaces[2] = false;
+		foundPlaces[3] = false;
+	}
+	
+	
+	public void useHealingItem() {
+		healingItemInUse = true;
+	}
+	
+	public boolean usingHealingItem() {
+		return healingItemInUse;
+	}
+	
+	public void stopUsingHealingItem() {
+		healingItemInUse = false;
+	}
+	
 	public void giveLuck() {
 		luck = true;
 	}

@@ -44,6 +44,7 @@ import teamStuff.Support;
 import teamStuff.Tank;
 
 public class gameEnvGui {
+	private int selectedItemPrice;
 	private static int luckynumDice = 0;
 	private static int luckynumGuess = 1;
 	private static int luckynumPSR = 3;
@@ -91,6 +92,7 @@ public class gameEnvGui {
 	public gameEnvGui() {
 		initialize();
 		gameStartPanel();
+//		lossGamePanel();
 //		cityAmmountPanel();//change to team set up later
 //		teamInitializerPanel();
 //		teamNamePanel();
@@ -105,7 +107,7 @@ public class gameEnvGui {
 //		powerUpDenPanel();
 //		villianBeatPanel();
 //		finishGamePanel();
-//		gameEndPanel();
+//		gameEndPane/l();
 	}
 
 	/**
@@ -1377,9 +1379,47 @@ public class gameEnvGui {
 		HealthIIIStock.setText(String.valueOf(Collections.frequency(game.getTeam().getHealingItems(), game.getCurrentShop().getHealingItems().get(2))));
 		
 		
+		
+		JButton timeRemainingButton = new JButton("View Time Remaining");
+		timeRemainingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					JOptionPane msg = new JOptionPane("Your Time Remaining", JOptionPane.PLAIN_MESSAGE);
+				    JDialog dlg = msg.createDialog(String.valueOf(current.getTimeRemaining()));
+				    dlg.setTitle("Your Time Remaining");
+				    dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+				    new Thread(new Runnable() {
+				      @Override
+				      public void run() {
+				    	  while(current.getTimeRemaining() > 0) {
+				        try {
+				          Thread.sleep(1000);
+				          msg.setMessage(current.getTimeRemaining());
+				        } catch (InterruptedException e) {
+				          e.printStackTrace();
+				        }
+				        }
+				    	game.stopUsingHealingItem();
+				        dlg.setVisible(false);
+				        current = null;
+				      }
+				   
+				    }).start();
+				    dlg.setVisible(true);
+				} catch (Exception no) {
+					JOptionPane.showMessageDialog(null, "You Need To Apply An Item First");
+				}
+			}
+		});
+		timeRemainingButton.setBounds(369, 487, 215, 44);
+		frame.getContentPane().add(timeRemainingButton);
+		
 		JButton applyToHero = new JButton("Apply To Hero");
 		applyToHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (game.usingHealingItem()) {
+					JOptionPane.showMessageDialog(null, "You Cannot Heal Two Characters At Once");
+				} else {
 				boolean applyIt = false;
 				int count = 0;
 				for (HealingItem item : game.getTeam().getHealingItems()) {
@@ -1390,14 +1430,18 @@ public class gameEnvGui {
 					count++;
 				}
 				if (applyIt == true) {
+					game.useHealingItem();
+					System.out.println(game.usingHealingItem());
 					current = game.getTeam().getHealingItems().get(count);
 					game.getTeam().getHeroArray().get(game.getCurrentHero()).useHealingItem(current);
 					frame.getContentPane().removeAll();
 					frame.repaint();
 					hospitalPanel();
+					timeRemainingButton.doClick();
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "YOU DONT HAVE THIS ITEM!");
+				}
 				}
 			}
 		});
@@ -1420,38 +1464,7 @@ public class gameEnvGui {
 		
 	
 		
-		JButton timeRemainingButton = new JButton("View Time Remaining");
-		timeRemainingButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					current.getTimeRemaining();
-					JOptionPane msg = new JOptionPane("Your Time Remaining", JOptionPane.PLAIN_MESSAGE);
-				    JDialog dlg = msg.createDialog(String.valueOf(current.getTimeRemaining()));
-				    dlg.setTitle("Your Time Remaining");
-				    dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-				    new Thread(new Runnable() {
-				      @Override
-				      public void run() {
-				    	  while(current.getTimeRemaining() > 0) {
-				        try {
-				          Thread.sleep(1000);
-				          msg.setMessage(current.getTimeRemaining());
-				        } catch (InterruptedException e) {
-				          e.printStackTrace();
-				        }}
-				        dlg.setVisible(false);
-				        current = null;
-				      }
-				   
-				    }).start();
-				    dlg.setVisible(true);
-				} catch (Exception no) {
-					JOptionPane.showMessageDialog(null, "You Need To Apply An Item First");
-				}
-			}
-		});
-		timeRemainingButton.setBounds(369, 487, 215, 44);
-		frame.getContentPane().add(timeRemainingButton);
+
 		
 		JLabel rs1 = new JLabel("New label");
 		rs1.setBounds(202, 41, 46, 52);
@@ -1607,61 +1620,98 @@ public class gameEnvGui {
 		ip1.setBounds(334, 96, 70, 15);
 		frame.getContentPane().add(ip1);
 		ip1.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(0).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getHealingItems().get(0).getHealingItemPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip1.setText(String.valueOf(10));
+		}
 		
 		JLabel ip2 = new JLabel("0");
 		ip2.setBounds(552, 96, 70, 15);
 		frame.getContentPane().add(ip2);
 		ip2.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(1).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getHealingItems().get(1).getHealingItemPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip2.setText(String.valueOf(10));
+		}
 		
 		JLabel ip3 = new JLabel("0");
 		ip3.setBounds(721, 96, 70, 15);
 		frame.getContentPane().add(ip3);
 		ip3.setText(String.valueOf(game.getCurrentShop().getHealingItems().get(2).getHealingItemPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getHealingItems().get(2).getHealingItemPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip3.setText(String.valueOf(10));
+		}
 		
 		JLabel ip4 = new JLabel("0");
 		ip4.setBounds(324, 223, 70, 15);
 		frame.getContentPane().add(ip4);
 		ip4.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(0).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(0).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip4.setText(String.valueOf(10));
+		}
 		
+		// start here
 		JLabel ip5 = new JLabel("0");
 		ip5.setBounds(525, 223, 70, 15);
 		frame.getContentPane().add(ip5);
 		ip5.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(1).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(1).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip5.setText(String.valueOf(10));
+		}
 		
 		JLabel ip6 = new JLabel("0");
 		ip6.setBounds(731, 223, 70, 15);
 		frame.getContentPane().add(ip6);
 		ip6.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(2).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(2).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip6.setText(String.valueOf(10));
+		}
 		
 		JLabel ip7 = new JLabel("0");
 		ip7.setBounds(324, 333, 70, 15);
 		frame.getContentPane().add(ip7);
 		ip7.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(3).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(3).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip7.setText(String.valueOf(10));
+		}
 		
 		JLabel ip8 = new JLabel("0");
 		ip8.setBounds(525, 333, 70, 15);
 		frame.getContentPane().add(ip8);
 		ip8.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(4).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(4).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip8.setText(String.valueOf(10));
+		}
 		
 		JLabel ip9 = new JLabel("0");
 		ip9.setBounds(721, 333, 70, 15);
 		frame.getContentPane().add(ip9);
 		ip9.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(5).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(5).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip9.setText(String.valueOf(10));
+		}
 		
 		JLabel ip10 = new JLabel("0");
 		ip10.setBounds(324, 433, 70, 15);
 		frame.getContentPane().add(ip10);
 		ip10.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(6).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(6).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip10.setText(String.valueOf(10));
+		}
 		
 		JLabel ip11 = new JLabel("0");
 		ip11.setBounds(525, 433, 70, 15);
 		frame.getContentPane().add(ip11);
 		ip11.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(7).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(7).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip11.setText(String.valueOf(10));
+		}
 		
 		JLabel ip12 = new JLabel("0");
 		ip12.setBounds(731, 433, 70, 15);
 		frame.getContentPane().add(ip12);
 		ip12.setText(String.valueOf(game.getCurrentShop().getPowerUpItems().get(8).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+		if (game.getCurrentShop().getPowerUpItems().get(8).getPowerUpPrice()-game.getTeam().getBarterSkillSum() <= 0){
+			ip12.setText(String.valueOf(10));
+		}
 		
 		
 		//itemName.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
@@ -1697,6 +1747,7 @@ public class gameEnvGui {
 		JButton health1 = new JButton("r1");
 		health1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip1.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(0).getHealingItemName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1708,6 +1759,7 @@ public class gameEnvGui {
 		JButton health2 = new JButton("r2");
 		health2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip2.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1719,6 +1771,7 @@ public class gameEnvGui {
 		JButton health3 = new JButton("r3");
 		health3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip3.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1734,6 +1787,7 @@ public class gameEnvGui {
 		JButton powerUp1 = new JButton("p1");
 		powerUp1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip4.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(0).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1745,6 +1799,7 @@ public class gameEnvGui {
 		JButton powerUp2 = new JButton("p2");
 		powerUp2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip5.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(1).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1756,6 +1811,7 @@ public class gameEnvGui {
 		JButton powerUp3 = new JButton("p3");
 		powerUp3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip6.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(2).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1767,6 +1823,7 @@ public class gameEnvGui {
 		JButton powerUp4 = new JButton("p4");
 		powerUp4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip7.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(3).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1778,6 +1835,7 @@ public class gameEnvGui {
 		JButton powerUp5 = new JButton("p5");
 		powerUp5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip8.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(4).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1789,6 +1847,7 @@ public class gameEnvGui {
 		JButton powerUp6 = new JButton("p6");
 		powerUp6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip9.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(5).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1800,6 +1859,7 @@ public class gameEnvGui {
 		JButton powerUp7 = new JButton("p7");
 		powerUp7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip10.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(6).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1811,6 +1871,7 @@ public class gameEnvGui {
 		JButton powerUp8 = new JButton("p8");
 		powerUp8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip11.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(7).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1822,6 +1883,7 @@ public class gameEnvGui {
 		JButton powerUp9 = new JButton("p9");
 		powerUp9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				selectedItemPrice = Integer.parseInt(ip12.getText());
 				itemName.setText(game.getCurrentShop().getPowerUpItems.get(8).getPowerUpName());
 				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
@@ -1982,10 +2044,10 @@ public class gameEnvGui {
 				}
 				if (buyingType == "Healing Potion") {
 				if (game.getCurrentShop().getHealingStockLevel()[buyingItem] > 0) {
-					if (game.getTeam().getMoney() >= game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice()) {
+					if (game.getTeam().getMoney() >= selectedItemPrice) {
 						game.getTeam().addHealingItem(game.getCurrentShop().getHealingItems().get(buyingItem));
 						game.getCurrentShop().getHealingStockLevel()[buyingItem] -= 1;
-						game.getTeam().addMoney(-(game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemPrice() - game.getTeam().getBarterSkillSum()));
+						game.getTeam().addMoney(-(selectedItemPrice));
 						JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getHealingItems().get(buyingItem).getHealingItemName());
 					} else {
 						JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
@@ -1994,10 +2056,10 @@ public class gameEnvGui {
 					JOptionPane.showMessageDialog(null, "THIS ITEM IS OUT OF STOCK");
 				}} else if (buyingType == "Power Up") {
 					if (game.getCurrentShop().getPowerUpStockLevel()[buyingItem] > 0) {
-						if (game.getTeam().getMoney() >= game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice()) {
+						if (game.getTeam().getMoney() >= selectedItemPrice) {
 							game.getTeam().addPowerUp(game.getCurrentShop().getPowerUpItems().get(buyingItem));
 							game.getCurrentShop().getPowerUpStockLevel()[buyingItem] -= 1;
-							game.getTeam().addMoney(-(game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpPrice()-game.getTeam().getBarterSkillSum()));
+							game.getTeam().addMoney(-(selectedItemPrice));
 							JOptionPane.showMessageDialog(null, "SUCESSFUL PURCHASE OF " + game.getCurrentShop().getPowerUpItems().get(buyingItem).getPowerUpName());
 						} else {
 							JOptionPane.showMessageDialog(null, "YOU DONT HAVE ENOUGH MONEY!");
@@ -2048,37 +2110,37 @@ public class gameEnvGui {
 		p1.setBounds(216, 224, 53, 51);
 		frame.getContentPane().add(p1);
 		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p1.setToolTipText(game.getAVI().toString());
+		p1.setToolTipText(game.getIFI().toString());
 		
 		JLabel p2 = new JLabel("New label");
 		p2.setBounds(416, 223, 46, 52);
 		frame.getContentPane().add(p2);
 		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p2.setToolTipText(game.getAVII().toString());
+		p2.setToolTipText(game.getIFII().toString());
 		
 		JLabel p3 = new JLabel("New label");
 		p3.setBounds(608, 224, 46, 52);
 		frame.getContentPane().add(p3);
 		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p3.setToolTipText(game.getAVIII().toString());
+		p3.setToolTipText(game.getIFIII().toString());
 		
 		JLabel p5 = new JLabel("New label");
 		p5.setBounds(416, 316, 46, 52);
 		frame.getContentPane().add(p5);
 		p5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p5.setToolTipText(game.getIFII().toString());
+		p5.setToolTipText(game.getAVII().toString());
 		
 		JLabel p4 = new JLabel("New label");
 		p4.setBounds(216, 317, 53, 51);
 		frame.getContentPane().add(p4);
 		p4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p4.setToolTipText(game.getIFI().toString());
+		p4.setToolTipText(game.getAVI().toString());
 		
 		JLabel p6 = new JLabel("New label");
 		p6.setBounds(608, 317, 46, 52);
 		frame.getContentPane().add(p6);
 		p6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
-		p6.setToolTipText(game.getIFIII().toString());
+		p6.setToolTipText(game.getAVIII().toString());
 		
 		JLabel p8 = new JLabel("New label");
 		p8.setBounds(416, 433, 46, 52);
@@ -2433,9 +2495,7 @@ public class gameEnvGui {
 		
 	}
 	
-	private void lossGamePanel() {
-		frame.getContentPane().setLayout(null);
-	}
+
 	
 	
 	private void powerUpDenPanel() {
@@ -3257,7 +3317,7 @@ public class gameEnvGui {
 			}
 		});
 		btnExitGame_1.setFont(new Font("Dialog", Font.BOLD, 50));
-		btnExitGame_1.setBounds(279, 492, 398, 69);
+		btnExitGame_1.setBounds(279, 432, 398, 69);
 		frame.getContentPane().add(btnExitGame_1);
 		
 		JLabel lblEndMessage = new JLabel("TEAM NAME: " + game.getTeam().getName());
@@ -3287,21 +3347,39 @@ public class gameEnvGui {
 		lblOurThanks.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOurThanks.setBounds(12, 368, 914, 52);
 		frame.getContentPane().add(lblOurThanks);
-		
-		JButton btnPlayAgain = new JButton("MAIN MENU");
-		btnPlayAgain.addActionListener(new ActionListener() {
+	}
+	
+	private void lossGamePanel() {
+		frame.getContentPane().setLayout(null);
+		JButton btnExitGame_1 = new JButton("EXIT GAME");
+		btnExitGame_1.setBackground(new Color(75, 0, 130));
+		btnExitGame_1.setForeground(new Color(255, 255, 255));
+		btnExitGame_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game = new gameEnvironmentGuiRunTime();
-				frame.getContentPane().removeAll();
-				frame.repaint();
-				gameStartPanel();
+				System.exit(0);
 			}
 		});
-		btnPlayAgain.setBackground(new Color(75, 0, 130));
-		btnPlayAgain.setForeground(new Color(255, 255, 255));
-		btnPlayAgain.setFont(new Font("Dialog", Font.BOLD, 50));
-		btnPlayAgain.setBounds(279, 427, 398, 69);
-		frame.getContentPane().add(btnPlayAgain);
+		btnExitGame_1.setFont(new Font("Dialog", Font.BOLD, 50));
+		btnExitGame_1.setBounds(279, 492, 398, 69);
+		frame.getContentPane().add(btnExitGame_1);
+		
+		JLabel lblCongratulatoryMessage = new JLabel("Oh blast, your team was killed and you couldnt save the princess");
+		lblCongratulatoryMessage.setFont(new Font("Arvo", Font.ITALIC, 22));
+		lblCongratulatoryMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCongratulatoryMessage.setBounds(12, 209, 914, 50);
+		frame.getContentPane().add(lblCongratulatoryMessage);
+		
+		JLabel lblNewLabel_4 = new JLabel("YOU DEAD AF");
+		lblNewLabel_4.setFont(new Font("Arvo", Font.BOLD, 80));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setBounds(12, 12, 914, 122);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_6 = new JLabel("Now your legacy will only throw shadow over you family");
+		lblNewLabel_6.setFont(new Font("Arvo", Font.ITALIC, 22));
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6.setBounds(12, 260, 914, 50);
+		frame.getContentPane().add(lblNewLabel_6);
 	}
 }
 

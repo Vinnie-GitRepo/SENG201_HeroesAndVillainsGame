@@ -41,18 +41,7 @@ public class diceRollGame {
 		}
 	}
 
-	
-	/**
-	 * 
-	 * Gets the players choice for the menu option
-	 * 
-	 * @return pos.nextInt();
-	 */
-	public int getPlayerChoice() {
-		Scanner pos = new Scanner(System.in);
-		return pos.nextInt();
-	}
-	
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

@@ -7,20 +7,6 @@ import villianStuff.*;
 
 public class numberGuess {
 	
-	/**
-	 * 
-	 * Calculates whether or not the player needs to guess higher or lower
-	 * then prints out a statement letting them know
-	 */
-	public void higherOrLower(int guess, int num) {
-		if (guess > num) {
-			System.out.println("Guess Lower");
-		} else {
-			System.out.println("Guess Higher");
-		}
-	}
-	
-	
 	
 	public String higherOrLowerGui(int guess, int num) {
 		if (guess > num) {
@@ -33,7 +19,7 @@ public class numberGuess {
 
 
 	public int getVillianChoice(int luckynum) {
-		return ThreadLocalRandom.current().nextInt(5, 11);
+		return ThreadLocalRandom.current().nextInt(luckynum, 11);
 	}
 	
 
