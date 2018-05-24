@@ -30,7 +30,7 @@ public class Team {
 	 * The money the team has to spend on items, which is awarded to the team for victories. 
 	 * Can be gifted or stolen.
 	 */
-	private int money = 100;
+	private int money = 300;
 	
 	
 	
@@ -57,6 +57,7 @@ public class Team {
 	private int barterSkillSum;
 	
 	
+
 	
 	/**
 	 * A list that stores the team's HealingItem objects.
@@ -79,7 +80,7 @@ public class Team {
 	//                   [INVENTORY]
 	//------------------------------------------------
 	
-		
+
 	/**
 	 * Adds a HealingItem to the healingItems list.
 	 * @param healingItem HealingItem
@@ -139,6 +140,7 @@ public class Team {
 	}
 	
 	
+
 	/**
 	 * Prints out all the items of the team to view
 	 * @return words String
@@ -161,6 +163,7 @@ public class Team {
 	
 	
 	
+
 	//------------------------------------------------
 	//                   [GETTERS]
 	//------------------------------------------------
@@ -217,9 +220,6 @@ public class Team {
 	public int getBarterSkillSum() {
 		return barterSkillSum;
 	}
-	
-	
-	
 	
 	
 	//------------------------------------------------

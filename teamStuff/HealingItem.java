@@ -79,7 +79,7 @@ public class HealingItem {
 	public HealingItem(String name, int potency, int price, int time) {
 		healingItemName = name;
 		healingItemPotency = potency;
-		healingItemPrice = price;
+		healingItemPrice = price * 3;
 		defaultApplicationTime = time;
 	}
 	
@@ -179,12 +179,11 @@ public class HealingItem {
 	 */
 	public String toString() {
 			
-			String resultString = "Name: " + getHealingItemName() + "\n"
-								+ "Item Type: Healing Item" + "\n"
-								+ "Potency: " + getHealingItemPotency() + "\n"
-								+ "Price: " + getHealingItemPrice() + "\n"
-								+ "Description: A restorative concoction, perfect for wounded heroes.\n"
-								+ "Item Effect: Will restore " + getHealingItemPotency() + " health in 25% increments over time.\n";   	
+			String resultString = "<html>Name: " + getHealingItemName() + "<br>"
+								+ "Item Type: Healing Item" + "<br>"
+								+ "Potency: " + getHealingItemPotency() + "<br>"
+								+ "Description: A restorative concoction, perfect for wounded heroes.<br>"
+								+ "Item Effect: Will restore " + getHealingItemPotency() + " health in 25% increments over time.<html>";   	
 			
 			return resultString;
 	}
