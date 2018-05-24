@@ -14,25 +14,23 @@ import villianStuff.Villian;
 
 public class gameEnvironmentGuiRunTime {
 	
-	public static boolean[] foundPlaces = {false, false, false, false};
+	private static boolean[] foundPlaces = {false, false, false, false};
 	
-	public static boolean hasMap = false;
+	private static boolean hasMap = false;
 	
-	public static ArrayList<Villian> villians = new ArrayList<Villian>();
+	private static ArrayList<Villian> villians = new ArrayList<Villian>();
 	
-	public static ArrayList<shop> shops = new ArrayList<shop>();
+	private static ArrayList<shop> shops = new ArrayList<shop>();
 	
-	public static int currentHero;
+	private static int currentHero;
 	
-	public static ArrayList<String> thisMap;
+	private static ArrayList<String> thisMap;
 	
-	public static shop currentShop;
+	private static shop currentShop;
 	
-	public static Villian currentVillian;
+	private static Villian currentVillian;
 	
-//	public static boolean hasCartographer;
-	
-	public static boolean luck = false;
+	private static boolean luck = false;
 	
 	public void giveLuck() {
 		luck = true;
@@ -43,10 +41,8 @@ public class gameEnvironmentGuiRunTime {
 		String theEvent ="Your Team Had A Safe Journey Back";
 		Random happen = new Random();
 		boolean event = happen.nextBoolean();
-//		System.out.println(event);
 		if (event) {
 			int number = happen.nextInt(4);
-//			System.out.println(number);
 			switch(number) {
 			case 0:
 				theEvent = "Your Team Has Been Given An Item!";
@@ -57,18 +53,18 @@ public class gameEnvironmentGuiRunTime {
 			case 1:
 				theEvent = "Your Team Has Lost An Item!";
 				try {
-				team.getHealingItems().remove(happen.nextInt(team.getHealingItems().size()));//team.removeHealingItem(currentShop.getHealingItems().get(happen.nextInt(4)));//removeItem(currentShop.getHealingItems().get(happen.nextInt(4)));
+				team.getHealingItems().remove(happen.nextInt(team.getHealingItems().size()));
 				} catch (Exception e) {
 					theEvent = "Someone Tried To Rob You But You Got Nothin!";
 				}
 				break;
 			case 2:
 				theEvent = "Your Team Has Been Given Some Money!";
-				team.addMoney(100);
+				team.addMoney(300);
 				break;
 			case 3:
 				theEvent = "Your Team Has Been Robbed Of Some Money!";
-				team.addMoney(-50);
+				team.addMoney(-150);
 				break;
 			}
 		}
@@ -79,7 +75,6 @@ public class gameEnvironmentGuiRunTime {
 		return luck;
 	}
 	
-//	public static boolean hasMerchant;
 	
 	public void giveMap() {
 		hasMap = true;
@@ -112,15 +107,11 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	public String getMapPlace(int num, int city) {
-//		System.out.println(num);
-//		System.out.println(foundPlaces[num]);
 		if (foundPlaces[num] == true) {
 			return baseCamps.get(city).getMap().get(num);
 		} else {
-			//foundPlaces[num] = true;
 			return "???";
 		}
-//		return "ga";
 	}
 	
 	public ArrayList<String> getCurrentMap(int num){
@@ -158,83 +149,20 @@ public class gameEnvironmentGuiRunTime {
 		return currentShop;
 	}
 	
-	public ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
+	private ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
 	
-	public Team team;
+	private Team team;
 	
 	public Random rand = new Random();
 	
-	public boolean cityBeat = false;
 	
-	
-	//This is used at any point if all of your super heroes
-	//have died it will exit the java application
-	/**
-	 * This can be called at any time if the team has lost
-	 * it will simply tell the player that they have lost and exit the game
-	 * 
-	 */
-	public void endGame() {
-		System.out.println("You have lost MWAHAHAHA!");
-		System.exit(0);
-	}
-	
-	
-	
-	
-	//cityBeat allows for the main programme to know whether
-	//the city has been beat or if the heroes have died
-	/**
-	 * cityBeat allows for the main programme to know whether
-	 * the city has been beat or if the heroes have died
-	 * 
-	 */
-	public void setCityBeat() {
-		cityBeat = true;
-	}
-	
-	
-	//Adds to the array of baseCamps which contains each
-	//camp within the game. Basecamps are in effect citys
-	//as each city is centralized to a basecamp.
-	/**
-	 * Adds to the array of baseCamps which contains each
-	 * camp within the game. Basecamps are in effect citys
-	 * as each city is centralized to a basecamp.
-	 * 
-	 */
-	public void addBaseCamp(Team team) {
-		baseCamp Camp = new baseCamp(team);
-		baseCamps.add(Camp);
-	}
-	
-	
-	//A likely unneeded function
+
 	public void addBaseCamp(ArrayList<String> map) {
 		baseCamp Camp = new baseCamp(map);
 		baseCamps.add(Camp);
-		//baseCamp Camp = new baseCamp(this.generateLayout());
-		//System.out.println("made new one");
-		//baseCamps.add(Camp);
 	}
 	
 	
-	//This simply returns whatever the user has inputted.
-	//Should be turned into a interface though possibly
-	/**
-	 * This simply returns whatever the user has inputted.
-	 * Should be turned into a interface though possibly
-	 * 
-	 * @return pos.nextInt();
-	 */
-	public int getPlayerChoice() {
-		Scanner pos = new Scanner(System.in);
-		return pos.nextInt();
-	}
-	
-	
-	//Allows for other classes to get the team in order
-	//to edit or add
 	/**
 	 * Allows for other classes to get the team in order
 	 * to edit or add
@@ -328,14 +256,26 @@ public class gameEnvironmentGuiRunTime {
 		return info;
 	}
 	
-	
-	public ArrayList<Hero> getHeroList() {
-		return this.getTeam().getHeroArray();
+	public SilverTongueI getSTI() {
+		SilverTongueI info = new SilverTongueI();
+		return info;
 	}
 	
-	//This is used when finishing a city the team is returned
-	//through the game and set to theTeam in order to move
-	//into the next city
+	
+	public SilverTongueII getSTII() {
+		SilverTongueII info = new SilverTongueII();
+		return info;
+	}
+	
+	
+	public SilverTongueIII getSTIII() {
+		SilverTongueIII info = new SilverTongueIII();
+		return info;
+	}
+	
+	
+
+	
 	/**
 	 * This is used when finishing a city the team is returned
 	 * through the game and set to theTeam in order to move
@@ -346,8 +286,6 @@ public class gameEnvironmentGuiRunTime {
 	} 
 	
 	
-	//Generates each villian for each city and stores them within
-	//villians an ArrayList<villian>
 	/**
 	 * Generates each villian for each city and stores them within
 	 * villians an ArrayList<villian>
@@ -385,43 +323,33 @@ public class gameEnvironmentGuiRunTime {
 		int numName;
 		int numPhrase;	
 		
-		//Villian Generating Loop
-		//Num is passed into it as it will only create as many
-		//vilians as there is towns
+
 		for (int i = 0; i < num; i++) {
 			numName = rand.nextInt(villianNames.size());
 			numPhrase = rand.nextInt(catchPhrase.size());
 			boolean switchGame = false;
 			
-//			if (numName % 2 == 0) 
-//			{
-//				switchGame = true;
-//			}
+			if (numName % 2 == 0) 
+			{
+				switchGame = true;
+			}
 			Random thing = new Random();
 			int changeNum = thing.nextInt(2);
 			boolean changes = false;
-//			if (changeNum == 1) {
-//				changes = true;
-//			}
+			if (changeNum == 1) {
+				changes = true;
+			}
 			Villian baddy = new Villian(villianNames.get(numName), 
 					catchPhrase.get(numPhrase), switchGame, villianIcons.get(i), changes);
 			villians.add(baddy);
 			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
 			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
 			
-			//TEST TO MAKE SURE IT IS RANDOMIZING
-			//System.out.println(villians.get(i).getName()); 
-			//System.out.println(villians.get(i).getTaunt());
+
 		}
 	}
 	
 	
-	//DATA FOR GENERATING CITIES
-	//public ArrayList<String> areas = new ArrayList<String>();
-	
-	
-	
-	//THE ACTUAL CITY GENERATOR
 	/**
 	 * This generates the city and how it will be laid out
 	 * 
@@ -470,46 +398,7 @@ public class gameEnvironmentGuiRunTime {
 	 * 
 	 */
 	public void main(String[] args) {
-		int num = 0;
-		gameEnvironmentGuiRunTime game = new gameEnvironmentGuiRunTime();
-		team = new Team();
-		System.out.println("Choose How Many Cities You Would Like To Save?");
-		while ((num < 3) || (num > 6)) {
-			System.out.println("Please Enter A Number Between 3 and 6:\n");
-			try {
-				num = game.getPlayerChoice();
-				}
-			catch(InputMismatchException e){
-				};
-		}
 		
-		game.generateVillians(num);																//Calls the villian generator passing in the num of cities
-
-		System.out.println(team);																//Prints out the initial team showing stats
-		
-		for (int i = 0; i != num; i++) {														//THIS IS GENERATING HOW MANY CITIES THERE ARE
-			//game.addBaseCamp();
-			//System.out.println("added camp");
-			//while (cityBeat == false) {
-				//game.addBaseCamp(team);															//i need to get the villian into that city
-				//baseCamps.get(i).viewMenu();
-			//}																					//something like if city is won baseCamps.get(i).finishCity();
-			
-			//cityBeat = false;
-			//System.out.println("You have completed this city!");
-			
-		}
-		for (int i = 0; i < baseCamps.size(); i++) {//(baseCamp camp : baseCamps) {
-			baseCamps.get(i).setTeam(team);//camp.setTeam(team);
-			//System.out.println(villians.get(i).getTaunt());
-			baseCamps.get(i).setVillian(villians.get(i));
-			baseCamps.get(i).viewMenu();//camp.viewMenu();
-			System.out.println("Finihed the city");
-			cityBeat = false;
-		}
-		//super villian spot is here this will only be called if they finish each city
-		System.out.println("WHAT THE FUCK CUNT HOW HAVE U GINISHED IT ALREADY WWUT>?");			//At this point they must have gone though each city, will make super villian happen now
-
 	}
 
 }

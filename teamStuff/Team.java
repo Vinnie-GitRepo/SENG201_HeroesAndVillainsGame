@@ -37,7 +37,7 @@ public class Team {
 	 * The money the team has to spend on items, which is awarded to the team for victories. 
 	 * Can be gifted or stolen.
 	 */
-	private int money = 100;
+	private int money = 300;
 	
 	
 	
@@ -64,19 +64,7 @@ public class Team {
 	private int barterSkillSum;
 	
 	
-	
-	/**
-	* An ArrayList where consumables are added and removed, which the displayInventory uses to sort inventory
-	*/
-	public static ArrayList<ConsumableItem> workingInventory = new ArrayList<ConsumableItem>();
-	
-	
-	
-	/**
-	* A TreeSet used to display the workingInventory which gets updated every time the workingInventory changes  
-	*/
-	public static TreeSet<String> displayInventory = new TreeSet<String>();
-	
+
 	
 	
 	/**
@@ -272,17 +260,6 @@ public class Team {
 	//------------------------------------------------
 	
 	
-	/**
-	* Refreshes the displayInventory when the workingInventory changes
-	*/
-	public static void refreshDisplayInventory() {
-		displayInventory = new TreeSet<String>();    
-		for(Consumable item : workingInventory) {
-			int itemFrequency = Collections.frequency(workingInventory, item);
-			displayInventory.add(item.getName() + " (" + itemFrequency + ")");
-		} 
-	}
-		
 	
 	/**
 	 * Adds a HealingItem to the healingItems list.
@@ -343,61 +320,8 @@ public class Team {
 	}
 	
 	
-		
-	/**
-	* Adds a consumable item to the workingInventory
-	* Reshreshes displayInventory
-	* 
-	* @param item			The Consumable being added
-	*/
-	public void addItem(ConsumableItem item) {    
-		workingInventory.add(item);
-		refreshDisplayInventory();
-	}
-		
-		
-	
-	/**
-	* Removes a consumable item from the workingInventory
-	* Refreshes displayInventory
-	* 
-	* @param item
-	*/
-	public void removeItem(Consumable item) {
-		workingInventory.remove(item);
-		refreshDisplayInventory();
-	}
-		
-	
-	
-	/**
-	 * Accesses the team's inventory and lists each item type along with its frequency 
-	 */
-	public void displayInventory() {
-		//ArrayList<Consumable> items = new ArrayList<Consumable>();
-		String stuff = "";
-		if (workingInventory.size() > 0) {
-			/*for (Consumable item : workingInventory) {
-				if (!items.contains(item)) {
-					items.add(item);
-				}
-			}
-			for (int i = 0; i < items.size(); i++) {
-				int itemFrequency = Collections.frequency(workingInventory, items.get(i));
-				System.out.println(items.get(i) + "(" + itemFrequency + ")"); 
-			}*/
-			for(String item : displayInventory) {
-				//System.out.println(item);
-				stuff = stuff + item.toString() + "\n";
-			}
-			
-		}
-		else {
-			System.out.println("You Have No Items Currently.");
-		}
-	}
-	
-	
+
+
 	//------------------------------------------------
 	//                   [GETTERS]
 	//------------------------------------------------
@@ -454,16 +378,7 @@ public class Team {
 		return barterSkillSum;
 	}
 	
-	
-	
-	/**
-	 * @return workingInventory
-	 */
-	public ArrayList<ConsumableItem> getInventory(){
-		return workingInventory;
-	}
-	
-	
+
 	
 	//------------------------------------------------
 	//                   [SETTERS]
