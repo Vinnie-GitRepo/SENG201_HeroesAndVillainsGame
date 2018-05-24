@@ -27,13 +27,6 @@ public class Team {
 	
 	
 	/**
-	 * Determines the size of the heroArray, which is between 1 and 3 Heroes in length
-	 */
-	private int teamSize;
-	
-	
-	
-	/**
 	 * The money the team has to spend on items, which is awarded to the team for victories. 
 	 * Can be gifted or stolen.
 	 */
@@ -66,7 +59,6 @@ public class Team {
 	
 
 	
-	
 	/**
 	 * A list that stores the team's HealingItem objects.
 	 * A hero's use of any healing item in a hospital will result in it being removed from this list.
@@ -82,188 +74,16 @@ public class Team {
 	public static ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	
-	
-	public String viewInventory() {
-		String words = "HEALING ITEMS\n";
-		for (HealingItem item : healingItems) {
-			words = words + item.getHealingItemName() + "\n";
-		}
-		words = words + "\nPOWER UP ITEMS\n";
-		for (PowerUp item : powerUps) {
-			words = words + item.getPowerUpName() + "\n";
-		}
-		return words;
-	}
-	
-	
-	/**
-	 * Constructor for the Team Class
-	 */
-	public Team() {
 
-		//chooseTeamSize();		// Determines the size of the heroArray of the team
-		//fillHeroArray();		// Lets you select and name heroes for your team
-		//nameTeam();				// Lets you name your team of heroes
-//		setBarterSkillSum();	//-------------------------------------
-//		setDeterrenceSum();		// Setters based on the heroes selected
-//		setFameSum();			//-------------------------------------
-	}
-	
-	
-	
-	
-	/**
-	 * Has the player select a valid number of heroes to be in the team.
-	 * 
-	 * @return teamSize
-	 */
-	public int chooseTeamSize() {
-		
-		boolean done = false;
-		while(done == false) {
-			System.out.println("\nChoose how many heroes are on your team\n \nChoices:");
-			System.out.println("(1) One Hero.");
-			System.out.println("(2) Two Heroes.");
-			System.out.println("(3) Three Heroes.");
-			
-			try {
-				Scanner sizeChoice = new Scanner(System.in);
-				int toAdd = sizeChoice.nextInt(); 
-
-				if ((toAdd > 3) || (toAdd < 1)) {
-					System.out.println("Your team may only contain 1, 2, or 3 heroes.");}
-				else {
-					teamSize += toAdd;
-					done = true;}}
-			
-			catch(InputMismatchException e) {
-				e.getCause();
-				System.out.println("\nYour input is invalid. Please enter a valid number");}
-		}
-		return teamSize;
-	}
-	
-	
-	
-	
-	/**
-	 *  Has the player select valid hero types for heroes they create, according to the size of the team.
-	 */
-	public void fillHeroArray() {
-		for (int i = 0; i < teamSize; i++) {
-			boolean correct = false;
-			while (!correct) {
-				System.out.println("\nWhat type of hero would you like to add to your team? \nEnter one of the following numbers:");
-				System.out.println("(1) Merchant Class Hero.");
-				System.out.println("(2) Tank Class Hero.");
-				System.out.println("(3) Cartographer Class Hero.");
-				System.out.println("(4) Support Class Hero.");
-				System.out.println("(5) LuckyBoii Class Hero.");
-				System.out.println("(6) Intimidating AntiHero Class Hero.");
-				
-				try {
-					Scanner heroChoice = new Scanner(System.in);
-					int choice = heroChoice.nextInt();
-					
-					if ((choice > 6) || (choice < 1)) {
-						System.out.println("Your input is invalid. Please enter a valid number");} 
-					else {
-						correct = true ;
-						this.selectHeroType(choice);}}
-			    
-				catch (InputMismatchException e) {
-			    	e.getCause();
-			    	System.out.println("Your input is invalid. Please enter a valid number");}
-				
-			}
-			//correct = false;
-		}
-	}
-	
-	
-	
-	/**
-	 * Has the player name the team in accordance with the length restrictions.
-	 */
-	public void nameTeam() {
-		
-		System.out.println("Name your team of heroes.");
-		Scanner teamNameChoice = new Scanner(System.in);
-		String name = teamNameChoice.nextLine();
-		
-		if(name.length() < 2 || name.length() > 10) {
-			System.out.println("The team name must be between 2 and 10 characters in length.");
-			nameTeam();}
-		else {
-			Team.teamName = name;}
-	}
-	
-	
-	
-	
-	/**
-	 * Checks if choice input is valid.<br>
-	 * Creates a new hero of the selected type.<br>
-	 * Adds the hero to the heroArray of the team.<br>
-	 *  
-	 * @param choice
-	 */
-	public void selectHeroType(int choice) {
-			
-		switch (choice) {
-			// Merchant Hero is chosen.
-			case 1:                  
-				MerchantMan merchant = new MerchantMan();
-				heroArray.add(merchant);
-				break;
-			
-			// Tank Hero is chosen.
-			case 2:                  
-				Tank tank = new Tank();
-				heroArray.add(tank);
-				break;
-			
-			// Cartographer Hero is chosen.
-			case 3:                  
-				Cartographer cartographer = new Cartographer();
-				heroArray.add(cartographer);
-				break;
-				
-			// Support Hero is chosen.	
-			case 4:                  
-				Support support = new Support();
-				heroArray.add(support);
-				break;
-				
-			// LuckyBoii Hero is chosen.
-			case 5:                  
-				LuckyBoii lucky = new LuckyBoii();
-				heroArray.add(lucky);
-				break;
-			
-			// EdgyScaryFiendLord Hero is chosen.
-			case 6:                  
-				EdgyScaryFiendLord esfl = new EdgyScaryFiendLord(); 
-				heroArray.add(esfl);
-				break;
-				
-			// Else
-			default:                 
-				break;
-		}
-	}
-	
-	
 	
 	//------------------------------------------------
 	//                   [INVENTORY]
 	//------------------------------------------------
 	
-	
-	
+
 	/**
 	 * Adds a HealingItem to the healingItems list.
-	 * @param healingItem
+	 * @param healingItem HealingItem
 	 */
 	public void addHealingItem(HealingItem healingItem) {
 		healingItems.add(healingItem);
@@ -273,7 +93,7 @@ public class Team {
 	
 	/**
 	 * Removes a HealingItem from the healingItems list. 
-	 * @param healingItem
+	 * @param healingItem HealingItem
 	 */
 	public static void removeHealingItem(HealingItem healingItem) {
 		healingItems.remove(healingItem);
@@ -283,7 +103,7 @@ public class Team {
 	
 	/**
 	 * Returns healingItems list. 
-	 * @return healingItems
+	 * @return healingItems ArrayList<HealingItem>
 	 */
 	public ArrayList<HealingItem> getHealingItems() {
 		return healingItems;
@@ -293,7 +113,7 @@ public class Team {
 	
 	/**
 	 * Adds a PowerUp to the powerUps list.
-	 * @param powerUp
+	 * @param powerUp PowerUp
 	 */
 	public void addPowerUp(PowerUp powerUp) {
 		powerUps.add(powerUp);
@@ -303,7 +123,7 @@ public class Team {
 	
 	/**
 	 * Removes a PowerUp from the powerUps list.
-	 * @param powerUp
+	 * @param powerUp PowerUp
 	 */
 	public static void removePowerUp(PowerUp powerUp) {
 		powerUps.remove(powerUp);
@@ -313,7 +133,7 @@ public class Team {
 	
 	/**
 	 * Returns the powerUps list
-	 * @return powerUps
+	 * @return powerUps ArrayList<PowerUp> 
 	 */
 	public ArrayList<PowerUp> getPowerUps() {
 		return powerUps;
@@ -321,13 +141,36 @@ public class Team {
 	
 	
 
+	/**
+	 * Prints out all the items of the team to view
+	 * @return words String
+	 */
+	public String viewInventory() {
+		String words = "HEALING ITEMS\n";
+		
+		for (HealingItem item : healingItems) {
+			words += item.getHealingItemName() + "\n";}
+		
+			words += "\nPOWER UP ITEMS\n";
+			
+		for (PowerUp item : powerUps) {
+			words += item.getPowerUpName() + "\n";}
+		
+		return words;
+	}
+	
+
+	
+	
+	
 
 	//------------------------------------------------
 	//                   [GETTERS]
 	//------------------------------------------------
 	
+	
 	/**
-	 * @return teamName
+	 * @return teamName String
 	 */
 	public String getName() {
 		return teamName;
@@ -336,7 +179,7 @@ public class Team {
 	
 	
 	/**
-	 * @return money 
+	 * @return money int
 	 */
 	public int getMoney() {
 		return money;
@@ -345,7 +188,7 @@ public class Team {
 	
 	
 	/**
-	 * @return heroArray
+	 * @return heroArray ArrayList<Hero>
 	 */
 	public static ArrayList<Hero> getHeroArray() {
 		return heroArray;
@@ -354,7 +197,7 @@ public class Team {
 	
 	
 	/**
-	 * @return fameSum
+	 * @return fameSum int
 	 */
 	public int getFameSum() {
 		return fameSum;
@@ -363,7 +206,7 @@ public class Team {
 	
 	
 	/**
-	 * @return deterrenceSum
+	 * @return deterrenceSum int
 	 */
 	public int getDeterrenceSum() {
 		return deterrenceSum;
@@ -372,13 +215,12 @@ public class Team {
 	
 	
 	/**
-	 * @return barterSkillSum
+	 * @return barterSkillSum int
 	 */
 	public int getBarterSkillSum() {
 		return barterSkillSum;
 	}
 	
-
 	
 	//------------------------------------------------
 	//                   [SETTERS]
@@ -428,7 +270,7 @@ public class Team {
 	/**
 	 * Sets the name for the team.<br>
 	 * Is called when submitting a name of valid length into the teamNameEntryBox
-	 * @param name
+	 * @param name String
 	 */
 	public void nameTeam(String name) {
 		teamName = name;
@@ -438,27 +280,20 @@ public class Team {
 	
 	/**
 	 * Adds a hero to the team's heroArray.
-	 * @param hero
+	 * @param hero Hero
 	 */
 	public void addHero(Hero hero) {
 		heroArray.add(hero);
 	}
 	
+	
+	
+	
+	
 	//------------------------------------------------
 	//                [BATTLE METHODS]
 	//------------------------------------------------
 	
-	
-	/**
-	 * Prints out a list of heroes available to battle the villain.
-	 * 					[Command Line Code]
-	 */
-	public void selectHero () {
-		System.out.println("\nSelect a hero for battle!");
-		for (int i = 0; i < heroArray.size(); i++) {
-			System.out.println("("+ i + ") " + heroArray.get(i).getName());
-		}
-	}
 	
 	/**
 	 * Removes a dead hero from the team
@@ -468,6 +303,8 @@ public class Team {
 		heroArray.remove(hero);
 	}
 	
+	
+	
 	/**
 	 * Changes the amount of money in the team's posession.
 	 * @param amount
@@ -475,7 +312,6 @@ public class Team {
 	public void addMoney(int amount) {
 		money += amount;
 	}
-	
 	
 	
 	

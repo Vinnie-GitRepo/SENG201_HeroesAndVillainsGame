@@ -99,23 +99,22 @@ public class Hero {
 	
 	
 	
-	/**
-	 * A boolean showing whether the Hero has a HealingItem applied.<br>
-	 * If this attribute is true then this hero should not be able to apply another HealingItem.
-	 */
-	private boolean currentlyHealing = false;
+	//------------------------------------------------
+	//              [HERO INITIALIZING]
+	//------------------------------------------------
+	
 	
 	/**
-	 * Constructor for the Hero class
+	 * <<Constructor>> for the Hero class
 	 * 
-	 * @param health
-	 * @param theClass
-	 * @param recovery
-	 * @param armor
-	 * @param barter
-	 * @param luck
-	 * @param fame
-	 * @param deterrence
+	 * @param health int
+	 * @param theClass String
+	 * @param recovery int
+	 * @param armor int
+	 * @param barter int
+	 * @param luck boolean
+	 * @param fame int 
+	 * @param deterrence int
 	 */
 	public Hero(int health, String theClass, int recovery, int armor, int barter, boolean luck, int fame, int deterrence, ImageIcon image) {
 		
@@ -129,43 +128,13 @@ public class Hero {
 		this.fame = fame;
 		this.deterrence = deterrence;
 		icon = image;
-		//nameHero();
 	}
 	
 	
 	/**
-	 * The naming process for the hero.
-	 * Ensures the name chosen isn't already taken by another hero.
+	 * Setter for the hero's name.
+	 * @param name String
 	 */
-	public void nameHero() {
-		ArrayList<Hero> checkArray = Team.getHeroArray();
-		
-		System.out.println("\nWhat is this hero's name? ");
-		Scanner inputName = new Scanner(System.in);
-		String name = inputName.nextLine();
-		
-		boolean done;
-		
-		if(checkArray.size() >= 1) {
-			for(Hero hero : checkArray) {
-				done = false;
-				while (done == false) {
-					if(name.equals(hero.getName())) {
-						System.out.println("That name is already taken by a team member");
-						System.out.println("Enter another name: ");
-						inputName = new Scanner(System.in);
-						name = inputName.nextLine();}
-					else {
-						heroName = name;
-						done = true;}
-				}
-			}
-		}
-		heroName = name;
-	}
-	
-	
-	
 	public void setHeroName(String name) {
 		heroName = name;
 	}
@@ -178,7 +147,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's name.
-	 * @return heroName
+	 * @return heroName String
 	 */
 	public String getName() {
 		return heroName;
@@ -186,13 +155,20 @@ public class Hero {
 	
 	
 	
+	/**
+	 * Getter for the hero's GUI representation
+	 * @return icon ImageIcon
+	 */
 	public ImageIcon getIcon() {
 		return icon;
 	}
 	
+	
+	
+	
 	/**
 	 * Getter for the hero's class.
-	 * @return heroClass
+	 * @return heroClass String
 	 */
 	public String getHeroClass() {
 		return heroClass;
@@ -203,7 +179,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's max health.
-	 * @return maxHealth
+	 * @return maxHealth int
 	 */
 	public int getMaxHealth() {
 		return maxHealth;
@@ -213,7 +189,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's current health.
-	 * @return currenthealth
+	 * @return currenthealth int
 	 */
 	public int getCurrentHealth() {
 		return currentHealth;
@@ -223,7 +199,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's recovery boost.
-	 * @return recoveryBoost
+	 * @return recoveryBoost int
 	 */
 	public int getRecoveryBoost() {
 		return recoveryBoost;
@@ -233,7 +209,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's armor.
-	 * @return heroArmor
+	 * @return heroArmor int 
 	 */
 	public int getArmor() {
 		return heroArmor;
@@ -243,7 +219,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's bartering skill.
-	 * @return barterSkill
+	 * @return barterSkill int
 	 */
 	public int getBarterSkill() {
 		return barterSkill;
@@ -253,7 +229,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's deterrence level.
-	 * @return deterrence
+	 * @return deterrence int
 	 */
 	public int getDeterrence() {
 		return deterrence;
@@ -263,7 +239,7 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's fame.
-	 * @return fame
+	 * @return fame int
 	 */
 	public int getFame() {
 		return fame;
@@ -273,19 +249,11 @@ public class Hero {
 	
 	/**
 	 * Getter for the hero's luck.
-	 * @return luck
+	 * @return luck boolean
 	 */
 	public boolean getLuck() {
 		return luck;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -296,11 +264,9 @@ public class Hero {
 	//------------------------------------------------
 
 	
-	
-	
 	/**
 	 * Use a HealingItem, item, by applying its effect to the hero, and removing it from the team's inventory.
-	 * @param item
+	 * @param item HealingItem
 	 */
 	public void useHealingItem(HealingItem item) {
 		item.apply(this);
@@ -309,20 +275,21 @@ public class Hero {
 	
 	
 	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Use a PowerUp, item, by applying its effect to the hero, and removing it from the team's inventory.
+	 * @param item PowerUp
+	 */
 	public void usePowerUp(PowerUp item) {
 		item.apply(this);
 		Team.removePowerUp(item);
 	}
 	
 	
+	
 	/**
-	 * @param amount
+	 * This is called by the apply method in HealingItem during each time increment.<br>
+	 * This method also ensure that the current health is less than or equal to their maximum health. 
+	 * @param amount int
 	 */
 	public void restoreHealth(int amount) {
 		if(currentHealth + amount >= maxHealth) {
@@ -343,7 +310,7 @@ public class Hero {
 	
 	/**
 	 * Executes max health boost on the hero using an Augment Vitality PowerUp.  
-	 * @param healthBoost
+	 * @param healthBoost int
 	 */
 	public void boostMaxHealth(int healthBoost) {
 		maxHealth += healthBoost;
@@ -353,7 +320,7 @@ public class Hero {
 	
 	/**
 	 * Executes armor boost on the hero using an Iron Flesh PowerUp. 
-	 * @param armorBoost
+	 * @param armorBoost int
 	 */
 	public void boostArmor(int armorBoost) {
 		heroArmor += armorBoost;
@@ -363,7 +330,7 @@ public class Hero {
 	
 	/**
 	 * Executes barter skill boost on the hero using a Silver Tongue PowerUp. 
-	 * @param barterBoost
+	 * @param barterBoost int 
 	 */
 	public void boostBarterSkill(int barterBoost) {
 		barterSkill += barterBoost;
@@ -373,7 +340,7 @@ public class Hero {
 	
 	/**
 	 * Executes fame boost for when the hero prevails against a villain. 
-	 * @param fameBoost
+	 * @param fameBoost int
 	 */
 	public void boostFame(int fameBoost) {
 		fame += fameBoost;
@@ -383,11 +350,14 @@ public class Hero {
 	
 	/**
 	 * Executes deterence boost for when the hero prevails agains a villain.
-	 * @param deterrenceBoost
+	 * @param deterrenceBoost int
 	 */
 	public void boostDeterrence(int deterrenceBoost) {
 		deterrence += deterrenceBoost;
 	}
+	
+	
+	
 	
 	
 	
@@ -397,12 +367,11 @@ public class Hero {
 	
 	
 	/**
-	 * Ensures that health is never negative.
-	 * Reduces the damaged hero's armor, if any.
-	 * Calculates how much damage is dealt, if any.
-	 * Determines whether the damaged hero is dead.
+	 * Ensures that health is never negative.<br>
+	 * Reduces the damaged hero's armor, if any.<br>
+	 * Calculates how much health damage is dealt, if any.
 	 * 
-	 * @param damage
+	 * @param damage int
 	 */
 	public void damageHealth(int damage) {
 		if(heroArmor < damage) {
@@ -414,16 +383,16 @@ public class Hero {
 		
 		if(currentHealth <= 0) {
 			currentHealth = 0;
-			deathHandling();}
+		}
 	}
 	
 	
 	
 	/**
-	 * Reduces the hero's armor according to the damage.
-	 * Ensures the hero's armor value is never negative.
+	 * This method reduces the hero's armor according to the damage.
+	 * This method ensures the hero's armor value is never negative.
 	 * 
-	 * @param damage
+	 * @param damage int
 	 */
 	public void damageArmor(int damage) {
 		if(heroArmor <= damage) {
@@ -435,18 +404,18 @@ public class Hero {
 	
 	
 	
+	
+	//------------------------------------------------
+	//        [PRESENTABLE HERO INFORMATION]
+	//------------------------------------------------
+	
+	
+	
 	/**
-	 * Informs user about the hero's death.
-	 * Removes the dead hero from the team.
+	 * Returns a message detailing the hero class and hero attributes.<br>
+	 * This method is used when clicking on any "class info" button in the teamInitializerPanel  
+	 * @return info String
 	 */
-	public void deathHandling() {
-		System.out.println(this.getName() + " has died");
-		//Team.removeHero(this);
-	}
-	
-	
-	
-	
 	public String getFullInfo() {
 		String info = "HERO CLASS: ANTI-HERO\n\n\n"
 					
@@ -481,6 +450,7 @@ public class Hero {
 	}
 	
 	
+	
 
 	/**
 	 * The hero's toString method, that prints the hero's attributes as desired.
@@ -498,17 +468,9 @@ public class Hero {
 	}
 	
 	
+	
+	
 	public static void main(String[] args) {
-		MerchantMan quod = new MerchantMan();
-		SilverTongueI buff1 = new SilverTongueI();
-		SilverTongueII buff2 = new SilverTongueII();
-		SilverTongueIII buff3 = new SilverTongueIII();
-		buff1.apply(quod);
-		//buff2.apply(quod);
-		//buff3.apply(quod);
-		System.out.println(quod);
-		
-		
 	}
 	
 }

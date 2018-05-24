@@ -142,7 +142,7 @@ public class HealingItem {
 				timeRemaining--;
 				secondsPassed++;
 				
-				System.out.println("Time remaining: " + timeRemaining);
+				//System.out.println("Time remaining: " + timeRemaining);
 				
 			
 				if(secondsPassed == 1 * applicationTime) {                							//	First increment, restoring 25% of the potion's potency.

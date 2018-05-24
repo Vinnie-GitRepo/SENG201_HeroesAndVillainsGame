@@ -5,6 +5,7 @@ import teamStuff.*;
 import villianStuff.*;
 
 
+
 public class baseCamp extends gameEnvironmentGuiRunTime {
 
 	/**
@@ -41,6 +42,5 @@ public class baseCamp extends gameEnvironmentGuiRunTime {
 		areas = map;
 	}
 	
-
 
 }
