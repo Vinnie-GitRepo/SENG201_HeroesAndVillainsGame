@@ -11,7 +11,13 @@ import games.*;
 import teamStuff.*;
 import villianStuff.Villian;
 
-
+/**
+ * Class containing useful data and methods called from across all classes.<br>
+ * An instance of this class is instantiated within gameEnvGui, the main program, so the game can use all relevant code. 
+ * 
+ * @author cwe55, vjj14
+ *
+ */
 public class gameEnvironmentGuiRunTime {
 	
 	private static boolean[] foundPlaces = {false, false, false, false};
@@ -422,14 +428,4 @@ public class gameEnvironmentGuiRunTime {
 			shops.add(newShop);
 		}
 	}
-	
-	/**
-	 * Where the game is intialized and played
-	 * 
-	 * 
-	 */
-	public void main(String[] args) {
-		
-	}
-
 }
