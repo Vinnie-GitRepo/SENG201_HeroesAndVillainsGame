@@ -8,6 +8,7 @@ public class Villian {
 	public int damageAmmount = 25;
 	public boolean defeated = false;
 	public String battleCry;
+	public int timesToBeat = 3;
 	public boolean favGame;
 	public ImageIcon icon;
 	public boolean changesGame;
@@ -20,12 +21,17 @@ public class Villian {
 		changesGame = change;
 	}
 	
+	public int getTimesToBeat() {
+		return timesToBeat;
+	}
+	
 	public int getDamageAmmount() {
 		return damageAmmount;
 	}
 	
 	public void superVillian() {
-		lossCount = -2;
+//		lossCount = -2;
+		timesToBeat = 5;
 		damageAmmount = 50;
 	}
 	public ImageIcon getIcon() {

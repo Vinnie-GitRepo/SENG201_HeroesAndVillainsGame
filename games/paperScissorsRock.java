@@ -30,7 +30,7 @@ public class paperScissorsRock {
 	}
 	
 	public String getOutCome(String outcome) {
-		String to_return = "hi";
+		String to_return = "";
 		switch(outcome) {
 		case "PaperScissors" :
 			to_return = "The Villian Has Won";

@@ -393,10 +393,10 @@ public class gameEnvironmentGuiRunTime {
 			numPhrase = rand.nextInt(catchPhrase.size());
 			boolean switchGame = false;
 			
-			if (numName % 2 == 0) 
-			{
-				switchGame = true;
-			}
+//			if (numName % 2 == 0) 
+//			{
+//				switchGame = true;
+//			}
 			Random thing = new Random();
 			int changeNum = thing.nextInt(2);
 			boolean changes = false;
