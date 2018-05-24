@@ -12,7 +12,6 @@ public class diceRollGame {
 	public static boolean finish = false;
 	
 	/**
-	 * 
 	 * Gets the randomly generated roll from the hero
 	 * 
 	 * @return ThreadLocalRandom.current().nextInt(luckynum, 7)
@@ -26,7 +25,6 @@ public class diceRollGame {
 	}
 	
 	/**
-	 * 
 	 * Gets the randomly generated roll for the Villian
 	 * 
 	 * @return ThreadLocalRandom.current().nextInt(1, 7)

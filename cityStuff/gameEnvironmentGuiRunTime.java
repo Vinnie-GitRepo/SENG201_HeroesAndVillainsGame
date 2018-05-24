@@ -167,12 +167,10 @@ public class gameEnvironmentGuiRunTime {
 	public boolean cityBeat = false;
 	
 	
-	//This is used at any point if all of your super heroes
-	//have died it will exit the java application
+
 	/**
-	 * This can be called at any time if the team has lost
-	 * it will simply tell the player that they have lost and exit the game
-	 * 
+	 * This can be called at any time if the team has lost.<br>
+	 * It will simply tell the player that they have lost and exit the game
 	 */
 	public void endGame() {
 		System.out.println("You have lost MWAHAHAHA!");
@@ -182,12 +180,9 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	
-	//cityBeat allows for the main programme to know whether
-	//the city has been beat or if the heroes have died
 	/**
-	 * cityBeat allows for the main programme to know whether
+	 * cityBeat allows the main program to know whether.<br>
 	 * the city has been beat or if the heroes have died
-	 * 
 	 */
 	public void setCityBeat() {
 		cityBeat = true;

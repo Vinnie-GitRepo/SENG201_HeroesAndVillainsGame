@@ -4,7 +4,7 @@ import teamStuff.*;
 
 public class hospital extends baseCamp {
 	
-	public static ConsumableItem current;
+	//public static ConsumableItem current;
 	//Give the options menu for within the hospital
 //	public void viewMenu() {
 //		

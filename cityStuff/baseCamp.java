@@ -5,7 +5,7 @@ import teamStuff.*;
 import villianStuff.*;
 
 
-public class baseCamp extends gameEnvironment implements menu {
+public class baseCamp extends gameEnvironmentGuiRunTime implements menu {
 	
 	//public Random random = new Random();
 	
@@ -167,40 +167,40 @@ public class baseCamp extends gameEnvironment implements menu {
 	}
 	
 	
-	//Operates the menu choice as the menu is specific in each section
-	/**
-	 * Used for the command line only this method will hand the menu choice 
-	 * 
-	 * @param choice
-	 */
-	public void operateMenuChoice(int choice) {
-		switch(choice) 
-		{
-		case 0 :
-			this.viewStats();//System.out.println("this.viewStats()");
-			break;
-		case 1 : 
-			this.viewMap();
-			break;
-		case 2 :
-			thisTeam.displayInventory();
-			this.viewMenu();
-			break;
-		case 3 :
-			this.exitGame();
-			break;
-		case 4 ://this is needed to be taken out
-			this.finishCity();
-			break;
-		case 5 ://another developer ,method
-			team.addMoney(400);
-			break;
-		default:
-			System.out.println("This Is Not An Availablie Option\nPlease Select An Option");
-			this.viewMenu();
-			break;
-		}
-	}
+//	//Operates the menu choice as the menu is specific in each section
+//	/**
+//	 * Used for the command line only this method will hand the menu choice 
+//	 * 
+//	 * @param choice
+//	 */
+//	public void operateMenuChoice(int choice) {
+//		switch(choice) 
+//		{
+//		case 0 :
+//			this.viewStats();//System.out.println("this.viewStats()");
+//			break;
+//		case 1 : 
+//			this.viewMap();
+//			break;
+//		case 2 :
+//			thisTeam.displayInventory();
+//			this.viewMenu();
+//			break;
+//		case 3 :
+//			this.exitGame();
+//			break;
+//		case 4 ://this is needed to be taken out
+//			this.finishCity();
+//			break;
+//		case 5 ://another developer ,method
+//			team.addMoney(400);
+//			break;
+//		default:
+//			System.out.println("This Is Not An Availablie Option\nPlease Select An Option");
+//			this.viewMenu();
+//			break;
+//		}
+//	}
 	
 	
 	/**
@@ -246,26 +246,26 @@ public class baseCamp extends gameEnvironment implements menu {
 	 * 
 	 *
 	 */
-	public void viewMenu() {
-		
-		System.out.println("Menu Options:");
-		
-		for (int i = 0; i < menu.length; i++) {
-			System.out.println("(" + i + ") " + menu[i] );
-		}
-		boolean accepted = false;
-		while (accepted == false) {
-			System.out.println("Please Select An Option");
-			try {
-				int choice = this.getPlayerChoice();
-				this.operateMenuChoice(choice);
-				accepted = true;
-			}
-			catch(InputMismatchException e) {
-				System.out.println("This Is Not An Available Option");
-			}
-			}
-	}
+//	public void viewMenu() {
+//		
+//		System.out.println("Menu Options:");
+//		
+//		for (int i = 0; i < menu.length; i++) {
+//			System.out.println("(" + i + ") " + menu[i] );
+//		}
+//		boolean accepted = false;
+//		while (accepted == false) {
+//			System.out.println("Please Select An Option");
+//			try {
+//				int choice = this.getPlayerChoice();
+//				this.operateMenuChoice(choice);
+//				accepted = true;
+//			}
+//			catch(InputMismatchException e) {
+//				System.out.println("This Is Not An Available Option");
+//			}
+//			}
+//	}
 	
 	
 	//This is the map showing where each thing is, at some point
