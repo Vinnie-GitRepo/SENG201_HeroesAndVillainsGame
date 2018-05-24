@@ -6,9 +6,9 @@ import javax.swing.ImageIcon;
 
 import cityStuff.gameEnvGui;
 /**
- * The Cartographer class of Hero who's just a nice regular dude with some maps.
- *                           They're heroic maps.
- *                We out here reading the planet n shit bruh.
+ * The Cartographer class of Hero who's just a nice regular dude with some maps.<br>
+ *                           They're heroic maps.<br>
+ *                "We out here reading the planet n shit bruh."
  * 
  * @author vjj14
  *

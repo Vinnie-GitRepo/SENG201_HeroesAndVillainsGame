@@ -1,13 +1,32 @@
 package games;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;//randomizer import
-import teamStuff.*;
-import villianStuff.*;
 
+import java.util.*;
+
+
+/**
+ * Class handling the outputs of the paperScissorsRock games played in the GUI.
+ * 
+ * @author cwe55, vjj14
+ * 
+ */
 public class paperScissorsRock {
 	
-	public static String[] options = {"Paper","Scissors","Rock"};
+	
+	
+	/**
+	 * An array of options available to both the hero and the villain.<br>
+	 * The hero should select their choice while the villain's choice is random.
+	 */
+	private static String[] options = {"Paper","Scissors","Rock"};
 
+	
+	
+	/**
+	 * Processes the choices of both the villain and the hero, returning the outcome.
+	 * 
+	 * @param outcome      String
+	 * @return to_return   String
+	 */
 	public String getOutCome(String outcome) {
 		String to_return = "";
 		switch(outcome) {
@@ -43,14 +62,18 @@ public class paperScissorsRock {
 	}
 
 	
+	
+	/**
+	 * Randomly generates a choice for the villain.<br>
+	 * Then returns this choice for comparison with the hero's choice.
+	 * 
+	 * @param num               int
+	 * @return villainChoice    String
+	 */
 	public String getVillianChoice(int num) {
 		Random rand = new Random();
-		return options[rand.nextInt(num)];
+		String villainChoice = options[rand.nextInt(num)];
+		return villainChoice;
 	}
 	
-	
-	public static void main(String[] args) {
-
-	}
-
 }

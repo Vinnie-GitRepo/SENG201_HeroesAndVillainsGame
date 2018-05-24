@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 
 import cityStuff.gameEnvGui;
 /**
- * The EdgyScaryFiendLord or "Anti-Hero" class of hero.
- *     Very intimidating and actually kinda tough.
+ * The EdgyScaryFiendLord or "Anti-Hero" class of hero.<br>
+ *      Very intimidating and actually kinda tough.
  * 									 
  * @author vjj14
  *
