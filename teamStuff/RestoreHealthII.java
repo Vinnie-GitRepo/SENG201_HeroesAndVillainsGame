@@ -19,18 +19,4 @@ public class RestoreHealthII extends HealingItem {
 		super("Restore Health II", 100, 40, 10);
 	}
 		
-	
-	/**
-	 * TESTING MAIN
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		MerchantMan quod = new MerchantMan();
-		System.out.println(quod);
-		quod.damageHealth(50);
-		
-		
-		RestoreHealthII heal = new RestoreHealthII();
-		heal.apply(quod);
-	}
 }

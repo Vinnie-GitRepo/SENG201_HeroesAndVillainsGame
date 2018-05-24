@@ -17,18 +17,5 @@ public class RestoreHealthI extends HealingItem{
 	public RestoreHealthI() {
 		super("Restore Health I", 40, 20, 10);
 	}
-	
-	
-	public static void main(String[] args) {
-		MerchantMan quod = new MerchantMan();
-		System.out.println(quod);
-		quod.damageHealth(50);
-		
-		
-		RestoreHealthI heal = new RestoreHealthI();
-		heal.apply(quod);
-		
-		
-	}
 
 }

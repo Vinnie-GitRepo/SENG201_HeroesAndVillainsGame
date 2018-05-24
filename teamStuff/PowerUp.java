@@ -1,5 +1,11 @@
 package teamStuff;
 
+
+/**
+ * 
+ * @author vjj14
+ *
+ */
 public class PowerUp {
 	
 	
@@ -37,9 +43,9 @@ public class PowerUp {
 	/**
 	 * <<constructor>> for PowerUp class
 	 * 
-	 * @param name
-	 * @param potency
-	 * @param price
+	 * @param name     String
+	 * @param potency  String
+	 * @param price    int
 	 */
 	public PowerUp(String name, String type, int potency, int price) {
 		powerUpName = name;
@@ -52,7 +58,7 @@ public class PowerUp {
 	
 	/**
 	 * Getter for the power up's name.
-	 * @return powerUpName
+	 * @return powerUpName String
 	 */
 	public String getPowerUpName() {
 		return powerUpName;
@@ -60,15 +66,18 @@ public class PowerUp {
 	
 	
 	
-	
-	 public String getPowerUpType() {
-		 return powerUpType; 
-	 }
+	/**
+	 * Getter for the power up's type.
+	 * @return powerUpType String
+	 */
+	public String getPowerUpType() {
+		return powerUpType; 
+	}
 	
 	
 	/**
 	 * Getter for the power up's potency.
-	 * @return powerUpPotency
+	 * @return powerUpPotency int
 	 */
 	public int getPowerUpPotency() {
 		return powerUpPotency;
@@ -78,12 +87,18 @@ public class PowerUp {
 	
 	/**
 	 * Getter for the power up's price.
-	 * @return powerUpPrice
+	 * @return powerUpPrice int
 	 */
 	public int getPowerUpPrice() {
 		return powerUpPrice;
 	}
 	
+	
+	
+	/**
+	 * Applies the effect to the hero, boosting the power up's relevant attribute.
+	 * @param hero Hero
+	 */
 	public void apply(Hero hero) {
 		if(this instanceof SilverTongueI || this instanceof SilverTongueII || this instanceof SilverTongueIII) {
 			hero.boostBarterSkill(getPowerUpPotency());
@@ -95,6 +110,7 @@ public class PowerUp {
 			hero.boostMaxHealth(getPowerUpPotency());
 		}
 	}
+	
 	
 	
 	/**
@@ -109,16 +125,16 @@ public class PowerUp {
 							+ "Price: " + getPowerUpPrice() + "\n";
 		
 		if(this instanceof SilverTongueI || this instanceof SilverTongueII || this instanceof SilverTongueIII) {
-			resultString += "Description: This power up heightens one's ability to coerce shopkeepers into accepting less favourable deals.\n" 
-						  + "Item effect: Upon application this power up will increase a hero's bartering skill by " + getPowerUpPotency() + ".\n";
+			   resultString += "Description: This power up heightens one's ability to coerce shopkeepers into accepting less favourable deals.\n" 
+						    + "Item effect: Upon application this power up will increase a hero's bartering skill by " + getPowerUpPotency() + ".\n";
 		}
 		else if(this instanceof IronFleshI || this instanceof IronFleshII || this instanceof IronFleshIII) {
-			resultString += "Description: This power up hardens one's being, shielding them, but the effect fades with each blow.\n"
-						  + "Item effect: Upon application this power up will increase a hero's armor by " + getPowerUpPotency() + ".\n";
+			   resultString += "Description: This power up hardens one's being, shielding them, but the effect fades with each blow.\n"
+						    + "Item effect: Upon application this power up will increase a hero's armor by " + getPowerUpPotency() + ".\n";
 		}
 		else if(this instanceof AugmentVitalityI || this instanceof AugmentVitalityII || this instanceof AugmentVitalityIII) {
-			resultString += "Description: This power up stimulates one's cell growth and energy efficiency, extending their lifeforce.\n"
-					      + "Item effect: Upon application this power up will increase a hero's maximum health by " + getPowerUpPotency() + ".\n";
+			   resultString += "Description: This power up stimulates one's cell growth and energy efficiency, extending their lifeforce.\n"
+					        + "Item effect: Upon application this power up will increase a hero's maximum health by " + getPowerUpPotency() + ".\n";
 		}
 		
 		return resultString;

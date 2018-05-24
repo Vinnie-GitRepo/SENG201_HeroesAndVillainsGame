@@ -71,10 +71,10 @@ public class HealingItem {
 	/**
 	 *  <<Constuctor>> for HealingItem class 
 	 * 
-	 * @param name
-	 * @param potency
-	 * @param price
-	 * @param time
+	 * @param name       String
+	 * @param potency    int
+	 * @param price      int
+	 * @param time       int
 	 */
 	public HealingItem(String name, int potency, int price, int time) {
 		healingItemName = name;
@@ -87,7 +87,7 @@ public class HealingItem {
 	
 	/**
 	 * Getter for the healing item's name.
-	 * @return healingItemName
+	 * @return healingItemName String
 	 */
 	public String getHealingItemName() {
 		return healingItemName;
@@ -97,7 +97,7 @@ public class HealingItem {
 	
 	/**
 	 * Getter for the healing item's potency.
-	 * @return healingItemPotency
+	 * @return healingItemPotency int
 	 */
 	public int getHealingItemPotency() {
 		return healingItemPotency;
@@ -107,20 +107,10 @@ public class HealingItem {
 	
 	/**
 	 * Getter for the healing item's price.
-	 * @return healingItemPrice
+	 * @return healingItemPrice int
 	 */
 	public int getHealingItemPrice() {
 		return healingItemPrice;
-	}
-	
-	
-	
-	/**
-	 * Getter for the time until the healing item has finished healing.
-	 * @return timeRemaining
-	 */
-	public int getTimeRemaining() {
-		return timeRemaining;
 	}
 	
 	
@@ -168,6 +158,17 @@ public class HealingItem {
 			}
 		};
 		time.scheduleAtFixedRate(healOverTime, 1000, 1000);
+	}
+	
+	
+	
+	
+	/**
+	 * Getter for the time until the healing item has finished healing.
+	 * @return timeRemaining int
+	 */
+	public int getTimeRemaining() {
+		return timeRemaining;
 	}
 	
 	
