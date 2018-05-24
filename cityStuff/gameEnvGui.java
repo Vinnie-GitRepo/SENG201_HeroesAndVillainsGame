@@ -2791,7 +2791,7 @@ public class gameEnvGui {
 		btnAddToTeam.setForeground(new Color(255, 255, 255));
 		btnAddToTeam.setBackground(new Color(75, 0, 130));
 		
-		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 28));
+		btnAddToTeam.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 20));
 		btnAddToTeam.setBounds(360, 493, 208, 53);
 		frame.getContentPane().add(btnAddToTeam);
 		
@@ -3279,7 +3279,7 @@ public class gameEnvGui {
 		lblOurThanks.setBounds(12, 368, 914, 52);
 		frame.getContentPane().add(lblOurThanks);
 		
-		JButton btnPlayAgain = new JButton("PLAY AGAIN");
+		JButton btnPlayAgain = new JButton("MAIN MENU");
 		btnPlayAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().removeAll();
