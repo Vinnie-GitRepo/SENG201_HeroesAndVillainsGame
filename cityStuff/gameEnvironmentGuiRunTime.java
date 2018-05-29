@@ -20,26 +20,88 @@ import villianStuff.Villian;
  */
 public class gameEnvironmentGuiRunTime {
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static boolean[] foundPlaces = {false, false, false, false};
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static boolean hasMap = false;
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static ArrayList<Villian> villians = new ArrayList<Villian>();
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static ArrayList<shop> shops = new ArrayList<shop>();
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static int currentHero;
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static ArrayList<String> thisMap;
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static shop currentShop;
 	
+	
+	
+	/**
+	 * 
+	 */
+	public int num_of_cities;
+	
+	
+	
+	/**
+	 * 
+	 */
 	private static Villian currentVillian;
 	
+	
+	
+	/**
+	 * 
+	 */
 	private static boolean luck = false;
 	
+	
+	
+	/**
+	 * 
+	 */
 	private boolean healingItemInUse = false;
 	
+	
+	
+	/**
+	 * 
+	 */
 	public void refresh() {
 		healingItemInUse = false;
 		luck = false;
@@ -57,23 +119,48 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
+	
+	/**
+	 * 
+	 */
 	public void useHealingItem() {
 		healingItemInUse = true;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean usingHealingItem() {
 		return healingItemInUse;
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
 	public void stopUsingHealingItem() {
 		healingItemInUse = false;
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
 	public void giveLuck() {
 		luck = true;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String randomEvent() {
 		String theEvent ="Your Team Had A Safe Journey Back";
 		Random happen = new Random();
@@ -108,19 +195,40 @@ public class gameEnvironmentGuiRunTime {
 		return theEvent;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean hasLuck() {
 		return luck;
 	}
 	
 	
+	
+	/**
+	 * 
+	 */
 	public void giveMap() {
 		hasMap = true;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean hasMap() {
 		return hasMap;
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
 	public void makeAllUnfound() {
 		foundPlaces[0] = false;
 		foundPlaces[1] = false;
@@ -128,6 +236,11 @@ public class gameEnvironmentGuiRunTime {
 		foundPlaces[3] = false;
 	}
 	
+	
+	
+	/**
+	 * 
+	 */
 	public void makeAllFound() {
 		foundPlaces[0] = true;
 		foundPlaces[1] = true;
@@ -135,14 +248,33 @@ public class gameEnvironmentGuiRunTime {
 		foundPlaces[3] = true;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @param num
+	 */
 	public void setFoundPlaceTrue(int num) {
 		foundPlaces[num] = true;
 	}
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getNumOfCities() {
 		return baseCamps.size();
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @param num
+	 * @param city
+	 * @return
+	 */
 	public String getMapPlace(int num, int city) {
 		if (foundPlaces[num] == true) {
 			return baseCamps.get(city).getMap().get(num);
@@ -151,49 +283,100 @@ public class gameEnvironmentGuiRunTime {
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 */
 	public ArrayList<String> getCurrentMap(int num){
 		return baseCamps.get(num).getMap();
 	}
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean[] getFoundPlaces() {
 		return foundPlaces;
 	}
 	
+	
+	/**
+	 * 
+	 * @param num
+	 */
 	public void setCurrentHero(int num) {
 		currentHero = num;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getCurrentHero() {
 		return currentHero;
 	}
 	
+	
+	/**
+	 * 
+	 * @param num
+	 */
 	public void setCurrentVillian(int num) {
 		currentVillian = villians.get(num);
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public Villian getCurrentVillian() {
 		return currentVillian;
 	}
 	
+	
+	/**
+	 * 
+	 * @param num
+	 */
 	public void setCurrentShop(int num) {
 		currentShop = shops.get(num);
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public shop getCurrentShop() {
 		return currentShop;
 	}
 	
+	
+	/**
+	 * 
+	 */
 	private ArrayList<baseCamp> baseCamps = new ArrayList<baseCamp>(); 
 	
+	
+	/**
+	 * 
+	 */
 	private Team team;
 	
+	
+	/**
+	 * 
+	 */
 	public Random rand = new Random();
 	
 	
-
+	/**
+	 * 
+	 * @param map
+	 */
 	public void addBaseCamp(ArrayList<String> map) {
 		baseCamp Camp = new baseCamp(map);
 		baseCamps.add(Camp);
@@ -208,103 +391,186 @@ public class gameEnvironmentGuiRunTime {
 		return team;
 	}
 	
-	
+	/**
+	 * @return info MerchantMan
+	 */
 	public MerchantMan getMerchant() {
 		MerchantMan info = new MerchantMan();
 		return info;
 	}
 	
+	
+	/**
+	 * 
+	 * @return info Tank
+	 */
 	public Tank getTank() {
 		Tank info = new Tank();
 		return info;
 	}
 	
+	
+	/**
+	 * 
+	 * @return info Cartographer 
+	 */
 	public Cartographer getCartographer() {
 		Cartographer info = new Cartographer();
 		return info;
 	}
 	
+	
+	/**
+	 * 
+	 * @return info Support
+	 */
 	public Support getSupport() {
 		Support info = new Support();
 		return info;
 	}
 	
+	
+	/**
+	 * 
+	 * @return info LuckyBoii
+	 */
 	public LuckyBoii getLuckyBoii() {
 		LuckyBoii info = new LuckyBoii();
 		return info;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return Edgy
+	 */
 	public EdgyScaryFiendLord getAntiHero() {
 		EdgyScaryFiendLord info = new EdgyScaryFiendLord();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public RestoreHealthI getRHI() {
 		RestoreHealthI info = new RestoreHealthI();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public RestoreHealthII getRHII() {
 		RestoreHealthII info = new RestoreHealthII();
 		return info;
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public RestoreHealthIII getRHIII() {
 		RestoreHealthIII info = new RestoreHealthIII();
 		return info;
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public AugmentVitalityI getAVI() {
 		AugmentVitalityI info = new AugmentVitalityI();
 		return info;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public AugmentVitalityII getAVII() {
 		AugmentVitalityII info = new AugmentVitalityII();
 		return info;
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public AugmentVitalityIII getAVIII() {
 		AugmentVitalityIII info = new AugmentVitalityIII();
 		return info;
 	}
 	
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public IronFleshI getIFI() {
 		IronFleshI info = new IronFleshI();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public IronFleshII getIFII() {
 		IronFleshII info = new IronFleshII();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public IronFleshIII getIFIII() {
 		IronFleshIII info = new IronFleshIII();
 		return info;
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public SilverTongueI getSTI() {
 		SilverTongueI info = new SilverTongueI();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public SilverTongueII getSTII() {
 		SilverTongueII info = new SilverTongueII();
 		return info;
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public SilverTongueIII getSTIII() {
 		SilverTongueIII info = new SilverTongueIII();
 		return info;
@@ -324,38 +590,37 @@ public class gameEnvironmentGuiRunTime {
 	
 	
 	/**
-	 * Generates each villian for each city and stores them within
-	 * villians an ArrayList<villian>
+	 * Generates each villian for each city and stores them within villians an ArrayList<villian>.
 	 */
 	public void generateVillians(int num) {
 		
 		ArrayList<String> villianNames = new ArrayList<String>() 
 		{{
-		add("Villian NUMBER 1");
-		add("Villian NUMBER 2");
-		add("Villian NUMBER 3");
-		add("Villian NUMBER 4");
-		add("Villian NUMBER 5");
-		add("Villian NUMBER 6");
+		add("Grabbin Steams");
+		add("Higher Being");
+		add("The Outlander");
+		add("Semem Knad");
+		add("?/+=}_?//.../?'__");
+		add("THE BEAN LORD");
 		}};
 		
 		ArrayList<String> catchPhrase = new ArrayList<String>() 
 		{{
-		add("catchPhrase NUMBER 1");
-		add("catchPhrase NUMBER 2");
-		add("catchPhrase NUMBER 3");
-		add("catchPhrase NUMBER 4");
-		add("catchPhrase NUMBER 5");
-		add("catchPhrase NUMBER 6");
+		add("Be away, knowlessmen!");
+		add("Get thee gone, filth!");
+		add("PROCEED CHALLENGER.");
+		add(".....");
+		add("The enemy hath appear'd!");
+		add("*uninteligible noise*");
 		}};
 		
 		ArrayList<ImageIcon> villianIcons = new ArrayList<ImageIcon>() {{
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill1.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill2.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill3.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill4.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill5.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
-			add(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/vill6.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill1.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill2.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill3.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill4.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill5.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
+			add(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/vill6.png")).getImage().getScaledInstance(550, 550, Image.SCALE_DEFAULT)));
 		}};
 		int numName;
 		int numPhrase;	
@@ -381,8 +646,6 @@ public class gameEnvironmentGuiRunTime {
 			villians.add(baddy);
 			villianNames.remove(numName);														//Makes sure that any names used get removed in order for there to be no double ups
 			catchPhrase.remove(numPhrase);														//Makes sure that any catch phrases used get removed in order for there to be no double ups
-			
-
 		}
 	}
 	
@@ -413,7 +676,8 @@ public class gameEnvironmentGuiRunTime {
 	}
 	
 	
-	public int num_of_cities;
+	
+	
 	
 	public void setNumOfCities(int num) {
 		num_of_cities = num;

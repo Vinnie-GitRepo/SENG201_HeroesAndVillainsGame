@@ -8,8 +8,10 @@ import games.paperScissorsRock;
 
 public class PaperScissorsRockTesting {
 
+	
+	
 	@Test
-	public void heroWon() {
+	public void heroWinsTest() {
 		paperScissorsRock test1 = new paperScissorsRock();
 		paperScissorsRock test2 = new paperScissorsRock();
 		paperScissorsRock test3 = new paperScissorsRock();
@@ -21,7 +23,9 @@ public class PaperScissorsRockTesting {
 		
 	}
 	
-	public void heroLost() {
+	
+	@Test
+	public void heroLosesTest() {
 		paperScissorsRock test1 = new paperScissorsRock();
 		paperScissorsRock test2 = new paperScissorsRock();
 		paperScissorsRock test3 = new paperScissorsRock();
@@ -31,27 +35,17 @@ public class PaperScissorsRockTesting {
 		
 	}
 	
-	public void heroDraw() {
+	
+	
+	@Test
+	public void heroDrawsTest() {
 		paperScissorsRock test1 = new paperScissorsRock();
 		paperScissorsRock test2 = new paperScissorsRock();
 		paperScissorsRock test3 = new paperScissorsRock();
+		
 		assertTrue(test1.getOutCome("RockRock").equals("It Is A Draw, Next Round!"));
 		assertTrue(test2.getOutCome("PaperPaper").equals("It Is A Draw, Next Round!"));
 		assertTrue(test3.getOutCome("ScissorsScissors").equals("It Is A Draw, Next Round!"));
 	}
 	
-	public void villianGuess() {
-		paperScissorsRock test1 = new paperScissorsRock();
-		paperScissorsRock test2 = new paperScissorsRock();
-		paperScissorsRock test3 = new paperScissorsRock();
-		
-		String answer1 = test1.getVillianChoice(0);
-		String answer2 = test1.getVillianChoice(1);
-		String answer3 = test1.getVillianChoice(2);
-		
-		assertTrue(answer1.equals("Paper") || answer1.equals("Scissors") || answer1.equals("Rock"));
-		assertTrue(answer2.equals("Scissors") || answer2.equals("Rock"));
-		assertTrue(answer3.equals("Rock"));
-	}
-
 }

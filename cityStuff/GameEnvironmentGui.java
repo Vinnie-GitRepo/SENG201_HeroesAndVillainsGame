@@ -50,7 +50,9 @@ import teamStuff.Tank;
  * @author cwe55, vjj14
  *
  */
-public class gameEnvGui {
+public class GameEnvironmentGui {
+	
+	
 	private int selectedItemPrice;
 	private static int luckynumDice = 0;
 	private static int luckynumGuess = 1;
@@ -72,7 +74,7 @@ public class gameEnvGui {
 	private Timer gameTimer = new Timer();
 	private int gameTime = 0;
 	private boolean finished = false;
-	public HealingItem current;
+	private HealingItem current;
     private JProgressBar pb;
     private JDialog dialog;
 
@@ -84,7 +86,7 @@ public class gameEnvGui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gameEnvGui window = new gameEnvGui();
+					GameEnvironmentGui window = new GameEnvironmentGui();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -96,7 +98,7 @@ public class gameEnvGui {
 	/**
 	 * Create the application.
 	 */
-	public gameEnvGui() {
+	public GameEnvironmentGui() {
 		initialize();
 		gameStartPanel();
 //		lossGamePanel();
@@ -135,7 +137,7 @@ public class gameEnvGui {
 	
 	
 	/**
-	 * First panel of the game, representing the main menu of the application.
+	 * Initializes the first panel of the game, representing the main menu of the application.
 	 */
 	private void gameStartPanel() {
 		frame.getContentPane().setLayout(null);
@@ -173,7 +175,7 @@ public class gameEnvGui {
 		frame.getContentPane().add(btnPlayGame);
 		
 		JLabel frontPageBackGround = new JLabel("");
-		frontPageBackGround.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/StartScreenArt.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		frontPageBackGround.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/StartScreenArt.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		frontPageBackGround.setBounds(0, 0, 938, 616);
 		frame.getContentPane().add(frontPageBackGround);
 		
@@ -418,7 +420,7 @@ public class gameEnvGui {
 		btnHeroType1.setBackground(Color.DARK_GRAY);
 		btnHeroType1.setBounds(34, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType1);
-		btnHeroType1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/merchant.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/merchant.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 		
 		
 		JButton btnHeroType2 = new JButton("");
@@ -446,7 +448,7 @@ public class gameEnvGui {
 		btnHeroType2.setBackground(Color.DARK_GRAY);
 		btnHeroType2.setBounds(191, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType2);
-		btnHeroType2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/tank.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/tank.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 		
 		
 		JButton btnHeroType3 = new JButton("");
@@ -474,7 +476,7 @@ public class gameEnvGui {
 		btnHeroType3.setBackground(Color.DARK_GRAY);
 		btnHeroType3.setBounds(338, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType3);
-		btnHeroType3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/cartographer.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/cartographer.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 
 		
 		JButton btnHeroType4 = new JButton("");
@@ -502,7 +504,7 @@ public class gameEnvGui {
 		btnHeroType4.setBackground(Color.DARK_GRAY);
 		btnHeroType4.setBounds(484, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType4);
-		btnHeroType4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/support.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType4.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/support.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 		
 		
 		JButton btnHeroType5 = new JButton("");
@@ -530,7 +532,7 @@ public class gameEnvGui {
 		btnHeroType5.setBackground(Color.DARK_GRAY);
 		btnHeroType5.setBounds(636, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType5);
-		btnHeroType5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/lucky-boii.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType5.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/lucky-boii.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 
 		
 		JButton btnHeroType6 = new JButton("");
@@ -558,7 +560,7 @@ public class gameEnvGui {
 		btnHeroType6.setBackground(Color.DARK_GRAY);
 		btnHeroType6.setBounds(792, 169, 117, 126);
 		frame.getContentPane().add(btnHeroType6);
-		btnHeroType6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/anti-hero.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+		btnHeroType6.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/anti-hero.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 
 		ButtonGroup heroClassOptions = new ButtonGroup();
 		heroClassOptions.add(btnHeroType1);
@@ -921,12 +923,12 @@ public class gameEnvGui {
 		btnWest.setText(game.getMapPlace(3,citiesFinished));
 		
 		JLabel compass = new JLabel("");
-		compass.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/compass.png")).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+		compass.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/compass.png")).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
 		compass.setBounds(0, 0, 200, 183);
 		frame.getContentPane().add(compass);
 		
 		JLabel baseCampBackGround = new JLabel("New label");
-		baseCampBackGround.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/finalBackground.jpg")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		baseCampBackGround.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/finalBackground.jpg")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		baseCampBackGround.setBounds(0, -64, 949, 740);
 		frame.getContentPane().add(baseCampBackGround);
 	}
@@ -991,7 +993,10 @@ public class gameEnvGui {
 		VillianName.setText(game.getCurrentVillian().getName());
 		
 		JLabel catchPhrase = new JLabel("New label");
-		catchPhrase.setBounds(490, 168, 140, 15);
+		catchPhrase.setForeground(Color.RED);
+		catchPhrase.setHorizontalAlignment(SwingConstants.CENTER);
+		catchPhrase.setFont(new Font("Bitstream Charter", Font.ITALIC, 18));
+		catchPhrase.setBounds(419, 136, 223, 136);
 		frame.getContentPane().add(catchPhrase);
 		catchPhrase.setText(game.getCurrentVillian().getTaunt());
 		
@@ -1004,7 +1009,7 @@ public class gameEnvGui {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(0, 0, 938, 616);
 		frame.getContentPane().add(lblNewLabel_2);
-		lblNewLabel_2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/lairWall.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		lblNewLabel_2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/lairWall.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		
 	}
 	
@@ -1031,19 +1036,19 @@ public class gameEnvGui {
 		JLabel PSR = new JLabel("");
 		PSR.setBounds(53, 176, 272, 200);
 		frame.getContentPane().add(PSR);
-		PSR.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/paperScissorsRock.png")).getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT)));
+		PSR.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/paperScissorsRock.png")).getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT)));
 
 		
 		
 		JLabel guessRanNum = new JLabel("");
 		guessRanNum.setBounds(337, 176, 230, 200);
 		frame.getContentPane().add(guessRanNum);
-		guessRanNum.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/GRN.png")).getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT)));
+		guessRanNum.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/GRN.png")).getImage().getScaledInstance(250, 150, Image.SCALE_DEFAULT)));
 		
 		JLabel diceRoll = new JLabel("");
 		diceRoll.setBounds(661, 205, 158, 171);
 		frame.getContentPane().add(diceRoll);
-		diceRoll.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/DICE.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+		diceRoll.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/DICE.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
 
 		
 		JButton GuessTheRandom = new JButton("Guess The Random Number");
@@ -1336,7 +1341,7 @@ public class gameEnvGui {
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(0, 0, 926, 604);
 		frame.getContentPane().add(lblNewLabel_1);
-		lblNewLabel_1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/diceBG.png")).getImage().getScaledInstance(950, 620, Image.SCALE_DEFAULT)));	
+		lblNewLabel_1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/diceBG.png")).getImage().getScaledInstance(950, 620, Image.SCALE_DEFAULT)));	
 	}
 	
 	
@@ -1620,7 +1625,7 @@ public class gameEnvGui {
 		JLabel backGround = new JLabel("");
 		backGround.setBounds(0, 0, 938, 616);
 		frame.getContentPane().add(backGround);
-		backGround.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/psrBG.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		backGround.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/psrBG.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 	
 	}
 	
@@ -1906,7 +1911,7 @@ public class gameEnvGui {
 		JLabel background = new JLabel("");
 		background.setBounds(0, -39, 938, 643);
 		frame.getContentPane().add(background);
-		background.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/numberguessBG.png")).getImage().getScaledInstance(950, 620, Image.SCALE_DEFAULT)));
+		background.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/numberguessBG.png")).getImage().getScaledInstance(950, 620, Image.SCALE_DEFAULT)));
 	}
 	
 	
@@ -2220,27 +2225,27 @@ public class gameEnvGui {
 		JLabel rs1 = new JLabel("New label");
 		rs1.setBounds(202, 41, 46, 52);
 		frame.getContentPane().add(rs1);
-		rs1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		rs1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel rs2 = new JLabel("New label");
 		rs2.setBounds(430, 41, 46, 52);
 		frame.getContentPane().add(rs2);
-		rs2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		rs2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 
 		
 		JLabel rs3 = new JLabel("New label");
 		rs3.setBounds(650, 41, 46, 52);
 		frame.getContentPane().add(rs3);
-		rs3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		rs3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setBounds(0, -77, 938, 681);
 		frame.getContentPane().add(lblNewLabel_8);
-		lblNewLabel_8.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/hospitalBack.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		lblNewLabel_8.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/hospitalBack.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setBounds(0, 12, 938, 681);
 		frame.getContentPane().add(lblNewLabel_9);
-		lblNewLabel_9.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/hospitalBack.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		lblNewLabel_9.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/hospitalBack.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 
 
 		
@@ -2472,7 +2477,7 @@ public class gameEnvGui {
 		JLabel itemImg = new JLabel("Selected Item Name");
 		itemImg.setBounds(45, 310, 53, 51);
 		frame.getContentPane().add(itemImg);
-		itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
@@ -2503,7 +2508,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip1.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(0).getHealingItemName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		health1.setBounds(173, 150, 159, 23);
@@ -2515,7 +2520,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip2.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(1).getHealingItemName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		health2.setBounds(372, 151, 165, 21);
@@ -2527,7 +2532,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip3.getText());
 				itemName.setText(game.getCurrentShop().getHealingItems().get(2).getHealingItemName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		health3.setBounds(561, 150, 186, 23);
@@ -2543,7 +2548,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip4.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(0).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp1.setBounds(173, 279, 159, 23);
@@ -2555,7 +2560,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip5.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(1).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp2.setBounds(372, 279, 165, 23);
@@ -2567,7 +2572,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip6.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(2).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp3.setBounds(561, 280, 186, 22);
@@ -2579,7 +2584,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip7.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(3).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp4.setBounds(173, 372, 159, 23);
@@ -2591,7 +2596,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip8.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(4).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp5.setBounds(372, 372, 165, 23);
@@ -2603,7 +2608,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip9.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(5).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp6.setBounds(561, 372, 186, 23);
@@ -2615,7 +2620,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip10.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(6).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp7.setBounds(173, 489, 159, 23);
@@ -2627,7 +2632,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip11.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(7).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp8.setBounds(372, 489, 165, 23);
@@ -2639,7 +2644,7 @@ public class gameEnvGui {
 			public void actionPerformed(ActionEvent e) {
 				selectedItemPrice = Integer.parseInt(ip12.getText());
 				itemName.setText(game.getCurrentShop().powerUpItems.get(8).getPowerUpName());
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		powerUp9.setBounds(561, 490, 186, 22);
@@ -2841,20 +2846,20 @@ public class gameEnvGui {
 		
 		JLabel r1 = new JLabel("New label");
 		r1.setBounds(216, 96, 53, 51);
-		r1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		r1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r1);
 		r1.setToolTipText(game.getRHI().toString());
 		
 		
 		JLabel r2 = new JLabel("New label");
 		r2.setBounds(416, 96, 46, 52);
-		r2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		r2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r2);
 		r2.setToolTipText(game.getRHII().toString());
 		
 		JLabel r3 = new JLabel("New label");
 		r3.setBounds(608, 91, 46, 52);
-		r3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		r3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/RestoreHealth1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(r3);
 		r3.setToolTipText(game.getRHIII().toString());
 		
@@ -2863,64 +2868,64 @@ public class gameEnvGui {
 		JLabel p1 = new JLabel("New label");
 		p1.setBounds(216, 224, 53, 51);
 		frame.getContentPane().add(p1);
-		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p1.setToolTipText(game.getIFI().toString());
 		
 		JLabel p2 = new JLabel("New label");
 		p2.setBounds(416, 223, 46, 52);
 		frame.getContentPane().add(p2);
-		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p2.setToolTipText(game.getIFII().toString());
 		
 		JLabel p3 = new JLabel("New label");
 		p3.setBounds(608, 224, 46, 52);
 		frame.getContentPane().add(p3);
-		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p3.setToolTipText(game.getIFIII().toString());
 		
 		JLabel p5 = new JLabel("New label");
 		p5.setBounds(416, 316, 46, 52);
 		frame.getContentPane().add(p5);
-		p5.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p5.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p5.setToolTipText(game.getAVII().toString());
 		
 		JLabel p4 = new JLabel("New label");
 		p4.setBounds(216, 317, 53, 51);
 		frame.getContentPane().add(p4);
-		p4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p4.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p4.setToolTipText(game.getAVI().toString());
 		
 		JLabel p6 = new JLabel("New label");
 		p6.setBounds(608, 317, 46, 52);
 		frame.getContentPane().add(p6);
-		p6.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p6.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p6.setToolTipText(game.getAVIII().toString());
 		
 		JLabel p8 = new JLabel("New label");
 		p8.setBounds(416, 433, 46, 52);
 		frame.getContentPane().add(p8);
-		p8.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p8.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p8.setToolTipText(game.getSTII().toString());
 		
 		
 		JLabel p7 = new JLabel("New label");
 		p7.setBounds(216, 433, 53, 58);
 		frame.getContentPane().add(p7);
-		p7.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p7.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p7.setToolTipText(game.getSTI().toString());
 
 		
 		JLabel p9 = new JLabel("New label");
 		p9.setBounds(608, 434, 46, 52);
 		frame.getContentPane().add(p9);
-		p9.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		p9.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		p9.setToolTipText(game.getSTIII().toString());
 
 		
 		JButton buyMap = new JButton("Map");
 		buyMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				itemImg.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+				itemImg.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 			}
 		});
 		buyMap.setBounds(21, 177, 104, 23);
@@ -2933,27 +2938,27 @@ public class gameEnvGui {
 		JLabel mapLabel = new JLabel("New label");
 		mapLabel.setBounds(45, 122, 53, 51);
 		frame.getContentPane().add(mapLabel);
-		mapLabel.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		mapLabel.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/map.png")).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf = new JLabel("");
 		shelf.setBounds(161, 419, 653, 113);
-		shelf.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
+		shelf.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(shelf);
 		
 		JLabel shelf2 = new JLabel("");
 		shelf2.setBounds(163, 314, 651, 107);
 		frame.getContentPane().add(shelf2);
-		shelf2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
+		shelf2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf3 = new JLabel("");
 		shelf3.setBounds(161, 205, 635, 109);
 		frame.getContentPane().add(shelf3);
-		shelf3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
+		shelf3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel shelf4 = new JLabel("");
 		shelf4.setBounds(161, 85, 635, 109);
 		frame.getContentPane().add(shelf4);
-		shelf4.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
+		shelf4.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(620, 100, Image.SCALE_DEFAULT)));
 		
 		JLabel moneyTitle = new JLabel("Teams Money Level:");
 		moneyTitle.setBounds(661, 26, 150, 15);
@@ -3098,22 +3103,22 @@ public class gameEnvGui {
 		
 		JLabel p1 = new JLabel("");
 		p1.setBounds(118, 51, 134, 144);
-		p1.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(140, 140, Image.SCALE_DEFAULT)));
+		p1.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/IronFlesh1.png")).getImage().getScaledInstance(140, 140, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(p1);
 		
 		JLabel p2 = new JLabel("");
 		p2.setBounds(390, 53, 167, 142);
-		p2.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+		p2.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/AugmentVitality1.png")).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(p2);
 		
 		JLabel p3 = new JLabel("");
 		p3.setBounds(679, 52, 159, 154);
-		p3.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
+		p3.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/SilverTongue1.png")).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(p3);
 		
 		JLabel shelf = new JLabel("");
 		shelf.setBounds(81, 38, 766, 180);
-		shelf.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(766, 170, Image.SCALE_DEFAULT)));
+		shelf.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/shelf.png")).getImage().getScaledInstance(766, 170, Image.SCALE_DEFAULT)));
 		frame.getContentPane().add(shelf);
 		
 		
@@ -3294,7 +3299,7 @@ public class gameEnvGui {
 		JLabel wall = new JLabel("");
 		wall.setBounds(0, 0, 932, 616);
 		frame.getContentPane().add(wall);
-		wall.setIcon(new ImageIcon(new ImageIcon(gameEnvGui.class.getResource("/Images/powerUpDenWall.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
+		wall.setIcon(new ImageIcon(new ImageIcon(GameEnvironmentGui.class.getResource("/Images/powerUpDenWall.png")).getImage().getScaledInstance(940, 642, Image.SCALE_DEFAULT)));
 	}
 	
 	
@@ -3329,6 +3334,7 @@ public class gameEnvGui {
 				
 				if (citiesFinished < game.getNumOfCities()) {
 					game.setCurrentVillian(citiesFinished);
+					game.setCurrentShop(citiesFinished);
 					if (citiesFinished + 1 == game.getNumOfCities()) {
 					game.getCurrentVillian().superVillian();
 					}

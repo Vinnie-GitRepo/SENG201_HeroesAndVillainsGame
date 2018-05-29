@@ -7,7 +7,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-import cityStuff.gameEnvGui;
+import cityStuff.GameEnvironmentGui;
 import javax.swing.ImageIcon;
 
 

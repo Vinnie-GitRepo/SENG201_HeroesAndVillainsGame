@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="teamStuff.AugmentVitalityIII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/AugmentVitalityIII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="124" x="3342" y="546"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="teamStuff.Hero" project="me-and-vinnie" file="/me-and-vinnie/teamStuff/Hero.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="560" width="209" x="2776" y="139"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="teamStuff.SilverTongueI" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/SilverTongueI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3393" y="671"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="teamStuff.RestoreHealthII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/RestoreHealthII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3631" y="362"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="teamStuff.PowerUp" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/PowerUp.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3569" y="575"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="teamStuff.Tank" project="me-and-vinnie" file="/me-and-vinnie/teamStuff/Tank.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="56" width="89" x="2570" y="332"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="teamStuff.IronFleshII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/IronFleshII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3362" y="772"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="teamStuff.IronFleshIII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/IronFleshIII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3497" y="799"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="teamStuff.LuckyBoii" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/LuckyBoii.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="49" width="89" x="2580" y="250"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="teamStuff.EdgyScaryFiendLord" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/EdgyScaryFiendLord.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="144" x="2598" y="157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="teamStuff.AugmentVitalityI" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/AugmentVitalityI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="59" width="118" x="3710" y="700"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="teamStuff.Support" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/Support.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="89" x="2578" y="416"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="teamStuff.Cartographer" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/Cartographer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="89" width="101" x="2641" y="588"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="teamStuff.IronFleshI" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/IronFleshI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3732" y="805"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="teamStuff.RestoreHealthI" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/RestoreHealthI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3624" y="249"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="teamStuff.RestoreHealthIII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/RestoreHealthIII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3608" y="159"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="teamStuff.SilverTongueII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/SilverTongueII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3626" y="808"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="teamStuff.MerchantMan" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/MerchantMan.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="61" width="102" x="2602" y="500"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="teamStuff.AugmentVitalityII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/AugmentVitalityII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="61" width="121" x="3721" y="599"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="teamStuff.SilverTongueIII" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/SilverTongueIII.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3768" y="519"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="teamStuff.HealingItem" project="me-and-vinnie" 
+    file="/me-and-vinnie/teamStuff/HealingItem.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="132" x="3389" y="157"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="teamStuff.Team" project="me-and-vinnie" file="/me-and-vinnie/teamStuff/Team.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3159" y="426"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="villianStuff.Villian" project="me-and-vinnie" 
+    file="/me-and-vinnie/villianStuff/Villian.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="455" width="256" x="716" y="773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="games.numberGuess" project="me-and-vinnie" 
+    file="/me-and-vinnie/games/numberGuess.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="113" width="180" x="910" y="1919"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="games.diceRollGame" project="me-and-vinnie" 
+    file="/me-and-vinnie/games/diceRollGame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="184" x="1130" y="1919"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="games.paperScissorsRock" project="me-and-vinnie" 
+    file="/me-and-vinnie/games/paperScissorsRock.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4729" y="1266"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="27">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="28" name="heroArray"/>      
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="38">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="39" name="powerUps"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="50">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="51" name="healingItems"/>      
+      <multiplicity id="52" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
